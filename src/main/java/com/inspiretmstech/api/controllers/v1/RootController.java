@@ -12,6 +12,7 @@ import com.inspiretmstech.db.Tables;
 import com.inspiretmstech.db.tables.records.CompaniesRecord;
 import org.apache.http.client.utils.URIBuilder;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,42 +24,44 @@ import java.util.Optional;
 @RequestMapping("/v1")
 public class RootController {
 
+    @Secured({"ANON"})
     @GetMapping("/version")
     public VersionResponse getVersion() {
         return new VersionResponse(Config.VERSION);
     }
 
+    @Secured({"ANON"})
     @GetMapping("/ping")
     public String ping() {
         return "\"pong\"";
     }
 
+    @Secured({"ANON"})
     @GetMapping("/about")
     public AboutResponse getAbout() throws Exception {
-        try (DatabaseConnection conn = new DatabaseConnection()) {
 
-            Optional<CompaniesRecord> companyRecord = conn.with((supabase) ->
-                    supabase.selectFrom(Tables.COMPANIES).fetchOne()
-            );
+        DatabaseConnection conn = DatabaseConnection.getInstance();
 
-            if (companyRecord.isEmpty()) throw new RuntimeException("unable to load company");
+        Optional<CompaniesRecord> companyRecord = conn.with((supabase) ->
+                supabase.selectFrom(Tables.COMPANIES).fetchOne()
+        );
 
-            // company
-            @Nullable String fileURL = null;
-            if (Objects.nonNull(companyRecord.get().getLogoFileId())) {
-                URIBuilder builder = new URIBuilder(Environment.get(Environment.Variables.SITE_URL));
-                builder.setPath("/api/v1/files/" + companyRecord.get().getLogoFileId());
-                fileURL = builder.build().toString();
-            }
-            AboutCompanyResponse company = new AboutCompanyResponse(companyRecord.get().getDisplayName(), companyRecord.get().getIsPublished(), fileURL);
+        if (companyRecord.isEmpty()) throw new RuntimeException("unable to load company");
 
-            // supabase
-            AboutSupabaseKeysResponse keys = new AboutSupabaseKeysResponse(Environment.get(Environment.Variables.SUPABASE_ANON_KEY));
-            AboutSupabaseResponse supabase = new AboutSupabaseResponse(Environment.get(Environment.Variables.SUPABASE_URL), keys);
-
-            return new AboutResponse(Config.VERSION, company, supabase);
-
+        // company
+        @Nullable String fileURL = null;
+        if (Objects.nonNull(companyRecord.get().getLogoFileId())) {
+            URIBuilder builder = new URIBuilder(Environment.get(Environment.Variables.SITE_URL));
+            builder.setPath("/api/v1/files/" + companyRecord.get().getLogoFileId());
+            fileURL = builder.build().toString();
         }
+        AboutCompanyResponse company = new AboutCompanyResponse(companyRecord.get().getDisplayName(), companyRecord.get().getIsPublished(), fileURL);
+
+        // supabase
+        AboutSupabaseKeysResponse keys = new AboutSupabaseKeysResponse(Environment.get(Environment.Variables.SUPABASE_ANON_KEY));
+        AboutSupabaseResponse supabase = new AboutSupabaseResponse(Environment.get(Environment.Variables.SUPABASE_URL), keys);
+
+        return new AboutResponse(Config.VERSION, company, supabase);
     }
 
 }

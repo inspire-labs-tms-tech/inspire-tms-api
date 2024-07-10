@@ -10,9 +10,10 @@ import org.slf4j.LoggerFactory;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Objects;
 import java.util.Optional;
 
-public class DatabaseConnection implements AutoCloseable {
+public class DatabaseConnection {
 
     private final String host;
     private final int port;
@@ -22,7 +23,9 @@ public class DatabaseConnection implements AutoCloseable {
     private final Connection connection;
     private final Logger logger = LoggerFactory.getLogger(DatabaseConnection.class);
 
-    public DatabaseConnection() throws SQLException {
+    private static DatabaseConnection instance = null;
+
+    private DatabaseConnection() throws SQLException {
         this.host = Environment.get(Environment.Variables.DB_HOST);
         this.port = Integer.parseInt(Environment.get(Environment.Variables.DB_PORT));
         this.username = Environment.get(Environment.Variables.DB_USER);
@@ -35,6 +38,11 @@ public class DatabaseConnection implements AutoCloseable {
         else throw new RuntimeException("unable to validate connection for " + this);
     }
 
+    public static synchronized DatabaseConnection getInstance() throws SQLException {
+        if(Objects.isNull(instance)) instance = new DatabaseConnection();
+        return instance;
+    }
+
     public <T> Optional<T> with(DatabaseExecutor<T> executor) {
         try {
             return Optional.ofNullable(executor.with(DSL.using(this.connection, SQLDialect.POSTGRES)));
@@ -42,11 +50,6 @@ public class DatabaseConnection implements AutoCloseable {
             this.logger.warn("a database connection failed to execute an executor: {}", e.getMessage());
             return Optional.empty();
         }
-    }
-
-    @Override
-    public void close() throws Exception {
-        this.connection.close();
     }
 
     private String getConnectionString() {
