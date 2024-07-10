@@ -13,19 +13,19 @@ import com.inspiretmstech.db.udt.records.LoadTenderRevenueItemRecord;
 import com.inspiretmstech.db.udt.records.LoadTenderStopRecord;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.jooq.DSLContext;
+import org.jooq.InsertResultStep;
 import org.jooq.exception.IntegrityConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
 
 @RestController
@@ -35,6 +35,81 @@ public class LoadTendersController {
 
     private final Logger logger = LoggerFactory.getLogger(LoadTendersController.class);
 
+    /**
+     * Handle a load tender exception
+     * @param e the exception to handle
+     */
+    private void handle(Exception e) {
+        if (e.getClass() == IntegrityConstraintViolationException.class) {
+            IntegrityConstraintViolationException ex = (IntegrityConstraintViolationException) e;
+
+            String search = "Detail: ";
+            int index = ex.getMessage().indexOf(search);
+            throw new ResponseException("Invalid Request", "Request could not be validated", index != -1 ? ex.getMessage().substring(index + search.length()) : null);
+        }
+        logger.error(e.getMessage());
+        throw new ResponseException("Invalid Request", "Request could not be validated", "Unknown Exception");
+    }
+
+    /**
+     * Create a fetchable LoadTenderVersionsRecord
+     * @param database the database object to build against
+     * @param tenderID the ID of the LoadTendersRecord to search for
+     * @param request the details of the request
+     * @return the fetchable LoadTenderVersionsRecord
+     */
+    private InsertResultStep<LoadTenderVersionsRecord> buildLoadTenderVersion(DSLContext database, UUID tenderID, LoadTenderRequest request) {
+
+        ArrayList<LoadTenderStopRecord> stops = new ArrayList<>();
+        ArrayList<LoadTenderRevenueItemRecord> revenue = new ArrayList<>();
+
+        return database.insertInto(Tables.LOAD_TENDER_VERSIONS,
+                Tables.LOAD_TENDER_VERSIONS.LOAD_TENDER_ID,
+                Tables.LOAD_TENDER_VERSIONS.CUSTOMER_REFERENCE_NUMBER,
+                Tables.LOAD_TENDER_VERSIONS.ACCEPT_WEBHOOK,
+                Tables.LOAD_TENDER_VERSIONS.DECLINE_WEBHOOK,
+                Tables.LOAD_TENDER_VERSIONS.STOPS,
+                Tables.LOAD_TENDER_VERSIONS.REVENUE
+        ).values(
+                tenderID,
+                request.reference(),
+                request.replyTo().accept(),
+                request.replyTo().decline(),
+                stops.toArray(new LoadTenderStopRecord[0]),
+                revenue.toArray(new LoadTenderRevenueItemRecord[0])
+        ).returning();
+    }
+
+    @Secured(Authority.Authorities.CUSTOMER)
+    @Operation(summary = "Update a load tender")
+    @PutMapping
+    public void updateLoadTender(@RequestBody LoadTenderRequest request) {
+
+        APIKey key = (APIKey) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        try {
+            DatabaseConnection.getInstance().unsafely(supabase -> {
+                supabase.transaction(transaction -> {
+
+                    // locate the tender
+                    LoadTendersRecord tender = transaction.dsl()
+                            .selectFrom(Tables.LOAD_TENDERS)
+                            .where(Tables.LOAD_TENDERS.CUSTOMER_ID.eq(key.getSub()))
+                            .and(Tables.LOAD_TENDERS.ORIGINAL_CUSTOMER_REFERENCE_NUMBER.eq(request.uniqueReferenceID()))
+                            .fetchOne();
+                    if(Objects.isNull(tender)) throw new RuntimeException("Unable to Locate Load Tender!");
+
+                    // create the load tender version
+                    LoadTenderVersionsRecord version = this.buildLoadTenderVersion(transaction.dsl(), tender.getId(), request).fetchOne();
+                    if(Objects.isNull(version)) throw new RuntimeException("Unable to Create Load Tender Version!");
+                });
+                return null;
+            });
+        } catch (Exception e) {
+            this.handle(e);
+        }
+    }
+
     @Secured(Authority.Authorities.CUSTOMER)
     @Operation(summary = "Create a new load tender")
     @PostMapping
@@ -42,15 +117,11 @@ public class LoadTendersController {
 
         APIKey key = (APIKey) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        ArrayList<LoadTenderStopRecord> stops = new ArrayList<>();
-        ArrayList<LoadTenderRevenueItemRecord> revenue = new ArrayList<>();
-
         AtomicReference<LoadTendersRecord> tender = new AtomicReference<>();
 
         try {
             DatabaseConnection.getInstance().unsafely(supabase -> {
                 supabase.transaction(transaction -> {
-
                     // create the load tender
                     tender.set(transaction.dsl().insertInto(Tables.LOAD_TENDERS,
                             Tables.LOAD_TENDERS.CUSTOMER_ID,
@@ -62,38 +133,17 @@ public class LoadTendersController {
                     if (Objects.isNull(tender.get())) throw new RuntimeException("Unable to Create Load Tender!");
 
                     // create the load tender version
-                    LoadTenderVersionsRecord version = transaction.dsl().insertInto(Tables.LOAD_TENDER_VERSIONS,
-                            Tables.LOAD_TENDER_VERSIONS.LOAD_TENDER_ID,
-                            Tables.LOAD_TENDER_VERSIONS.CUSTOMER_REFERENCE_NUMBER,
-                            Tables.LOAD_TENDER_VERSIONS.ACCEPT_WEBHOOK,
-                            Tables.LOAD_TENDER_VERSIONS.DECLINE_WEBHOOK,
-                            Tables.LOAD_TENDER_VERSIONS.STOPS,
-                            Tables.LOAD_TENDER_VERSIONS.REVENUE
-                    ).values(
-                            tender.get().getId(),
-                            request.reference(),
-                            request.replyTo().accept(),
-                            request.replyTo().decline(),
-                            stops.toArray(new LoadTenderStopRecord[0]),
-                            revenue.toArray(new LoadTenderRevenueItemRecord[0])
-                    ).returning().fetchOne();
-
+                    LoadTenderVersionsRecord version = this.buildLoadTenderVersion(transaction.dsl(), tender.get().getId(), request).fetchOne();
+                    if(Objects.isNull(version)) throw new RuntimeException("Unable to Create Load Tender Version!");
                 });
                 return null;
             });
-        } catch (Exception e ) {
-            if(e.getClass() == IntegrityConstraintViolationException.class) {
-                IntegrityConstraintViolationException ex = (IntegrityConstraintViolationException) e;
-
-                String search = "Detail: ";
-                int index = ex.getMessage().indexOf(search);
-                throw new ResponseException("Invalid Request", "Request could not be validated", index != -1 ? ex.getMessage().substring(index + search.length()) : null);
-            }
-            logger.error(e.getMessage());
-            throw new ResponseException("Invalid Request", "Request could not be validated", "Unknown Exception");
+        } catch (Exception e) {
+            handle(e);
         }
 
-        if(Objects.isNull(tender.get())) throw new ResponseException("Unable to Create Load Tender", "No error was thrown, but no load tender was created");
+        if (Objects.isNull(tender.get()))
+            throw new ResponseException("Unable to Create Load Tender", "No error was thrown, but no load tender was created");
 
         return IDResponse.from(tender.get().getId());
     }
