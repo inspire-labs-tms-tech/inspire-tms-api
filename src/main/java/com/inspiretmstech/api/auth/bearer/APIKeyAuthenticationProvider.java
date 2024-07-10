@@ -9,7 +9,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
 
 import java.util.Optional;
-import java.util.UUID;
 
 public class APIKeyAuthenticationProvider implements AuthenticationProvider {
 
@@ -17,7 +16,8 @@ public class APIKeyAuthenticationProvider implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 
         ValidateApiKey validator = new ValidateApiKey();
-        validator.setPId(UUID.fromString(authentication.getPrincipal().toString()));
+        APIKey key = (APIKey) authentication.getPrincipal();
+        validator.setPId(key.getID());
         validator.setPSecret(authentication.getCredentials().toString());
 
         try {
@@ -27,7 +27,7 @@ public class APIKeyAuthenticationProvider implements AuthenticationProvider {
         }
 
         authentication.setAuthenticated(Optional.ofNullable(validator.getReturnValue()).orElse(false));
-        if(!authentication.isAuthenticated()) throw new AccessDeniedException("invalid API credentials");
+        if (!authentication.isAuthenticated()) throw new AccessDeniedException("invalid API credentials");
 
         return authentication;
     }

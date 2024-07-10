@@ -8,7 +8,6 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -35,9 +34,9 @@ public class AuthenticationFilter extends OncePerRequestFilter {
         String auth = Optional.ofNullable(request.getHeader("Authorization")).orElse("");
         if (Pattern.compile("^Bearer [0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}:itms_api_v1_[0-9A-z]{32}$").matcher(auth).matches()) {
             List<String> parts = List.of(List.of(auth.split(" ")).get(1).split(":"));
-            String id = parts.get(0);
-            String secret = parts.get(1);
-            authentication = new PreAuthenticatedAuthenticationToken(id, secret, service.loadUserByUsername(id).getAuthorities());
+            UserDetails key = service.loadUserByUsername(parts.get(0));
+            authentication = new PreAuthenticatedAuthenticationToken(key, parts.get(1), key.getAuthorities());
+
         }
 
         Authentication authenticated = null;

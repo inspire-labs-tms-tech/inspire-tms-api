@@ -1,5 +1,6 @@
 package com.inspiretmstech.api.controllers.v1;
 
+import com.inspiretmstech.api.auth.Authority;
 import com.inspiretmstech.api.constants.Config;
 import com.inspiretmstech.api.constants.Environment;
 import com.inspiretmstech.api.models.responses.VersionResponse;
@@ -24,19 +25,31 @@ import java.util.Optional;
 @RequestMapping("/v1")
 public class RootController {
 
-    @Secured({"ANON"})
+    @Secured(Authority.Authorities.ANON)
     @GetMapping("/version")
     public VersionResponse getVersion() {
         return new VersionResponse(Config.VERSION);
     }
 
-    @Secured({"ANON"})
+    @Secured(Authority.Authorities.ANON)
     @GetMapping("/ping")
     public String ping() {
         return "\"pong\"";
     }
 
-    @Secured({"ANON"})
+    @Secured(Authority.Authorities.USER)
+    @GetMapping("/ping/user")
+    public String pingUser() {
+        return "\"pong\"";
+    }
+
+    @Secured(Authority.Authorities.CUSTOMER)
+    @GetMapping("/ping/customer")
+    public String pingCustomer() {
+        return "\"pong\"";
+    }
+
+    @Secured(Authority.Authorities.ANON)
     @GetMapping("/about")
     public AboutResponse getAbout() throws Exception {
 
