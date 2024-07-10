@@ -12,7 +12,8 @@ public class Environment {
         DB_HOST,
         DB_PORT,
         DB_NAME,
-        SITE_URL
+        SITE_URL,
+        GOOGLE_GEOCODING_API_KEY
     }
 
     public static String get(Variables variable) {
