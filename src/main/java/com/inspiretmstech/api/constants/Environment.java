@@ -11,7 +11,8 @@ public class Environment {
         DB_PASS,
         DB_HOST,
         DB_PORT,
-        DB_NAME
+        DB_NAME,
+        SITE_URL
     }
 
     public static String get(Variables variable) {
