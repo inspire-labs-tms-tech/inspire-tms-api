@@ -1,5 +1,6 @@
 package com.inspiretmstech.api.models.requests;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotNull;
 
@@ -7,10 +8,17 @@ import java.util.List;
 
 public record LoadTenderRequest(
         @NotNull LoadTenderRequestReplyTo replyTo,
-        @NotNull String uniqueReferenceID, // an immutable reference for the order in the sending-party's system
-        @Nullable String reference, // a mutable, human-readable reference number
+
+        @Schema(description = "An immutable reference for the order in the sending-party's system, usable in future transactions")
+        @NotNull String uniqueReferenceID,
+
+        @Schema(description = "A mutable, human-readable reference number that can be updated in future tenders of the same uniqueReferenceID")
+        @Nullable String reference,
+
         @Nullable List<String> notes,
+
         @Nullable List<LoadTenderRequestRevenueItem> revenue,
+
         @NotNull List<LoadTenderRequestStop> stops
 ) {
 }

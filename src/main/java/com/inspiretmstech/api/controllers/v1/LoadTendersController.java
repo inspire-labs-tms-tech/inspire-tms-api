@@ -11,6 +11,8 @@ import com.inspiretmstech.db.tables.records.LoadTenderVersionsRecord;
 import com.inspiretmstech.db.tables.records.LoadTendersRecord;
 import com.inspiretmstech.db.udt.records.LoadTenderRevenueItemRecord;
 import com.inspiretmstech.db.udt.records.LoadTenderStopRecord;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.jooq.exception.IntegrityConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,12 +29,14 @@ import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
 @RestController
+@Tag(name = "Load Tenders", description = "Customer endpoints for tendering loads directly to Inspire TMS")
 @RequestMapping("/v1/load-tenders")
 public class LoadTendersController {
 
     private final Logger logger = LoggerFactory.getLogger(LoadTendersController.class);
 
     @Secured(Authority.Authorities.CUSTOMER)
+    @Operation(summary = "Create a new load tender")
     @PostMapping
     public IDResponse createLoadTender(@RequestBody LoadTenderRequest request) throws SQLException {
 

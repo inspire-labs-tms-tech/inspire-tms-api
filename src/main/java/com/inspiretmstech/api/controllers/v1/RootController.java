@@ -11,6 +11,7 @@ import com.inspiretmstech.api.models.responses.about.AboutSupabaseResponse;
 import com.inspiretmstech.api.utils.DatabaseConnection;
 import com.inspiretmstech.db.Tables;
 import com.inspiretmstech.db.tables.records.CompaniesRecord;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.apache.http.client.utils.URIBuilder;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.springframework.security.access.annotation.Secured;
@@ -22,6 +23,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @RestController
+@Tag(name = "About", description = "Retrieve basic diagnostic and public information about an Inspire TMS Instance")
 @RequestMapping("/v1")
 public class RootController {
 
