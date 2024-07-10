@@ -1,5 +1,6 @@
 package com.inspiretmstech.api.configurations;
 
+import com.inspiretmstech.api.models.ResponseException;
 import com.inspiretmstech.api.models.responses.ErrorResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,9 +16,11 @@ public class GlobalExceptionHandler {
 
     public final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
-    @ExceptionHandler({RuntimeException.class, SQLException.class})
+    @ExceptionHandler({RuntimeException.class, SQLException.class, ResponseException.class})
     public ResponseEntity<ErrorResponse> handleRuntimeException(RuntimeException e) {
         logger.error(e.getMessage());
+
+        if(e.getClass() == ResponseException.class) return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(((ResponseException) e).getErrorResponse());
 
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)

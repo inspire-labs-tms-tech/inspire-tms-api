@@ -45,11 +45,15 @@ public class DatabaseConnection {
 
     public <T> Optional<T> with(DatabaseExecutor<T> executor) {
         try {
-            return Optional.ofNullable(executor.with(DSL.using(this.connection, SQLDialect.POSTGRES)));
+            return this.unsafely(executor);
         } catch (Exception e) {
-            this.logger.warn("a database connection failed to execute an executor: {}", e.getMessage());
+            this.logger.warn("({}) a database connection failed to execute an executor: {}", e.getClass().getSimpleName(), e.getMessage());
             return Optional.empty();
         }
+    }
+
+    public <T> Optional<T> unsafely(DatabaseExecutor<T> executor) throws Exception {
+        return Optional.ofNullable(executor.with(DSL.using(this.connection, SQLDialect.POSTGRES)));
     }
 
     private String getConnectionString() {
