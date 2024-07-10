@@ -1,4 +1,6 @@
 package com.inspiretmstech.api.models.responses;
 
-public record VersionResponse(String version) {
+import jakarta.validation.constraints.NotNull;
+
+public record VersionResponse(@NotNull String version) {
 }
