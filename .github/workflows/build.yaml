@@ -64,3 +64,33 @@ jobs:
           build-args: |
             GH_USER=inspire-labs-tech-readonly
             GH_TOKEN=${{ secrets.INSPIRE_TMS_READONLY_PERSONAL_ACCESS_TOKEN }}
+  types:
+    name: Generate Types
+    needs: dockerize
+    runs-on: ubuntu-latest
+    services:
+      self:
+        image: ghcr.io/inspire-labs-tms-tech/inspire-tms-api:latest
+        ports:
+          - 8080:8080
+        credentials:
+          username: inspire-labs-tech-readonly
+          password: ${{ secrets.INSPIRE_TMS_READONLY_PERSONAL_ACCESS_TOKEN }}
+    permissions:
+      contents: write
+      packages: write
+    steps:
+      - run: sudo apt-get -y install binutils
+      - run: sudo apt-get -y install fakeroot
+
+      - name: setup
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+
+      - name: generate typescript client
+        run: |
+          npx --yes @hey-api/openapi-ts \
+            --input http://127.0.0.1:8080/api-docs \
+            --output .
+          ls -la
