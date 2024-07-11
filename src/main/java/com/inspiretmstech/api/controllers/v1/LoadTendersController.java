@@ -5,18 +5,15 @@ import com.inspiretmstech.api.auth.Authority;
 import com.inspiretmstech.api.auth.bearer.APIKey;
 import com.inspiretmstech.api.models.ResponseException;
 import com.inspiretmstech.api.models.requests.LoadTenderRequest;
+import com.inspiretmstech.api.models.requests.LoadTenderRequestRevenueItem;
 import com.inspiretmstech.api.models.requests.LoadTenderRequestStop;
 import com.inspiretmstech.api.models.responses.IDResponse;
 import com.inspiretmstech.api.utils.DatabaseConnection;
 import com.inspiretmstech.api.utils.Geocoder;
 import com.inspiretmstech.api.utils.TimeZones;
 import com.inspiretmstech.db.Tables;
-import com.inspiretmstech.db.enums.StopTypes;
 import com.inspiretmstech.db.tables.records.LoadTenderVersionsRecord;
 import com.inspiretmstech.db.tables.records.LoadTendersRecord;
-import com.inspiretmstech.db.tables.records.StopsRecord;
-import com.inspiretmstech.db.udt.Address;
-import com.inspiretmstech.db.udt.records.AddressRecord;
 import com.inspiretmstech.db.udt.records.LoadTenderRevenueItemRecord;
 import com.inspiretmstech.db.udt.records.LoadTenderStopRecord;
 import io.swagger.v3.oas.annotations.Operation;
@@ -24,14 +21,13 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.jooq.DSLContext;
 import org.jooq.InsertResultStep;
 import org.jooq.exception.IntegrityConstraintViolationException;
-import org.jooq.meta.derby.sys.Sys;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.text.html.Option;
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
@@ -50,6 +46,7 @@ public class LoadTendersController {
 
     /**
      * Handle a load tender exception
+     *
      * @param e the exception to handle
      */
     private void handle(Exception e) {
@@ -61,7 +58,7 @@ public class LoadTendersController {
             throw new ResponseException("Invalid Request", "Request could not be validated", index != -1 ? ex.getMessage().substring(index + search.length()) : null);
         }
 
-        if(e.getClass() == ResponseException.class) throw (ResponseException) e;
+        if (e.getClass() == ResponseException.class) throw (ResponseException) e;
 
         logger.error(e.getMessage());
         throw new ResponseException("Invalid Request", "Request could not be validated", "Unknown Exception");
@@ -69,9 +66,10 @@ public class LoadTendersController {
 
     /**
      * Create a fetchable LoadTenderVersionsRecord
+     *
      * @param database the database object to build against
      * @param tenderID the ID of the LoadTendersRecord to search for
-     * @param request the details of the request
+     * @param request  the details of the request
      * @return the fetchable LoadTenderVersionsRecord
      */
     private InsertResultStep<LoadTenderVersionsRecord> buildLoadTenderVersion(DSLContext database, UUID tenderID, LoadTenderRequest request) {
@@ -79,15 +77,23 @@ public class LoadTendersController {
         ArrayList<LoadTenderStopRecord> stops = new ArrayList<>();
         ArrayList<LoadTenderRevenueItemRecord> revenue = new ArrayList<>();
 
+        if (Objects.nonNull(request.revenue()))
+            for (LoadTenderRequestRevenueItem item : request.revenue())
+                revenue.add(new LoadTenderRevenueItemRecord(item.quantity(), BigDecimal.valueOf(item.rate())));
+
         for (LoadTenderRequestStop stop : request.stops()) {
             LatLng coords = Geocoder.geocode(stop.address().toString());
             Optional<ZoneId> zone = TimeZones.lookup(coords);
 
-            if(Objects.isNull(stop.appointment())) throw new ResponseException("Invalid Appointment", "Appointment cannot be empty");
-            if(Objects.isNull(stop.appointment().earliest())) throw new ResponseException("Invalid Appointment", "The earliest appointment cannot be empty");
-            if(Objects.isNull(stop.appointment().latest())) throw new ResponseException("Invalid Appointment", "The latest appointment cannot be empty");
+            if (Objects.isNull(stop.appointment()))
+                throw new ResponseException("Invalid Appointment", "Appointment cannot be empty");
+            if (Objects.isNull(stop.appointment().earliest()))
+                throw new ResponseException("Invalid Appointment", "The earliest appointment cannot be empty");
+            if (Objects.isNull(stop.appointment().latest()))
+                throw new ResponseException("Invalid Appointment", "The latest appointment cannot be empty");
 
-            if(zone.isEmpty()) throw new ResponseException("Unable to determine timezone for address: " + stop.address());
+            if (zone.isEmpty())
+                throw new ResponseException("Unable to determine timezone for address: " + stop.address());
             stops.add(new LoadTenderStopRecord(null, OffsetDateTime.parse(stop.appointment().earliest()), OffsetDateTime.parse(stop.appointment().latest()), stop.type(), stop.address().toAddress(coords, zone.get())));
         }
 
@@ -125,11 +131,11 @@ public class LoadTendersController {
                             .where(Tables.LOAD_TENDERS.CUSTOMER_ID.eq(key.getSub()))
                             .and(Tables.LOAD_TENDERS.ORIGINAL_CUSTOMER_REFERENCE_NUMBER.eq(request.uniqueReferenceID()))
                             .fetchOne();
-                    if(Objects.isNull(tender)) throw new RuntimeException("Unable to Locate Load Tender!");
+                    if (Objects.isNull(tender)) throw new RuntimeException("Unable to Locate Load Tender!");
 
                     // create the load tender version
                     LoadTenderVersionsRecord version = this.buildLoadTenderVersion(transaction.dsl(), tender.getId(), request).fetchOne();
-                    if(Objects.isNull(version)) throw new RuntimeException("Unable to Create Load Tender Version!");
+                    if (Objects.isNull(version)) throw new RuntimeException("Unable to Create Load Tender Version!");
                 });
                 return null;
             });
@@ -162,7 +168,7 @@ public class LoadTendersController {
 
                     // create the load tender version
                     LoadTenderVersionsRecord version = this.buildLoadTenderVersion(transaction.dsl(), tender.get().getId(), request).fetchOne();
-                    if(Objects.isNull(version)) throw new RuntimeException("Unable to Create Load Tender Version!");
+                    if (Objects.isNull(version)) throw new RuntimeException("Unable to Create Load Tender Version!");
                 });
                 return null;
             });
