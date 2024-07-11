@@ -1,4 +1,4 @@
-package com.inspiretmstech.api.models.requests;
+package com.inspiretmstech.api.models.requests.tenders;
 
 import jakarta.validation.constraints.NotNull;
 

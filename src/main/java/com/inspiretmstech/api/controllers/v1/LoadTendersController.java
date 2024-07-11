@@ -4,9 +4,9 @@ import com.google.maps.model.LatLng;
 import com.inspiretmstech.api.auth.Authority;
 import com.inspiretmstech.api.auth.bearer.APIKey;
 import com.inspiretmstech.api.models.ResponseException;
-import com.inspiretmstech.api.models.requests.LoadTenderRequest;
-import com.inspiretmstech.api.models.requests.LoadTenderRequestRevenueItem;
-import com.inspiretmstech.api.models.requests.LoadTenderRequestStop;
+import com.inspiretmstech.api.models.requests.tenders.LoadTenderRequest;
+import com.inspiretmstech.api.models.requests.tenders.LoadTenderRequestRevenueItem;
+import com.inspiretmstech.api.models.requests.tenders.LoadTenderRequestStop;
 import com.inspiretmstech.api.models.responses.IDResponse;
 import com.inspiretmstech.api.utils.DatabaseConnection;
 import com.inspiretmstech.api.utils.Geocoder;
@@ -83,7 +83,7 @@ public class LoadTendersController {
 
         for (LoadTenderRequestStop stop : request.stops()) {
             LatLng coords = Geocoder.geocode(stop.address().toString());
-            Optional<ZoneId> zone = TimeZones.lookup(coords);
+            ZoneId zone = TimeZones.lookup(coords, stop.address());
 
             if (Objects.isNull(stop.appointment()))
                 throw new ResponseException("Invalid Appointment", "Appointment cannot be empty");
@@ -92,9 +92,7 @@ public class LoadTendersController {
             if (Objects.isNull(stop.appointment().latest()))
                 throw new ResponseException("Invalid Appointment", "The latest appointment cannot be empty");
 
-            if (zone.isEmpty())
-                throw new ResponseException("Unable to determine timezone for address: " + stop.address());
-            stops.add(new LoadTenderStopRecord(null, OffsetDateTime.parse(stop.appointment().earliest()), OffsetDateTime.parse(stop.appointment().latest()), stop.type(), stop.address().toAddress(coords, zone.get())));
+            stops.add(new LoadTenderStopRecord(null, OffsetDateTime.parse(stop.appointment().earliest()), OffsetDateTime.parse(stop.appointment().latest()), stop.type(), stop.address().toAddress()));
         }
 
         return database.insertInto(Tables.LOAD_TENDER_VERSIONS,

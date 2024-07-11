@@ -11,6 +11,7 @@ import com.inspiretmstech.api.models.responses.about.AboutSupabaseResponse;
 import com.inspiretmstech.api.utils.DatabaseConnection;
 import com.inspiretmstech.db.Tables;
 import com.inspiretmstech.db.tables.records.CompaniesRecord;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.apache.http.client.utils.URIBuilder;
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -28,30 +29,35 @@ import java.util.Optional;
 public class RootController {
 
     @Secured(Authority.Authorities.ANON)
+    @Operation(summary = "Retrieve the Inspire TMS API version")
     @GetMapping("/version")
     public VersionResponse getVersion() {
         return new VersionResponse(Config.VERSION);
     }
 
     @Secured(Authority.Authorities.ANON)
+    @Operation(summary = "An unauthenticated (anonymous) ping endpoint")
     @GetMapping("/ping")
     public String ping() {
         return "\"pong\"";
     }
 
     @Secured(Authority.Authorities.USER)
+    @Operation(summary = "A user-authenticated ping endpoint (to verify user-level authentication)")
     @GetMapping("/ping/user")
     public String pingUser() {
         return "\"pong\"";
     }
 
     @Secured(Authority.Authorities.CUSTOMER)
+    @Operation(summary = "A customer-authenticated ping endpoint (to verify customer-level authentication)")
     @GetMapping("/ping/customer")
     public String pingCustomer() {
         return "\"pong\"";
     }
 
     @Secured(Authority.Authorities.ANON)
+    @Operation(summary = "Retrieve basic information about the company configured in the Inspire TMS instance")
     @GetMapping("/about")
     public AboutResponse getAbout() throws Exception {
 

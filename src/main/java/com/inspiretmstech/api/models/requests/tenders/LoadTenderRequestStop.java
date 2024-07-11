@@ -1,4 +1,4 @@
-package com.inspiretmstech.api.models.requests;
+package com.inspiretmstech.api.models.requests.tenders;
 
 import com.inspiretmstech.api.models.Address;
 import com.inspiretmstech.db.enums.StopTypes;
