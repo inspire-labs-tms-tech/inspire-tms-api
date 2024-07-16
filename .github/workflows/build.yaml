@@ -89,9 +89,21 @@ jobs:
         with:
           node-version: '20.x'
 
-      - run: cat version.json | jq .version --raw-output
+      - name: get the current version
+        run: echo "VERSION=$(git show HEAD:version.json | jq .version --raw-output)" >> "$GITHUB_ENV"
 
-      - run: git show HEAD:version.json
+      - name: get the previous version
+        run: echo "PREVIOUS_VERSION=$(git show HEAD~1:version.json | jq .version --raw-output)" >> "$GITHUB_ENV"
+
+      - name: check version
+        shell: bash
+        run: |
+          if [[ "${{ env.VERSION }}" == "${{ env.PREVIOUS_VERSION }}" ]]; then
+            echo "version change confirmed!";
+          else
+            echo "version not changed!";
+            exit 1;
+          fi
 
       - name: generate typescript client
         run: |
