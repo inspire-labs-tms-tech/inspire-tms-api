@@ -37,9 +37,11 @@ jobs:
         shell: bash
         run: |
           if [[ "$VERSION" == "$PREVIOUS_VERSION" ]]; then
-            echo "version change confirmed!";
+            echo "[DEBUG] version change confirmed: $VERSION";
           else
-            echo "version not changed!";
+            echo "[ERROR] Version not changed:";
+            echo "          Latest Version: $VERSION";
+            echo "        Previous Version: $PREVIOUS_VERSION";
             exit 1;
           fi
         env:
