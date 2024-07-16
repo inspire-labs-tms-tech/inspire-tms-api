@@ -39,7 +39,7 @@ jobs:
       - name: check version
         shell: bash
         run: |
-          if [[ "$VERSION" == "$PREVIOUS_VERSION" ]]; then
+          if [[ "$VERSION" != "$PREVIOUS_VERSION" ]]; then
             echo "[DEBUG] version change confirmed: $VERSION";
           else
             echo "[ERROR] Version not changed:";
