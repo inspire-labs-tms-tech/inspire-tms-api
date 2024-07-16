@@ -121,14 +121,27 @@ jobs:
       contents: write
       packages: write
     steps:
+      - uses: actions/checkout@v4
 
       - name: setup
         uses: actions/setup-node@v3
         with:
           node-version: '20.x'
 
+      - name: persist version
+        run: sed -i -e "s|0.0.0|${{ needs.version.outputs.latest }}|g" "${{ github.workspace }}/types/typescript/package.json"
+
+      - run: npm ci
+        working-directory: ./types/typescript
+
       - name: generate typescript client
-        run: |
-          npx --yes @hey-api/openapi-ts \
-            --input http://127.0.0.1:8080/api-docs \
-            --output .
+        run: npm run build
+        working-directory: ./types/typescript
+
+      - name: publish to GHPR
+        run: npm publish
+
+      - name: publish to NPM
+        uses: JS-DevTools/npm-publish@v3
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
