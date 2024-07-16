@@ -140,8 +140,10 @@ jobs:
 
       - name: publish to GHPR
         run: npm publish
+        working-directory: ./types/typescript
 
       - name: publish to NPM
         uses: JS-DevTools/npm-publish@v3
         with:
           token: ${{ secrets.NPM_TOKEN }}
+          package: "${{ github.workspace }}/types/typescript/package.json"
