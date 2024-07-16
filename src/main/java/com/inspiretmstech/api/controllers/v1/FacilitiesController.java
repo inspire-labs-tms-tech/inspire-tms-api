@@ -53,7 +53,7 @@ public class FacilitiesController {
     @Requires({Scopes.FACILITIES})
     @Operation(summary = "Update a facility")
     @PutMapping("{id}")
-    public void createFacility(
+    public void updateFacility(
             @RequestBody FacilityRequest request,
             @PathVariable String id
     ) throws SQLException {
