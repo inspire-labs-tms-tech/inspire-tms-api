@@ -98,12 +98,15 @@ jobs:
       - name: check version
         shell: bash
         run: |
-          if [[ "${{ env.VERSION }}" == "${{ env.PREVIOUS_VERSION }}" ]]; then
+          if [[ "$VERSION" == "$PREVIOUS_VERSION" ]]; then
             echo "version change confirmed!";
           else
             echo "version not changed!";
             exit 1;
           fi
+        env:
+          VERSION: ${{ env.VERSION }}
+          PREVIOUS_VERSION: ${{ env.PREVIOUS_VERSION }}
 
       - name: generate typescript client
         run: |
