@@ -149,3 +149,4 @@ jobs:
         with:
           token: ${{ secrets.NPM_TOKEN }}
           package: "${{ github.workspace }}/types/typescript/package.json"
+          access: public
