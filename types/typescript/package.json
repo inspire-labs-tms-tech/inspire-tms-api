@@ -1,0 +1,24 @@
+{
+  "name": "@inspire-labs-tms-tech/inspire-tms-api",
+  "version": "0.0.0",
+  "description": "A Typescript Client for Inspire TMS's API",
+  "main": "index.ts",
+  "scripts": {
+    "types": "npx --yes @hey-api/openapi-ts --input http://127.0.0.1:8080/api-docs --output ./gen",
+    "build": "npm run types && tsup"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/inspire-labs-tms-tech/inspire-tms-api.git"
+  },
+  "author": "@inspire-labs-tms-tech",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/inspire-labs-tms-tech/inspire-tms-api/issues"
+  },
+  "homepage": "https://github.com/inspire-labs-tms-tech/inspire-tms-api#readme",
+  "devDependencies": {
+    "tsup": "^8.1.0",
+    "typescript": "^5.5.3"
+  }
+}

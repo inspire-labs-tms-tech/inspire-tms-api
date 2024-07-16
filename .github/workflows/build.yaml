@@ -82,11 +82,16 @@ jobs:
     steps:
       - run: sudo apt-get -y install binutils
       - run: sudo apt-get -y install fakeroot
+      - run: sudo apt-get -y install jq
 
       - name: setup
         uses: actions/setup-node@v3
         with:
           node-version: '20.x'
+
+      - run: cat version.json | jq .version --raw-output
+
+      - run: git show HEAD:version.json
 
       - name: generate typescript client
         run: |
