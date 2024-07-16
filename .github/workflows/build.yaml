@@ -15,8 +15,39 @@ env:
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
+  version:
+    name: Check Version
+    runs-on: ubuntu-latest
+    outputs:
+      previous: ${{ steps.previous.outputs.version }}
+      latest: ${{ steps.latest.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get -y install jq
+
+      - name: get the current version
+        id: latest
+        run: echo "version=$(git show HEAD:version.json | jq .version --raw-output)" >> "$GITHUB_OUTPUT"
+
+      - name: get the previous version
+        id: previous
+        run: echo "version=$(git show HEAD~1:version.json | jq .version --raw-output)" >> "$GITHUB_OUTPUT"
+
+      - name: check version
+        shell: bash
+        run: |
+          if [[ "$VERSION" == "$PREVIOUS_VERSION" ]]; then
+            echo "version change confirmed!";
+          else
+            echo "version not changed!";
+            exit 1;
+          fi
+        env:
+          VERSION: ${{ env.VERSION }}
+          PREVIOUS_VERSION: ${{ env.PREVIOUS_VERSION }}
   dockerize:
     name: Dockerize
+    needs: version
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -53,6 +84,7 @@ jobs:
           tags: |
             type=raw,value=${{ env.VERSION }}
             type=raw,value=latest
+            type=semver,pattern={{version}},value=${{ needs.version.outputs.latest }}
 
       - name: build and push Docker image
         uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
@@ -66,7 +98,9 @@ jobs:
             GH_TOKEN=${{ secrets.INSPIRE_TMS_READONLY_PERSONAL_ACCESS_TOKEN }}
   types:
     name: Generate Types
-    needs: dockerize
+    needs:
+      - version
+      - dockerize
     runs-on: ubuntu-latest
     services:
       self:
@@ -80,37 +114,14 @@ jobs:
       contents: write
       packages: write
     steps:
-      - run: sudo apt-get -y install binutils
-      - run: sudo apt-get -y install fakeroot
-      - run: sudo apt-get -y install jq
 
       - name: setup
         uses: actions/setup-node@v3
         with:
           node-version: '20.x'
 
-      - name: get the current version
-        run: echo "VERSION=$(git show HEAD:version.json | jq .version --raw-output)" >> "$GITHUB_ENV"
-
-      - name: get the previous version
-        run: echo "PREVIOUS_VERSION=$(git show HEAD~1:version.json | jq .version --raw-output)" >> "$GITHUB_ENV"
-
-      - name: check version
-        shell: bash
-        run: |
-          if [[ "$VERSION" == "$PREVIOUS_VERSION" ]]; then
-            echo "version change confirmed!";
-          else
-            echo "version not changed!";
-            exit 1;
-          fi
-        env:
-          VERSION: ${{ env.VERSION }}
-          PREVIOUS_VERSION: ${{ env.PREVIOUS_VERSION }}
-
       - name: generate typescript client
         run: |
           npx --yes @hey-api/openapi-ts \
             --input http://127.0.0.1:8080/api-docs \
             --output .
-          ls -la
