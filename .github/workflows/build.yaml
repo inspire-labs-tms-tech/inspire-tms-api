@@ -41,6 +41,8 @@ jobs:
         run: |
           if [[ "$VERSION" != "$PREVIOUS_VERSION" ]]; then
             echo "[DEBUG] version change confirmed: $VERSION";
+            echo "          Latest Version: $VERSION";
+            echo "        Previous Version: $PREVIOUS_VERSION";
           else
             echo "[ERROR] Version not changed:";
             echo "          Latest Version: $VERSION";
