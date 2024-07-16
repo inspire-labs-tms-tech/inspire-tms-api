@@ -139,7 +139,7 @@ jobs:
         working-directory: ./types/typescript
 
       - name: publish to GHPR
-        run: npm publish
+        run: npm publish --access public
         working-directory: ./types/typescript
         env:
           GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
