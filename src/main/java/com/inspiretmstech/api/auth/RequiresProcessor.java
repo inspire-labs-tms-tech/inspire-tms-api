@@ -26,6 +26,10 @@ public class RequiresProcessor {
         throw new InsufficientPrivilegesException(scope);
     }
 
+    private void test(Scopes scope, boolean predicate) {
+        if (!predicate) this.fail(scope);
+    }
+
     public void requires(Scopes scope) throws SQLException {
 
         APIKey key = (APIKey) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -45,10 +49,8 @@ public class RequiresProcessor {
 
         // check the scope
         switch (scope) {
-            case FACILITIES -> {
-                if (!role.get().getScopeFacilities()) this.fail(scope);
-            }
-            case NEVER -> this.fail(scope);
+            case FACILITIES -> this.test(scope, role.get().getScopeFacilities());
+            case NEVER -> this.test(scope, false); // NEVER is always false
             default -> throw new ResponseException("Unhandled Scope", "The server is improperly configured to handle scope " + scope, "Contact Inspire TMS Support to resolve this issue");
         }
     }
