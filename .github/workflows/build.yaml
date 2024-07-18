@@ -131,7 +131,7 @@ jobs:
         working-directory: ./types/java
         run: |
           bash ./build.sh
-          REPO="gh::default::https://maven.pkg.github.com/${GITHUB_REPOSITORY}"
+          REPO="gh::default::https://maven.pkg.github.com/inspire-labs-tms-tech/inspire-tms-api"
           cd gen && mvn deploy -DaltReleaseDeploymentRepository="${REPO}" -DaltSnapshotDeploymentRepository="${REPO}"
         env:
           VERSION: ${{ needs.version.outputs.latest }}
