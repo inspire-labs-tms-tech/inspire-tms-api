@@ -1,8 +1,13 @@
 import xml.etree.ElementTree as ET
+from xml.dom import minidom
 
 def add_distribution_management(xml_path):
     tree = ET.parse(xml_path)
     root = tree.getroot()
+
+    # Define namespaces (if any) and register them
+    namespaces = {'': 'http://maven.apache.org/POM/4.0.0'}
+    ET.register_namespace('', namespaces[''])
 
     # Create the new XML structure
     distribution_management = ET.Element('distributionManagement')
@@ -15,11 +20,17 @@ def add_distribution_management(xml_path):
     url.text = 'https://maven.pkg.github.com/inspire-labs-tms-tech/inspire-tms-api'
 
     # Find the project element and add the new XML structure
-    project = root.find('./')
+    project = root.find('{http://maven.apache.org/POM/4.0.0}project')
+    if project is None:
+        project = root
+
     project.append(distribution_management)
 
-    # Write the modified XML back to the file
-    tree.write(xml_path, encoding='utf-8', xml_declaration=True)
+    # Convert the tree to a string and write it back without XML declaration
+    xml_str = ET.tostring(root, encoding='utf-8').decode('utf-8')
+    xml_pretty_str = minidom.parseString(xml_str).toprettyxml(indent="  ", encoding='utf-8').decode('utf-8')
+    with open(xml_path, 'w', encoding='utf-8') as f:
+        f.write(xml_pretty_str)
 
 # Specify the path to the XML file
 xml_path = './gen/pom.xml'
