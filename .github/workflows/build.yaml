@@ -127,17 +127,17 @@ jobs:
           distribution: 'corretto'
           java-version: '21'
           server-id: 'github'
-      - run: bash ./types/java/build.sh
-        env:
-          VERSION: ${{ needs.version.outputs.latest }}
       - name: Publish to GitHub Packages
+        working-directory: ./types/java
         run: |
+          bash ./build.sh
           REPO="gh::default::https://maven.pkg.github.com/${GITHUB_REPOSITORY}"
           mvn deploy -DaltReleaseDeploymentRepository="${REPO}" -DaltSnapshotDeploymentRepository="${REPO}"
         env:
+          VERSION: ${{ needs.version.outputs.latest }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  types:
+  typescript:
     name: Generate Typescript Types
     needs:
       - version
