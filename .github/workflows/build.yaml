@@ -127,11 +127,15 @@ jobs:
           distribution: 'corretto'
           java-version: '21'
           server-id: 'github'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
       - name: Publish to GitHub Packages
         working-directory: ./types/java
         run: |
           bash ./build.sh
           REPO="github::default::https://maven.pkg.github.com/inspire-labs-tms-tech/inspire-tms-api"
+          python patch-pom.xml.py
           cd gen && mvn deploy -DaltReleaseDeploymentRepository="${REPO}" -DaltSnapshotDeploymentRepository="${REPO}"
         env:
           VERSION: ${{ needs.version.outputs.latest }}
