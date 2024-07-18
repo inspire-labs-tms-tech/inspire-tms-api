@@ -132,7 +132,7 @@ jobs:
         run: |
           bash ./build.sh
           REPO="gh::default::https://maven.pkg.github.com/${GITHUB_REPOSITORY}"
-          mvn deploy -DaltReleaseDeploymentRepository="${REPO}" -DaltSnapshotDeploymentRepository="${REPO}"
+          cd gen && mvn deploy -DaltReleaseDeploymentRepository="${REPO}" -DaltSnapshotDeploymentRepository="${REPO}"
         env:
           VERSION: ${{ needs.version.outputs.latest }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
