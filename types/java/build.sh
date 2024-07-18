@@ -14,6 +14,10 @@ npx --yes @openapitools/openapi-generator-cli generate \
   --input-spec http://127.0.0.1:8080/api-docs \
   --generator-name java \
   --output "$HERE/gen" \
+  --additional-properties=invokerPackage=com.inspiretmstech.api \
+  --additional-properties=apiPackage=com.inspiretmstech.api \
+  --additional-properties=modelPackage=com.inspiretmstech.api.models \
+  --additional-properties=library=apache-httpclient \
   --additional-properties=groupId=com.inspiretmstech \
   --additional-properties=artifactId=api \
   --additional-properties=artifactVersion="$VERSION" \
