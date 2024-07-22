@@ -30,6 +30,7 @@ public class APIKey implements UserDetails {
         switch (this.key.getType()) {
             case USER -> authorities.add(Authority.USER);
             case CUSTOMER -> authorities.add(Authority.CUSTOMER);
+            case ORBCOMM -> authorities.add(Authority.ORBCOMM);
             default -> logger.warn("unhandled API key type: {}", this.key.getType());
         }
 

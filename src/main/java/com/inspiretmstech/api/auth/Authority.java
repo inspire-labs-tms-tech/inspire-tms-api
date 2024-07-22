@@ -6,7 +6,8 @@ public enum Authority implements GrantedAuthority {
 
     ANON(Authorities.ANON),
     USER(Authorities.USER),
-    CUSTOMER(Authorities.CUSTOMER);
+    CUSTOMER(Authorities.CUSTOMER),
+    ORBCOMM(Authorities.ORBCOMM);
 
     private final String authority;
 
@@ -23,5 +24,6 @@ public enum Authority implements GrantedAuthority {
         public static final String ANON = "ANON";
         public static final String USER = "USER";
         public static final String CUSTOMER = "CUSTOMER";
+        public static final String ORBCOMM = "ORBCOMM";
     }
 }
