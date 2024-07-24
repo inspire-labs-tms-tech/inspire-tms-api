@@ -44,7 +44,7 @@ public class OrbcommWebhookController {
     @Operation(summary = "POST tracking updates")
     @PostMapping
     public StatusResponse sendTrackingUpdates(@RequestBody OrbcommDataPushRequest request) {
-        this.logger.info("Received Request: {}", request.data().size());
+        this.logger.trace("Received Request: {}", request.data().size());
 
         DatabaseConnection db;
         try {

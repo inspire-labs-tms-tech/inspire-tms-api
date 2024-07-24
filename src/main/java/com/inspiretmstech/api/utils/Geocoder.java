@@ -42,6 +42,10 @@ public class Geocoder {
     }
 
     public static AddressRecord reverseGeocode(String address) {
+        return Geocoder.reverseGeocode(address, true);
+    }
+
+    public static AddressRecord reverseGeocode(String address, boolean validate) {
         return Geocoder.lookup(address, (result) -> {
             AddressRecord record = new AddressRecord();
 
@@ -64,24 +68,24 @@ public class Geocoder {
                     case POSTAL_CODE -> postalCode = Optional.ofNullable(component.longName);
                 }
 
-                if (streetNumber.isEmpty())
+                if (streetNumber.isEmpty() && validate)
                     throw new ResponseException("Unable to determine street number for address: " + address, "Is this a valid street number?");
-                if (streetName.isEmpty())
+                if (streetName.isEmpty() && validate)
                     throw new ResponseException("Unable to determine street name for address: " + address, "Is this a valid street name?");
                 if (streetAddress2.isEmpty()) streetAddress2 = Optional.of("");
                 if (city.isEmpty())
                     throw new ResponseException("Unable to determine city for address: " + address, "Is this a valid city?");
-                if (state.isEmpty())
+                if (state.isEmpty() && validate)
                     throw new ResponseException("Unable to determine state for address: " + address, "Is this a valid state?");
-                if (postalCode.isEmpty())
+                if (postalCode.isEmpty() && validate)
                     throw new ResponseException("Unable to determine postal code for address: " + address, "Is this a valid postal code?");
             }
 
-            record.setStreetAddress_1(streetNumber.get() + " " + streetName.get());
-            record.setStreetAddress_2(streetAddress2.get());
-            record.setCity(city.get());
-            record.setState(state.get());
-            record.setZip(postalCode.get());
+            record.setStreetAddress_1((streetNumber.orElse("") + " " + streetName.orElse("")).trim());
+            record.setStreetAddress_2(streetAddress2.orElse(""));
+            record.setCity(city.orElse(""));
+            record.setState(state.orElse(""));
+            record.setZip(postalCode.orElse(""));
             record.setLatitude(BigDecimal.valueOf(coords.lat));
             record.setLongitude(BigDecimal.valueOf(coords.lng));
             record.setIanaTimezoneId(ianaTimezoneID.getId());

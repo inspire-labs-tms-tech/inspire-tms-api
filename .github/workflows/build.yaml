@@ -74,7 +74,7 @@ jobs:
           sudo sed -i -e "s|00000000.000000|$VERSION|g" ./build.gradle
           sudo sed -i -e "s|00000000.000000|$VERSION|g" ./src/main/java/com/inspiretmstech/api/constants/Config.java
         env:
-          VERSION: ${{ env.VERSION }}
+          VERSION: ${{ needs.version.outputs.latest }}
 
       - name: login to registry
         uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
