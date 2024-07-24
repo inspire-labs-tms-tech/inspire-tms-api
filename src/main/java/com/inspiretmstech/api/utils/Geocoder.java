@@ -63,7 +63,7 @@ public class Geocoder {
                     case STREET_NUMBER -> streetNumber = Optional.ofNullable(component.longName);
                     case ROUTE -> streetName = Optional.ofNullable(component.longName);
                     case SUBPREMISE -> streetAddress2 = Optional.ofNullable(component.longName);
-                    case LOCALITY, SUBLOCALITY_LEVEL_1 -> city = Optional.ofNullable(component.longName);
+                    case LOCALITY -> city = Optional.ofNullable(component.longName);
                     case ADMINISTRATIVE_AREA_LEVEL_1 -> state = Optional.ofNullable(component.longName);
                     case POSTAL_CODE -> postalCode = Optional.ofNullable(component.longName);
                 }
@@ -73,7 +73,7 @@ public class Geocoder {
                 if (streetName.isEmpty() && validate)
                     throw new ResponseException("Unable to determine street name for address: " + address, "Is this a valid street name?");
                 if (streetAddress2.isEmpty()) streetAddress2 = Optional.of("");
-                if (city.isEmpty())
+                if (city.isEmpty() && validate)
                     throw new ResponseException("Unable to determine city for address: " + address, "Is this a valid city?");
                 if (state.isEmpty() && validate)
                     throw new ResponseException("Unable to determine state for address: " + address, "Is this a valid state?");
