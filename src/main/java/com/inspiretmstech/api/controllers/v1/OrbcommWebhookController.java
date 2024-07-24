@@ -69,7 +69,7 @@ public class OrbcommWebhookController {
             record.ifPresent(eldAssetsRecord -> db.with(supabase -> supabase
                     .insertInto(Tables.ELD_ASSETS)
                     .set(eldAssetsRecord)
-                    .onConflict().doUpdate().set(eldAssetsRecord)
+                    .onConflict(Tables.ELD_ASSETS.UID).doUpdate().set(eldAssetsRecord)
                     .execute()
             ));
         }
