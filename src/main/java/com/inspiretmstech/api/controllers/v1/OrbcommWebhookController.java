@@ -61,7 +61,7 @@ public class OrbcommWebhookController {
                 updatedRecord.setType(IntegrationTypes.ORBCOMM);
                 updatedRecord.setEldProviderId(data.assetStatus().deviceSN());
                 updatedRecord.setAddressUpdatedAt(OffsetDateTime.now());
-                updatedRecord.setLastAddress(Geocoder.reverseGeocode(data.positionStatus().address()));
+                updatedRecord.setLastAddress(Geocoder.reverseGeocode(data.positionStatus().address(), false));
                 return updatedRecord;
             });
 
