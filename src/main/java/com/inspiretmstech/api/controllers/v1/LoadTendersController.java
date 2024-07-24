@@ -1,6 +1,5 @@
 package com.inspiretmstech.api.controllers.v1;
 
-import com.google.maps.model.LatLng;
 import com.inspiretmstech.api.auth.Authority;
 import com.inspiretmstech.api.auth.bearer.APIKey;
 import com.inspiretmstech.api.models.ResponseException;
@@ -9,8 +8,6 @@ import com.inspiretmstech.api.models.requests.tenders.LoadTenderRequestRevenueIt
 import com.inspiretmstech.api.models.requests.tenders.LoadTenderRequestStop;
 import com.inspiretmstech.api.models.responses.IDResponse;
 import com.inspiretmstech.api.utils.DatabaseConnection;
-import com.inspiretmstech.api.utils.Geocoder;
-import com.inspiretmstech.api.utils.TimeZones;
 import com.inspiretmstech.db.Tables;
 import com.inspiretmstech.db.tables.records.LoadTenderVersionsRecord;
 import com.inspiretmstech.db.tables.records.LoadTendersRecord;
@@ -30,7 +27,6 @@ import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.time.OffsetDateTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.UUID;
@@ -81,9 +77,6 @@ public class LoadTendersController {
                 revenue.add(new LoadTenderRevenueItemRecord(item.quantity(), BigDecimal.valueOf(item.rate())));
 
         for (LoadTenderRequestStop stop : request.stops()) {
-            LatLng coords = Geocoder.geocode(stop.address().toString());
-            ZoneId zone = TimeZones.lookup(coords, stop.address());
-
             if (Objects.isNull(stop.appointment()))
                 throw new ResponseException("Invalid Appointment", "Appointment cannot be empty");
             if (Objects.isNull(stop.appointment().earliest()))

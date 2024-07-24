@@ -19,6 +19,10 @@ public class TimeZones {
     }
 
     public static ZoneId lookup(LatLng coords, Address address) {
+        return TimeZones.lookup(coords, address.toString());
+    }
+
+    public static ZoneId lookup(LatLng coords, String address) {
         Optional<ZoneId> result = getEngine().query(coords.lat, coords.lng);
         if(result.isEmpty()) throw new ResponseException("Unable to Determine Time Zone", "Unable to determine time zone for address: " + address);
         return result.get();
