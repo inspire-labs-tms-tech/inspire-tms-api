@@ -12,7 +12,7 @@ npm install @inspire-labs-tms-tech/inspire-tms-api
 import {InspireTMS} from "@inspire-labs-tms-tech/inspire-tms-api";
 
 const slug = "sandbox"; // enter organization slug here
-InspireTMS.OpenAPI.BASE = slug === `https://api.${slug}.app.inspiretmsconnect.com`;
+InspireTMS.OpenAPI.BASE = `https://api.${slug}.app.inspiretmsconnect.com`;
 
 InspireTMS.createFacility({
   requestBody: {
