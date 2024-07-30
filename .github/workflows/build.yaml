@@ -111,7 +111,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       self:
-        image: ghcr.io/inspire-labs-tms-tech/inspire-tms-api:latest
+        image: ghcr.io/inspire-labs-tms-tech/inspire-tms-api:${{ needs.version.outputs.latest }}
         ports:
           - 8080:8080
         credentials:
