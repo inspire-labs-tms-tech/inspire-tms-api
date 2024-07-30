@@ -68,6 +68,23 @@ jobs:
         run: echo "VERSION=v$(date +'%Y%m%d.%H%M%S')" >> "$GITHUB_ENV"
 
       - uses: actions/checkout@v4
+      - uses: supabase/setup-cli@v1
+
+      - name: download migrations
+        env:
+          GH_TOKEN: ${{ secrets.INSPIRE_TMS_READONLY_PERSONAL_ACCESS_TOKEN }}
+        run: |
+          cd ~ 
+          # mkdir ~/supabase
+          # mkdir ~/supabase/migrations
+          supabase init
+          ls -la && cd supabase && ls -la
+          supabase db start
+          gh release download -p 'migrations.tar.gz' --repo inspire-labs-tms-tech/inspire-tms-db
+          tar -xf ~/migrations.tar.gz -C ~/supabase/migrations
+          
+          
+          
 
       - name: update version
         run: |
