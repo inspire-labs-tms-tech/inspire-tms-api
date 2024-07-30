@@ -48,8 +48,6 @@ public class DicksSportingGoodsLoadTenderController {
     @PostMapping
     public IDResponse webhook(@RequestBody List<DicksSportingGoodsLoadTender.Shipment> tenders) throws Exception {
 
-        System.out.println(tenders);
-
         Optional<IntegrationsRecord> dsg = DatabaseConnection.getInstance().with(supabase ->
                 supabase.selectFrom(Tables.INTEGRATIONS).where(Tables.INTEGRATIONS.TYPE.eq(IntegrationTypes.DSG)).fetchOne());
 
