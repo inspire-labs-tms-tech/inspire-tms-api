@@ -7,6 +7,7 @@ import com.google.maps.model.GeocodingResult;
 import com.google.maps.model.LatLng;
 import com.inspiretmstech.api.constants.Environment;
 import com.inspiretmstech.api.models.ResponseException;
+import com.inspiretmstech.api.models.requests.tenders.gp.GeorgiaPacificLoadTender;
 import com.inspiretmstech.db.udt.records.AddressRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
