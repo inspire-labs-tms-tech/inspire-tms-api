@@ -23,7 +23,7 @@ ENV SITE_URL=http://127.0.0.1:3000/
 
 COPY --chown=gradle:gradle . /home/gradle/src
 WORKDIR /home/gradle/src
-RUN gradle build --no-daemon
+RUN gradle build --no-daemon --scan
 RUN rm /home/gradle/src/build/libs/*-plain.jar
 
 FROM amazoncorretto:17-alpine-full

@@ -80,7 +80,6 @@ jobs:
           gh release download -p 'migrations.tar.gz' --repo inspire-labs-tms-tech/inspire-tms-db
           tar -xf ~/migrations.tar.gz -C ~/supabase/migrations
           supabase db start
-          ls -la ~/supabase/migrations
 
       - name: update version
         run: |
