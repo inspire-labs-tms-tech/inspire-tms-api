@@ -7,7 +7,7 @@
   "types": "./dist/index.d.ts",
   "files": ["README.md", "index.ts", "dist"],
   "scripts": {
-    "types": "npx --yes @hey-api/openapi-ts --input http://127.0.0.1:8080/api-docs --output ./gen",
+    "types": "npx --yes @hey-api/openapi-ts@0.50.2 --input http://127.0.0.1:8080/api-docs --output ./gen",
     "build": "npm run types && tsup"
   },
   "repository": {
