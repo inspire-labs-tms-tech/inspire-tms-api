@@ -3,7 +3,7 @@ package com.inspiretmstech.api.controllers.v1;
 import com.google.maps.model.LatLng;
 import com.inspiretmstech.api.auth.Authority;
 import com.inspiretmstech.api.models.ResponseException;
-import com.inspiretmstech.api.models.requests.tenders.gp.GeorgiaPacificLoadTender;
+import com.inspiretmstech.api.models.requests.tenders.dsg.DicksSportingGoodsLoadTender;
 import com.inspiretmstech.api.models.responses.IDResponse;
 import com.inspiretmstech.api.utils.DatabaseConnection;
 import com.inspiretmstech.api.utils.Geocoder;
@@ -15,11 +15,13 @@ import com.inspiretmstech.db.enums.StopTypes;
 import com.inspiretmstech.db.tables.records.IntegrationsRecord;
 import com.inspiretmstech.db.tables.records.LoadTenderVersionsRecord;
 import com.inspiretmstech.db.tables.records.LoadTendersRecord;
+import com.inspiretmstech.db.udt.LoadTenderRevenueItem;
 import com.inspiretmstech.db.udt.records.AddressRecord;
 import com.inspiretmstech.db.udt.records.LoadTenderRevenueItemRecord;
 import com.inspiretmstech.db.udt.records.LoadTenderStopRecord;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.jooq.meta.derby.sys.Sys;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,40 +32,45 @@ import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 
 @RestController
-@Tag(name = "Georgia Pacific", description = "Webhook for Georgia Pacific")
-@RequestMapping("/v1/georgia-pacific")
-public class GeorgiaPacificLoadTenderController {
+@Tag(name = "Dicks Sporting Goods", description = "Webhook for Dicks Sporting Goods")
+@RequestMapping("/v1/dicks-sporting-goods")
+public class DicksSportingGoodsLoadTenderController {
 
     @Secured(Authority.Authorities.ANON)
     @Operation(summary = "Tender a Load")
     @PostMapping
-    public IDResponse webhook(@RequestBody List<GeorgiaPacificLoadTender.Shipment> shipments) throws Exception {
+    public IDResponse webhook(@RequestBody List<DicksSportingGoodsLoadTender.Shipment> tenders) throws Exception {
 
-        Optional<IntegrationsRecord> gp = DatabaseConnection.getInstance().with(supabase ->
-                supabase.selectFrom(Tables.INTEGRATIONS).where(Tables.INTEGRATIONS.TYPE.eq(IntegrationTypes.GEORGIA_PACIFIC)).fetchOne());
+        System.out.println(tenders);
 
-        if (gp.isEmpty()) throw new ResponseException("Georgia Pacific Integration Not Installed");
-        if (Objects.isNull(gp.get().getGeorgiaPacificCustomerId()))
-            throw new ResponseException("Georgia Pacific Integration Not Setup", "Customer Not Mapped");
+        Optional<IntegrationsRecord> dsg = DatabaseConnection.getInstance().with(supabase ->
+                supabase.selectFrom(Tables.INTEGRATIONS).where(Tables.INTEGRATIONS.TYPE.eq(IntegrationTypes.DSG)).fetchOne());
+
+        if (dsg.isEmpty()) throw new ResponseException("Dicks Sporting Goods Integration Not Installed");
+        if (Objects.isNull(dsg.get().getDsgCustomerId()))
+            throw new ResponseException("Dicks Sporting Goods Integration Not Setup", "Customer Not Mapped");
 
         Optional<IDResponse> successful = Optional.empty();
-        for (GeorgiaPacificLoadTender.Shipment shipment : shipments)
+        for (DicksSportingGoodsLoadTender.Shipment tender : tenders)
             successful = DatabaseConnection.getInstance().unsafely(supabase -> {
                 AtomicReference<IDResponse> newVersion = new AtomicReference<>();
                 supabase.transaction(transaction -> {
 
                     LoadTendersRecord _tender = new LoadTendersRecord();
-                    _tender.setCustomerId(gp.get().getGeorgiaPacificCustomerId());
-                    _tender.setOriginalCustomerReferenceNumber(shipment.data().section1().beginningSegmentForShipmentInformationTransaction().shipmentIdentificationNumber());
-                    _tender.setIntegrationType(IntegrationTypes.GEORGIA_PACIFIC);
+                    _tender.setCustomerId(dsg.get().getDsgCustomerId());
+                    _tender.setOriginalCustomerReferenceNumber(tender.data().section1().beginningSegmentForShipmentInformationTransaction().shipmentIdentificationNumber());
+                    _tender.setIntegrationType(IntegrationTypes.DSG);
                     _tender.setStatus(LoadTenderStatus.NEW);
 
                     // create the load tender
-                    Optional<LoadTendersRecord> tender = Optional.ofNullable(transaction.dsl()
+                    Optional<LoadTendersRecord> newTender = Optional.ofNullable(transaction.dsl()
                             .insertInto(Tables.LOAD_TENDERS)
                             .set(_tender)
                             .onConflict(Tables.LOAD_TENDERS.ORIGINAL_CUSTOMER_REFERENCE_NUMBER)
@@ -71,15 +78,22 @@ public class GeorgiaPacificLoadTenderController {
                             .set(_tender)
                             .returning()
                             .fetchOne());
-                    if (tender.isEmpty()) throw new ResponseException("Unable to Create Load Tender!");
+                    if (newTender.isEmpty()) throw new ResponseException("Unable to Create Load Tender!");
+
+                    // lists
+                    List<LoadTenderStopRecord> stops = new ArrayList<>();
+                    List<LoadTenderRevenueItemRecord> revenue = new ArrayList<>();
+
+                    // create the revenue
+                    if(Objects.nonNull(tender.data().section3().totalWeightAndCharges()) && Objects.nonNull(tender.data().section3().totalWeightAndCharges().charge()))
+                        revenue.add(new LoadTenderRevenueItemRecord(1, BigDecimal.valueOf(tender.data().section3().totalWeightAndCharges().charge() / 100)));
 
                     // create the stops
                     int stopNum = 0;
-                    List<LoadTenderStopRecord> stops = new ArrayList<>();
-                    for (GeorgiaPacificLoadTender.GroupStopOffDetails210 stop : shipment.data().section2().groupStopOffDetails_210()) {
+                    for (DicksSportingGoodsLoadTender.GroupStopOffDetails_210 tenderStop : tender.data().section2().groupStopOffDetails_210()) {
                         stopNum++;
 
-                        LoadTenderStopRecord _stop = new LoadTenderStopRecord();
+                        LoadTenderStopRecord stop = new LoadTenderStopRecord();
 
                         Optional<String> address = Optional.empty();
                         Optional<String> streetAddress1 = Optional.empty();
@@ -87,13 +101,13 @@ public class GeorgiaPacificLoadTenderController {
                         Optional<String> city = Optional.empty();
                         Optional<String> state = Optional.empty();
                         Optional<String> postalCode = Optional.empty();
-                        if (Objects.nonNull(stop.groupName_270()) && Objects.nonNull(stop.groupName_270().addressInformation()) && Objects.nonNull(stop.groupName_270().geographicLocation())) {
 
-                            city = Optional.ofNullable(stop.groupName_270().geographicLocation().cityName());
-                            state = Optional.ofNullable(stop.groupName_270().geographicLocation().stateOrProvinceCode());
-                            postalCode = Optional.ofNullable(stop.groupName_270().geographicLocation().postalCode());
+                        if (Objects.nonNull(tenderStop.groupName_270()) && Objects.nonNull(tenderStop.groupName_270().addressInformation()) && Objects.nonNull(tenderStop.groupName_270().geographicLocation())) {
+                            city = Optional.ofNullable(tenderStop.groupName_270().geographicLocation().cityName());
+                            state = Optional.ofNullable(tenderStop.groupName_270().geographicLocation().stateOrProvinceCode());
+                            postalCode = Optional.ofNullable(tenderStop.groupName_270().geographicLocation().postalCode());
 
-                            for (GeorgiaPacificLoadTender.AddressInformation addressInformation : stop.groupName_270().addressInformation()) {
+                            for (DicksSportingGoodsLoadTender.AddressInformation addressInformation : tenderStop.groupName_270().addressInformation()) {
                                 if (Objects.nonNull(addressInformation.addressInformation()) && !addressInformation.addressInformation().isBlank())
                                     streetAddress1 = Optional.of(addressInformation.addressInformation());
                                 if (Objects.nonNull(addressInformation.addressInformation_1()) && !addressInformation.addressInformation_1().isBlank())
@@ -109,7 +123,7 @@ public class GeorgiaPacificLoadTenderController {
                         }
 
                         if (address.isEmpty())
-                            throw new ResponseException("Unable to Geocode Address", "Unable to geocode address: " + stop.groupName_270());
+                            throw new ResponseException("Unable to Geocode Address", "Unable to geocode address: " + tenderStop.groupName_270());
 
                         LatLng coords = Geocoder.geocode(address.get());
                         ZoneId zone = TimeZones.lookup(coords, address.get());
@@ -125,51 +139,24 @@ public class GeorgiaPacificLoadTenderController {
                         a.setLongitude(BigDecimal.valueOf(coords.lng));
                         a.setIanaTimezoneId(ianaTimezoneID);
 
-                        // use stop number by default
-                        GeorgiaPacificLoadTender.BusinessInstructionsAndReferenceNumber num = new GeorgiaPacificLoadTender.BusinessInstructionsAndReferenceNumber("", "" + stopNum, "");
-                        if (Objects.nonNull(stop.businessInstructionsAndReferenceNumber()))
-                            for (GeorgiaPacificLoadTender.BusinessInstructionsAndReferenceNumber ref : stop.businessInstructionsAndReferenceNumber())
-                                if (Objects.nonNull(ref.referenceIdentificationQualifier()) &&
-                                    ref.referenceIdentificationQualifier().equalsIgnoreCase("QN") &&
-                                    Objects.nonNull(ref.referenceIdentification())
-                                ) num = ref;
+                        // get the stop ID
+                        Optional<DicksSportingGoodsLoadTender.BusinessInstructionsAndReferenceNumber> stopRef = tenderStop.businessInstructionsAndReferenceNumber().stream().filter(i -> i.referenceIdentificationQualifier().equalsIgnoreCase("QN")).findFirst();
+                        if (stopRef.isEmpty() || stopRef.get().referenceIdentification().isBlank())
+                            throw new ResponseException("Stop " + stopNum + " Missing Unique ID ('QN')");
+                        String stopID = stopRef.get().referenceIdentification();
 
-                        _stop.setId(num.referenceIdentification());
 
-                        // get appointment times
-                        List<String> scheduledCodes = Arrays.asList("10", "78", "70", "68", "69");
-                        List<String> earliestCodes = Arrays.asList("37", "53", "EP", "LC");
-                        List<String> latestCodes = Arrays.asList("54", "LP", "CL", "38");
-                        List<String> pickupCodes = Arrays.asList("37", "38", "CL", "LC", "10", "EP", "LP", "69");
-                        List<String> deliveryCodes = Arrays.asList("53", "54", "68", "70", "78");
-                        Optional<GeorgiaPacificLoadTender.DateOrTime> scheduled = Objects.isNull(stop.dateOrTime()) ? Optional.empty() :
-                                stop.dateOrTime().stream().filter(i -> {
-                                            for (String code : scheduledCodes)
-                                                if (code.equalsIgnoreCase(i.dateQualifier()))
-                                                    return true;
-                                            return false;
-                                        }
-                                ).findFirst();
-                        Optional<GeorgiaPacificLoadTender.DateOrTime> _earliest = scheduled.isPresent() ? scheduled : Objects.isNull(stop.dateOrTime()) ? Optional.empty() :
-                                stop.dateOrTime().stream().filter(i -> {
-                                            for (String code : earliestCodes)
-                                                if (code.equalsIgnoreCase(i.dateQualifier()))
-                                                    return true;
-                                            return false;
-                                        }
-                                ).findFirst();
-                        Optional<GeorgiaPacificLoadTender.DateOrTime> _latest = scheduled.isPresent() ? scheduled : Objects.isNull(stop.dateOrTime()) ? Optional.empty() :
-                                stop.dateOrTime().stream().filter(i -> {
-                                            for (String code : latestCodes)
-                                                if (code.equalsIgnoreCase(i.dateQualifier()))
-                                                    return true;
-                                            return false;
-                                        }
-                                ).findFirst();
+                        // get appointments
+                        Optional<DicksSportingGoodsLoadTender.DateOrTime> scheduled = Objects.isNull(tenderStop.dateOrTime()) ? Optional.empty() :
+                                tenderStop.dateOrTime().stream().filter(i -> i.timeQualifier().equalsIgnoreCase("X")).findFirst();
+                        Optional<DicksSportingGoodsLoadTender.DateOrTime> _earliest = scheduled.isPresent() ? scheduled : Objects.isNull(tenderStop.dateOrTime()) ? Optional.empty() :
+                                tenderStop.dateOrTime().stream().filter(i -> i.timeQualifier().equalsIgnoreCase("G") || i.timeQualifier().equalsIgnoreCase("I")).findFirst();
+                        Optional<DicksSportingGoodsLoadTender.DateOrTime> _latest = scheduled.isPresent() ? scheduled : Objects.isNull(tenderStop.dateOrTime()) ? Optional.empty() :
+                                tenderStop.dateOrTime().stream().filter(i -> i.timeQualifier().equalsIgnoreCase("K") || i.timeQualifier().equalsIgnoreCase("L")).findFirst();
 
                         // it is possible to only have an earliest or a latest
-                        if(_earliest.isPresent() && _latest.isEmpty()) _latest = _earliest;
-                        if(_earliest.isEmpty() && _latest.isPresent()) _earliest = _latest;
+                        if (_earliest.isPresent() && _latest.isEmpty()) _latest = _earliest;
+                        if (_earliest.isEmpty() && _latest.isPresent()) _earliest = _latest;
 
                         if (_earliest.isEmpty() || Objects.isNull(_earliest.get().date()) || Objects.isNull(_earliest.get().time()))
                             throw new ResponseException("Invalid Appointment", "The appointment on stop " + stopNum + " is invalid", "Earliest appointment is missing");
@@ -200,42 +187,44 @@ public class GeorgiaPacificLoadTenderController {
                                 zone
                         ).toOffsetDateTime();
 
-                        Optional<GeorgiaPacificLoadTender.DateOrTime> final_earliest = _earliest;
+
+                        // get the type
                         StopTypes type =
                                 stopNum == 1 ? StopTypes.PICKUP :
                                         stopNum == stops.size() ? StopTypes.DROPOFF :
-                                                pickupCodes.stream().anyMatch(code -> code.equalsIgnoreCase(final_earliest.get().dateQualifier())) ? StopTypes.PICKUP :
+                                                (_earliest.get().timeQualifier().equalsIgnoreCase("I") || _latest.get().timeQualifier().equalsIgnoreCase("K")) ? StopTypes.PICKUP :
                                                         StopTypes.DROPOFF;
 
-                        _stop.setEarliestArrival(earliest);
-                        _stop.setLatestArrival(latest);
-                        _stop.setType(type);
-                        _stop.setAddress(a);
+                        // build stop
+                        stop.setId(stopID);
+                        stop.setEarliestArrival(earliest);
+                        stop.setLatestArrival(latest);
+                        stop.setType(type);
+                        stop.setAddress(a);
 
-                        stops.add(_stop);
+                        stops.add(stop);
                     }
 
                     // build the notes
                     StringBuilder notes = new StringBuilder();
-                    if (Objects.nonNull(shipment.data().section1().groupEquipmentDetails_1200()))
-                        for (GeorgiaPacificLoadTender.GroupEquipmentDetails1200 groupEquipmentDetails1200 : shipment.data().section1().groupEquipmentDetails_1200())
-                            if (Objects.nonNull(groupEquipmentDetails1200.equipmentDetails()) && Objects.nonNull(groupEquipmentDetails1200.equipmentDetails().equipmentLength()))
-                                notes.append("Equipment Length: ").append(groupEquipmentDetails1200.equipmentDetails().equipmentLength() / 100).append("\n");
-                    if (Objects.nonNull(shipment.data().section1().noteOrSpecialInstruction()))
-                        for (GeorgiaPacificLoadTender.NoteOrSpecialInstruction note : shipment.data().section1().noteOrSpecialInstruction())
-                            notes.append(note.description()).append("\n");
+                    if (Objects.nonNull(tender.data().section1().noteOrSpecialInstruction()))
+                        for (DicksSportingGoodsLoadTender.NoteOrSpecialInstruction note : tender.data().section1().noteOrSpecialInstruction())
+                            notes.append(Objects.nonNull(note.noteReferenceCode()) ? note.noteReferenceCode() : "NOTE")
+                                    .append(": ")
+                                    .append(note.description())
+                                    .append("\n");
 
-
-                    // Build the Version
+                    // build the new version
                     LoadTenderVersionsRecord version = new LoadTenderVersionsRecord();
-                    version.setCustomerReferenceNumber(shipment.data().section1().beginningSegmentForShipmentInformationTransaction().shipmentIdentificationNumber());
+                    version.setCustomerReferenceNumber(tender.data().section1().beginningSegmentForShipmentInformationTransaction().shipmentIdentificationNumber());
                     version.setAcceptWebhook("#");
                     version.setDeclineWebhook("#");
-                    version.setLoadTenderId(tender.get().getId());
-                    version.setRevenue(new LoadTenderRevenueItemRecord[0]); // GP does not send revenue in 204s
+                    version.setLoadTenderId(newTender.get().getId());
+                    version.setRevenue(revenue.toArray(new LoadTenderRevenueItemRecord[0])); // GP does not send revenue in 204s
                     version.setStops(stops.toArray(new LoadTenderStopRecord[0]));
                     version.setNotes(notes.toString());
 
+                    // save the new version
                     Optional<LoadTenderVersionsRecord> v = Optional.ofNullable(transaction.dsl().insertInto(Tables.LOAD_TENDER_VERSIONS)
                             .set(version)
                             .returning()
