@@ -70,19 +70,16 @@ jobs:
       - uses: actions/checkout@v4
       - uses: supabase/setup-cli@v1
 
-      - name: download migrations
+      - name: download migrations and setup supabase
         env:
           GH_TOKEN: ${{ secrets.INSPIRE_TMS_READONLY_PERSONAL_ACCESS_TOKEN }}
         run: |
           cd ~ 
           supabase init
           mkdir ~/supabase/migrations
-          supabase db start
           gh release download -p 'migrations.tar.gz' --repo inspire-labs-tms-tech/inspire-tms-db
           tar -xf ~/migrations.tar.gz -C ~/supabase/migrations
-          
-          
-          
+          supabase db start
 
       - name: update version
         run: |
@@ -118,6 +115,7 @@ jobs:
           build-args: |
             GH_USER=inspire-labs-tech-readonly
             GH_TOKEN=${{ secrets.INSPIRE_TMS_READONLY_PERSONAL_ACCESS_TOKEN }}
+            GOOGLE_GEOCODING_API_KEY=${{ secrets.GOOGLE_GEOCODING_API_KEY }}
   java:
     name: Generate Java Types
     needs:
