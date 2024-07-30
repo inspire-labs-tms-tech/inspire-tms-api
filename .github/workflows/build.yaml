@@ -75,10 +75,8 @@ jobs:
           GH_TOKEN: ${{ secrets.INSPIRE_TMS_READONLY_PERSONAL_ACCESS_TOKEN }}
         run: |
           cd ~ 
-          # mkdir ~/supabase
-          # mkdir ~/supabase/migrations
           supabase init
-          ls -la && cd supabase && ls -la
+          mkdir ~/supabase/migrations
           supabase db start
           gh release download -p 'migrations.tar.gz' --repo inspire-labs-tms-tech/inspire-tms-db
           tar -xf ~/migrations.tar.gz -C ~/supabase/migrations
