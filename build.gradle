@@ -19,8 +19,8 @@ repositories {
 }
 
 dependencies {
-    implementation("com.inspiretmstech:db:0.11.5")
-    implementation("com.inspiretmstech:common:1.6.7")
+    implementation("com.inspiretmstech:db:0.11.9")
+    implementation("com.inspiretmstech:common:1.6.9")
     implementation("org.apache.logging.log4j:log4j-api:2.23.1")
     implementation("org.apache.logging.log4j:log4j-core:2.23.1")
     implementation("org.apache.logging.log4j:log4j-slf4j-impl:2.23.1")
