@@ -5,9 +5,9 @@ import com.inspiretmstech.api.auth.Authority;
 import com.inspiretmstech.api.models.ResponseException;
 import com.inspiretmstech.api.models.requests.tenders.dsg.DicksSportingGoodsLoadTender;
 import com.inspiretmstech.api.models.responses.IDResponse;
-import com.inspiretmstech.api.utils.DatabaseConnection;
 import com.inspiretmstech.api.utils.Geocoder;
 import com.inspiretmstech.api.utils.TimeZones;
+import com.inspiretmstech.common.postgres.PostgresConnection;
 import com.inspiretmstech.db.Tables;
 import com.inspiretmstech.db.enums.IntegrationTypes;
 import com.inspiretmstech.db.enums.LoadTenderStatus;
@@ -15,13 +15,11 @@ import com.inspiretmstech.db.enums.StopTypes;
 import com.inspiretmstech.db.tables.records.IntegrationsRecord;
 import com.inspiretmstech.db.tables.records.LoadTenderVersionsRecord;
 import com.inspiretmstech.db.tables.records.LoadTendersRecord;
-import com.inspiretmstech.db.udt.LoadTenderRevenueItem;
 import com.inspiretmstech.db.udt.records.AddressRecord;
 import com.inspiretmstech.db.udt.records.LoadTenderRevenueItemRecord;
 import com.inspiretmstech.db.udt.records.LoadTenderStopRecord;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.jooq.meta.derby.sys.Sys;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -48,7 +46,7 @@ public class DicksSportingGoodsLoadTenderController {
     @PostMapping
     public IDResponse webhook(@RequestBody List<DicksSportingGoodsLoadTender.Shipment> tenders) throws Exception {
 
-        Optional<IntegrationsRecord> dsg = DatabaseConnection.getInstance().with(supabase ->
+        Optional<IntegrationsRecord> dsg = PostgresConnection.getInstance().with(supabase ->
                 supabase.selectFrom(Tables.INTEGRATIONS).where(Tables.INTEGRATIONS.TYPE.eq(IntegrationTypes.DSG)).fetchOne());
 
         if (dsg.isEmpty()) throw new ResponseException("Dicks Sporting Goods Integration Not Installed");
@@ -57,7 +55,7 @@ public class DicksSportingGoodsLoadTenderController {
 
         Optional<IDResponse> successful = Optional.empty();
         for (DicksSportingGoodsLoadTender.Shipment tender : tenders)
-            successful = DatabaseConnection.getInstance().unsafely(supabase -> {
+            successful = PostgresConnection.getInstance().unsafely(supabase -> {
                 AtomicReference<IDResponse> newVersion = new AtomicReference<>();
                 supabase.transaction(transaction -> {
 
@@ -83,7 +81,7 @@ public class DicksSportingGoodsLoadTenderController {
                     List<LoadTenderRevenueItemRecord> revenue = new ArrayList<>();
 
                     // create the revenue
-                    if(Objects.nonNull(tender.data().section3().totalWeightAndCharges()) && Objects.nonNull(tender.data().section3().totalWeightAndCharges().charge()))
+                    if (Objects.nonNull(tender.data().section3().totalWeightAndCharges()) && Objects.nonNull(tender.data().section3().totalWeightAndCharges().charge()))
                         revenue.add(new LoadTenderRevenueItemRecord(1, BigDecimal.valueOf(tender.data().section3().totalWeightAndCharges().charge() / 100)));
 
                     // create the stops

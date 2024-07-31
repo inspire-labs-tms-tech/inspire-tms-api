@@ -2,13 +2,14 @@ package com.inspiretmstech.api.controllers.v1;
 
 import com.inspiretmstech.api.auth.Authority;
 import com.inspiretmstech.api.constants.Config;
-import com.inspiretmstech.api.constants.Environment;
+import com.inspiretmstech.api.constants.EnvironmentVariables;
 import com.inspiretmstech.api.models.responses.VersionResponse;
 import com.inspiretmstech.api.models.responses.about.AboutCompanyResponse;
 import com.inspiretmstech.api.models.responses.about.AboutResponse;
 import com.inspiretmstech.api.models.responses.about.AboutSupabaseKeysResponse;
 import com.inspiretmstech.api.models.responses.about.AboutSupabaseResponse;
-import com.inspiretmstech.api.utils.DatabaseConnection;
+import com.inspiretmstech.common.postgres.PostgresConnection;
+import com.inspiretmstech.common.utils.Environment;
 import com.inspiretmstech.db.Tables;
 import com.inspiretmstech.db.tables.records.CompaniesRecord;
 import io.swagger.v3.oas.annotations.Operation;
@@ -61,7 +62,7 @@ public class RootController {
     @GetMapping("/about")
     public AboutResponse getAbout() throws Exception {
 
-        DatabaseConnection conn = DatabaseConnection.getInstance();
+        PostgresConnection conn = PostgresConnection.getInstance();
 
         Optional<CompaniesRecord> companyRecord = conn.with((supabase) ->
                 supabase.selectFrom(Tables.COMPANIES).fetchOne()
@@ -72,15 +73,15 @@ public class RootController {
         // company
         @Nullable String fileURL = null;
         if (Objects.nonNull(companyRecord.get().getLogoFileId())) {
-            URIBuilder builder = new URIBuilder(Environment.get(Environment.Variables.SITE_URL));
+            URIBuilder builder = new URIBuilder(Environment.get(EnvironmentVariables.SITE_URL));
             builder.setPath("/api/v1/files/" + companyRecord.get().getLogoFileId());
             fileURL = builder.build().toString();
         }
         AboutCompanyResponse company = new AboutCompanyResponse(companyRecord.get().getDisplayName(), companyRecord.get().getIsPublished(), fileURL);
 
         // supabase
-        AboutSupabaseKeysResponse keys = new AboutSupabaseKeysResponse(Environment.get(Environment.Variables.SUPABASE_ANON_KEY));
-        AboutSupabaseResponse supabase = new AboutSupabaseResponse(Environment.get(Environment.Variables.SUPABASE_URL), keys);
+        AboutSupabaseKeysResponse keys = new AboutSupabaseKeysResponse(Environment.get(EnvironmentVariables.SUPABASE_ANON_KEY));
+        AboutSupabaseResponse supabase = new AboutSupabaseResponse(Environment.get(EnvironmentVariables.SUPABASE_URL), keys);
 
         return new AboutResponse(Config.VERSION, company, supabase);
     }

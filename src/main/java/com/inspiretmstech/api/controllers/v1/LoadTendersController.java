@@ -7,7 +7,7 @@ import com.inspiretmstech.api.models.requests.tenders.LoadTenderRequest;
 import com.inspiretmstech.api.models.requests.tenders.LoadTenderRequestRevenueItem;
 import com.inspiretmstech.api.models.requests.tenders.LoadTenderRequestStop;
 import com.inspiretmstech.api.models.responses.IDResponse;
-import com.inspiretmstech.api.utils.DatabaseConnection;
+import com.inspiretmstech.common.postgres.PostgresConnection;
 import com.inspiretmstech.db.Tables;
 import com.inspiretmstech.db.tables.records.LoadTenderVersionsRecord;
 import com.inspiretmstech.db.tables.records.LoadTendersRecord;
@@ -112,7 +112,7 @@ public class LoadTendersController {
         APIKey key = (APIKey) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         try {
-            DatabaseConnection.getInstance().unsafely(supabase -> {
+            PostgresConnection.getInstance().unsafely(supabase -> {
                 supabase.transaction(transaction -> {
 
                     // locate the tender
@@ -144,7 +144,7 @@ public class LoadTendersController {
         AtomicReference<LoadTendersRecord> tender = new AtomicReference<>();
 
         try {
-            DatabaseConnection.getInstance().unsafely(supabase -> {
+            PostgresConnection.getInstance().unsafely(supabase -> {
                 supabase.transaction(transaction -> {
                     // create the load tender
                     tender.set(transaction.dsl().insertInto(Tables.LOAD_TENDERS,

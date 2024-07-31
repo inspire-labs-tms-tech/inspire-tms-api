@@ -6,7 +6,7 @@ import com.inspiretmstech.api.auth.Scopes;
 import com.inspiretmstech.api.models.ResponseException;
 import com.inspiretmstech.api.models.requests.facilities.FacilityRequest;
 import com.inspiretmstech.api.models.responses.IDResponse;
-import com.inspiretmstech.api.utils.DatabaseConnection;
+import com.inspiretmstech.common.postgres.PostgresConnection;
 import com.inspiretmstech.db.Tables;
 import com.inspiretmstech.db.tables.records.FacilitiesRecord;
 import io.swagger.v3.oas.annotations.Operation;
@@ -30,7 +30,7 @@ public class FacilitiesController {
     public IDResponse createFacility(
             @RequestBody FacilityRequest request
     ) throws SQLException {
-        Optional<FacilitiesRecord> facility = DatabaseConnection.getInstance().with(supabase -> supabase
+        Optional<FacilitiesRecord> facility = PostgresConnection.getInstance().with(supabase -> supabase
                 .insertInto(Tables.FACILITIES,
                         Tables.FACILITIES.DISPLAY,
                         Tables.FACILITIES.IS_ACTIVE,
@@ -58,7 +58,7 @@ public class FacilitiesController {
             @PathVariable String id
     ) throws SQLException {
 
-        Optional<FacilitiesRecord> updated = DatabaseConnection.getInstance().with(supabase -> supabase
+        Optional<FacilitiesRecord> updated = PostgresConnection.getInstance().with(supabase -> supabase
                 .update(Tables.FACILITIES)
                 .set(Tables.FACILITIES.DISPLAY, request.displayName())
                 .set(Tables.FACILITIES.IS_ACTIVE, request.isActive())
@@ -66,10 +66,9 @@ public class FacilitiesController {
                 .where(Tables.FACILITIES.ID.eq(UUID.fromString(id)))
                 .returning()
                 .fetchOne());
-        if(updated.isEmpty())
+        if (updated.isEmpty())
             throw new ResponseException("Facility could not be updated", "An unknown exception occurred while updating the facility", "Does the facility exist?");
     }
-
 
 
 }

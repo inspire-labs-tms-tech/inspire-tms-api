@@ -1,6 +1,6 @@
 package com.inspiretmstech.api.auth.bearer;
 
-import com.inspiretmstech.api.utils.DatabaseConnection;
+import com.inspiretmstech.common.postgres.PostgresConnection;
 import com.inspiretmstech.db.Tables;
 import com.inspiretmstech.db.tables.records.ApiKeysRecord;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,7 +17,7 @@ public class APIKeyDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UUID id = UUID.fromString(username);
         try {
-            Optional<ApiKeysRecord> key = DatabaseConnection.getInstance().with(supabase ->
+            Optional<ApiKeysRecord> key = PostgresConnection.getInstance().with(supabase ->
                     supabase.selectFrom(Tables.API_KEYS).where(Tables.API_KEYS.ID.eq(id)).fetchOne());
             if (key.isEmpty()) throw new UsernameNotFoundException("API key not found");
             return new APIKey(key.get());

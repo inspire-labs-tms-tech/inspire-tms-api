@@ -1,6 +1,6 @@
 package com.inspiretmstech.api.auth.bearer;
 
-import com.inspiretmstech.api.utils.DatabaseConnection;
+import com.inspiretmstech.common.postgres.PostgresConnection;
 import com.inspiretmstech.db.routines.ValidateApiKey;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -21,7 +21,7 @@ public class APIKeyAuthenticationProvider implements AuthenticationProvider {
         validator.setPSecret(authentication.getCredentials().toString());
 
         try {
-            DatabaseConnection.getInstance().with(supabase -> validator.execute(supabase.configuration()));
+            PostgresConnection.getInstance().with(supabase -> validator.execute(supabase.configuration()));
         } catch (Exception e) {
             throw new AccessDeniedException("unable to validate credentials");
         }

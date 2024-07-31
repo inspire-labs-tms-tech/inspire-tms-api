@@ -5,8 +5,8 @@ import com.inspiretmstech.api.models.ResponseException;
 import com.inspiretmstech.api.models.requests.orbcomm.Data;
 import com.inspiretmstech.api.models.requests.orbcomm.OrbcommDataPushRequest;
 import com.inspiretmstech.api.models.responses.StatusResponse;
-import com.inspiretmstech.api.utils.DatabaseConnection;
 import com.inspiretmstech.api.utils.Geocoder;
+import com.inspiretmstech.common.postgres.PostgresConnection;
 import com.inspiretmstech.db.Tables;
 import com.inspiretmstech.db.enums.IntegrationTypes;
 import com.inspiretmstech.db.tables.records.EldAssetsRecord;
@@ -46,9 +46,9 @@ public class OrbcommWebhookController {
     public StatusResponse sendTrackingUpdates(@RequestBody OrbcommDataPushRequest request) {
         this.logger.trace("Received Request: {}", request.data().size());
 
-        DatabaseConnection db;
+        PostgresConnection db;
         try {
-             db = DatabaseConnection.getInstance();
+            db = PostgresConnection.getInstance();
         } catch (SQLException e) {
             logger.error("An error occurred while connecting to the database: {}", e.getMessage());
             throw new ResponseException("An error occurred while connecting to the database", e.getMessage());

@@ -3,7 +3,7 @@ package com.inspiretmstech.api.auth;
 import com.inspiretmstech.api.auth.bearer.APIKey;
 import com.inspiretmstech.api.models.ResponseException;
 import com.inspiretmstech.api.models.exceptions.InsufficientPrivilegesException;
-import com.inspiretmstech.api.utils.DatabaseConnection;
+import com.inspiretmstech.common.postgres.PostgresConnection;
 import com.inspiretmstech.db.Tables;
 import com.inspiretmstech.db.tables.records.RolesRecord;
 import com.inspiretmstech.db.tables.records.UsersRecord;
@@ -14,7 +14,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -35,14 +34,14 @@ public class RequiresProcessor {
         APIKey key = (APIKey) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         // load the user
-        Optional<UsersRecord> user = DatabaseConnection.getInstance().with(supabase ->
+        Optional<UsersRecord> user = PostgresConnection.getInstance().with(supabase ->
                 supabase.selectFrom(Tables.USERS).where(Tables.USERS.ID.eq(key.getSub())).fetchOne());
-        if(user.isEmpty())
+        if (user.isEmpty())
             throw new ResponseException("Unable to Load User", "The server was unable to load a user object for the current user");
-        if(Objects.isNull(user.get().getRoleId())) this.fail(scope);
+        if (Objects.isNull(user.get().getRoleId())) this.fail(scope);
 
         // load the role
-        Optional<RolesRecord> role = DatabaseConnection.getInstance().with(supabase ->
+        Optional<RolesRecord> role = PostgresConnection.getInstance().with(supabase ->
                 supabase.selectFrom(Tables.ROLES).where(Tables.ROLES.ID.eq(user.get().getRoleId())).fetchOne());
         if (role.isEmpty())
             throw new ResponseException("Unable to Load Role", "The server was unable to load a role for the current user");
@@ -51,7 +50,8 @@ public class RequiresProcessor {
         switch (scope) {
             case FACILITIES -> this.test(scope, role.get().getScopeFacilities());
             case NEVER -> this.test(scope, false); // NEVER is always false
-            default -> throw new ResponseException("Unhandled Scope", "The server is improperly configured to handle scope " + scope, "Contact Inspire TMS Support to resolve this issue");
+            default ->
+                    throw new ResponseException("Unhandled Scope", "The server is improperly configured to handle scope " + scope, "Contact Inspire TMS Support to resolve this issue");
         }
     }
 

@@ -5,9 +5,9 @@ import com.google.maps.GeocodingApi;
 import com.google.maps.model.AddressComponent;
 import com.google.maps.model.GeocodingResult;
 import com.google.maps.model.LatLng;
-import com.inspiretmstech.api.constants.Environment;
+import com.inspiretmstech.api.constants.EnvironmentVariables;
 import com.inspiretmstech.api.models.ResponseException;
-import com.inspiretmstech.api.models.requests.tenders.gp.GeorgiaPacificLoadTender;
+import com.inspiretmstech.common.utils.Environment;
 import com.inspiretmstech.db.udt.records.AddressRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,7 +38,7 @@ public class Geocoder {
 
     private static synchronized GeoApiContext getContext() {
         if (context == null)
-            context = new GeoApiContext.Builder().apiKey(Environment.get(Environment.Variables.GOOGLE_GEOCODING_API_KEY)).build();
+            context = new GeoApiContext.Builder().apiKey(Environment.get(EnvironmentVariables.GOOGLE_GEOCODING_API_KEY)).build();
         return context;
     }
 

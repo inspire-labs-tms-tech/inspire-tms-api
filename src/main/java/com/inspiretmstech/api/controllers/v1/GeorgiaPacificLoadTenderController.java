@@ -5,9 +5,9 @@ import com.inspiretmstech.api.auth.Authority;
 import com.inspiretmstech.api.models.ResponseException;
 import com.inspiretmstech.api.models.requests.tenders.gp.GeorgiaPacificLoadTender;
 import com.inspiretmstech.api.models.responses.IDResponse;
-import com.inspiretmstech.api.utils.DatabaseConnection;
 import com.inspiretmstech.api.utils.Geocoder;
 import com.inspiretmstech.api.utils.TimeZones;
+import com.inspiretmstech.common.postgres.PostgresConnection;
 import com.inspiretmstech.db.Tables;
 import com.inspiretmstech.db.enums.IntegrationTypes;
 import com.inspiretmstech.db.enums.LoadTenderStatus;
@@ -43,7 +43,7 @@ public class GeorgiaPacificLoadTenderController {
     @PostMapping
     public IDResponse webhook(@RequestBody List<GeorgiaPacificLoadTender.Shipment> shipments) throws Exception {
 
-        Optional<IntegrationsRecord> gp = DatabaseConnection.getInstance().with(supabase ->
+        Optional<IntegrationsRecord> gp = PostgresConnection.getInstance().with(supabase ->
                 supabase.selectFrom(Tables.INTEGRATIONS).where(Tables.INTEGRATIONS.TYPE.eq(IntegrationTypes.GEORGIA_PACIFIC)).fetchOne());
 
         if (gp.isEmpty()) throw new ResponseException("Georgia Pacific Integration Not Installed");
@@ -52,7 +52,7 @@ public class GeorgiaPacificLoadTenderController {
 
         Optional<IDResponse> successful = Optional.empty();
         for (GeorgiaPacificLoadTender.Shipment shipment : shipments)
-            successful = DatabaseConnection.getInstance().unsafely(supabase -> {
+            successful = PostgresConnection.getInstance().unsafely(supabase -> {
                 AtomicReference<IDResponse> newVersion = new AtomicReference<>();
                 supabase.transaction(transaction -> {
 
