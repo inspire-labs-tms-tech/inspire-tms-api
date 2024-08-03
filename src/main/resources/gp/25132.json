@@ -1,0 +1,404 @@
+[
+    {
+        "meta": {
+            "file_name": "KBXTECH_079884536_204_379637778.edi-t-379637778-447eeec3-4d68-4703-af7b-2c3d3b5ecd88@orderful-ip-10-204-18-38.us-west-2.compute.internal",
+            "group_functional_identifier": "SM",
+            "group_seq_number": "24649",
+            "message_seq_number": "000024649",
+            "set_seq_number": "0001"
+        },
+        "data": {
+            "section1": {
+                "beginningSegmentForShipmentInformationTransaction": {
+                    "customsDocumentationHandlingCode": null,
+                    "shipmentIdentificationNumber": "6887169",
+                    "shipmentMethodOfPayment": "PP",
+                    "standardCarrierAlphaCode": "RTQR",
+                    "weightUnitCode": "L"
+                },
+                "billOfLadingHandlingRequirements": [
+                    {
+                        "specialHandlingCode": null,
+                        "specialHandlingDescription": "53 FT 102 IN TRAILER",
+                        "specialServicesCode": null
+                    }
+                ],
+                "businessInstructionsAndReferenceNumber": [
+                    {
+                        "description": "6e1a0d67-54e0-4f42-a3ad-86f80b101684",
+                        "referenceIdentification": "00304006887169000",
+                        "referenceIdentificationQualifier": "BM"
+                    },
+                    {
+                        "description": null,
+                        "referenceIdentification": "KBXLEGACY",
+                        "referenceIdentificationQualifier": "4F"
+                    }
+                ],
+                "dateOrTime": {
+                    "date": "20240731",
+                    "dateQualifier": "10",
+                    "time": "174900",
+                    "timeCode": "LT",
+                    "timeQualifier": "Y"
+                },
+                "groupEquipmentDetails_1200": [
+                    {
+                        "equipmentDetails": {
+                            "equipmentDescriptionCode": "TF",
+                            "equipmentLength": 5300,
+                            "equipmentNumber": "0",
+                            "height": 102
+                        },
+                        "sealNumbers": []
+                    }
+                ],
+                "groupName_1140": [
+                    {
+                        "addressInformation": [
+                            {
+                                "addressInformation": "DO NOT SUBMIT INVOICE",
+                                "addressInformation_1": null
+                            }
+                        ],
+                        "contact": [],
+                        "geographicLocation": null,
+                        "name": {
+                            "entityIdentifierCode": "BT",
+                            "name": "FREIGHT AUTO PAY BY GEORGIA PACIFIC CPG"
+                        }
+                    },
+                    {
+                        "addressInformation": [],
+                        "contact": [],
+                        "geographicLocation": null,
+                        "name": {
+                            "entityIdentifierCode": "SH",
+                            "name": "GEORGIA-PACIFIC CPG FREIGHT"
+                        }
+                    }
+                ],
+                "hazardousCertification": [],
+                "interlineInformation": {
+                    "routingSequenceCode": "B",
+                    "standardCarrierAlphaCode": "RTQR",
+                    "transportationMethodOrTypeCode": "J"
+                },
+                "noteOrSpecialInstruction": [
+                    {
+                        "description": "08/01 @ 0800 PER KRISHNA"
+                    },
+                    {
+                        "description": "CALL ANYTIME BETWEEN 6AM-11PM CENTRAL TIME"
+                    },
+                    {
+                        "description": "CARRIER MUST CALL RECEIVING AT 608-274-8944 IF LOAD WILL BE LATE. CAN"
+                    },
+                    {
+                        "description": "IF CARRIER HAS TO RESET APPOINTMENT -  RESET FOR MORNING APPOINTMENTS"
+                    },
+                    {
+                        "description": "MUST CONTACT RECEIVER PRIOR TO MISSING DELIVERY"
+                    },
+                    {
+                        "description": "ONLY (ANYTIME UP UNTIL 1PM)"
+                    }
+                ],
+                "palletInformation": null,
+                "setPurpose": {
+                    "applicationType": "LT",
+                    "transactionSetPurposeCode": "04"
+                }
+            },
+            "section2": {
+                "groupStopOffDetails_210": [
+                    {
+                        "billOfLadingHandlingRequirements": [
+                            {
+                                "specialHandlingCode": null,
+                                "specialHandlingDescription": "NO APPT NECESSARY",
+                                "specialServicesCode": null
+                            }
+                        ],
+                        "businessInstructionsAndReferenceNumber": [
+                            {
+                                "referenceIdentification": "PO-20-747",
+                                "referenceIdentificationQualifier": "PO"
+                            },
+                            {
+                                "referenceIdentification": "GEORGIA-PACIFIC",
+                                "referenceIdentificationQualifier": "PRT"
+                            },
+                            {
+                                "referenceIdentification": "8003011002",
+                                "referenceIdentificationQualifier": "VN"
+                            }
+                        ],
+                        "dateOrTime": [
+                            {
+                                "date": "20240731",
+                                "dateQualifier": "LC",
+                                "time": "174900",
+                                "timeCode": "LT",
+                                "timeQualifier": "W"
+                            }
+                        ],
+                        "groupName_270": {
+                            "addressInformation": [
+                                {
+                                    "addressInformation": "21837 WEST MISSISSIPPI AVENUE",
+                                    "addressInformation_1": null
+                                }
+                            ],
+                            "contact": [
+                                {
+                                    "communicationNumber": "815-423-9990",
+                                    "communicationNumberQualifier": "TE",
+                                    "contactFunctionCode": "IC",
+                                    "contactInquiryReference": null,
+                                    "name": "SHIPPING"
+                                }
+                            ],
+                            "geographicLocation": {
+                                "cityName": "ELWOOD",
+                                "countryCode": "USA",
+                                "postalCode": "60421",
+                                "stateOrProvinceCode": "IL"
+                            },
+                            "name": {
+                                "entityIdentifierCode": "SF",
+                                "identificationCode": "A072",
+                                "identificationCodeQualifier": "93",
+                                "name": "CHICAGO DC"
+                            }
+                        },
+                        "groupOrderIdentificationDetail_2150": [
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 1
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "PO-20-747",
+                                    "quantity": 25,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 1287,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 6147,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 2
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "PO-20-747",
+                                    "quantity": 35,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 1779,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 9544,
+                                    "weightUnitCode": "L"
+                                }
+                            }
+                        ],
+                        "noteOrSpecialInstruction": [
+                            {
+                                "description": "NO APPT NECESSARY"
+                            }
+                        ],
+                        "palletInformation": null,
+                        "shipmentWeightPackagingAndQuantityData": {
+                            "ladingQuantity": 60,
+                            "ladingQuantity_1": 0,
+                            "volume": 3066,
+                            "volumeUnitQualifier": "E",
+                            "weight": 15692,
+                            "weightQualifier": "G",
+                            "weightUnitCode": "L"
+                        },
+                        "stopOffDetails": {
+                            "stopReasonCode": "CL",
+                            "stopSequenceNumber": 1
+                        }
+                    },
+                    {
+                        "billOfLadingHandlingRequirements": [
+                            {
+                                "specialHandlingCode": null,
+                                "specialHandlingDescription": null,
+                                "specialServicesCode": "CU"
+                            },
+                            {
+                                "specialHandlingCode": null,
+                                "specialHandlingDescription": "NO NEED TO CONFIRM APPT",
+                                "specialServicesCode": null
+                            }
+                        ],
+                        "businessInstructionsAndReferenceNumber": [
+                            {
+                                "referenceIdentification": "PO-20-747",
+                                "referenceIdentificationQualifier": "PO"
+                            },
+                            {
+                                "referenceIdentification": "GEORGIA-PACIFIC",
+                                "referenceIdentificationQualifier": "PRT"
+                            },
+                            {
+                                "referenceIdentification": "8003011002",
+                                "referenceIdentificationQualifier": "VN"
+                            }
+                        ],
+                        "dateOrTime": [
+                            {
+                                "date": "20240801",
+                                "dateQualifier": "70",
+                                "time": "080000",
+                                "timeCode": "LT",
+                                "timeQualifier": "X"
+                            }
+                        ],
+                        "groupName_270": {
+                            "addressInformation": [
+                                {
+                                    "addressInformation": "725 S GAMMON RD",
+                                    "addressInformation_1": null
+                                }
+                            ],
+                            "contact": [
+                                {
+                                    "communicationNumber": "608-274-8944",
+                                    "communicationNumberQualifier": "TE",
+                                    "contactFunctionCode": "IC",
+                                    "contactInquiryReference": null,
+                                    "name": "RECEIVING"
+                                }
+                            ],
+                            "geographicLocation": {
+                                "cityName": "MADISON",
+                                "countryCode": "USA",
+                                "postalCode": "53719",
+                                "stateOrProvinceCode": "WI"
+                            },
+                            "name": {
+                                "entityIdentifierCode": "ST",
+                                "identificationCode": "2043056",
+                                "identificationCodeQualifier": "93",
+                                "name": "WOODMANS 20"
+                            }
+                        },
+                        "groupOrderIdentificationDetail_2150": [
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 1
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "PO-20-747",
+                                    "quantity": 25,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 1287,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 6147,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 2
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "PO-20-747",
+                                    "quantity": 35,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 1779,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 9544,
+                                    "weightUnitCode": "L"
+                                }
+                            }
+                        ],
+                        "noteOrSpecialInstruction": [
+                            {
+                                "description": "NO NEED TO CONFIRM APPT"
+                            },
+                            {
+                                "description": "MUST CONTACT RECEIVER PRIOR TO MISSING DELIVERY"
+                            },
+                            {
+                                "description": "CARRIER MUST CALL RECEIVING AT 608-274-8944 IF LOAD WILL BE LATE. CAN"
+                            },
+                            {
+                                "description": "CALL ANYTIME BETWEEN 6AM-11PM CENTRAL TIME"
+                            },
+                            {
+                                "description": "IF CARRIER HAS TO RESET APPOINTMENT -  RESET FOR MORNING APPOINTMENTS"
+                            },
+                            {
+                                "description": "ONLY (ANYTIME UP UNTIL 1PM)"
+                            },
+                            {
+                                "description": "08/01 @ 0800 PER KRISHNA"
+                            },
+                            {
+                                "description": "RECEIVING: RECEIVING"
+                            },
+                            {
+                                "description": "PHONE: 608-274-8944"
+                            },
+                            {
+                                "description": "RECEIVING: RECEIVING"
+                            },
+                            {
+                                "description": "PHONE: 608-274-8944"
+                            }
+                        ],
+                        "palletInformation": null,
+                        "shipmentWeightPackagingAndQuantityData": {
+                            "ladingQuantity": 60,
+                            "ladingQuantity_1": 0,
+                            "volume": 3066,
+                            "volumeUnitQualifier": "E",
+                            "weight": 15691,
+                            "weightQualifier": "G",
+                            "weightUnitCode": "L"
+                        },
+                        "stopOffDetails": {
+                            "stopReasonCode": "CU",
+                            "stopSequenceNumber": 2
+                        }
+                    }
+                ]
+            },
+            "section3": {
+                "totalWeightAndCharges": {
+                    "ladingQuantity": 60,
+                    "volume": 3066,
+                    "volumeUnitQualifier": "E",
+                    "weight": 15691,
+                    "weightQualifier": "G",
+                    "weightUnitCode": "L"
+                }
+            }
+        }
+    }
+]

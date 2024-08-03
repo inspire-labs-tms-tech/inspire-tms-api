@@ -1,0 +1,453 @@
+[
+    {
+        "meta": {
+            "file_name": "KBXTECH_079884536_204_380062857.edi-t-380062857-ee44b983-f192-4d74-9cd8-f61e87606077@orderful-ip-10-204-36-226.us-west-2.compute.internal",
+            "group_functional_identifier": "SM",
+            "group_seq_number": "24667",
+            "message_seq_number": "000024667",
+            "set_seq_number": "0001"
+        },
+        "data": {
+            "section1": {
+                "beginningSegmentForShipmentInformationTransaction": {
+                    "customsDocumentationHandlingCode": null,
+                    "shipmentIdentificationNumber": "6885038",
+                    "shipmentMethodOfPayment": "PP",
+                    "standardCarrierAlphaCode": "RTQR",
+                    "weightUnitCode": "L"
+                },
+                "billOfLadingHandlingRequirements": [
+                    {
+                        "specialHandlingCode": null,
+                        "specialHandlingDescription": "53 FT 102 IN TRAILER",
+                        "specialServicesCode": null
+                    }
+                ],
+                "businessInstructionsAndReferenceNumber": [
+                    {
+                        "description": "74764e22-a848-4bdf-b64f-620bee711cab",
+                        "referenceIdentification": "00304006885038001",
+                        "referenceIdentificationQualifier": "BM"
+                    },
+                    {
+                        "description": null,
+                        "referenceIdentification": "KBXLEGACY",
+                        "referenceIdentificationQualifier": "4F"
+                    }
+                ],
+                "dateOrTime": {
+                    "date": "20240730",
+                    "dateQualifier": "10",
+                    "time": "174200",
+                    "timeCode": "LT",
+                    "timeQualifier": "Y"
+                },
+                "groupEquipmentDetails_1200": [
+                    {
+                        "equipmentDetails": {
+                            "equipmentDescriptionCode": "TF",
+                            "equipmentLength": 5300,
+                            "equipmentNumber": "0",
+                            "height": 102
+                        },
+                        "sealNumbers": []
+                    }
+                ],
+                "groupName_1140": [
+                    {
+                        "addressInformation": [
+                            {
+                                "addressInformation": "DO NOT SUBMIT INVOICE",
+                                "addressInformation_1": null
+                            }
+                        ],
+                        "contact": [],
+                        "geographicLocation": null,
+                        "name": {
+                            "entityIdentifierCode": "BT",
+                            "name": "FREIGHT AUTO PAY BY GEORGIA PACIFIC CPG"
+                        }
+                    },
+                    {
+                        "addressInformation": [],
+                        "contact": [],
+                        "geographicLocation": null,
+                        "name": {
+                            "entityIdentifierCode": "SH",
+                            "name": "GEORGIA-PACIFIC CPG FREIGHT"
+                        }
+                    }
+                ],
+                "hazardousCertification": [],
+                "interlineInformation": {
+                    "routingSequenceCode": "B",
+                    "standardCarrierAlphaCode": "RTQR",
+                    "transportationMethodOrTypeCode": "J"
+                },
+                "noteOrSpecialInstruction": [
+                    {
+                        "description": "07/25 AT 0900, CONFIRMATION NUMBER : 80523, ESTIMATED UNLOAD TIME: 4.0 HOURS"
+                    },
+                    {
+                        "description": "07/31 AT 0800, CONFIRMATION NUMBER : 80523, ESTIMATED UNLOAD TIME: 4.0 HOURS"
+                    },
+                    {
+                        "description": "LOAD/CONFIRMATION NUMBER : 80523"
+                    },
+                    {
+                        "description": "PAYS SIGNIFICANT PENALTY FEES FOR LATE/RESCHEDULED LOADS"
+                    },
+                    {
+                        "description": "WALGREENS LOAD/CONFIRMATION NUMBER MAY BE ON BOL PAGE 2. DON T CONTACT"
+                    },
+                    {
+                        "description": "WALGREENS, ONLY CONTACT KBX IF NECESSARY.  LUMPER FEES UNAUTHORIZED.  GP"
+                    }
+                ],
+                "palletInformation": null,
+                "setPurpose": {
+                    "applicationType": "LT",
+                    "transactionSetPurposeCode": "04"
+                }
+            },
+            "section2": {
+                "groupStopOffDetails_210": [
+                    {
+                        "billOfLadingHandlingRequirements": [
+                            {
+                                "specialHandlingCode": null,
+                                "specialHandlingDescription": "NO APPT NECESSARY",
+                                "specialServicesCode": null
+                            }
+                        ],
+                        "businessInstructionsAndReferenceNumber": [
+                            {
+                                "referenceIdentification": "4547169375",
+                                "referenceIdentificationQualifier": "PO"
+                            },
+                            {
+                                "referenceIdentification": "DIXIE",
+                                "referenceIdentificationQualifier": "PRT"
+                            },
+                            {
+                                "referenceIdentification": "GEORGIA-PACIFIC",
+                                "referenceIdentificationQualifier": "PRT"
+                            },
+                            {
+                                "referenceIdentification": "8003008882",
+                                "referenceIdentificationQualifier": "VN"
+                            }
+                        ],
+                        "dateOrTime": [
+                            {
+                                "date": "20240730",
+                                "dateQualifier": "LC",
+                                "time": "062700",
+                                "timeCode": "LT",
+                                "timeQualifier": "W"
+                            }
+                        ],
+                        "groupName_270": {
+                            "addressInformation": [
+                                {
+                                    "addressInformation": "21837 WEST MISSISSIPPI AVENUE",
+                                    "addressInformation_1": null
+                                }
+                            ],
+                            "contact": [
+                                {
+                                    "communicationNumber": "815-423-9990",
+                                    "communicationNumberQualifier": "TE",
+                                    "contactFunctionCode": "IC",
+                                    "contactInquiryReference": null,
+                                    "name": "SHIPPING"
+                                }
+                            ],
+                            "geographicLocation": {
+                                "cityName": "ELWOOD",
+                                "countryCode": "USA",
+                                "postalCode": "60421",
+                                "stateOrProvinceCode": "IL"
+                            },
+                            "name": {
+                                "entityIdentifierCode": "SF",
+                                "identificationCode": "A072",
+                                "identificationCodeQualifier": "93",
+                                "name": "CHICAGO DC"
+                            }
+                        },
+                        "groupOrderIdentificationDetail_2150": [
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 1
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "4547169375",
+                                    "quantity": 44,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 53,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 242,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 2
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "4547169375",
+                                    "quantity": 144,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 447,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 2066,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 3
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "4547169375",
+                                    "quantity": 336,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 664,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 3353,
+                                    "weightUnitCode": "L"
+                                }
+                            }
+                        ],
+                        "noteOrSpecialInstruction": [
+                            {
+                                "description": "NO APPT NECESSARY"
+                            }
+                        ],
+                        "palletInformation": null,
+                        "shipmentWeightPackagingAndQuantityData": {
+                            "ladingQuantity": 524,
+                            "ladingQuantity_1": 0,
+                            "volume": 1163,
+                            "volumeUnitQualifier": "E",
+                            "weight": 5662,
+                            "weightQualifier": "G",
+                            "weightUnitCode": "L"
+                        },
+                        "stopOffDetails": {
+                            "stopReasonCode": "CL",
+                            "stopSequenceNumber": 1
+                        }
+                    },
+                    {
+                        "billOfLadingHandlingRequirements": [
+                            {
+                                "specialHandlingCode": null,
+                                "specialHandlingDescription": null,
+                                "specialServicesCode": "CU"
+                            },
+                            {
+                                "specialHandlingCode": null,
+                                "specialHandlingDescription": "NO NEED TO CONFIRM APPT",
+                                "specialServicesCode": null
+                            }
+                        ],
+                        "businessInstructionsAndReferenceNumber": [
+                            {
+                                "referenceIdentification": "4547169375",
+                                "referenceIdentificationQualifier": "PO"
+                            },
+                            {
+                                "referenceIdentification": "DIXIE",
+                                "referenceIdentificationQualifier": "PRT"
+                            },
+                            {
+                                "referenceIdentification": "GEORGIA-PACIFIC",
+                                "referenceIdentificationQualifier": "PRT"
+                            },
+                            {
+                                "referenceIdentification": "8003008882",
+                                "referenceIdentificationQualifier": "VN"
+                            }
+                        ],
+                        "dateOrTime": [
+                            {
+                                "date": "20240731",
+                                "dateQualifier": "70",
+                                "time": "080000",
+                                "timeCode": "LT",
+                                "timeQualifier": "X"
+                            }
+                        ],
+                        "groupName_270": {
+                            "addressInformation": [
+                                {
+                                    "addressInformation": "4400 STATE RD HWY 19",
+                                    "addressInformation_1": null
+                                }
+                            ],
+                            "contact": [
+                                {
+                                    "communicationNumber": "608-846-3075",
+                                    "communicationNumberQualifier": "TE",
+                                    "contactFunctionCode": "IC",
+                                    "contactInquiryReference": null,
+                                    "name": "RECEIVING"
+                                }
+                            ],
+                            "geographicLocation": {
+                                "cityName": "WINDSOR",
+                                "countryCode": "USA",
+                                "postalCode": "53598",
+                                "stateOrProvinceCode": "WI"
+                            },
+                            "name": {
+                                "entityIdentifierCode": "ST",
+                                "identificationCode": "225222",
+                                "identificationCodeQualifier": "93",
+                                "name": "WALGREENS - WINDSOR WI"
+                            }
+                        },
+                        "groupOrderIdentificationDetail_2150": [
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 1
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "4547169375",
+                                    "quantity": 44,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 53,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 242,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 2
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "4547169375",
+                                    "quantity": 144,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 447,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 2066,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 3
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "4547169375",
+                                    "quantity": 336,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 664,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 3353,
+                                    "weightUnitCode": "L"
+                                }
+                            }
+                        ],
+                        "noteOrSpecialInstruction": [
+                            {
+                                "description": "NO NEED TO CONFIRM APPT"
+                            },
+                            {
+                                "description": "WALGREENS LOAD/CONFIRMATION NUMBER MAY BE ON BOL PAGE 2. DON T CONTACT"
+                            },
+                            {
+                                "description": "WALGREENS, ONLY CONTACT KBX IF NECESSARY.  LUMPER FEES UNAUTHORIZED.  GP"
+                            },
+                            {
+                                "description": "PAYS SIGNIFICANT PENALTY FEES FOR LATE/RESCHEDULED LOADS"
+                            },
+                            {
+                                "description": "07/25 AT 0900, CONFIRMATION NUMBER : 80523, ESTIMATED UNLOAD TIME: 4.0 HOURS"
+                            },
+                            {
+                                "description": "07/31 AT 0800, CONFIRMATION NUMBER : 80523, ESTIMATED UNLOAD TIME: 4.0 HOURS"
+                            },
+                            {
+                                "description": "LOAD/CONFIRMATION NUMBER : 80523"
+                            },
+                            {
+                                "description": "LOAD/CONFIRMATION NUMBER : 80523"
+                            },
+                            {
+                                "description": "RECEIVING: RECEIVING"
+                            },
+                            {
+                                "description": "PHONE: 608-846-3075"
+                            },
+                            {
+                                "description": "RECEIVING: RECEIVING"
+                            },
+                            {
+                                "description": "PHONE: 608-846-3075"
+                            }
+                        ],
+                        "palletInformation": null,
+                        "shipmentWeightPackagingAndQuantityData": {
+                            "ladingQuantity": 524,
+                            "ladingQuantity_1": 0,
+                            "volume": 1164,
+                            "volumeUnitQualifier": "E",
+                            "weight": 5661,
+                            "weightQualifier": "G",
+                            "weightUnitCode": "L"
+                        },
+                        "stopOffDetails": {
+                            "stopReasonCode": "CU",
+                            "stopSequenceNumber": 2
+                        }
+                    }
+                ]
+            },
+            "section3": {
+                "totalWeightAndCharges": {
+                    "ladingQuantity": 524,
+                    "volume": 1164,
+                    "volumeUnitQualifier": "E",
+                    "weight": 5661,
+                    "weightQualifier": "G",
+                    "weightUnitCode": "L"
+                }
+            }
+        }
+    }
+]

@@ -1,0 +1,388 @@
+[
+    {
+        "meta": {
+            "file_name": "KBXTECH_079884536_204_378539451.edi-t-378539451-58dc1ba5-34f6-4509-84f2-bd48e3cba6d6@orderful-ip-10-204-32-117.us-west-2.compute.internal",
+            "group_functional_identifier": "SM",
+            "group_seq_number": "24587",
+            "message_seq_number": "000024587",
+            "set_seq_number": "0001"
+        },
+        "data": {
+            "section1": {
+                "beginningSegmentForShipmentInformationTransaction": {
+                    "customsDocumentationHandlingCode": null,
+                    "shipmentIdentificationNumber": "6881372",
+                    "shipmentMethodOfPayment": "PP",
+                    "standardCarrierAlphaCode": "RTQR",
+                    "weightUnitCode": "L"
+                },
+                "billOfLadingHandlingRequirements": [
+                    {
+                        "specialHandlingCode": null,
+                        "specialHandlingDescription": "53 FT 102 IN TRAILER",
+                        "specialServicesCode": null
+                    }
+                ],
+                "businessInstructionsAndReferenceNumber": [
+                    {
+                        "description": "957de925-c2ec-42db-8cc8-ea2154e2f318",
+                        "referenceIdentification": "00304006881372000",
+                        "referenceIdentificationQualifier": "BM"
+                    },
+                    {
+                        "description": null,
+                        "referenceIdentification": "KBXLEGACY",
+                        "referenceIdentificationQualifier": "4F"
+                    }
+                ],
+                "dateOrTime": {
+                    "date": "20240728",
+                    "dateQualifier": "10",
+                    "time": "123600",
+                    "timeCode": "LT",
+                    "timeQualifier": "Y"
+                },
+                "groupEquipmentDetails_1200": [
+                    {
+                        "equipmentDetails": {
+                            "equipmentDescriptionCode": "TF",
+                            "equipmentLength": 5300,
+                            "equipmentNumber": "0",
+                            "height": 102
+                        },
+                        "sealNumbers": []
+                    }
+                ],
+                "groupName_1140": [
+                    {
+                        "addressInformation": [
+                            {
+                                "addressInformation": "DO NOT SUBMIT INVOICE",
+                                "addressInformation_1": null
+                            }
+                        ],
+                        "contact": [],
+                        "geographicLocation": null,
+                        "name": {
+                            "entityIdentifierCode": "BT",
+                            "name": "FREIGHT AUTO PAY BY GEORGIA PACIFIC CPG"
+                        }
+                    },
+                    {
+                        "addressInformation": [],
+                        "contact": [],
+                        "geographicLocation": null,
+                        "name": {
+                            "entityIdentifierCode": "SH",
+                            "name": "GEORGIA-PACIFIC CPG FREIGHT"
+                        }
+                    }
+                ],
+                "hazardousCertification": [],
+                "interlineInformation": {
+                    "routingSequenceCode": "B",
+                    "standardCarrierAlphaCode": "RTQR",
+                    "transportationMethodOrTypeCode": "J"
+                },
+                "noteOrSpecialInstruction": [
+                    {
+                        "description": ". SOUTH,GROVEPORT,OH,43125"
+                    },
+                    {
+                        "description": "9475 0020 00063CWQ"
+                    },
+                    {
+                        "description": "BUYER: SAMS ECOM FC GROVEPORT OH,UL,0605388011725,6198 GREEN POINTE DR"
+                    },
+                    {
+                        "description": "CARRIER MUST RESET MISSED APPT IMMEDIATELY. RESET APPT SHOULD BE SET F"
+                    },
+                    {
+                        "description": "CARRIER-DRIVERS: MUST OBTAIN SAMS SIGNATURE AND STAMP NOTATING"
+                    },
+                    {
+                        "description": "DRIVER MUST CALL CLUB IN ADVANCE IF APPT TIME WILL BE MISSED"
+                    },
+                    {
+                        "description": "LIVE 07/29 AT 0700 DELIVERY   83325125"
+                    },
+                    {
+                        "description": "LIVE CONFIRMATION  83325125 DELIVERY APPT: 20240729 07:00"
+                    },
+                    {
+                        "description": "LIVE CONFIRMATION 83325125 DELIVERY APPT: 20240729 07:00"
+                    },
+                    {
+                        "description": "NO PRETICKET"
+                    }
+                ],
+                "palletInformation": null,
+                "setPurpose": {
+                    "applicationType": "LT",
+                    "transactionSetPurposeCode": "04"
+                }
+            },
+            "section2": {
+                "groupStopOffDetails_210": [
+                    {
+                        "billOfLadingHandlingRequirements": [
+                            {
+                                "specialHandlingCode": null,
+                                "specialHandlingDescription": "NO APPT NECESSARY",
+                                "specialServicesCode": null
+                            }
+                        ],
+                        "businessInstructionsAndReferenceNumber": [
+                            {
+                                "referenceIdentification": "3028876048",
+                                "referenceIdentificationQualifier": "PO"
+                            },
+                            {
+                                "referenceIdentification": "GEORGIA-PACIFIC",
+                                "referenceIdentificationQualifier": "PRT"
+                            },
+                            {
+                                "referenceIdentification": "8003004606",
+                                "referenceIdentificationQualifier": "VN"
+                            }
+                        ],
+                        "dateOrTime": [
+                            {
+                                "date": "20240727",
+                                "dateQualifier": "LC",
+                                "time": "133700",
+                                "timeCode": "LT",
+                                "timeQualifier": "W"
+                            }
+                        ],
+                        "groupName_270": {
+                            "addressInformation": [
+                                {
+                                    "addressInformation": "23534 SOUTH CENTRAL AVENUE",
+                                    "addressInformation_1": null
+                                }
+                            ],
+                            "contact": [
+                                {
+                                    "communicationNumber": "708-627-3243",
+                                    "communicationNumberQualifier": "TE",
+                                    "contactFunctionCode": "IC",
+                                    "contactInquiryReference": null,
+                                    "name": "SHIPPING"
+                                }
+                            ],
+                            "geographicLocation": {
+                                "cityName": "UNIVERSITY PARK",
+                                "countryCode": "USA",
+                                "postalCode": "60484",
+                                "stateOrProvinceCode": "IL"
+                            },
+                            "name": {
+                                "entityIdentifierCode": "SF",
+                                "identificationCode": "A524",
+                                "identificationCodeQualifier": "93",
+                                "name": "SOUTH CHICAGO RDC"
+                            }
+                        },
+                        "groupOrderIdentificationDetail_2150": [
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 1
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "3028876048",
+                                    "quantity": 30,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 2925,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 14184,
+                                    "weightUnitCode": "L"
+                                }
+                            }
+                        ],
+                        "noteOrSpecialInstruction": [
+                            {
+                                "description": "NO APPT NECESSARY"
+                            }
+                        ],
+                        "palletInformation": null,
+                        "shipmentWeightPackagingAndQuantityData": {
+                            "ladingQuantity": 30,
+                            "ladingQuantity_1": 0,
+                            "volume": 2925,
+                            "volumeUnitQualifier": "E",
+                            "weight": 14184,
+                            "weightQualifier": "G",
+                            "weightUnitCode": "L"
+                        },
+                        "stopOffDetails": {
+                            "stopReasonCode": "CL",
+                            "stopSequenceNumber": 1
+                        }
+                    },
+                    {
+                        "billOfLadingHandlingRequirements": [
+                            {
+                                "specialHandlingCode": null,
+                                "specialHandlingDescription": null,
+                                "specialServicesCode": "CU"
+                            },
+                            {
+                                "specialHandlingCode": null,
+                                "specialHandlingDescription": "NO NEED TO CONFIRM APPT",
+                                "specialServicesCode": null
+                            }
+                        ],
+                        "businessInstructionsAndReferenceNumber": [
+                            {
+                                "referenceIdentification": "3028876048",
+                                "referenceIdentificationQualifier": "PO"
+                            },
+                            {
+                                "referenceIdentification": "GEORGIA-PACIFIC",
+                                "referenceIdentificationQualifier": "PRT"
+                            },
+                            {
+                                "referenceIdentification": "8003004606",
+                                "referenceIdentificationQualifier": "VN"
+                            }
+                        ],
+                        "dateOrTime": [
+                            {
+                                "date": "20240729",
+                                "dateQualifier": "70",
+                                "time": "070000",
+                                "timeCode": "LT",
+                                "timeQualifier": "X"
+                            }
+                        ],
+                        "groupName_270": {
+                            "addressInformation": [
+                                {
+                                    "addressInformation": "6198 GREEN POINTE DR S",
+                                    "addressInformation_1": null
+                                }
+                            ],
+                            "contact": [],
+                            "geographicLocation": {
+                                "cityName": "GROVEPORT",
+                                "countryCode": "USA",
+                                "postalCode": "43125",
+                                "stateOrProvinceCode": "OH"
+                            },
+                            "name": {
+                                "entityIdentifierCode": "ST",
+                                "identificationCode": "2306226",
+                                "identificationCodeQualifier": "93",
+                                "name": "SAMS CLUB.COM GROVEPORT 9475"
+                            }
+                        },
+                        "groupOrderIdentificationDetail_2150": [
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 1
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "3028876048",
+                                    "quantity": 30,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 2925,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 14184,
+                                    "weightUnitCode": "L"
+                                }
+                            }
+                        ],
+                        "noteOrSpecialInstruction": [
+                            {
+                                "description": "NO NEED TO CONFIRM APPT"
+                            },
+                            {
+                                "description": "9475 0020 00063CWQ"
+                            },
+                            {
+                                "description": "DRIVER MUST CALL CLUB IN ADVANCE IF APPT TIME WILL BE MISSED"
+                            },
+                            {
+                                "description": "CARRIER-DRIVERS: MUST OBTAIN SAMS SIGNATURE AND STAMP NOTATING"
+                            },
+                            {
+                                "description": "QUANTITIES OVER/SHORT AND DAMAGES."
+                            },
+                            {
+                                "description": "OVERAGES AND SHORTAGES 877-673-2257 CUST SRV 866-878-6215"
+                            },
+                            {
+                                "description": "CARRIER MUST RESET MISSED APPT IMMEDIATELY. RESET APPT SHOULD BE SET F"
+                            },
+                            {
+                                "description": "WITHIN 24 HOURS OF ORIGINAL APPOINTMENT."
+                            },
+                            {
+                                "description": "LIVE 07/29 AT 0700 DELIVERY   83325125"
+                            },
+                            {
+                                "description": "LIVE CONFIRMATION  83325125 DELIVERY APPT: 20240729 07:00"
+                            },
+                            {
+                                "description": "LIVE CONFIRMATION 83325125 DELIVERY APPT: 20240729 07:00"
+                            },
+                            {
+                                "description": "SPECIAL INSTRUCTIONS"
+                            },
+                            {
+                                "description": "NO PRETICKET"
+                            },
+                            {
+                                "description": "TRUCK   01 FOR 226795631"
+                            },
+                            {
+                                "description": "BUYER: SAMS ECOM FC GROVEPORT OH,UL,0605388011725,6198 GREEN POINTE DR"
+                            },
+                            {
+                                "description": ". SOUTH,GROVEPORT,OH,43125"
+                            },
+                            {
+                                "description": "SHIP FROM: GEORGIA-PACIFIC CONSUMER PRODU"
+                            }
+                        ],
+                        "palletInformation": null,
+                        "shipmentWeightPackagingAndQuantityData": {
+                            "ladingQuantity": 30,
+                            "ladingQuantity_1": 0,
+                            "volume": 2925,
+                            "volumeUnitQualifier": "E",
+                            "weight": 14184,
+                            "weightQualifier": "G",
+                            "weightUnitCode": "L"
+                        },
+                        "stopOffDetails": {
+                            "stopReasonCode": "CU",
+                            "stopSequenceNumber": 2
+                        }
+                    }
+                ]
+            },
+            "section3": {
+                "totalWeightAndCharges": {
+                    "ladingQuantity": 30,
+                    "volume": 2925,
+                    "volumeUnitQualifier": "E",
+                    "weight": 14184,
+                    "weightQualifier": "G",
+                    "weightUnitCode": "L"
+                }
+            }
+        }
+    }
+]

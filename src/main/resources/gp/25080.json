@@ -1,0 +1,488 @@
+[
+    {
+        "meta": {
+            "file_name": "KBXTECH_079884536_204_379141673.edi-t-379141673-8ea75252-6780-4091-b290-6b9270ee80b7@orderful-ip-10-204-14-159.us-west-2.compute.internal",
+            "group_functional_identifier": "SM",
+            "group_seq_number": "24609",
+            "message_seq_number": "000024609",
+            "set_seq_number": "0001"
+        },
+        "data": {
+            "section1": {
+                "beginningSegmentForShipmentInformationTransaction": {
+                    "customsDocumentationHandlingCode": null,
+                    "shipmentIdentificationNumber": "6883485",
+                    "shipmentMethodOfPayment": "PP",
+                    "standardCarrierAlphaCode": "RTQR",
+                    "weightUnitCode": "L"
+                },
+                "billOfLadingHandlingRequirements": [
+                    {
+                        "specialHandlingCode": null,
+                        "specialHandlingDescription": "53 FT 102 IN TRAILER",
+                        "specialServicesCode": null
+                    }
+                ],
+                "businessInstructionsAndReferenceNumber": [
+                    {
+                        "description": "8be25c7c-c875-4579-91c3-86bb747a7169",
+                        "referenceIdentification": "00304006883485005",
+                        "referenceIdentificationQualifier": "BM"
+                    },
+                    {
+                        "description": null,
+                        "referenceIdentification": "KBXLEGACY",
+                        "referenceIdentificationQualifier": "4F"
+                    }
+                ],
+                "dateOrTime": {
+                    "date": "20240729",
+                    "dateQualifier": "LP",
+                    "time": "092500",
+                    "timeCode": "LT",
+                    "timeQualifier": "LP"
+                },
+                "groupEquipmentDetails_1200": [
+                    {
+                        "equipmentDetails": {
+                            "equipmentDescriptionCode": "TF",
+                            "equipmentLength": 5300,
+                            "equipmentNumber": "0",
+                            "height": 102
+                        },
+                        "sealNumbers": []
+                    }
+                ],
+                "groupName_1140": [
+                    {
+                        "addressInformation": [
+                            {
+                                "addressInformation": "DO NOT SUBMIT INVOICE",
+                                "addressInformation_1": null
+                            }
+                        ],
+                        "contact": [],
+                        "geographicLocation": null,
+                        "name": {
+                            "entityIdentifierCode": "BT",
+                            "name": "FREIGHT AUTO PAY BY GEORGIA PACIFIC CPG"
+                        }
+                    },
+                    {
+                        "addressInformation": [],
+                        "contact": [],
+                        "geographicLocation": null,
+                        "name": {
+                            "entityIdentifierCode": "SH",
+                            "name": "GEORGIA-PACIFIC CPG FREIGHT"
+                        }
+                    }
+                ],
+                "hazardousCertification": [],
+                "interlineInformation": {
+                    "routingSequenceCode": "B",
+                    "standardCarrierAlphaCode": "RTQR",
+                    "transportationMethodOrTypeCode": "J"
+                },
+                "noteOrSpecialInstruction": [
+                    {
+                        "description": "479-258-8912. CARRIER MUST OBTAIN DC STAMP AND SIGNATURE WITH ARRIVAL"
+                    },
+                    {
+                        "description": "7055 0020 00004CWQ"
+                    },
+                    {
+                        "description": "BE SCHEDULED BY THE CARRIER IN WAL-MARTS ON-LINE APPOINTMENT SCHEDULER"
+                    },
+                    {
+                        "description": "BUYER: REGIONAL DISTRIBUTION CENTER 7055,UL,0078742058511,100 FISHER P"
+                    },
+                    {
+                        "description": "CARRIER/DRIVER MUST DELIVER ON REQUESTED DELIVERY DATE LISTED ON BOL,"
+                    },
+                    {
+                        "description": "COMMUNICATION THAT DEVIATE FROM THESE EXPECTATIONS. IF YOU HEAR THIS"
+                    },
+                    {
+                        "description": "DATE/TIME. PLEASE REVIEW DETAILED SHIPPING MANIFEST FOR PO RECEIPT QTY"
+                    },
+                    {
+                        "description": "DROP CONFIRMATION  28241993 DELIVERY DATE: 20240730"
+                    },
+                    {
+                        "description": "FEEDBACK, SEEK IMMEDIATE ASSISTANCE FROM YOUR DISPATCH."
+                    },
+                    {
+                        "description": "HVDC/RDC FIRST, THEN EMAIL SCHEDEXC@WAL-MART.COM. FOR ANY OTHER ISSUES"
+                    }
+                ],
+                "palletInformation": null,
+                "setPurpose": {
+                    "applicationType": "LT",
+                    "transactionSetPurposeCode": "04"
+                }
+            },
+            "section2": {
+                "groupStopOffDetails_210": [
+                    {
+                        "billOfLadingHandlingRequirements": [
+                            {
+                                "specialHandlingCode": null,
+                                "specialHandlingDescription": "NO APPT NECESSARY",
+                                "specialServicesCode": null
+                            }
+                        ],
+                        "businessInstructionsAndReferenceNumber": [
+                            {
+                                "referenceIdentification": "5280455783",
+                                "referenceIdentificationQualifier": "PO"
+                            },
+                            {
+                                "referenceIdentification": "WALMART",
+                                "referenceIdentificationQualifier": "PRT"
+                            },
+                            {
+                                "referenceIdentification": "8003007037",
+                                "referenceIdentificationQualifier": "VN"
+                            }
+                        ],
+                        "dateOrTime": [
+                            {
+                                "date": "20240728",
+                                "dateQualifier": "LC",
+                                "time": "185600",
+                                "timeCode": "LT",
+                                "timeQualifier": "W"
+                            }
+                        ],
+                        "groupName_270": {
+                            "addressInformation": [
+                                {
+                                    "addressInformation": "21837 WEST MISSISSIPPI AVENUE",
+                                    "addressInformation_1": null
+                                }
+                            ],
+                            "contact": [
+                                {
+                                    "communicationNumber": "815-423-9990",
+                                    "communicationNumberQualifier": "TE",
+                                    "contactFunctionCode": "IC",
+                                    "contactInquiryReference": null,
+                                    "name": "SHIPPING"
+                                }
+                            ],
+                            "geographicLocation": {
+                                "cityName": "ELWOOD",
+                                "countryCode": "USA",
+                                "postalCode": "60421",
+                                "stateOrProvinceCode": "IL"
+                            },
+                            "name": {
+                                "entityIdentifierCode": "SF",
+                                "identificationCode": "A072",
+                                "identificationCodeQualifier": "93",
+                                "name": "CHICAGO DC"
+                            }
+                        },
+                        "groupOrderIdentificationDetail_2150": [
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 1
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "5280455783",
+                                    "quantity": 8,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 790,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 3582,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 2
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "5280455783",
+                                    "quantity": 16,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 1316,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 5965,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 3
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "5280455783",
+                                    "quantity": 480,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 662,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 3096,
+                                    "weightUnitCode": "L"
+                                }
+                            }
+                        ],
+                        "noteOrSpecialInstruction": [
+                            {
+                                "description": "NO APPT NECESSARY"
+                            }
+                        ],
+                        "palletInformation": null,
+                        "shipmentWeightPackagingAndQuantityData": {
+                            "ladingQuantity": 504,
+                            "ladingQuantity_1": 0,
+                            "volume": 2768,
+                            "volumeUnitQualifier": "E",
+                            "weight": 12643,
+                            "weightQualifier": "G",
+                            "weightUnitCode": "L"
+                        },
+                        "stopOffDetails": {
+                            "stopReasonCode": "CL",
+                            "stopSequenceNumber": 1
+                        }
+                    },
+                    {
+                        "billOfLadingHandlingRequirements": [
+                            {
+                                "specialHandlingCode": null,
+                                "specialHandlingDescription": "NO APPT NECESSARY",
+                                "specialServicesCode": null
+                            },
+                            {
+                                "specialHandlingCode": "DRO",
+                                "specialHandlingDescription": null,
+                                "specialServicesCode": null
+                            }
+                        ],
+                        "businessInstructionsAndReferenceNumber": [
+                            {
+                                "referenceIdentification": "5280455783",
+                                "referenceIdentificationQualifier": "PO"
+                            },
+                            {
+                                "referenceIdentification": "WALMART",
+                                "referenceIdentificationQualifier": "PRT"
+                            },
+                            {
+                                "referenceIdentification": "8003007037",
+                                "referenceIdentificationQualifier": "VN"
+                            }
+                        ],
+                        "dateOrTime": [
+                            {
+                                "date": "20240729",
+                                "dateQualifier": "53",
+                                "time": "000100",
+                                "timeCode": "LT",
+                                "timeQualifier": "ED"
+                            },
+                            {
+                                "date": "20240730",
+                                "dateQualifier": "54",
+                                "time": "235900",
+                                "timeCode": "LT",
+                                "timeQualifier": "LD"
+                            }
+                        ],
+                        "groupName_270": {
+                            "addressInformation": [
+                                {
+                                    "addressInformation": "100 FISCHER PKWY",
+                                    "addressInformation_1": null
+                                }
+                            ],
+                            "contact": [
+                                {
+                                    "communicationNumber": "765-677-7000",
+                                    "communicationNumberQualifier": "TE",
+                                    "contactFunctionCode": "IC",
+                                    "contactInquiryReference": null,
+                                    "name": "RECEIVING"
+                                }
+                            ],
+                            "geographicLocation": {
+                                "cityName": "GAS CITY",
+                                "countryCode": "USA",
+                                "postalCode": "46933",
+                                "stateOrProvinceCode": "IN"
+                            },
+                            "name": {
+                                "entityIdentifierCode": "ST",
+                                "identificationCode": "2114783",
+                                "identificationCodeQualifier": "93",
+                                "name": "WALMART DC 7055 - HVDC"
+                            }
+                        },
+                        "groupOrderIdentificationDetail_2150": [
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 1
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "5280455783",
+                                    "quantity": 8,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 790,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 3582,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 2
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "5280455783",
+                                    "quantity": 16,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 1316,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 5965,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 3
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "5280455783",
+                                    "quantity": 480,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 662,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 3096,
+                                    "weightUnitCode": "L"
+                                }
+                            }
+                        ],
+                        "noteOrSpecialInstruction": [
+                            {
+                                "description": "NO APPT NECESSARY"
+                            },
+                            {
+                                "description": "7055 0020 00004CWQ"
+                            },
+                            {
+                                "description": "CARRIER/DRIVER MUST DELIVER ON REQUESTED DELIVERY DATE LISTED ON BOL,"
+                            },
+                            {
+                                "description": "MUST NOT DELIVER EARLY OR LATE, REGARDLESS OF GUARD SHACK/CUSTOMER"
+                            },
+                            {
+                                "description": "COMMUNICATION THAT DEVIATE FROM THESE EXPECTATIONS. IF YOU HEAR THIS"
+                            },
+                            {
+                                "description": "FEEDBACK, SEEK IMMEDIATE ASSISTANCE FROM YOUR DISPATCH."
+                            },
+                            {
+                                "description": "IF LOAD IS A DROP, CARRIERS WILL RECEIVE THEIR DROP CONFIRMATION NUMBE"
+                            },
+                            {
+                                "description": "ONCE THE LOAD IS TENDERED. FOR ANY ISSUES WITH DROP CONFIRMATION NUMBE"
+                            },
+                            {
+                                "description": "PLEASE REACH OUT TO KBXLAPPTS@KBXLOGISTICS.COM. LIVE APPOINTMENTS MUST"
+                            },
+                            {
+                                "description": "BE SCHEDULED BY THE CARRIER IN WAL-MARTS ON-LINE APPOINTMENT SCHEDULER"
+                            },
+                            {
+                                "description": "IF THERE ARE NO AVAILABLE APPOINTMENTS ON MABD, REACH OUT TO THE"
+                            },
+                            {
+                                "description": "HVDC/RDC FIRST, THEN EMAIL SCHEDEXC@WAL-MART.COM. FOR ANY OTHER ISSUES"
+                            },
+                            {
+                                "description": "RELATED TO SCHEDULING REACH OUT TO DCSCHADMIN@WAL-MART.COM OR"
+                            },
+                            {
+                                "description": "479-258-8912. CARRIER MUST OBTAIN DC STAMP AND SIGNATURE WITH ARRIVAL"
+                            },
+                            {
+                                "description": "DATE/TIME. PLEASE REVIEW DETAILED SHIPPING MANIFEST FOR PO RECEIPT QTY"
+                            },
+                            {
+                                "description": "DROP CONFIRMATION  28241993 DELIVERY DATE: 20240730"
+                            },
+                            {
+                                "description": "SPECIAL INSTRUCTIONS"
+                            },
+                            {
+                                "description": "NO PRETICKET"
+                            },
+                            {
+                                "description": "TRUCK   01 FOR 193508044"
+                            },
+                            {
+                                "description": "BUYER: REGIONAL DISTRIBUTION CENTER 7055,UL,0078742058511,100 FISHER P"
+                            }
+                        ],
+                        "palletInformation": null,
+                        "shipmentWeightPackagingAndQuantityData": {
+                            "ladingQuantity": 504,
+                            "ladingQuantity_1": 0,
+                            "volume": 2768,
+                            "volumeUnitQualifier": "E",
+                            "weight": 12643,
+                            "weightQualifier": "G",
+                            "weightUnitCode": "L"
+                        },
+                        "stopOffDetails": {
+                            "stopReasonCode": "CU",
+                            "stopSequenceNumber": 2
+                        }
+                    }
+                ]
+            },
+            "section3": {
+                "totalWeightAndCharges": {
+                    "ladingQuantity": 504,
+                    "volume": 2768,
+                    "volumeUnitQualifier": "E",
+                    "weight": 12643,
+                    "weightQualifier": "G",
+                    "weightUnitCode": "L"
+                }
+            }
+        }
+    }
+]

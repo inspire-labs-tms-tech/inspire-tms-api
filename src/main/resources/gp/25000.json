@@ -1,0 +1,731 @@
+[
+    {
+        "meta": {
+            "file_name": "KBXTECH_079884536_204_377339111.edi-t-377339111-fe78586d-5ab3-4090-a30c-8f88276397b6@orderful-ip-10-204-14-159.us-west-2.compute.internal",
+            "group_functional_identifier": "SM",
+            "group_seq_number": "24531",
+            "message_seq_number": "000024531",
+            "set_seq_number": "0001"
+        },
+        "data": {
+            "section1": {
+                "beginningSegmentForShipmentInformationTransaction": {
+                    "customsDocumentationHandlingCode": null,
+                    "shipmentIdentificationNumber": "6879316",
+                    "shipmentMethodOfPayment": "PP",
+                    "standardCarrierAlphaCode": "RTQR",
+                    "weightUnitCode": "L"
+                },
+                "billOfLadingHandlingRequirements": [
+                    {
+                        "specialHandlingCode": null,
+                        "specialHandlingDescription": "53 FT 102 IN TRAILER",
+                        "specialServicesCode": null
+                    }
+                ],
+                "businessInstructionsAndReferenceNumber": [
+                    {
+                        "description": "6564a885-9553-4542-b8ca-f02eeeeabf3d",
+                        "referenceIdentification": "00304006879316009",
+                        "referenceIdentificationQualifier": "BM"
+                    },
+                    {
+                        "description": null,
+                        "referenceIdentification": "KBXLEGACY",
+                        "referenceIdentificationQualifier": "4F"
+                    }
+                ],
+                "dateOrTime": {
+                    "date": "20240727",
+                    "dateQualifier": "10",
+                    "time": "075600",
+                    "timeCode": "LT",
+                    "timeQualifier": "Y"
+                },
+                "groupEquipmentDetails_1200": [
+                    {
+                        "equipmentDetails": {
+                            "equipmentDescriptionCode": "TF",
+                            "equipmentLength": 5300,
+                            "equipmentNumber": "22-53030",
+                            "height": 102
+                        },
+                        "sealNumbers": []
+                    }
+                ],
+                "groupName_1140": [
+                    {
+                        "addressInformation": [
+                            {
+                                "addressInformation": "DO NOT SUBMIT INVOICE",
+                                "addressInformation_1": null
+                            }
+                        ],
+                        "contact": [],
+                        "geographicLocation": null,
+                        "name": {
+                            "entityIdentifierCode": "BT",
+                            "name": "FREIGHT AUTO PAY BY GEORGIA PACIFIC CPG"
+                        }
+                    },
+                    {
+                        "addressInformation": [],
+                        "contact": [],
+                        "geographicLocation": null,
+                        "name": {
+                            "entityIdentifierCode": "SH",
+                            "name": "GEORGIA-PACIFIC CPG FREIGHT"
+                        }
+                    }
+                ],
+                "hazardousCertification": [],
+                "interlineInformation": {
+                    "routingSequenceCode": "B",
+                    "standardCarrierAlphaCode": "RTQR",
+                    "transportationMethodOrTypeCode": "J"
+                },
+                "noteOrSpecialInstruction": [
+                    {
+                        "description": "07/28/2024 AT 0400"
+                    },
+                    {
+                        "description": "07/28/2024 AT 0530"
+                    },
+                    {
+                        "description": "AIRBAG BETWEEN STOPS AND END OF TRAILER;"
+                    },
+                    {
+                        "description": "AS THEY MAY BE AMENDED FROM TIME TO TIME, AND ANY APPLICABLE"
+                    },
+                    {
+                        "description": "ATTN: CARRIER/ DRIVER: ASK FOR RECEIVING SECRETARY FOR RESETS. IF THE"
+                    },
+                    {
+                        "description": "ATTN: CARRIER/DRIVER - DO NOT LEAVE CONSIGNEE IF STORE STAMP FOR EACH"
+                    },
+                    {
+                        "description": "ATTN: CUSTOMER/RECEIVER:  STORE STAMP MUST BE VISIBLE ON PROOF OF"
+                    },
+                    {
+                        "description": "BUYER VENDOR SUFFIX"
+                    },
+                    {
+                        "description": "COSTCO MAIN 317-532-1608"
+                    },
+                    {
+                        "description": "COSTCO MAIN 317-558-1453"
+                    }
+                ],
+                "palletInformation": null,
+                "setPurpose": {
+                    "applicationType": "LT",
+                    "transactionSetPurposeCode": "04"
+                }
+            },
+            "section2": {
+                "groupStopOffDetails_210": [
+                    {
+                        "billOfLadingHandlingRequirements": [
+                            {
+                                "specialHandlingCode": null,
+                                "specialHandlingDescription": "NO APPT NECESSARY",
+                                "specialServicesCode": null
+                            }
+                        ],
+                        "businessInstructionsAndReferenceNumber": [
+                            {
+                                "referenceIdentification": "3460719269",
+                                "referenceIdentificationQualifier": "PO"
+                            },
+                            {
+                                "referenceIdentification": "3470719268",
+                                "referenceIdentificationQualifier": "PO"
+                            },
+                            {
+                                "referenceIdentification": "COSTCO",
+                                "referenceIdentificationQualifier": "PRT"
+                            },
+                            {
+                                "referenceIdentification": "GEORGIA-PACIFIC",
+                                "referenceIdentificationQualifier": "PRT"
+                            },
+                            {
+                                "referenceIdentification": "8003002691",
+                                "referenceIdentificationQualifier": "VN"
+                            },
+                            {
+                                "referenceIdentification": "8003002693",
+                                "referenceIdentificationQualifier": "VN"
+                            }
+                        ],
+                        "dateOrTime": [
+                            {
+                                "date": "20240725",
+                                "dateQualifier": "CL",
+                                "time": "160800",
+                                "timeCode": "LT",
+                                "timeQualifier": "W"
+                            }
+                        ],
+                        "groupName_270": {
+                            "addressInformation": [
+                                {
+                                    "addressInformation": "23534 SOUTH CENTRAL AVENUE",
+                                    "addressInformation_1": null
+                                }
+                            ],
+                            "contact": [
+                                {
+                                    "communicationNumber": "708-627-3243",
+                                    "communicationNumberQualifier": "TE",
+                                    "contactFunctionCode": "IC",
+                                    "contactInquiryReference": null,
+                                    "name": "SHIPPING"
+                                }
+                            ],
+                            "geographicLocation": {
+                                "cityName": "UNIVERSITY PARK",
+                                "countryCode": "USA",
+                                "postalCode": "60484",
+                                "stateOrProvinceCode": "IL"
+                            },
+                            "name": {
+                                "entityIdentifierCode": "SF",
+                                "identificationCode": "A524",
+                                "identificationCodeQualifier": "93",
+                                "name": "SOUTH CHICAGO RDC"
+                            }
+                        },
+                        "groupOrderIdentificationDetail_2150": [
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 1
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "3460719269",
+                                    "quantity": 2,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 101,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 896,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 2
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "3460719269",
+                                    "quantity": 2,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 100,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 899,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 3
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "3460719269",
+                                    "quantity": 22,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 1210,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 9042,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 4
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "3470719268",
+                                    "quantity": 2,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 101,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 896,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 5
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "3470719268",
+                                    "quantity": 28,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 1540,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 11508,
+                                    "weightUnitCode": "L"
+                                }
+                            }
+                        ],
+                        "noteOrSpecialInstruction": [
+                            {
+                                "description": "NO APPT NECESSARY"
+                            }
+                        ],
+                        "palletInformation": null,
+                        "shipmentWeightPackagingAndQuantityData": {
+                            "ladingQuantity": 56,
+                            "ladingQuantity_1": 0,
+                            "volume": 3053,
+                            "volumeUnitQualifier": "E",
+                            "weight": 23241,
+                            "weightQualifier": "G",
+                            "weightUnitCode": "L"
+                        },
+                        "stopOffDetails": {
+                            "stopReasonCode": "CL",
+                            "stopSequenceNumber": 1
+                        }
+                    },
+                    {
+                        "billOfLadingHandlingRequirements": [
+                            {
+                                "specialHandlingCode": null,
+                                "specialHandlingDescription": null,
+                                "specialServicesCode": "CU"
+                            },
+                            {
+                                "specialHandlingCode": "OTD",
+                                "specialHandlingDescription": null,
+                                "specialServicesCode": null
+                            },
+                            {
+                                "specialHandlingCode": null,
+                                "specialHandlingDescription": "NO NEED TO CONFIRM APPT",
+                                "specialServicesCode": null
+                            }
+                        ],
+                        "businessInstructionsAndReferenceNumber": [
+                            {
+                                "referenceIdentification": "3460719269",
+                                "referenceIdentificationQualifier": "PO"
+                            },
+                            {
+                                "referenceIdentification": "COSTCO",
+                                "referenceIdentificationQualifier": "PRT"
+                            },
+                            {
+                                "referenceIdentification": "GEORGIA-PACIFIC",
+                                "referenceIdentificationQualifier": "PRT"
+                            },
+                            {
+                                "referenceIdentification": "8003002691",
+                                "referenceIdentificationQualifier": "VN"
+                            }
+                        ],
+                        "dateOrTime": [
+                            {
+                                "date": "20240728",
+                                "dateQualifier": "70",
+                                "time": "040000",
+                                "timeCode": "LT",
+                                "timeQualifier": "X"
+                            }
+                        ],
+                        "groupName_270": {
+                            "addressInformation": [
+                                {
+                                    "addressInformation": "6110 E 86TH ST",
+                                    "addressInformation_1": null
+                                }
+                            ],
+                            "contact": [
+                                {
+                                    "communicationNumber": "317-558-1465",
+                                    "communicationNumberQualifier": "TE",
+                                    "contactFunctionCode": "IC",
+                                    "contactInquiryReference": null,
+                                    "name": "RECEIVING"
+                                }
+                            ],
+                            "geographicLocation": {
+                                "cityName": "CASTLETON",
+                                "countryCode": "USA",
+                                "postalCode": "46250",
+                                "stateOrProvinceCode": "IN"
+                            },
+                            "name": {
+                                "entityIdentifierCode": "ST",
+                                "identificationCode": "2058353",
+                                "identificationCodeQualifier": "93",
+                                "name": "COSTCO 346"
+                            }
+                        },
+                        "groupOrderIdentificationDetail_2150": [
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 1
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "3460719269",
+                                    "quantity": 2,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 101,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 896,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 2
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "3460719269",
+                                    "quantity": 2,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 100,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 899,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 3
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "3460719269",
+                                    "quantity": 22,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 1210,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 9042,
+                                    "weightUnitCode": "L"
+                                }
+                            }
+                        ],
+                        "noteOrSpecialInstruction": [
+                            {
+                                "description": "NO NEED TO CONFIRM APPT"
+                            },
+                            {
+                                "description": "AIRBAG BETWEEN STOPS AND END OF TRAILER;"
+                            },
+                            {
+                                "description": "GP CUSTOMER SERVICE 1-800-526-7371"
+                            },
+                            {
+                                "description": "COSTCO RECEIVING 317-558-1465"
+                            },
+                            {
+                                "description": "COSTCO MAIN 317-558-1453"
+                            },
+                            {
+                                "description": "ATTN: CUSTOMER/RECEIVER:  STORE STAMP MUST BE VISIBLE ON PROOF OF"
+                            },
+                            {
+                                "description": "DELIVERY; PLEASE FILL OUT STORE STAMP FOR EACH PURCHASE ORDER NUMBER AND"
+                            },
+                            {
+                                "description": "STOP TO INCLUDE QUANTITIES (SHORT/OVER/REFUSED) AND SIGN BEFORE DRIVER"
+                            },
+                            {
+                                "description": "LEAVES PREMISES."
+                            },
+                            {
+                                "description": "ATTN: CARRIER/DRIVER - DO NOT LEAVE CONSIGNEE IF STORE STAMP FOR EACH"
+                            },
+                            {
+                                "description": "PURCHASE ORDER NUMBER IS NOT FILLED OUT COMPLETELY AS NOTED-CALL GP AT"
+                            },
+                            {
+                                "description": "PH  BELOW IF CUSTOMER/RECEIVER DOES NOT COMPLETE THE STORE STAMP"
+                            },
+                            {
+                                "description": "ATTN: CARRIER/ DRIVER: ASK FOR RECEIVING SECRETARY FOR RESETS. IF THE"
+                            },
+                            {
+                                "description": "RECEIVING SECRETARY IS NOT AVAILABLE, PLEASE ASK FOR THE RECEIVING"
+                            },
+                            {
+                                "description": "MANAGER"
+                            },
+                            {
+                                "description": "07/28/2024 AT 0400"
+                            },
+                            {
+                                "description": "LEGAL DISCLAIMER"
+                            },
+                            {
+                                "description": "THIS ORDER INCORPORATES THE COSTCO WHOLESALE STANDARD TERMS,"
+                            },
+                            {
+                                "description": "AS THEY MAY BE AMENDED FROM TIME TO TIME, AND ANY APPLICABLE"
+                            },
+                            {
+                                "description": "SIGNED AGREEMENTS BETWEEN US."
+                            }
+                        ],
+                        "palletInformation": null,
+                        "shipmentWeightPackagingAndQuantityData": {
+                            "ladingQuantity": 26,
+                            "ladingQuantity_1": 0,
+                            "volume": 1411,
+                            "volumeUnitQualifier": "E",
+                            "weight": 10837,
+                            "weightQualifier": "G",
+                            "weightUnitCode": "L"
+                        },
+                        "stopOffDetails": {
+                            "stopReasonCode": "PU",
+                            "stopSequenceNumber": 2
+                        }
+                    },
+                    {
+                        "billOfLadingHandlingRequirements": [
+                            {
+                                "specialHandlingCode": null,
+                                "specialHandlingDescription": null,
+                                "specialServicesCode": "CU"
+                            },
+                            {
+                                "specialHandlingCode": "OTD",
+                                "specialHandlingDescription": null,
+                                "specialServicesCode": null
+                            },
+                            {
+                                "specialHandlingCode": null,
+                                "specialHandlingDescription": "NO NEED TO CONFIRM APPT",
+                                "specialServicesCode": null
+                            }
+                        ],
+                        "businessInstructionsAndReferenceNumber": [
+                            {
+                                "referenceIdentification": "3470719268",
+                                "referenceIdentificationQualifier": "PO"
+                            },
+                            {
+                                "referenceIdentification": "COSTCO",
+                                "referenceIdentificationQualifier": "PRT"
+                            },
+                            {
+                                "referenceIdentification": "GEORGIA-PACIFIC",
+                                "referenceIdentificationQualifier": "PRT"
+                            },
+                            {
+                                "referenceIdentification": "8003002693",
+                                "referenceIdentificationQualifier": "VN"
+                            }
+                        ],
+                        "dateOrTime": [
+                            {
+                                "date": "20240728",
+                                "dateQualifier": "70",
+                                "time": "053000",
+                                "timeCode": "LT",
+                                "timeQualifier": "X"
+                            }
+                        ],
+                        "groupName_270": {
+                            "addressInformation": [
+                                {
+                                    "addressInformation": "9010 MICHIGAN RD",
+                                    "addressInformation_1": null
+                                }
+                            ],
+                            "contact": [
+                                {
+                                    "communicationNumber": "317-532-1620",
+                                    "communicationNumberQualifier": "TE",
+                                    "contactFunctionCode": "IC",
+                                    "contactInquiryReference": null,
+                                    "name": "RECEIVING"
+                                }
+                            ],
+                            "geographicLocation": {
+                                "cityName": "INDIANAPOLIS",
+                                "countryCode": "USA",
+                                "postalCode": "46268",
+                                "stateOrProvinceCode": "IN"
+                            },
+                            "name": {
+                                "entityIdentifierCode": "ST",
+                                "identificationCode": "2058354",
+                                "identificationCodeQualifier": "93",
+                                "name": "COSTCO 347"
+                            }
+                        },
+                        "groupOrderIdentificationDetail_2150": [
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 1
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "3470719268",
+                                    "quantity": 2,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 101,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 896,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 2
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "3470719268",
+                                    "quantity": 28,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 1540,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 11508,
+                                    "weightUnitCode": "L"
+                                }
+                            }
+                        ],
+                        "noteOrSpecialInstruction": [
+                            {
+                                "description": "NO NEED TO CONFIRM APPT"
+                            },
+                            {
+                                "description": "AIRBAG BETWEEN STOPS AND END OF TRAILER;"
+                            },
+                            {
+                                "description": "GP CUSTOMER SERVICE 1-800-526-7371"
+                            },
+                            {
+                                "description": "COSTCO RECEIVING 317-532-1620"
+                            },
+                            {
+                                "description": "COSTCO MAIN 317-532-1608"
+                            },
+                            {
+                                "description": "ATTN: CUSTOMER/RECEIVER:  STORE STAMP MUST BE VISIBLE ON PROOF OF"
+                            },
+                            {
+                                "description": "DELIVERY; PLEASE FILL OUT STORE STAMP FOR EACH PURCHASE ORDER NUMBER AND"
+                            },
+                            {
+                                "description": "STOP TO INCLUDE QUANTITIES (SHORT/OVER/REFUSED) AND SIGN BEFORE DRIVER"
+                            },
+                            {
+                                "description": "LEAVES PREMISES."
+                            },
+                            {
+                                "description": "ATTN: CARRIER/DRIVER - DO NOT LEAVE CONSIGNEE IF STORE STAMP FOR EACH"
+                            },
+                            {
+                                "description": "PURCHASE ORDER NUMBER IS NOT FILLED OUT COMPLETELY AS NOTED-CALL GP AT"
+                            },
+                            {
+                                "description": "PH  BELOW IF CUSTOMER/RECEIVER DOES NOT COMPLETE THE STORE STAMP"
+                            },
+                            {
+                                "description": "ATTN: CARRIER/ DRIVER: ASK FOR RECEIVING SECRETARY FOR RESETS. IF THE"
+                            },
+                            {
+                                "description": "RECEIVING SECRETARY IS NOT AVAILABLE, PLEASE ASK FOR THE RECEIVING"
+                            },
+                            {
+                                "description": "MANAGER"
+                            },
+                            {
+                                "description": "07/28/2024 AT 0530"
+                            },
+                            {
+                                "description": "LEGAL DISCLAIMER"
+                            },
+                            {
+                                "description": "THIS ORDER INCORPORATES THE COSTCO WHOLESALE STANDARD TERMS,"
+                            },
+                            {
+                                "description": "AS THEY MAY BE AMENDED FROM TIME TO TIME, AND ANY APPLICABLE"
+                            },
+                            {
+                                "description": "SIGNED AGREEMENTS BETWEEN US."
+                            }
+                        ],
+                        "palletInformation": null,
+                        "shipmentWeightPackagingAndQuantityData": {
+                            "ladingQuantity": 30,
+                            "ladingQuantity_1": 0,
+                            "volume": 1641,
+                            "volumeUnitQualifier": "E",
+                            "weight": 12404,
+                            "weightQualifier": "G",
+                            "weightUnitCode": "L"
+                        },
+                        "stopOffDetails": {
+                            "stopReasonCode": "CU",
+                            "stopSequenceNumber": 3
+                        }
+                    }
+                ]
+            },
+            "section3": {
+                "totalWeightAndCharges": {
+                    "ladingQuantity": 56,
+                    "volume": 3052,
+                    "volumeUnitQualifier": "E",
+                    "weight": 23241,
+                    "weightQualifier": "G",
+                    "weightUnitCode": "L"
+                }
+            }
+        }
+    }
+]

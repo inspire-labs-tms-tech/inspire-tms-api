@@ -5,8 +5,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.inspiretmstech.api.auth.Authority;
-import com.inspiretmstech.api.auth.Requires;
-import com.inspiretmstech.api.auth.Scopes;
 import com.inspiretmstech.api.constants.EnvironmentVariables;
 import com.inspiretmstech.api.models.responses.fmcsa.FMCSAResult;
 import com.inspiretmstech.common.utils.Environment;
@@ -26,8 +24,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,16 +34,14 @@ public class FMCSAController {
 
     private final Logger logger = LoggerFactory.getLogger(FMCSAController.class);
 
-    @Secured(Authority.Authorities.USER)
-    @Requires({Scopes.CARRIERS})
+    @Secured(Authority.Authorities.ANON)
     @Operation(summary = "Query by DOT Number")
     @PostMapping("/dot-number")
     public List<FMCSAResult> fmcsaLookupDOTNumber(@RequestBody int dotNumber) {
         return this.queryFMCSA("/qc/services/carriers/" + dotNumber);
     }
 
-    @Secured(Authority.Authorities.USER)
-    @Requires({Scopes.CARRIERS})
+    @Secured(Authority.Authorities.ANON)
     @Operation(summary = "Query by Name")
     @PostMapping("/name")
     public List<FMCSAResult> fmcsaLookupName(@RequestBody String name) {

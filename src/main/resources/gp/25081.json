@@ -1,0 +1,752 @@
+[
+    {
+        "meta": {
+            "file_name": "KBXTECH_079884536_204_379141987.edi-t-379141987-e591eec4-318f-42bb-955d-6808b14967f2@orderful-ip-10-204-17-122.us-west-2.compute.internal",
+            "group_functional_identifier": "SM",
+            "group_seq_number": "24610",
+            "message_seq_number": "000024610",
+            "set_seq_number": "0001"
+        },
+        "data": {
+            "section1": {
+                "beginningSegmentForShipmentInformationTransaction": {
+                    "customsDocumentationHandlingCode": null,
+                    "shipmentIdentificationNumber": "6881848",
+                    "shipmentMethodOfPayment": "PP",
+                    "standardCarrierAlphaCode": "RTQR",
+                    "weightUnitCode": "L"
+                },
+                "billOfLadingHandlingRequirements": [
+                    {
+                        "specialHandlingCode": null,
+                        "specialHandlingDescription": "53 FT 102 IN TRAILER",
+                        "specialServicesCode": null
+                    }
+                ],
+                "businessInstructionsAndReferenceNumber": [
+                    {
+                        "description": "5494ec12-e0f9-45d8-9b8d-bb0f51df4b19",
+                        "referenceIdentification": "00304006881848000",
+                        "referenceIdentificationQualifier": "BM"
+                    },
+                    {
+                        "description": null,
+                        "referenceIdentification": "KBXLEGACY",
+                        "referenceIdentificationQualifier": "4F"
+                    }
+                ],
+                "dateOrTime": {
+                    "date": "20240729",
+                    "dateQualifier": "10",
+                    "time": "030400",
+                    "timeCode": "LT",
+                    "timeQualifier": "Y"
+                },
+                "groupEquipmentDetails_1200": [
+                    {
+                        "equipmentDetails": {
+                            "equipmentDescriptionCode": "TF",
+                            "equipmentLength": 5300,
+                            "equipmentNumber": "0",
+                            "height": 102
+                        },
+                        "sealNumbers": []
+                    }
+                ],
+                "groupName_1140": [
+                    {
+                        "addressInformation": [
+                            {
+                                "addressInformation": "DO NOT SUBMIT INVOICE",
+                                "addressInformation_1": null
+                            }
+                        ],
+                        "contact": [],
+                        "geographicLocation": null,
+                        "name": {
+                            "entityIdentifierCode": "BT",
+                            "name": "FREIGHT AUTO PAY BY GEORGIA PACIFIC CPG"
+                        }
+                    },
+                    {
+                        "addressInformation": [],
+                        "contact": [],
+                        "geographicLocation": null,
+                        "name": {
+                            "entityIdentifierCode": "SH",
+                            "name": "GEORGIA-PACIFIC CPG FREIGHT"
+                        }
+                    }
+                ],
+                "hazardousCertification": [],
+                "interlineInformation": {
+                    "routingSequenceCode": "B",
+                    "standardCarrierAlphaCode": "RTQR",
+                    "transportationMethodOrTypeCode": "J"
+                },
+                "noteOrSpecialInstruction": [
+                    {
+                        "description": "07/29/2024 23:00 EDT ISA: 78486026978."
+                    },
+                    {
+                        "description": "CARRIER SIGNATURE REQUIRED: MUST RECEIVE AMAZON STAMP. NOTE"
+                    },
+                    {
+                        "description": "HEDULED APPT TIME. IF DRIVER WILL MISS APPOINTMENT CONTACT KBX TEAM KBXLAPPTS@KB"
+                    },
+                    {
+                        "description": "XLOGISTICS.COM TO CANCEL APPT PRIOR TO APPT TIME;"
+                    },
+                    {
+                        "description": "HTTPS://CARRIERCENTRAL.AMAZON.COM"
+                    },
+                    {
+                        "description": "INCLUDE AMAZON IN SUBJECT LINE; LTL CARRIERS ONLY MUST SET UP AN ACCOUNT"
+                    },
+                    {
+                        "description": "ON BOL THAT AN APPOINTMENT HAS ALREADY BEEN SET."
+                    },
+                    {
+                        "description": "OVERAGE/SHORTAGE. CARRIER NOT TO ARRIVE MORE THAN 30 MIN EARLIER THAN SC"
+                    },
+                    {
+                        "description": "WITH AMAZON TRANSPORTATION TO MAKE A DELIVERY APPOINTMENT, UNLESS NOTED"
+                    }
+                ],
+                "palletInformation": null,
+                "setPurpose": {
+                    "applicationType": "LT",
+                    "transactionSetPurposeCode": "04"
+                }
+            },
+            "section2": {
+                "groupStopOffDetails_210": [
+                    {
+                        "billOfLadingHandlingRequirements": [
+                            {
+                                "specialHandlingCode": null,
+                                "specialHandlingDescription": "NO APPT NECESSARY",
+                                "specialServicesCode": null
+                            }
+                        ],
+                        "businessInstructionsAndReferenceNumber": [
+                            {
+                                "referenceIdentification": "1JMR458I",
+                                "referenceIdentificationQualifier": "PO"
+                            },
+                            {
+                                "referenceIdentification": "DIXIE",
+                                "referenceIdentificationQualifier": "PRT"
+                            },
+                            {
+                                "referenceIdentification": "GEORGIA-PACIFIC",
+                                "referenceIdentificationQualifier": "PRT"
+                            },
+                            {
+                                "referenceIdentification": "8003005126",
+                                "referenceIdentificationQualifier": "VN"
+                            }
+                        ],
+                        "dateOrTime": [
+                            {
+                                "date": "20240728",
+                                "dateQualifier": "LC",
+                                "time": "191200",
+                                "timeCode": "LT",
+                                "timeQualifier": "W"
+                            }
+                        ],
+                        "groupName_270": {
+                            "addressInformation": [
+                                {
+                                    "addressInformation": "21837 WEST MISSISSIPPI AVENUE",
+                                    "addressInformation_1": null
+                                }
+                            ],
+                            "contact": [
+                                {
+                                    "communicationNumber": "815-423-9990",
+                                    "communicationNumberQualifier": "TE",
+                                    "contactFunctionCode": "IC",
+                                    "contactInquiryReference": null,
+                                    "name": "SHIPPING"
+                                }
+                            ],
+                            "geographicLocation": {
+                                "cityName": "ELWOOD",
+                                "countryCode": "USA",
+                                "postalCode": "60421",
+                                "stateOrProvinceCode": "IL"
+                            },
+                            "name": {
+                                "entityIdentifierCode": "SF",
+                                "identificationCode": "A072",
+                                "identificationCodeQualifier": "93",
+                                "name": "CHICAGO DC"
+                            }
+                        },
+                        "groupOrderIdentificationDetail_2150": [
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 1
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "1JMR458I",
+                                    "quantity": 1,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 49,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 149,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 2
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "1JMR458I",
+                                    "quantity": 3,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 3,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 16,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 3
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "1JMR458I",
+                                    "quantity": 3,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 159,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 821,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 4
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "1JMR458I",
+                                    "quantity": 4,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 3,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 25,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 5
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "1JMR458I",
+                                    "quantity": 28,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 73,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 247,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 6
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "1JMR458I",
+                                    "quantity": 32,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 19,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 259,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 7
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "1JMR458I",
+                                    "quantity": 32,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 21,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 304,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 8
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "1JMR458I",
+                                    "quantity": 36,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 107,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 537,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 9
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "1JMR458I",
+                                    "quantity": 216,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 640,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 3225,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 10
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "1JMR458I",
+                                    "quantity": 288,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 580,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 3366,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 11
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "1JMR458I",
+                                    "quantity": 576,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 887,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 5119,
+                                    "weightUnitCode": "L"
+                                }
+                            }
+                        ],
+                        "noteOrSpecialInstruction": [
+                            {
+                                "description": "NO APPT NECESSARY"
+                            }
+                        ],
+                        "palletInformation": null,
+                        "shipmentWeightPackagingAndQuantityData": {
+                            "ladingQuantity": 1255,
+                            "ladingQuantity_1": 0,
+                            "volume": 2647,
+                            "volumeUnitQualifier": "E",
+                            "weight": 14604,
+                            "weightQualifier": "G",
+                            "weightUnitCode": "L"
+                        },
+                        "stopOffDetails": {
+                            "stopReasonCode": "CL",
+                            "stopSequenceNumber": 1
+                        }
+                    },
+                    {
+                        "billOfLadingHandlingRequirements": [
+                            {
+                                "specialHandlingCode": null,
+                                "specialHandlingDescription": null,
+                                "specialServicesCode": "CU"
+                            },
+                            {
+                                "specialHandlingCode": null,
+                                "specialHandlingDescription": "NO NEED TO CONFIRM APPT",
+                                "specialServicesCode": null
+                            }
+                        ],
+                        "businessInstructionsAndReferenceNumber": [
+                            {
+                                "referenceIdentification": "1JMR458I",
+                                "referenceIdentificationQualifier": "PO"
+                            },
+                            {
+                                "referenceIdentification": "DIXIE",
+                                "referenceIdentificationQualifier": "PRT"
+                            },
+                            {
+                                "referenceIdentification": "GEORGIA-PACIFIC",
+                                "referenceIdentificationQualifier": "PRT"
+                            },
+                            {
+                                "referenceIdentification": "8003005126",
+                                "referenceIdentificationQualifier": "VN"
+                            }
+                        ],
+                        "dateOrTime": [
+                            {
+                                "date": "20240729",
+                                "dateQualifier": "70",
+                                "time": "230000",
+                                "timeCode": "LT",
+                                "timeQualifier": "X"
+                            }
+                        ],
+                        "groupName_270": {
+                            "addressInformation": [
+                                {
+                                    "addressInformation": "4747 REBAR AVE NE",
+                                    "addressInformation_1": null
+                                }
+                            ],
+                            "contact": [],
+                            "geographicLocation": {
+                                "cityName": "CANTON",
+                                "countryCode": "USA",
+                                "postalCode": "44705",
+                                "stateOrProvinceCode": "OH"
+                            },
+                            "name": {
+                                "entityIdentifierCode": "ST",
+                                "identificationCode": "200012968",
+                                "identificationCodeQualifier": "93",
+                                "name": "AMAZON.COM SERVICES INC AKR1 OH"
+                            }
+                        },
+                        "groupOrderIdentificationDetail_2150": [
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 1
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "1JMR458I",
+                                    "quantity": 1,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 49,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 149,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 2
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "1JMR458I",
+                                    "quantity": 3,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 3,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 16,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 3
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "1JMR458I",
+                                    "quantity": 3,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 159,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 821,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 4
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "1JMR458I",
+                                    "quantity": 4,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 3,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 25,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 5
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "1JMR458I",
+                                    "quantity": 28,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 73,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 247,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 6
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "1JMR458I",
+                                    "quantity": 32,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 19,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 259,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 7
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "1JMR458I",
+                                    "quantity": 32,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 21,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 304,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 8
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "1JMR458I",
+                                    "quantity": 36,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 107,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 537,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 9
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "1JMR458I",
+                                    "quantity": 216,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 640,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 3225,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 10
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "1JMR458I",
+                                    "quantity": 288,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 580,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 3366,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 11
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "1JMR458I",
+                                    "quantity": 576,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 887,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 5119,
+                                    "weightUnitCode": "L"
+                                }
+                            }
+                        ],
+                        "noteOrSpecialInstruction": [
+                            {
+                                "description": "NO NEED TO CONFIRM APPT"
+                            },
+                            {
+                                "description": "CARRIER SIGNATURE REQUIRED: MUST RECEIVE AMAZON STAMP. NOTE"
+                            },
+                            {
+                                "description": "OVERAGE/SHORTAGE. CARRIER NOT TO ARRIVE MORE THAN 30 MIN EARLIER THAN SC"
+                            },
+                            {
+                                "description": "HEDULED APPT TIME. IF DRIVER WILL MISS APPOINTMENT CONTACT KBX TEAM KBXLAPPTS@KB"
+                            },
+                            {
+                                "description": "XLOGISTICS.COM TO CANCEL APPT PRIOR TO APPT TIME;"
+                            },
+                            {
+                                "description": "INCLUDE AMAZON IN SUBJECT LINE; LTL CARRIERS ONLY MUST SET UP AN ACCOUNT"
+                            },
+                            {
+                                "description": "WITH AMAZON TRANSPORTATION TO MAKE A DELIVERY APPOINTMENT, UNLESS NOTED"
+                            },
+                            {
+                                "description": "ON BOL THAT AN APPOINTMENT HAS ALREADY BEEN SET."
+                            },
+                            {
+                                "description": "HTTPS://CARRIERCENTRAL.AMAZON.COM"
+                            },
+                            {
+                                "description": "07/29/2024 23:00 EDT ISA: 78486026978."
+                            }
+                        ],
+                        "palletInformation": null,
+                        "shipmentWeightPackagingAndQuantityData": {
+                            "ladingQuantity": 1255,
+                            "ladingQuantity_1": 0,
+                            "volume": 2648,
+                            "volumeUnitQualifier": "E",
+                            "weight": 14605,
+                            "weightQualifier": "G",
+                            "weightUnitCode": "L"
+                        },
+                        "stopOffDetails": {
+                            "stopReasonCode": "CU",
+                            "stopSequenceNumber": 2
+                        }
+                    }
+                ]
+            },
+            "section3": {
+                "totalWeightAndCharges": {
+                    "ladingQuantity": 1255,
+                    "volume": 2648,
+                    "volumeUnitQualifier": "E",
+                    "weight": 14605,
+                    "weightQualifier": "G",
+                    "weightUnitCode": "L"
+                }
+            }
+        }
+    }
+]

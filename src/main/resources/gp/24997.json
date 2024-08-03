@@ -1,0 +1,1241 @@
+[
+    {
+        "meta": {
+            "file_name": "KBXTECH_079884536_204_377301856.edi-t-377301856-25042cdf-ea8d-4ace-ae26-90ab40e05e78@orderful-ip-10-204-19-62.us-west-2.compute.internal",
+            "group_functional_identifier": "SM",
+            "group_seq_number": "24529",
+            "message_seq_number": "000024529",
+            "set_seq_number": "0001"
+        },
+        "data": {
+            "section1": {
+                "beginningSegmentForShipmentInformationTransaction": {
+                    "customsDocumentationHandlingCode": null,
+                    "shipmentIdentificationNumber": "6870414",
+                    "shipmentMethodOfPayment": "PP",
+                    "standardCarrierAlphaCode": "RTQR",
+                    "weightUnitCode": "L"
+                },
+                "billOfLadingHandlingRequirements": [
+                    {
+                        "specialHandlingCode": null,
+                        "specialHandlingDescription": "53 FT 102 IN TRAILER",
+                        "specialServicesCode": null
+                    }
+                ],
+                "businessInstructionsAndReferenceNumber": [
+                    {
+                        "description": "a93c42ca-d093-4940-a6ff-13808ad861c2",
+                        "referenceIdentification": "00304006870414001",
+                        "referenceIdentificationQualifier": "BM"
+                    },
+                    {
+                        "description": null,
+                        "referenceIdentification": "KBXLEGACY",
+                        "referenceIdentificationQualifier": "4F"
+                    }
+                ],
+                "dateOrTime": {
+                    "date": "20240725",
+                    "dateQualifier": "10",
+                    "time": "074200",
+                    "timeCode": "LT",
+                    "timeQualifier": "Y"
+                },
+                "groupEquipmentDetails_1200": [
+                    {
+                        "equipmentDetails": {
+                            "equipmentDescriptionCode": "TF",
+                            "equipmentLength": 5300,
+                            "equipmentNumber": "22-53079",
+                            "height": 102
+                        },
+                        "sealNumbers": []
+                    }
+                ],
+                "groupName_1140": [
+                    {
+                        "addressInformation": [
+                            {
+                                "addressInformation": "DO NOT SUBMIT INVOICE",
+                                "addressInformation_1": null
+                            }
+                        ],
+                        "contact": [],
+                        "geographicLocation": null,
+                        "name": {
+                            "entityIdentifierCode": "BT",
+                            "name": "FREIGHT AUTO PAY BY GEORGIA PACIFIC CPG"
+                        }
+                    },
+                    {
+                        "addressInformation": [],
+                        "contact": [],
+                        "geographicLocation": null,
+                        "name": {
+                            "entityIdentifierCode": "SH",
+                            "name": "GEORGIA-PACIFIC CPG FREIGHT"
+                        }
+                    }
+                ],
+                "hazardousCertification": [],
+                "interlineInformation": {
+                    "routingSequenceCode": "B",
+                    "standardCarrierAlphaCode": "RTQR",
+                    "transportationMethodOrTypeCode": "J"
+                },
+                "noteOrSpecialInstruction": [
+                    {
+                        "description": ")AVAILABLE AT  HTTPS //SUPPLIER.GFS.COM/NA-PURCHASE-ORDER-TERMS-AND-C"
+                    },
+                    {
+                        "description": "- GR LOCATION AT 7/26/24 06:00. CONFIRMATION   IS 456866."
+                    },
+                    {
+                        "description": "-ORDER-TERMS-AND-CONDITIONS THE PROVISION OF ANY"
+                    },
+                    {
+                        "description": ". SEND PO CONFIRMATIONS TO GFS WITHIN 24 HRS CONFIRM QUANTITY CHANGES"
+                    },
+                    {
+                        "description": ".M. - FRIDAY 10 00 P.M. 24 HOURS APPOINTMENT REQUIRED 72 HOURS IN ADVA"
+                    },
+                    {
+                        "description": "24 HRS CONFIRM QUANTITY CHANGES ON THE ORIGINAL PO TO THE BUYER. SEND"
+                    },
+                    {
+                        "description": "ALYST ARE ON THE TOP RIGHT SIDEOF THE PO HEADER. THIS PURCHASE ORDER S"
+                    },
+                    {
+                        "description": "AT  HTTPS //SUPPLIER.GFS.COM/NA-PURCHASE-ORDER-TERMS-AND-CONDITIONS. T"
+                    },
+                    {
+                        "description": "AVE -GR LOCATION AT 7/26/24 03:00 AM. CONFIRMATION   IS 605656."
+                    },
+                    {
+                        "description": "BY VENDOR."
+                    }
+                ],
+                "palletInformation": null,
+                "setPurpose": {
+                    "applicationType": "LT",
+                    "transactionSetPurposeCode": "04"
+                }
+            },
+            "section2": {
+                "groupStopOffDetails_210": [
+                    {
+                        "billOfLadingHandlingRequirements": [
+                            {
+                                "specialHandlingCode": null,
+                                "specialHandlingDescription": "NO APPT NECESSARY",
+                                "specialServicesCode": null
+                            }
+                        ],
+                        "businessInstructionsAndReferenceNumber": [
+                            {
+                                "referenceIdentification": "4511572585",
+                                "referenceIdentificationQualifier": "PO"
+                            },
+                            {
+                                "referenceIdentification": "4511572619",
+                                "referenceIdentificationQualifier": "PO"
+                            },
+                            {
+                                "referenceIdentification": "DIXIE",
+                                "referenceIdentificationQualifier": "PRT"
+                            },
+                            {
+                                "referenceIdentification": "8002987243",
+                                "referenceIdentificationQualifier": "VN"
+                            },
+                            {
+                                "referenceIdentification": "8002987244",
+                                "referenceIdentificationQualifier": "VN"
+                            }
+                        ],
+                        "dateOrTime": [
+                            {
+                                "date": "20240724",
+                                "dateQualifier": "CL",
+                                "time": "173300",
+                                "timeCode": "LT",
+                                "timeQualifier": "W"
+                            }
+                        ],
+                        "groupName_270": {
+                            "addressInformation": [
+                                {
+                                    "addressInformation": "23534 SOUTH CENTRAL AVENUE",
+                                    "addressInformation_1": null
+                                }
+                            ],
+                            "contact": [
+                                {
+                                    "communicationNumber": "708-627-3243",
+                                    "communicationNumberQualifier": "TE",
+                                    "contactFunctionCode": "IC",
+                                    "contactInquiryReference": null,
+                                    "name": "SHIPPING"
+                                }
+                            ],
+                            "geographicLocation": {
+                                "cityName": "UNIVERSITY PARK",
+                                "countryCode": "USA",
+                                "postalCode": "60484",
+                                "stateOrProvinceCode": "IL"
+                            },
+                            "name": {
+                                "entityIdentifierCode": "SF",
+                                "identificationCode": "A524",
+                                "identificationCodeQualifier": "93",
+                                "name": "SOUTH CHICAGO RDC"
+                            }
+                        },
+                        "groupOrderIdentificationDetail_2150": [
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 1
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "4511572585",
+                                    "quantity": 18,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 8,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 155,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 2
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "4511572585",
+                                    "quantity": 36,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 30,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 150,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 3
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "4511572585",
+                                    "quantity": 36,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 33,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 360,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 4
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "4511572585",
+                                    "quantity": 36,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 130,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 915,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 5
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "4511572585",
+                                    "quantity": 63,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 32,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 500,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 6
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "4511572585",
+                                    "quantity": 120,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 60,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 1007,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 7
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "4511572585",
+                                    "quantity": 144,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 57,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 1253,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 8
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "4511572585",
+                                    "quantity": 234,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 103,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 2002,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 9
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "4511572585",
+                                    "quantity": 250,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 96,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 2173,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 10
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "4511572619",
+                                    "quantity": 2,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 6,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 39,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 11
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "4511572619",
+                                    "quantity": 18,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 71,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 508,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 12
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "4511572619",
+                                    "quantity": 24,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 22,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 261,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 13
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "4511572619",
+                                    "quantity": 30,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 19,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 360,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 14
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "4511572619",
+                                    "quantity": 36,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 20,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 253,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 15
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "4511572619",
+                                    "quantity": 46,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 15,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 410,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 16
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "4511572619",
+                                    "quantity": 72,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 90,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 475,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 17
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "4511572619",
+                                    "quantity": 72,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 195,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 1336,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 18
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "4511572619",
+                                    "quantity": 84,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 33,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 424,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 19
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "4511572619",
+                                    "quantity": 104,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 50,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 930,
+                                    "weightUnitCode": "L"
+                                }
+                            }
+                        ],
+                        "noteOrSpecialInstruction": [
+                            {
+                                "description": "NO APPT NECESSARY"
+                            }
+                        ],
+                        "palletInformation": null,
+                        "shipmentWeightPackagingAndQuantityData": {
+                            "ladingQuantity": 1425,
+                            "ladingQuantity_1": 0,
+                            "volume": 1071,
+                            "volumeUnitQualifier": "E",
+                            "weight": 13510,
+                            "weightQualifier": "G",
+                            "weightUnitCode": "L"
+                        },
+                        "stopOffDetails": {
+                            "stopReasonCode": "CL",
+                            "stopSequenceNumber": 1
+                        }
+                    },
+                    {
+                        "billOfLadingHandlingRequirements": [
+                            {
+                                "specialHandlingCode": null,
+                                "specialHandlingDescription": null,
+                                "specialServicesCode": "CC"
+                            },
+                            {
+                                "specialHandlingCode": null,
+                                "specialHandlingDescription": "NO NEED TO CONFIRM APPT",
+                                "specialServicesCode": null
+                            }
+                        ],
+                        "businessInstructionsAndReferenceNumber": [
+                            {
+                                "referenceIdentification": "4511572585",
+                                "referenceIdentificationQualifier": "PO"
+                            },
+                            {
+                                "referenceIdentification": "DIXIE",
+                                "referenceIdentificationQualifier": "PRT"
+                            },
+                            {
+                                "referenceIdentification": "8002987244",
+                                "referenceIdentificationQualifier": "VN"
+                            }
+                        ],
+                        "dateOrTime": [
+                            {
+                                "date": "20240726",
+                                "dateQualifier": "70",
+                                "time": "030000",
+                                "timeCode": "LT",
+                                "timeQualifier": "X"
+                            }
+                        ],
+                        "groupName_270": {
+                            "addressInformation": [
+                                {
+                                    "addressInformation": "4900 CLAY AVE SW",
+                                    "addressInformation_1": null
+                                }
+                            ],
+                            "contact": [
+                                {
+                                    "communicationNumber": "616-249-4770",
+                                    "communicationNumberQualifier": "TE",
+                                    "contactFunctionCode": "IC",
+                                    "contactInquiryReference": null,
+                                    "name": "RECEIVING"
+                                }
+                            ],
+                            "geographicLocation": {
+                                "cityName": "GRAND RAPIDS",
+                                "countryCode": "USA",
+                                "postalCode": "49548",
+                                "stateOrProvinceCode": "MI"
+                            },
+                            "name": {
+                                "entityIdentifierCode": "ST",
+                                "identificationCode": "2047711",
+                                "identificationCodeQualifier": "93",
+                                "name": "GORDON FOODSERVICE-GRAND RAPIDS-DC6"
+                            }
+                        },
+                        "groupOrderIdentificationDetail_2150": [
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 1
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "4511572585",
+                                    "quantity": 18,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 8,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 155,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 2
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "4511572585",
+                                    "quantity": 36,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 30,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 150,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 3
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "4511572585",
+                                    "quantity": 36,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 33,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 360,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 4
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "4511572585",
+                                    "quantity": 36,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 130,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 915,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 5
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "4511572585",
+                                    "quantity": 63,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 32,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 500,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 6
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "4511572585",
+                                    "quantity": 120,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 60,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 1007,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 7
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "4511572585",
+                                    "quantity": 144,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 57,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 1253,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 8
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "4511572585",
+                                    "quantity": 234,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 103,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 2002,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 9
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "4511572585",
+                                    "quantity": 250,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 96,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 2173,
+                                    "weightUnitCode": "L"
+                                }
+                            }
+                        ],
+                        "noteOrSpecialInstruction": [
+                            {
+                                "description": "NO NEED TO CONFIRM APPT"
+                            },
+                            {
+                                "description": "EMAIL FOR DELIVERY APPOINTMENT: REC.CLAY@GFS.COM"
+                            },
+                            {
+                                "description": "RECEIVING:616-717-4760"
+                            },
+                            {
+                                "description": "RECV HRS 24 HRS A DAY FROM SUNDAY 2200-FRIDAY 1500"
+                            },
+                            {
+                                "description": "PO 4511572585 IS SCHEDULED FOR THE GROCERY RECEIVING DOCK AT THE CLAY"
+                            },
+                            {
+                                "description": "AVE -GR LOCATION AT 7/26/24 03:00 AM. CONFIRMATION   IS 605656."
+                            },
+                            {
+                                "description": "EFS-REF  120513205"
+                            },
+                            {
+                                "description": "GEN"
+                            },
+                            {
+                                "description": "VENDOR REFERENCE   727773994"
+                            },
+                            {
+                                "description": "PO 1 OF 3"
+                            },
+                            {
+                                "description": "THIS PURCHASE ORDER SHALL BE GOVERNED EXCLUSIVELY BY THE PURCHASE ORDE"
+                            },
+                            {
+                                "description": "R TERMS AND CONDITIONS OF GORDON FOOD SERVICE, INC., AS AMENDED ( TERM"
+                            },
+                            {
+                                "description": "S AND CONDITIONS ), AVAILABLE AT  HTTPS //SUPPLIER.GFS.COM/NA-PURCHASE"
+                            },
+                            {
+                                "description": "-ORDER-TERMS-AND-CONDITIONS THE PROVISION OF ANY"
+                            },
+                            {
+                                "description": "OF THE GOODS OR SERVICES REFERENCED HEREIN OR VENDOR S RETURN OF AN AC"
+                            },
+                            {
+                                "description": "KNOWLEDGMENT OF THIS PURCHASE ORDER CONSTITUTES ACCEPTANCE OF THE TERM"
+                            },
+                            {
+                                "description": "S AND CONDITIONS BY VENDOR."
+                            },
+                            {
+                                "description": "RECEIVING IS OPEN SUNDAY - FRIDAY RECEIVING HOURS START SUNDAY 10 00 P"
+                            },
+                            {
+                                "description": ".M. - FRIDAY 10 00 P.M. 24 HOURS APPOINTMENT REQUIRED 72 HOURS IN ADVA"
+                            },
+                            {
+                                "description": "NCE. EMAIL FOR AVAILABILITY. NO APPOINTMENT REQUIRED FOR SHIPMENTS UND"
+                            }
+                        ],
+                        "palletInformation": null,
+                        "shipmentWeightPackagingAndQuantityData": {
+                            "ladingQuantity": 937,
+                            "ladingQuantity_1": 0,
+                            "volume": 549,
+                            "volumeUnitQualifier": "E",
+                            "weight": 8515,
+                            "weightQualifier": "G",
+                            "weightUnitCode": "L"
+                        },
+                        "stopOffDetails": {
+                            "stopReasonCode": "PU",
+                            "stopSequenceNumber": 2
+                        }
+                    },
+                    {
+                        "billOfLadingHandlingRequirements": [
+                            {
+                                "specialHandlingCode": null,
+                                "specialHandlingDescription": null,
+                                "specialServicesCode": "CC"
+                            },
+                            {
+                                "specialHandlingCode": null,
+                                "specialHandlingDescription": "NO NEED TO CONFIRM APPT",
+                                "specialServicesCode": null
+                            }
+                        ],
+                        "businessInstructionsAndReferenceNumber": [
+                            {
+                                "referenceIdentification": "4511572619",
+                                "referenceIdentificationQualifier": "PO"
+                            },
+                            {
+                                "referenceIdentification": "DIXIE",
+                                "referenceIdentificationQualifier": "PRT"
+                            },
+                            {
+                                "referenceIdentification": "8002987243",
+                                "referenceIdentificationQualifier": "VN"
+                            }
+                        ],
+                        "dateOrTime": [
+                            {
+                                "date": "20240726",
+                                "dateQualifier": "70",
+                                "time": "060000",
+                                "timeCode": "LT",
+                                "timeQualifier": "X"
+                            }
+                        ],
+                        "groupName_270": {
+                            "addressInformation": [
+                                {
+                                    "addressInformation": "333 50TH ST SW",
+                                    "addressInformation_1": null
+                                }
+                            ],
+                            "contact": [
+                                {
+                                    "communicationNumber": "616-249-4174",
+                                    "communicationNumberQualifier": "TE",
+                                    "contactFunctionCode": "IC",
+                                    "contactInquiryReference": null,
+                                    "name": "RECEIVING"
+                                }
+                            ],
+                            "geographicLocation": {
+                                "cityName": "WYOMING",
+                                "countryCode": "USA",
+                                "postalCode": "49548",
+                                "stateOrProvinceCode": "MI"
+                            },
+                            "name": {
+                                "entityIdentifierCode": "ST",
+                                "identificationCode": "2047704",
+                                "identificationCodeQualifier": "93",
+                                "name": "GORDON FOODSERVICE-WYOMING-DC-FDSV"
+                            }
+                        },
+                        "groupOrderIdentificationDetail_2150": [
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 1
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "4511572619",
+                                    "quantity": 2,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 6,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 39,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 2
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "4511572619",
+                                    "quantity": 18,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 71,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 508,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 3
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "4511572619",
+                                    "quantity": 24,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 22,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 261,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 4
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "4511572619",
+                                    "quantity": 30,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 19,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 360,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 5
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "4511572619",
+                                    "quantity": 36,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 20,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 253,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 6
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "4511572619",
+                                    "quantity": 46,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 15,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 410,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 7
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "4511572619",
+                                    "quantity": 72,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 90,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 475,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 8
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "4511572619",
+                                    "quantity": 72,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 195,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 1336,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 9
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "4511572619",
+                                    "quantity": 84,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 33,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 424,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 10
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "4511572619",
+                                    "quantity": 104,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 50,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 930,
+                                    "weightUnitCode": "L"
+                                }
+                            }
+                        ],
+                        "noteOrSpecialInstruction": [
+                            {
+                                "description": "NO NEED TO CONFIRM APPT"
+                            },
+                            {
+                                "description": "STANDING DELIVERY APPT- 0600"
+                            },
+                            {
+                                "description": "RECEIVING EMAIL : REC.50TH@GFS.COM"
+                            },
+                            {
+                                "description": "RECEIVING: 616-249-4174"
+                            },
+                            {
+                                "description": "PO 4511572619 IS SCHEDULED FOR THE GROCERY RECEIVING DOCK AT THE 50TH ST"
+                            },
+                            {
+                                "description": "- GR LOCATION AT 7/26/24 06:00. CONFIRMATION   IS 456866."
+                            },
+                            {
+                                "description": "EFS-REF  120513240"
+                            },
+                            {
+                                "description": "GEN"
+                            },
+                            {
+                                "description": "VENDOR REFERENCE   727773994"
+                            },
+                            {
+                                "description": "PO 2 OF 2"
+                            },
+                            {
+                                "description": "THIS PURCHASE ORDER SHALL BE GOVERNED EXCLUSIVELY BY THE PURCHASE ORDE"
+                            },
+                            {
+                                "description": "R TERMS AND CONDITIONS OF GORDON FOOD SERVICE, INC., AS AMENDED ( TERM"
+                            },
+                            {
+                                "description": "S AND CONDITIONS ), AVAILABLE AT  HTTPS //SUPPLIER.GFS.COM/NA-PURCHASE"
+                            },
+                            {
+                                "description": "-ORDER-TERMS-AND-CONDITIONS THE PROVISION OF ANY"
+                            },
+                            {
+                                "description": "OF THE GOODS OR SERVICES REFERENCED HEREIN OR VENDOR S RETURN OF AN AC"
+                            },
+                            {
+                                "description": "KNOWLEDGMENT OF THIS PURCHASE ORDER CONSTITUTES ACCEPTANCE OF THE TERM"
+                            },
+                            {
+                                "description": "S AND CONDITIONS BY VENDOR."
+                            },
+                            {
+                                "description": "RECEIVING IS OPEN MONDAY - FRIDAY RECEIVING HOURS ARE 6 00 A.M. - 2 00"
+                            },
+                            {
+                                "description": "P.M. APPOINTMENT REQUIRED 72 HOURS IN ADVANCE. EMAIL FOR AVAILABILITY"
+                            },
+                            {
+                                "description": ". SEND PO CONFIRMATIONS TO GFS WITHIN 24 HRS CONFIRM QUANTITY CHANGES"
+                            }
+                        ],
+                        "palletInformation": null,
+                        "shipmentWeightPackagingAndQuantityData": {
+                            "ladingQuantity": 488,
+                            "ladingQuantity_1": 0,
+                            "volume": 521,
+                            "volumeUnitQualifier": "E",
+                            "weight": 4996,
+                            "weightQualifier": "G",
+                            "weightUnitCode": "L"
+                        },
+                        "stopOffDetails": {
+                            "stopReasonCode": "CU",
+                            "stopSequenceNumber": 3
+                        }
+                    }
+                ]
+            },
+            "section3": {
+                "totalWeightAndCharges": {
+                    "ladingQuantity": 1425,
+                    "volume": 1070,
+                    "volumeUnitQualifier": "E",
+                    "weight": 13511,
+                    "weightQualifier": "G",
+                    "weightUnitCode": "L"
+                }
+            }
+        }
+    }
+]

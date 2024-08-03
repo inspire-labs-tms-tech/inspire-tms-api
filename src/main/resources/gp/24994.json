@@ -1,0 +1,681 @@
+[
+    {
+        "meta": {
+            "file_name": "KBXTECH_079884536_204_377289268.edi-t-377289268-08cb0b87-87fa-4f58-b209-29c570f3ae6e@orderful-ip-10-204-39-52.us-west-2.compute.internal",
+            "group_functional_identifier": "SM",
+            "group_seq_number": "24527",
+            "message_seq_number": "000024527",
+            "set_seq_number": "0001"
+        },
+        "data": {
+            "section1": {
+                "beginningSegmentForShipmentInformationTransaction": {
+                    "customsDocumentationHandlingCode": null,
+                    "shipmentIdentificationNumber": "SH2446987",
+                    "shipmentMethodOfPayment": "PP",
+                    "standardCarrierAlphaCode": "RTQR",
+                    "weightUnitCode": "L"
+                },
+                "billOfLadingHandlingRequirements": [
+                    {
+                        "specialHandlingCode": null,
+                        "specialHandlingDescription": "53 FT 102 IN TRAILER",
+                        "specialServicesCode": null
+                    }
+                ],
+                "businessInstructionsAndReferenceNumber": [
+                    {
+                        "description": "9c1a3f71-a11f-43d5-aac7-375255b8e756",
+                        "referenceIdentification": "SH2446987",
+                        "referenceIdentificationQualifier": "BM"
+                    },
+                    {
+                        "description": null,
+                        "referenceIdentification": "SH2446987",
+                        "referenceIdentificationQualifier": "SI"
+                    },
+                    {
+                        "description": null,
+                        "referenceIdentification": "KBXLEGACY",
+                        "referenceIdentificationQualifier": "4F"
+                    }
+                ],
+                "dateOrTime": {
+                    "date": "20240726",
+                    "dateQualifier": "LP",
+                    "time": "064900",
+                    "timeCode": "LT",
+                    "timeQualifier": "LP"
+                },
+                "groupEquipmentDetails_1200": [
+                    {
+                        "equipmentDetails": {
+                            "equipmentDescriptionCode": "TF",
+                            "equipmentLength": 5300,
+                            "equipmentNumber": "225380",
+                            "height": 102
+                        },
+                        "sealNumbers": []
+                    }
+                ],
+                "groupName_1140": [
+                    {
+                        "addressInformation": [
+                            {
+                                "addressInformation": "DO NOT SUBMIT INVOICE",
+                                "addressInformation_1": null
+                            }
+                        ],
+                        "contact": [],
+                        "geographicLocation": null,
+                        "name": {
+                            "entityIdentifierCode": "BT",
+                            "name": "FREIGHT AUTO PAY BY GEORGIA PACIFIC CPG"
+                        }
+                    },
+                    {
+                        "addressInformation": [],
+                        "contact": [],
+                        "geographicLocation": null,
+                        "name": {
+                            "entityIdentifierCode": "SH",
+                            "name": "FG MUTH OUTSIDE WAREHOUSE"
+                        }
+                    }
+                ],
+                "hazardousCertification": [],
+                "interlineInformation": {
+                    "routingSequenceCode": "B",
+                    "standardCarrierAlphaCode": "RTQR",
+                    "transportationMethodOrTypeCode": "J"
+                },
+                "noteOrSpecialInstruction": [
+                    {
+                        "description": "SHIPPER PICKUP NBR SH2446987"
+                    }
+                ],
+                "palletInformation": null,
+                "setPurpose": {
+                    "applicationType": "LT",
+                    "transactionSetPurposeCode": "04"
+                }
+            },
+            "section2": {
+                "groupStopOffDetails_210": [
+                    {
+                        "billOfLadingHandlingRequirements": [
+                            {
+                                "specialHandlingCode": null,
+                                "specialHandlingDescription": "NO APPT NECESSARY",
+                                "specialServicesCode": null
+                            },
+                            {
+                                "specialHandlingCode": null,
+                                "specialHandlingDescription": "FIRST COME, FIRST SERVE",
+                                "specialServicesCode": null
+                            }
+                        ],
+                        "businessInstructionsAndReferenceNumber": [
+                            {
+                                "referenceIdentification": "SH2446987",
+                                "referenceIdentificationQualifier": "VN"
+                            },
+                            {
+                                "referenceIdentification": "SH2446987",
+                                "referenceIdentificationQualifier": "CO"
+                            },
+                            {
+                                "referenceIdentification": "4588921",
+                                "referenceIdentificationQualifier": "IL"
+                            },
+                            {
+                                "referenceIdentification": "5700227846",
+                                "referenceIdentificationQualifier": "PO"
+                            },
+                            {
+                                "referenceIdentification": "5700228281",
+                                "referenceIdentificationQualifier": "PO"
+                            },
+                            {
+                                "referenceIdentification": "5700228282",
+                                "referenceIdentificationQualifier": "PO"
+                            },
+                            {
+                                "referenceIdentification": "SH2446987",
+                                "referenceIdentificationQualifier": "SI"
+                            }
+                        ],
+                        "dateOrTime": [
+                            {
+                                "date": "20240725",
+                                "dateQualifier": "CL",
+                                "time": "124100",
+                                "timeCode": "LT",
+                                "timeQualifier": "W"
+                            }
+                        ],
+                        "groupName_270": {
+                            "addressInformation": [
+                                {
+                                    "addressInformation": "2821 MUTH COURT",
+                                    "addressInformation_1": null
+                                }
+                            ],
+                            "contact": [],
+                            "geographicLocation": {
+                                "cityName": "SHEBOYGAN",
+                                "countryCode": "USA",
+                                "postalCode": "53083",
+                                "stateOrProvinceCode": "WI"
+                            },
+                            "name": {
+                                "entityIdentifierCode": "SF",
+                                "identificationCode": "1687-003",
+                                "identificationCodeQualifier": "93",
+                                "name": "FG MUTH OUTSIDE WAREHOUSE"
+                            }
+                        },
+                        "groupOrderIdentificationDetail_2150": [
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "4S688",
+                                            "ladingLineItemNumber": 1
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "5700228281",
+                                    "quantity": 4,
+                                    "unitOrBasisForMeasurementCode": "PL",
+                                    "volume": 40,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 1001,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "4S687",
+                                            "ladingLineItemNumber": 2
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "5700228281",
+                                    "quantity": 4,
+                                    "unitOrBasisForMeasurementCode": "PL",
+                                    "volume": 46,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 1214,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "3S600K",
+                                            "ladingLineItemNumber": 3
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "5700228281",
+                                    "quantity": 4,
+                                    "unitOrBasisForMeasurementCode": "PL",
+                                    "volume": 61,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 1572,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "4S658",
+                                            "ladingLineItemNumber": 4
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "5700228281",
+                                    "quantity": 4,
+                                    "unitOrBasisForMeasurementCode": "PL",
+                                    "volume": 59,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 1515,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "3S162",
+                                            "ladingLineItemNumber": 5
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "5700228281",
+                                    "quantity": 4,
+                                    "unitOrBasisForMeasurementCode": "PL",
+                                    "volume": 50,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 1525,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "3S156",
+                                            "ladingLineItemNumber": 6
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "5700227846",
+                                    "quantity": 6,
+                                    "unitOrBasisForMeasurementCode": "PL",
+                                    "volume": 53,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 2232,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "5S104",
+                                            "ladingLineItemNumber": 7
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "5700228282",
+                                    "quantity": 10,
+                                    "unitOrBasisForMeasurementCode": "PL",
+                                    "volume": 53,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 3471,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "4S655",
+                                            "ladingLineItemNumber": 8
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "5700228281",
+                                    "quantity": 4,
+                                    "unitOrBasisForMeasurementCode": "PL",
+                                    "volume": 53,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 1373,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "3S156",
+                                            "ladingLineItemNumber": 9
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "5700228281",
+                                    "quantity": 4,
+                                    "unitOrBasisForMeasurementCode": "PL",
+                                    "volume": 53,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 1364,
+                                    "weightUnitCode": "L"
+                                }
+                            }
+                        ],
+                        "noteOrSpecialInstruction": [
+                            {
+                                "description": "NO APPT NECESSARY"
+                            },
+                            {
+                                "description": "FIRST COME, FIRST SERVE"
+                            },
+                            {
+                                "description": "PLEASE MAKE DOCK APPT:   SHEBOYGAN.FALLSWAREHOUSE@GAPAC.COM"
+                            },
+                            {
+                                "description": "Planned Load By 07/26/2024 00:14"
+                            },
+                            {
+                                "description": "Product Ready"
+                            }
+                        ],
+                        "palletInformation": null,
+                        "shipmentWeightPackagingAndQuantityData": {
+                            "ladingQuantity": 44,
+                            "ladingQuantity_1": 0,
+                            "volume": 468,
+                            "volumeUnitQualifier": "E",
+                            "weight": 15267,
+                            "weightQualifier": "G",
+                            "weightUnitCode": "L"
+                        },
+                        "stopOffDetails": {
+                            "stopReasonCode": "CL",
+                            "stopSequenceNumber": 1
+                        }
+                    },
+                    {
+                        "billOfLadingHandlingRequirements": [
+                            {
+                                "specialHandlingCode": null,
+                                "specialHandlingDescription": "NO APPT NECESSARY",
+                                "specialServicesCode": null
+                            },
+                            {
+                                "specialHandlingCode": "DRO",
+                                "specialHandlingDescription": null,
+                                "specialServicesCode": null
+                            },
+                            {
+                                "specialHandlingCode": null,
+                                "specialHandlingDescription": "FIRST COME, FIRST SERVE",
+                                "specialServicesCode": null
+                            }
+                        ],
+                        "businessInstructionsAndReferenceNumber": [
+                            {
+                                "referenceIdentification": "SH2446987",
+                                "referenceIdentificationQualifier": "VN"
+                            },
+                            {
+                                "referenceIdentification": "SH2446987",
+                                "referenceIdentificationQualifier": "CO"
+                            },
+                            {
+                                "referenceIdentification": "4588921",
+                                "referenceIdentificationQualifier": "IL"
+                            },
+                            {
+                                "referenceIdentification": "SH2446987",
+                                "referenceIdentificationQualifier": "SI"
+                            },
+                            {
+                                "referenceIdentification": "SH2446987",
+                                "referenceIdentificationQualifier": "PO"
+                            }
+                        ],
+                        "dateOrTime": [
+                            {
+                                "date": "20240726",
+                                "dateQualifier": "53",
+                                "time": "042400",
+                                "timeCode": "LT",
+                                "timeQualifier": "ED"
+                            },
+                            {
+                                "date": "20240726",
+                                "dateQualifier": "54",
+                                "time": "110000",
+                                "timeCode": "LT",
+                                "timeQualifier": "LD"
+                            }
+                        ],
+                        "groupName_270": {
+                            "addressInformation": [
+                                {
+                                    "addressInformation": "701 GRAINGER WAY",
+                                    "addressInformation_1": null
+                                }
+                            ],
+                            "contact": [
+                                {
+                                    "communicationNumber": "(763) 486-1071",
+                                    "communicationNumberQualifier": "TE",
+                                    "contactFunctionCode": "IC",
+                                    "contactInquiryReference": null,
+                                    "name": "BRITTANY COPP"
+                                }
+                            ],
+                            "geographicLocation": {
+                                "cityName": "MINOOKA",
+                                "countryCode": "USA",
+                                "postalCode": "60447",
+                                "stateOrProvinceCode": "IL"
+                            },
+                            "name": {
+                                "entityIdentifierCode": "ST",
+                                "identificationCode": "22089-004",
+                                "identificationCodeQualifier": "93",
+                                "name": "GRAINGER MINOOKA"
+                            }
+                        },
+                        "groupOrderIdentificationDetail_2150": [
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "4S688",
+                                            "ladingLineItemNumber": 1
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "5700228281",
+                                    "quantity": 4,
+                                    "unitOrBasisForMeasurementCode": "PL",
+                                    "volume": 40,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 1001,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "4S687",
+                                            "ladingLineItemNumber": 2
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "5700228281",
+                                    "quantity": 4,
+                                    "unitOrBasisForMeasurementCode": "PL",
+                                    "volume": 46,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 1214,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "3S600K",
+                                            "ladingLineItemNumber": 3
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "5700228281",
+                                    "quantity": 4,
+                                    "unitOrBasisForMeasurementCode": "PL",
+                                    "volume": 61,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 1572,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "4S658",
+                                            "ladingLineItemNumber": 4
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "5700228281",
+                                    "quantity": 4,
+                                    "unitOrBasisForMeasurementCode": "PL",
+                                    "volume": 59,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 1515,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "3S162",
+                                            "ladingLineItemNumber": 5
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "5700228281",
+                                    "quantity": 4,
+                                    "unitOrBasisForMeasurementCode": "PL",
+                                    "volume": 50,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 1525,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "3S156",
+                                            "ladingLineItemNumber": 6
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "5700227846",
+                                    "quantity": 6,
+                                    "unitOrBasisForMeasurementCode": "PL",
+                                    "volume": 53,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 2232,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "5S104",
+                                            "ladingLineItemNumber": 7
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "5700228282",
+                                    "quantity": 10,
+                                    "unitOrBasisForMeasurementCode": "PL",
+                                    "volume": 53,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 3471,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "4S655",
+                                            "ladingLineItemNumber": 8
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "5700228281",
+                                    "quantity": 4,
+                                    "unitOrBasisForMeasurementCode": "PL",
+                                    "volume": 53,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 1373,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "3S156",
+                                            "ladingLineItemNumber": 9
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "5700228281",
+                                    "quantity": 4,
+                                    "unitOrBasisForMeasurementCode": "PL",
+                                    "volume": 53,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 1364,
+                                    "weightUnitCode": "L"
+                                }
+                            }
+                        ],
+                        "noteOrSpecialInstruction": [
+                            {
+                                "description": "NO APPT NECESSARY"
+                            },
+                            {
+                                "description": "FIRST COME, FIRST SERVE"
+                            },
+                            {
+                                "description": "NO APPT NEEDED- DROP TRAILERS"
+                            }
+                        ],
+                        "palletInformation": null,
+                        "shipmentWeightPackagingAndQuantityData": {
+                            "ladingQuantity": 44,
+                            "ladingQuantity_1": 0,
+                            "volume": 468,
+                            "volumeUnitQualifier": "E",
+                            "weight": 15267,
+                            "weightQualifier": "G",
+                            "weightUnitCode": "L"
+                        },
+                        "stopOffDetails": {
+                            "stopReasonCode": "CU",
+                            "stopSequenceNumber": 2
+                        }
+                    }
+                ]
+            },
+            "section3": {
+                "totalWeightAndCharges": {
+                    "ladingQuantity": 44,
+                    "volume": 468,
+                    "volumeUnitQualifier": "E",
+                    "weight": 15267,
+                    "weightQualifier": "G",
+                    "weightUnitCode": "L"
+                }
+            }
+        }
+    }
+]

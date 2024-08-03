@@ -1,0 +1,644 @@
+[
+    {
+        "meta": {
+            "file_name": "KBXTECH_079884536_204_379637672.edi-t-379637672-4a273b65-1358-470f-b05e-6b86671c7d8e@orderful-ip-10-204-39-52.us-west-2.compute.internal",
+            "group_functional_identifier": "SM",
+            "group_seq_number": "24648",
+            "message_seq_number": "000024648",
+            "set_seq_number": "0001"
+        },
+        "data": {
+            "section1": {
+                "beginningSegmentForShipmentInformationTransaction": {
+                    "customsDocumentationHandlingCode": null,
+                    "shipmentIdentificationNumber": "6887177",
+                    "shipmentMethodOfPayment": "PP",
+                    "standardCarrierAlphaCode": "RTQR",
+                    "weightUnitCode": "L"
+                },
+                "billOfLadingHandlingRequirements": [
+                    {
+                        "specialHandlingCode": null,
+                        "specialHandlingDescription": "53 FT 102 IN TRAILER",
+                        "specialServicesCode": null
+                    }
+                ],
+                "businessInstructionsAndReferenceNumber": [
+                    {
+                        "description": "755bde3c-9371-4833-a005-c7737353e575",
+                        "referenceIdentification": "00304006887177005",
+                        "referenceIdentificationQualifier": "BM"
+                    },
+                    {
+                        "description": null,
+                        "referenceIdentification": "KBXLEGACY",
+                        "referenceIdentificationQualifier": "4F"
+                    }
+                ],
+                "dateOrTime": {
+                    "date": "20240731",
+                    "dateQualifier": "10",
+                    "time": "220400",
+                    "timeCode": "LT",
+                    "timeQualifier": "Y"
+                },
+                "groupEquipmentDetails_1200": [
+                    {
+                        "equipmentDetails": {
+                            "equipmentDescriptionCode": "TF",
+                            "equipmentLength": 5300,
+                            "equipmentNumber": "0",
+                            "height": 102
+                        },
+                        "sealNumbers": []
+                    }
+                ],
+                "groupName_1140": [
+                    {
+                        "addressInformation": [
+                            {
+                                "addressInformation": "DO NOT SUBMIT INVOICE",
+                                "addressInformation_1": null
+                            }
+                        ],
+                        "contact": [],
+                        "geographicLocation": null,
+                        "name": {
+                            "entityIdentifierCode": "BT",
+                            "name": "FREIGHT AUTO PAY BY GEORGIA PACIFIC CPG"
+                        }
+                    },
+                    {
+                        "addressInformation": [],
+                        "contact": [],
+                        "geographicLocation": null,
+                        "name": {
+                            "entityIdentifierCode": "SH",
+                            "name": "GEORGIA-PACIFIC CPG FREIGHT"
+                        }
+                    }
+                ],
+                "hazardousCertification": [],
+                "interlineInformation": {
+                    "routingSequenceCode": "B",
+                    "standardCarrierAlphaCode": "RTQR",
+                    "transportationMethodOrTypeCode": "J"
+                },
+                "noteOrSpecialInstruction": [
+                    {
+                        "description": "07/30/2024 07:00 EDT ISA: 78531026978."
+                    },
+                    {
+                        "description": "08/01/2024 18:00 EDT ISA: 78531026978."
+                    },
+                    {
+                        "description": "CARRIER SIGNATURE REQUIRED: MUST RECEIVE AMAZON STAMP. NOTE"
+                    },
+                    {
+                        "description": "HEDULED APPT TIME. IF DRIVER WILL MISS APPOINTMENT CONTACT KBX TEAM KBXLAPPTS@KB"
+                    },
+                    {
+                        "description": "XLOGISTICS.COM TO CANCEL APPT PRIOR TO APPT TIME;"
+                    },
+                    {
+                        "description": "HTTPS://CARRIERCENTRAL.AMAZON.COM"
+                    },
+                    {
+                        "description": "INCLUDE AMAZON IN SUBJECT LINE; LTL CARRIERS ONLY MUST SET UP AN ACCOUNT"
+                    },
+                    {
+                        "description": "ON BOL THAT AN APPOINTMENT HAS ALREADY BEEN SET."
+                    },
+                    {
+                        "description": "OVERAGE/SHORTAGE. CARRIER NOT TO ARRIVE MORE THAN 30 MIN EARLIER THAN SC"
+                    },
+                    {
+                        "description": "WITH AMAZON TRANSPORTATION TO MAKE A DELIVERY APPOINTMENT, UNLESS NOTED"
+                    }
+                ],
+                "palletInformation": null,
+                "setPurpose": {
+                    "applicationType": "LT",
+                    "transactionSetPurposeCode": "04"
+                }
+            },
+            "section2": {
+                "groupStopOffDetails_210": [
+                    {
+                        "billOfLadingHandlingRequirements": [
+                            {
+                                "specialHandlingCode": null,
+                                "specialHandlingDescription": "NO APPT NECESSARY",
+                                "specialServicesCode": null
+                            }
+                        ],
+                        "businessInstructionsAndReferenceNumber": [
+                            {
+                                "referenceIdentification": "2HMOYV6Z",
+                                "referenceIdentificationQualifier": "PO"
+                            },
+                            {
+                                "referenceIdentification": "DIXIE",
+                                "referenceIdentificationQualifier": "PRT"
+                            },
+                            {
+                                "referenceIdentification": "GEORGIA-PACIFIC",
+                                "referenceIdentificationQualifier": "PRT"
+                            },
+                            {
+                                "referenceIdentification": "8003011009",
+                                "referenceIdentificationQualifier": "VN"
+                            }
+                        ],
+                        "dateOrTime": [
+                            {
+                                "date": "20240731",
+                                "dateQualifier": "LC",
+                                "time": "220400",
+                                "timeCode": "LT",
+                                "timeQualifier": "W"
+                            }
+                        ],
+                        "groupName_270": {
+                            "addressInformation": [
+                                {
+                                    "addressInformation": "21837 WEST MISSISSIPPI AVENUE",
+                                    "addressInformation_1": null
+                                }
+                            ],
+                            "contact": [
+                                {
+                                    "communicationNumber": "815-423-9990",
+                                    "communicationNumberQualifier": "TE",
+                                    "contactFunctionCode": "IC",
+                                    "contactInquiryReference": null,
+                                    "name": "SHIPPING"
+                                }
+                            ],
+                            "geographicLocation": {
+                                "cityName": "ELWOOD",
+                                "countryCode": "USA",
+                                "postalCode": "60421",
+                                "stateOrProvinceCode": "IL"
+                            },
+                            "name": {
+                                "entityIdentifierCode": "SF",
+                                "identificationCode": "A072",
+                                "identificationCodeQualifier": "93",
+                                "name": "CHICAGO DC"
+                            }
+                        },
+                        "groupOrderIdentificationDetail_2150": [
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 1
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "2HMOYV6Z",
+                                    "quantity": 1,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 1,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 5,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 2
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "2HMOYV6Z",
+                                    "quantity": 8,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 24,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 119,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 3
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "2HMOYV6Z",
+                                    "quantity": 16,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 10,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 152,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 4
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "2HMOYV6Z",
+                                    "quantity": 36,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 94,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 317,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 5
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "2HMOYV6Z",
+                                    "quantity": 36,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 1912,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 9850,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 6
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "2HMOYV6Z",
+                                    "quantity": 64,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 99,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 569,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 7
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "2HMOYV6Z",
+                                    "quantity": 72,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 213,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 1075,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 8
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "2HMOYV6Z",
+                                    "quantity": 96,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 193,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 1122,
+                                    "weightUnitCode": "L"
+                                }
+                            }
+                        ],
+                        "noteOrSpecialInstruction": [
+                            {
+                                "description": "NO APPT NECESSARY"
+                            }
+                        ],
+                        "palletInformation": null,
+                        "shipmentWeightPackagingAndQuantityData": {
+                            "ladingQuantity": 329,
+                            "ladingQuantity_1": 0,
+                            "volume": 2545,
+                            "volumeUnitQualifier": "E",
+                            "weight": 13209,
+                            "weightQualifier": "G",
+                            "weightUnitCode": "L"
+                        },
+                        "stopOffDetails": {
+                            "stopReasonCode": "CL",
+                            "stopSequenceNumber": 1
+                        }
+                    },
+                    {
+                        "billOfLadingHandlingRequirements": [
+                            {
+                                "specialHandlingCode": null,
+                                "specialHandlingDescription": null,
+                                "specialServicesCode": "CU"
+                            },
+                            {
+                                "specialHandlingCode": null,
+                                "specialHandlingDescription": "NO NEED TO CONFIRM APPT",
+                                "specialServicesCode": null
+                            }
+                        ],
+                        "businessInstructionsAndReferenceNumber": [
+                            {
+                                "referenceIdentification": "2HMOYV6Z",
+                                "referenceIdentificationQualifier": "PO"
+                            },
+                            {
+                                "referenceIdentification": "DIXIE",
+                                "referenceIdentificationQualifier": "PRT"
+                            },
+                            {
+                                "referenceIdentification": "GEORGIA-PACIFIC",
+                                "referenceIdentificationQualifier": "PRT"
+                            },
+                            {
+                                "referenceIdentification": "8003011009",
+                                "referenceIdentificationQualifier": "VN"
+                            }
+                        ],
+                        "dateOrTime": [
+                            {
+                                "date": "20240801",
+                                "dateQualifier": "70",
+                                "time": "180000",
+                                "timeCode": "LT",
+                                "timeQualifier": "X"
+                            }
+                        ],
+                        "groupName_270": {
+                            "addressInformation": [
+                                {
+                                    "addressInformation": "4747 REBAR AVE NE",
+                                    "addressInformation_1": null
+                                }
+                            ],
+                            "contact": [],
+                            "geographicLocation": {
+                                "cityName": "CANTON",
+                                "countryCode": "USA",
+                                "postalCode": "44705",
+                                "stateOrProvinceCode": "OH"
+                            },
+                            "name": {
+                                "entityIdentifierCode": "ST",
+                                "identificationCode": "200012968",
+                                "identificationCodeQualifier": "93",
+                                "name": "AMAZON.COM SERVICES INC AKR1 OH"
+                            }
+                        },
+                        "groupOrderIdentificationDetail_2150": [
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 1
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "2HMOYV6Z",
+                                    "quantity": 1,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 1,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 5,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 2
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "2HMOYV6Z",
+                                    "quantity": 8,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 24,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 119,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 3
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "2HMOYV6Z",
+                                    "quantity": 16,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 10,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 152,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 4
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "2HMOYV6Z",
+                                    "quantity": 36,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 94,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 317,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 5
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "2HMOYV6Z",
+                                    "quantity": 36,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 1912,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 9850,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 6
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "2HMOYV6Z",
+                                    "quantity": 64,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 99,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 569,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 7
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "2HMOYV6Z",
+                                    "quantity": 72,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 213,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 1075,
+                                    "weightUnitCode": "L"
+                                }
+                            },
+                            {
+                                "groupDescriptionMarksAndNumbers_2190": [
+                                    {
+                                        "descriptionMarksAndNumbers": {
+                                            "ladingDescription": "PAPER PRODUCTS",
+                                            "ladingLineItemNumber": 8
+                                        }
+                                    }
+                                ],
+                                "orderIdentificationDetail": {
+                                    "purchaseOrderNumber": "2HMOYV6Z",
+                                    "quantity": 96,
+                                    "unitOrBasisForMeasurementCode": "PC",
+                                    "volume": 193,
+                                    "volumeUnitQualifier": "E",
+                                    "weight": 1122,
+                                    "weightUnitCode": "L"
+                                }
+                            }
+                        ],
+                        "noteOrSpecialInstruction": [
+                            {
+                                "description": "NO NEED TO CONFIRM APPT"
+                            },
+                            {
+                                "description": "CARRIER SIGNATURE REQUIRED: MUST RECEIVE AMAZON STAMP. NOTE"
+                            },
+                            {
+                                "description": "OVERAGE/SHORTAGE. CARRIER NOT TO ARRIVE MORE THAN 30 MIN EARLIER THAN SC"
+                            },
+                            {
+                                "description": "HEDULED APPT TIME. IF DRIVER WILL MISS APPOINTMENT CONTACT KBX TEAM KBXLAPPTS@KB"
+                            },
+                            {
+                                "description": "XLOGISTICS.COM TO CANCEL APPT PRIOR TO APPT TIME;"
+                            },
+                            {
+                                "description": "INCLUDE AMAZON IN SUBJECT LINE; LTL CARRIERS ONLY MUST SET UP AN ACCOUNT"
+                            },
+                            {
+                                "description": "WITH AMAZON TRANSPORTATION TO MAKE A DELIVERY APPOINTMENT, UNLESS NOTED"
+                            },
+                            {
+                                "description": "ON BOL THAT AN APPOINTMENT HAS ALREADY BEEN SET."
+                            },
+                            {
+                                "description": "HTTPS://CARRIERCENTRAL.AMAZON.COM"
+                            },
+                            {
+                                "description": "07/30/2024 07:00 EDT ISA: 78531026978."
+                            },
+                            {
+                                "description": "08/01/2024 18:00 EDT ISA: 78531026978."
+                            }
+                        ],
+                        "palletInformation": null,
+                        "shipmentWeightPackagingAndQuantityData": {
+                            "ladingQuantity": 329,
+                            "ladingQuantity_1": 0,
+                            "volume": 2546,
+                            "volumeUnitQualifier": "E",
+                            "weight": 13209,
+                            "weightQualifier": "G",
+                            "weightUnitCode": "L"
+                        },
+                        "stopOffDetails": {
+                            "stopReasonCode": "CU",
+                            "stopSequenceNumber": 2
+                        }
+                    }
+                ]
+            },
+            "section3": {
+                "totalWeightAndCharges": {
+                    "ladingQuantity": 329,
+                    "volume": 2546,
+                    "volumeUnitQualifier": "E",
+                    "weight": 13209,
+                    "weightQualifier": "G",
+                    "weightUnitCode": "L"
+                }
+            }
+        }
+    }
+]
