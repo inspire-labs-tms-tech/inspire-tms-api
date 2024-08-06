@@ -34,12 +34,14 @@ public class FacilitiesController {
                 .insertInto(Tables.FACILITIES,
                         Tables.FACILITIES.DISPLAY,
                         Tables.FACILITIES.IS_ACTIVE,
-                        Tables.FACILITIES.ADDRESS
+                        Tables.FACILITIES.ADDRESS,
+                        Tables.FACILITIES.MIGRATED_FACILITY_ID
                 )
                 .values(
                         request.displayName(),
                         request.isActive(),
-                        request.address().toAddress()
+                        request.address().toAddress(),
+                        request.externalID()
                 )
                 .returning()
                 .fetchOne());
@@ -63,6 +65,7 @@ public class FacilitiesController {
                 .set(Tables.FACILITIES.DISPLAY, request.displayName())
                 .set(Tables.FACILITIES.IS_ACTIVE, request.isActive())
                 .set(Tables.FACILITIES.ADDRESS, request.address().toAddress())
+                .set(Tables.FACILITIES.MIGRATED_FACILITY_ID, request.externalID())
                 .where(Tables.FACILITIES.ID.eq(UUID.fromString(id)))
                 .returning()
                 .fetchOne());

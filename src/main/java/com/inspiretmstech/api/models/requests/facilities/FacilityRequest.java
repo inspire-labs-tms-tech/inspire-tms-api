@@ -2,6 +2,7 @@ package com.inspiretmstech.api.models.requests.facilities;
 
 import com.inspiretmstech.api.models.Address;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotNull;
 
 public record FacilityRequest(
@@ -12,6 +13,9 @@ public record FacilityRequest(
         @NotNull boolean isActive,
 
         @Schema(description = "The location of the facility")
-        @NotNull Address address
-        ) {
+        @NotNull Address address,
+
+        @Schema(description = "(optional) External ID of the facility")
+        @Nullable String externalID
+) {
 }
