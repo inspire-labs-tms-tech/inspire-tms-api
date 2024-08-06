@@ -170,6 +170,8 @@ jobs:
         credentials:
           username: inspire-labs-tech-readonly
           password: ${{ secrets.INSPIRE_TMS_READONLY_PERSONAL_ACCESS_TOKEN }}
+        env:
+          SITE_URL: http://127.0.0.1:3000
     permissions:
       contents: write
       packages: write

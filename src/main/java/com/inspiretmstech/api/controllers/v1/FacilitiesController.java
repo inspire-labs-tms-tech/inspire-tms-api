@@ -5,6 +5,7 @@ import com.inspiretmstech.api.auth.Requires;
 import com.inspiretmstech.api.auth.Scopes;
 import com.inspiretmstech.api.models.ResponseException;
 import com.inspiretmstech.api.models.requests.facilities.FacilityRequest;
+import com.inspiretmstech.api.models.requests.facilities.FacilityWithAddressRequest;
 import com.inspiretmstech.api.models.responses.IDResponse;
 import com.inspiretmstech.common.postgres.PostgresConnection;
 import com.inspiretmstech.db.Tables;
@@ -22,6 +23,34 @@ import java.util.UUID;
 @Tag(name = "Facilities", description = "User endpoints for managing facilities")
 @RequestMapping("/v1/facilities")
 public class FacilitiesController {
+
+    @Secured(Authority.Authorities.USER)
+    @Requires({Scopes.FACILITIES})
+    @Operation(summary = "Create a facility with a fully-qualified address")
+    @PostMapping("/with-address")
+    public IDResponse createFacilityWithAddress(
+            @RequestBody FacilityWithAddressRequest request
+    ) throws SQLException {
+        Optional<FacilitiesRecord> facility = PostgresConnection.getInstance().with(supabase -> supabase
+                .insertInto(Tables.FACILITIES,
+                        Tables.FACILITIES.DISPLAY,
+                        Tables.FACILITIES.IS_ACTIVE,
+                        Tables.FACILITIES.ADDRESS,
+                        Tables.FACILITIES.MIGRATED_FACILITY_ID
+                )
+                .values(
+                        request.displayName(),
+                        request.isActive(),
+                        request.address(),
+                        request.externalID()
+                )
+                .returning()
+                .fetchOne());
+        if (facility.isEmpty())
+            throw new ResponseException("Facility could not be created", "An unexpected error occurred while creating the facility", "Is the displayName unique?");
+
+        return IDResponse.from(facility.get().getId());
+    }
 
     @Secured(Authority.Authorities.USER)
     @Requires({Scopes.FACILITIES})
