@@ -84,7 +84,7 @@ public class LoadTendersController {
             if (Objects.isNull(stop.appointment().latest()))
                 throw new ResponseException("Invalid Appointment", "The latest appointment cannot be empty");
 
-            stops.add(new LoadTenderStopRecord(null, OffsetDateTime.parse(stop.appointment().earliest()), OffsetDateTime.parse(stop.appointment().latest()), stop.type(), stop.address().toAddress()));
+            stops.add(new LoadTenderStopRecord(null, OffsetDateTime.parse(stop.appointment().earliest()), OffsetDateTime.parse(stop.appointment().latest()), stop.type(), stop.address().build()));
         }
 
         return database.insertInto(Tables.LOAD_TENDER_VERSIONS,

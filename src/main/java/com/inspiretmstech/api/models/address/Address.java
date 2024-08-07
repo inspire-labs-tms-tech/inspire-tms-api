@@ -1,4 +1,4 @@
-package com.inspiretmstech.api.models;
+package com.inspiretmstech.api.models.address;
 
 import com.google.maps.model.LatLng;
 import com.inspiretmstech.common.utils.Geocoder;
@@ -17,7 +17,7 @@ public record Address(
         @NotNull String city,
         @NotNull String state,
         @NotNull String zipCode
-) {
+) implements AddressObjectModel {
 
     @Override
     public String toString() {
@@ -29,7 +29,8 @@ public record Address(
         return address;
     }
 
-    public AddressRecord toAddress() {
+    @Override
+    public AddressRecord build() {
         LatLng coords = Geocoder.geocode(this.toString());
         ZoneId zone = TimeZones.lookup(coords, this.toString());
         return new AddressRecord(

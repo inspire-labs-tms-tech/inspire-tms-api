@@ -4,6 +4,7 @@ import com.inspiretmstech.api.auth.Authority;
 import com.inspiretmstech.api.auth.Requires;
 import com.inspiretmstech.api.auth.Scopes;
 import com.inspiretmstech.api.models.ResponseException;
+import com.inspiretmstech.api.models.address.AddressObjectModel;
 import com.inspiretmstech.api.models.requests.facilities.FacilityRequest;
 import com.inspiretmstech.api.models.responses.IDResponse;
 import com.inspiretmstech.common.postgres.PostgresConnection;
@@ -37,6 +38,8 @@ public class FacilitiesController {
         if (!Objects.isNull(request.address()) && !Objects.isNull(request.fullyQualifiedAddress()))
             throw new ResponseException("Invalid Request", "only one of 'request' or 'fullyQualifiedAddress' must be specified");
 
+        AddressObjectModel address = Objects.isNull(request.address()) ? request.fullyQualifiedAddress() : request.address();
+
         Optional<FacilitiesRecord> facility = PostgresConnection.getInstance().with(supabase -> supabase
                 .insertInto(Tables.FACILITIES,
                         Tables.FACILITIES.DISPLAY,
@@ -47,7 +50,7 @@ public class FacilitiesController {
                 .values(
                         request.displayName(),
                         request.isActive(),
-                        Objects.isNull(request.address()) ? request.fullyQualifiedAddress() : request.address().toAddress(),
+                        address.build(),
                         request.externalID()
                 )
                 .returning()
@@ -67,11 +70,18 @@ public class FacilitiesController {
             @PathVariable String id
     ) throws SQLException {
 
+        if (Objects.isNull(request.address()) && Objects.isNull(request.fullyQualifiedAddress()))
+            throw new ResponseException("Invalid Request", "'request' or 'fullyQualifiedAddress' must be specified");
+        if (!Objects.isNull(request.address()) && !Objects.isNull(request.fullyQualifiedAddress()))
+            throw new ResponseException("Invalid Request", "only one of 'request' or 'fullyQualifiedAddress' must be specified");
+
+        AddressObjectModel address = Objects.isNull(request.address()) ? request.fullyQualifiedAddress() : request.address();
+
         Optional<FacilitiesRecord> updated = PostgresConnection.getInstance().with(supabase -> supabase
                 .update(Tables.FACILITIES)
                 .set(Tables.FACILITIES.DISPLAY, request.displayName())
                 .set(Tables.FACILITIES.IS_ACTIVE, request.isActive())
-                .set(Tables.FACILITIES.ADDRESS, request.address().toAddress())
+                .set(Tables.FACILITIES.ADDRESS, address.build())
                 .set(Tables.FACILITIES.MIGRATED_FACILITY_ID, request.externalID())
                 .where(Tables.FACILITIES.ID.eq(UUID.fromString(id)))
                 .returning()

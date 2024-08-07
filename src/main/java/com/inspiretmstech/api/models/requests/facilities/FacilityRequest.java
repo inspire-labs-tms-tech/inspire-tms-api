@@ -1,7 +1,7 @@
 package com.inspiretmstech.api.models.requests.facilities;
 
-import com.inspiretmstech.api.models.Address;
-import com.inspiretmstech.db.udt.records.AddressRecord;
+import com.inspiretmstech.api.models.address.Address;
+import com.inspiretmstech.api.models.address.FullyQualifiedAddress;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 
@@ -16,7 +16,7 @@ public record FacilityRequest(
         Address address,
 
         @Schema(description = "The fully-qualified location of the facility (must specify address or fullyQualifiedAddress)")
-        AddressRecord fullyQualifiedAddress,
+        FullyQualifiedAddress fullyQualifiedAddress,
 
         @Schema(description = "(optional) External ID of the facility")
         String externalID
