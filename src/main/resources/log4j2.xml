@@ -6,7 +6,7 @@
         </Console>
     </Appenders>
     <Loggers>
-        <Logger name="com.inspiretmstech.api" level="debug">
+        <Logger name="com.inspiretmstech.api" level="warn">
             <AppenderRef ref="Console"/>
         </Logger>
         <Logger name="org.apache" level="warn">

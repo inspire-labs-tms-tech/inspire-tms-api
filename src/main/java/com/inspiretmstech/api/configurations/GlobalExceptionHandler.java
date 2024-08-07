@@ -19,7 +19,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler({RuntimeException.class, SQLException.class, ResponseException.class})
     public ResponseEntity<ErrorResponse> handleRuntimeException(RuntimeException e) {
-        logger.error(e.getMessage());
+        logger.trace(e.getMessage());
         for (StackTraceElement stackTraceElement : e.getStackTrace())
             logger.trace(stackTraceElement.toString());
 

@@ -5,6 +5,7 @@ import com.inspiretmstech.api.auth.Requires;
 import com.inspiretmstech.api.auth.Scopes;
 import com.inspiretmstech.api.models.ResponseException;
 import com.inspiretmstech.api.models.address.AddressObjectModel;
+import com.inspiretmstech.api.models.controllers.Controller;
 import com.inspiretmstech.api.models.requests.facilities.FacilityRequest;
 import com.inspiretmstech.api.models.responses.IDResponse;
 import com.inspiretmstech.common.postgres.PostgresConnection;
@@ -23,7 +24,11 @@ import java.util.UUID;
 @RestController
 @Tag(name = "Facilities", description = "User endpoints for managing facilities")
 @RequestMapping("/v1/facilities")
-public class FacilitiesController {
+public class FacilitiesController extends Controller {
+
+    public FacilitiesController() {
+        super(FacilitiesController.class);
+    }
 
     @Secured(Authority.Authorities.USER)
     @Requires({Scopes.FACILITIES})
@@ -40,21 +45,27 @@ public class FacilitiesController {
 
         AddressObjectModel address = Objects.isNull(request.address()) ? request.fullyQualifiedAddress() : request.address();
 
-        Optional<FacilitiesRecord> facility = PostgresConnection.getInstance().with(supabase -> supabase
-                .insertInto(Tables.FACILITIES,
-                        Tables.FACILITIES.DISPLAY,
-                        Tables.FACILITIES.IS_ACTIVE,
-                        Tables.FACILITIES.ADDRESS,
-                        Tables.FACILITIES.MIGRATED_FACILITY_ID
-                )
-                .values(
-                        request.displayName(),
-                        request.isActive(),
-                        address.build(),
-                        request.externalID()
-                )
-                .returning()
-                .fetchOne());
+        Optional<FacilitiesRecord> facility = Optional.empty();
+        try {
+            facility = PostgresConnection.getInstance().unsafely(supabase -> supabase
+                    .insertInto(Tables.FACILITIES,
+                            Tables.FACILITIES.DISPLAY,
+                            Tables.FACILITIES.IS_ACTIVE,
+                            Tables.FACILITIES.ADDRESS,
+                            Tables.FACILITIES.MIGRATED_FACILITY_ID
+                    )
+                    .values(
+                            request.displayName(),
+                            request.isActive(),
+                            address.build(),
+                            request.externalID()
+                    )
+                    .returning()
+                    .fetchOne());
+        } catch (Exception e) {
+            if(e.getMessage().contains("Key (migrated_facility_id)=(" + request.externalID() + ") already exists"))
+                throw new ResponseException("External ID Already Exists", "A facility with external id '" + request.externalID() + "' already exists");
+        }
         if (facility.isEmpty())
             throw new ResponseException("Facility could not be created", "An unexpected error occurred while creating the facility", "Is the displayName unique?");
 
