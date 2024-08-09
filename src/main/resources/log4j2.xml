@@ -6,6 +6,9 @@
         </Console>
     </Appenders>
     <Loggers>
+        <Logger name="com.inspiretmstech.api.src.controllers.v1.TruckerToolsController" level="trace">
+            <AppenderRef ref="Console"/>
+        </Logger>
         <Logger name="com.inspiretmstech.api.src" level="warn">
             <AppenderRef ref="Console"/>
         </Logger>
