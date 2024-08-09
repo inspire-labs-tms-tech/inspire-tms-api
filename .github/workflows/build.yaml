@@ -84,7 +84,7 @@ jobs:
       - name: update version
         run: |
           sudo sed -i -e "s|00000000.000000|$VERSION|g" ./build.gradle
-          sudo sed -i -e "s|00000000.000000|$VERSION|g" ./src/main/java/com/inspiretmstech/api/constants/Config.java
+          sudo sed -i -e "s|00000000.000000|$VERSION|g" ./src/main/java/com/inspiretmstech/api/src/constants/Config.java
         env:
           VERSION: ${{ needs.version.outputs.latest }}
 
