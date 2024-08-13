@@ -11,6 +11,7 @@ import com.inspiretmstech.api.src.models.responses.about.AboutSupabaseResponse;
 import com.inspiretmstech.common.postgres.PostgresConnection;
 import com.inspiretmstech.common.utils.Environment;
 import com.inspiretmstech.db.Tables;
+import com.inspiretmstech.db.enums.CompanyTypes;
 import com.inspiretmstech.db.tables.records.CompaniesRecord;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -77,7 +78,13 @@ public class RootController {
             builder.setPath("/api/v1/files/" + companyRecord.get().getLogoFileId());
             fileURL = builder.build().toString();
         }
-        AboutCompanyResponse company = new AboutCompanyResponse(companyRecord.get().getDisplayName(), companyRecord.get().getIsPublished(), fileURL);
+        AboutCompanyResponse company = new AboutCompanyResponse(
+                companyRecord.get().getDisplayName(),
+                companyRecord.get().getIsPublished(),
+                fileURL,
+                companyRecord.get().getType() == CompanyTypes.BROKER,
+                companyRecord.get().getType() == CompanyTypes.CARRIER
+        );
 
         // supabase
         AboutSupabaseKeysResponse keys = new AboutSupabaseKeysResponse(Environment.get(EnvironmentVariables.SUPABASE_ANON_KEY));
