@@ -3,6 +3,7 @@ package com.inspiretmstech.api.src.controllers.v1;
 import com.inspiretmstech.api.src.auth.Authority;
 import com.inspiretmstech.api.src.auth.bearer.APIKey;
 import com.inspiretmstech.api.src.models.ResponseException;
+import com.inspiretmstech.api.src.models.controllers.Controller;
 import com.inspiretmstech.api.src.models.requests.tenders.LoadTenderRequest;
 import com.inspiretmstech.api.src.models.requests.tenders.LoadTenderRequestRevenueItem;
 import com.inspiretmstech.api.src.models.requests.tenders.LoadTenderRequestStop;
@@ -35,9 +36,11 @@ import java.util.concurrent.atomic.AtomicReference;
 @RestController
 @Tag(name = "Load Tenders", description = "Customer endpoints for tendering loads directly to Inspire TMS")
 @RequestMapping("/v1/load-tenders")
-public class LoadTendersController {
+public class LoadTendersController extends Controller {
 
-    private final Logger logger = LoggerFactory.getLogger(LoadTendersController.class);
+    public LoadTendersController() {
+        super(LoadTendersController.class);
+    }
 
     /**
      * Handle a load tender exception

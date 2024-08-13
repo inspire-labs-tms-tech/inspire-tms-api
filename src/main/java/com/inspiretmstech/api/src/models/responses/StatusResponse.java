@@ -8,4 +8,8 @@ public record StatusResponse(@NotNull String status) {
         return new StatusResponse("ACCEPTED");
     }
 
+    public static StatusResponse DECLINED() {
+        return new StatusResponse("DECLINED");
+    }
+
 }
