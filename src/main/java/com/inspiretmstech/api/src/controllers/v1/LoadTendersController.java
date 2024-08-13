@@ -90,21 +90,18 @@ public class LoadTendersController extends Controller {
             stops.add(new LoadTenderStopRecord(null, OffsetDateTime.parse(stop.appointment().earliest()), OffsetDateTime.parse(stop.appointment().latest()), stop.type(), stop.address().build()));
         }
 
-        return database.insertInto(Tables.LOAD_TENDER_VERSIONS,
-                Tables.LOAD_TENDER_VERSIONS.LOAD_TENDER_ID,
-                Tables.LOAD_TENDER_VERSIONS.CUSTOMER_REFERENCE_NUMBER,
-                Tables.LOAD_TENDER_VERSIONS.ACCEPT_WEBHOOK,
-                Tables.LOAD_TENDER_VERSIONS.DECLINE_WEBHOOK,
-                Tables.LOAD_TENDER_VERSIONS.STOPS,
-                Tables.LOAD_TENDER_VERSIONS.REVENUE
-        ).values(
-                tenderID,
-                request.reference(),
-                request.replyTo().accept(),
-                request.replyTo().decline(),
-                stops.toArray(new LoadTenderStopRecord[0]),
-                revenue.toArray(new LoadTenderRevenueItemRecord[0])
-        ).returning();
+        LoadTenderVersionsRecord newVersion = new LoadTenderVersionsRecord();
+        newVersion.setLoadTenderId(tenderID);
+        newVersion.setCustomerReferenceNumber(request.reference());
+        newVersion.setAcceptWebhook(request.replyTo().accept());
+        newVersion.setDeclineWebhook(request.replyTo().decline());
+        newVersion.setStops(stops.toArray(new LoadTenderStopRecord[0]));
+        newVersion.setRevenue(revenue.toArray(new LoadTenderRevenueItemRecord[0]));
+
+        return database
+                .insertInto(Tables.LOAD_TENDER_VERSIONS)
+                .set(newVersion)
+                .returning();
     }
 
     @Secured(Authority.Authorities.CUSTOMER)
@@ -149,14 +146,22 @@ public class LoadTendersController extends Controller {
         try {
             PostgresConnection.getInstance().unsafely(supabase -> {
                 supabase.transaction(transaction -> {
-                    // create the load tender
-                    tender.set(transaction.dsl().insertInto(Tables.LOAD_TENDERS,
-                            Tables.LOAD_TENDERS.CUSTOMER_ID,
-                            Tables.LOAD_TENDERS.ORIGINAL_CUSTOMER_REFERENCE_NUMBER
-                    ).values(
-                            key.getSub(),
-                            request.uniqueReferenceID()
-                    ).returning().fetchOne());
+                    // create the load tender (upsertable)
+
+                    LoadTendersRecord record = new LoadTendersRecord();
+                    record.setCustomerId(key.getSub());
+                    record.setOriginalCustomerReferenceNumber(request.uniqueReferenceID());
+
+                    tender.set(
+                            transaction.dsl()
+                                    .insertInto(Tables.LOAD_TENDERS)
+                                    .set(record)
+                                    .onConflict(Tables.LOAD_TENDERS.UID)
+                                    .doUpdate()
+                                    .set(record)
+                                    .returning()
+                                    .fetchOne()
+                    );
                     if (Objects.isNull(tender.get())) throw new RuntimeException("Unable to Create Load Tender!");
 
                     // create the load tender version
