@@ -106,7 +106,7 @@ public class TruckerToolsController extends Controller {
         if (Objects.isNull(request.comments())) throw new ResponseException("Comment Cannot be Null");
 
         TruckerToolsLoadCommentsRecord comment = new TruckerToolsLoadCommentsRecord();
-        comment.setLoadId((long) request.loadTracklId());
+        comment.setLoadId((long) request.loadTrackId());
         comment.setComment(request.comments().comment());
         comment.setCommentBy(request.comments().commentBy());
         comment.setLat(Objects.isNull(request.comments().location()) ? null : new BigDecimal(request.comments().location().lat()));
