@@ -114,14 +114,22 @@ public class TruckerToolsController extends Controller {
         comment.setCity(Objects.isNull(request.comments().location()) ? null : request.comments().location().city());
         comment.setState(Objects.isNull(request.comments().location()) ? null : request.comments().location().state());
 
-        Optional<TruckerToolsLoadCommentsRecord> created = PostgresConnection.getInstance().with(supabase ->
-                supabase
-                        .insertInto(Tables.TRUCKER_TOOLS_LOAD_COMMENTS)
-                        .values(comment)
-                        .returning()
-                        .fetchOne());
+        Optional<TruckerToolsLoadCommentsRecord> created = Optional.empty();
+        try {
+            created = PostgresConnection.getInstance().unsafely(supabase ->
+                    supabase
+                            .insertInto(Tables.TRUCKER_TOOLS_LOAD_COMMENTS)
+                            .values(comment)
+                            .returning()
+                            .fetchOne());
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+        }
 
-        if (created.isEmpty()) throw new ResponseException("Unable to Create Load Track Comment!");
+        if (created.isEmpty()) {
+            logger.error("unable to create load track comment");
+            throw new ResponseException("Unable to Create Load Track Comment!");
+        }
         return StatusResponse.ACCEPTED();
     }
 }
