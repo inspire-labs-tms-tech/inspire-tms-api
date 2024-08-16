@@ -3,7 +3,7 @@ package com.inspiretmstech.api.src.models.requests.truckertools;
 public record TruckerToolsCommentsRequest(
         int partnerId,
         String accountId,
-        int loadTracklId,
+        int loadTrackId,
         String loadTrackExternalId,
         String carrierExternalId,
         String driverPhone,
