@@ -51,11 +51,15 @@ public class TruckerToolsController extends Controller {
         status.setLat(Objects.isNull(request.status().location()) ? null : new BigDecimal(request.status().location().lat()));
         status.setLong(Objects.isNull(request.status().location()) ? null : new BigDecimal(request.status().location().lon()));
 
-        PostgresConnection.getInstance().with(supabase ->
-                supabase
-                        .insertInto(Tables.TRUCKER_TOOLS_LOAD_STATUSES)
-                        .values(status)
-                        .execute());
+        try {
+            PostgresConnection.getInstance().unsafely(supabase ->
+                    supabase
+                            .insertInto(Tables.TRUCKER_TOOLS_LOAD_STATUSES)
+                            .values(status)
+                            .execute());
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+        }
 
         return StatusResponse.ACCEPTED();
     }
@@ -80,11 +84,15 @@ public class TruckerToolsController extends Controller {
         document.setCity(Objects.isNull(request.document().location()) ? null : request.document().location().city());
         document.setState(Objects.isNull(request.document().location()) ? null : request.document().location().state());
 
-        PostgresConnection.getInstance().with(supabase ->
-                supabase
-                        .insertInto(Tables.TRUCKER_TOOLS_LOAD_DOCUMENTS)
-                        .values(document)
-                        .execute());
+        try {
+            PostgresConnection.getInstance().unsafely(supabase ->
+                    supabase
+                            .insertInto(Tables.TRUCKER_TOOLS_LOAD_DOCUMENTS)
+                            .values(document)
+                            .execute());
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+        }
 
         return StatusResponse.ACCEPTED();
     }
@@ -109,11 +117,15 @@ public class TruckerToolsController extends Controller {
         comment.setCity(Objects.isNull(request.comments().location()) ? null : request.comments().location().city());
         comment.setState(Objects.isNull(request.comments().location()) ? null : request.comments().location().state());
 
-        PostgresConnection.getInstance().with(supabase ->
-                supabase
-                        .insertInto(Tables.TRUCKER_TOOLS_LOAD_COMMENTS)
-                        .values(comment)
-                        .execute());
+        try {
+            PostgresConnection.getInstance().unsafely(supabase ->
+                    supabase
+                            .insertInto(Tables.TRUCKER_TOOLS_LOAD_COMMENTS)
+                            .values(comment)
+                            .execute());
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+        }
 
         return StatusResponse.ACCEPTED();
     }
