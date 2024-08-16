@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.Objects;
+import java.util.Optional;
 
 @RestController
 @Tag(name = "Trucker Tools", description = "Webhooks for Trucker Tools")
@@ -51,16 +52,14 @@ public class TruckerToolsController extends Controller {
         status.setLat(Objects.isNull(request.status().location()) ? null : new BigDecimal(request.status().location().lat()));
         status.setLong(Objects.isNull(request.status().location()) ? null : new BigDecimal(request.status().location().lon()));
 
-        try {
-            PostgresConnection.getInstance().unsafely(supabase ->
-                    supabase
-                            .insertInto(Tables.TRUCKER_TOOLS_LOAD_STATUSES)
-                            .values(status)
-                            .execute());
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-        }
+        Optional<TruckerToolsLoadStatusesRecord> created = PostgresConnection.getInstance().with(supabase ->
+                supabase
+                        .insertInto(Tables.TRUCKER_TOOLS_LOAD_STATUSES)
+                        .set(status)
+                        .returning()
+                        .fetchOne());
 
+        if (created.isEmpty()) throw new ResponseException("Unable to Create Load Track Status!");
         return StatusResponse.ACCEPTED();
     }
 
@@ -84,16 +83,14 @@ public class TruckerToolsController extends Controller {
         document.setCity(Objects.isNull(request.document().location()) ? null : request.document().location().city());
         document.setState(Objects.isNull(request.document().location()) ? null : request.document().location().state());
 
-        try {
-            PostgresConnection.getInstance().unsafely(supabase ->
-                    supabase
-                            .insertInto(Tables.TRUCKER_TOOLS_LOAD_DOCUMENTS)
-                            .values(document)
-                            .execute());
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-        }
+        Optional<TruckerToolsLoadDocumentsRecord> created = PostgresConnection.getInstance().with(supabase ->
+                supabase
+                        .insertInto(Tables.TRUCKER_TOOLS_LOAD_DOCUMENTS)
+                        .set(document)
+                        .returning()
+                        .fetchOne());
 
+        if (created.isEmpty()) throw new ResponseException("Unable to Create Load Track Document!");
         return StatusResponse.ACCEPTED();
     }
 
@@ -117,16 +114,17 @@ public class TruckerToolsController extends Controller {
         comment.setCity(Objects.isNull(request.comments().location()) ? null : request.comments().location().city());
         comment.setState(Objects.isNull(request.comments().location()) ? null : request.comments().location().state());
 
-        try {
-            PostgresConnection.getInstance().unsafely(supabase ->
-                    supabase
-                            .insertInto(Tables.TRUCKER_TOOLS_LOAD_COMMENTS)
-                            .values(comment)
-                            .execute());
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-        }
+        Optional<TruckerToolsLoadCommentsRecord> created = PostgresConnection.getInstance().with(supabase ->
+                supabase
+                        .insertInto(Tables.TRUCKER_TOOLS_LOAD_COMMENTS)
+                        .set(comment)
+                        .returning()
+                        .fetchOne());
 
+        if (created.isEmpty()) {
+            logger.error("unable to create load track comment");
+            throw new ResponseException("Unable to Create Load Track Comment!");
+        }
         return StatusResponse.ACCEPTED();
     }
 }
