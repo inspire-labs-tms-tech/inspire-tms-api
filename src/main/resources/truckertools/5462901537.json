@@ -1,0 +1,55 @@
+{
+    "type": "CommentUpdate",
+    "headers": [
+        "Content-Length: 1140",
+        "Content-Type: application/json",
+        "Authorization: 9q/QQ2H297RwSulNldDr5A==",
+        "x-api-key: 9q/QQ2H297RwSulNldDr5A=="
+    ],
+    "body": {
+        "partnerId": 143,
+        "accountId": "9q/QQ2H297RwSulNldDr5A==",
+        "loadTrackId": 24566354,
+        "loadTrackExternalId": "38b49410-1496-4194-b6fc-f26fecc57ac6",
+        "ltExternalId": "38b49410-1496-4194-b6fc-f26fecc57ac6",
+        "carrierExternalId": null,
+        "driverPhone": "4013167762",
+        "loadNumber": "120000",
+        "eventType": "CommentUpdate",
+        "latestLocation": {
+            "lat": "41.8694049",
+            "lon": "-71.472634",
+            "accuracy": 4.7647,
+            "timestampSec": "08/13/2024 22:46:52 EDT",
+            "timestamp": "08/13/2024 22:46 EDT",
+            "timestampUTC": "08/14/2024 02:46:52 UTC",
+            "city": "N Providence",
+            "state": "RI",
+            "country": "USA"
+        },
+        "latestStatus": {
+            "name": "Entered pickup geofence",
+            "code": "PE",
+            "stopExternalId": "0c29e7b1-c92a-4262-ad6f-eb100aa3dba4",
+            "timestamp": "08/13/2024 22:46 EDT",
+            "timestampSec": "08/13/2024 22:46:31 EDT",
+            "timestampUTC": "08/14/2024 02:46:31 UTC"
+        },
+        "comments": {
+            "comment": "Test comment",
+            "commentBy": "D",
+            "location": {
+                "lat": "41.8693975",
+                "lon": "-71.472640",
+                "accuracy": 4.7674,
+                "city": "N Providence",
+                "state": "RI",
+                "country": "USA"
+            },
+            "timestamp": "08/13/2024 22:46 EDT",
+            "timestampSec": "08/13/2024 22:46:45 EDT",
+            "timestampUTC": "08/14/2024 02:46:45 UTC",
+            "stopExternalId": "0c29e7b1-c92a-4262-ad6f-eb100aa3dba4"
+        }
+    }
+}

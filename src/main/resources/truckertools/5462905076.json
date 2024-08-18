@@ -1,0 +1,55 @@
+{
+    "type": "StatusUpdate",
+    "headers": [
+        "Content-Length: 1345",
+        "Content-Type: application/json",
+        "Authorization: 9q/QQ2H297RwSulNldDr5A==",
+        "x-api-key: 9q/QQ2H297RwSulNldDr5A=="
+    ],
+    "body": {
+        "partnerId": 143,
+        "accountId": "9q/QQ2H297RwSulNldDr5A==",
+        "loadTrackId": 24566354,
+        "loadTrackExternalId": "38b49410-1496-4194-b6fc-f26fecc57ac6",
+        "ltExternalId": "38b49410-1496-4194-b6fc-f26fecc57ac6",
+        "carrierExternalId": null,
+        "driverPhone": "4013167762",
+        "loadNumber": "120000",
+        "eventType": "StatusUpdate",
+        "latestLocation": {
+            "lat": "41.8693935",
+            "lon": "-71.472642",
+            "accuracy": 4.764,
+            "timestampSec": "08/13/2024 22:47:14 EDT",
+            "timestamp": "08/13/2024 22:47 EDT",
+            "timestampUTC": "08/14/2024 02:47:14 UTC",
+            "city": "N Providence",
+            "state": "RI",
+            "country": "USA"
+        },
+        "latestStatus": {
+            "name": "Entered pickup geofence",
+            "code": "PE",
+            "stopExternalId": "0c29e7b1-c92a-4262-ad6f-eb100aa3dba4",
+            "timestamp": "08/13/2024 22:46 EDT",
+            "timestampSec": "08/13/2024 22:46:31 EDT",
+            "timestampUTC": "08/14/2024 02:46:31 UTC"
+        },
+        "status": {
+            "location": {
+                "lat": "41.8693935",
+                "lon": "-71.472642",
+                "accuracy": 4.764
+            },
+            "timestamp": "08/13/2024 22:47 EDT",
+            "timestampSec": "08/13/2024 22:47:14 EDT",
+            "timestampUTC": "08/14/2024 02:47:14 UTC",
+            "extras": {
+                "n": "Proof of Delivery",
+                "v": "https://assets.truckertools.com/images/tt-scan-docs/scanImageuploads/pkyg-120000-07194AE0-6BB4-4D1C-80D3-50078C601BB1.jpg"
+            },
+            "name": "Driver Scanned Proof of Delivery (https://dashboard.loadtracking.truckertools.com/#/app/scan-image?item=YTU3Y2RjODIzNGNjYmYzZTBtZjRoc244eTRwR2l2MW4vVmh5VHc9PQ==)",
+            "code": "SCD"
+        }
+    }
+}

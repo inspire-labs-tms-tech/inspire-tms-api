@@ -1,0 +1,42 @@
+{
+    "type": "StatusUpdate",
+    "headers": [
+        "Content-Length: 788",
+        "Content-Type: application/json",
+        "Authorization: 9q/QQ2H297RwSulNldDr5A==",
+        "x-api-key: 9q/QQ2H297RwSulNldDr5A=="
+    ],
+    "body": {
+        "partnerId": 143,
+        "accountId": "9q/QQ2H297RwSulNldDr5A==",
+        "loadTrackId": 24566354,
+        "loadTrackExternalId": "38b49410-1496-4194-b6fc-f26fecc57ac6",
+        "ltExternalId": "38b49410-1496-4194-b6fc-f26fecc57ac6",
+        "carrierExternalId": null,
+        "driverPhone": "4013167762",
+        "loadNumber": "120000",
+        "eventType": "StatusUpdate",
+        "latestLocation": {
+            "lat": null,
+            "lon": null,
+            "accuracy": null,
+            "timestampSec": null,
+            "timestamp": null,
+            "timestampUTC": null
+        },
+        "latestStatus": {
+            "name": "Driver has to Download the app",
+            "code": "DHTDA",
+            "timestamp": "08/13/2024 22:44 EDT",
+            "timestampSec": "08/13/2024 22:44:25 EDT",
+            "timestampUTC": "08/14/2024 02:44:25 UTC"
+        },
+        "status": {
+            "timestamp": "08/13/2024 22:44 EDT",
+            "timestampSec": "08/13/2024 22:44:26 EDT",
+            "timestampUTC": "08/14/2024 02:44:26 UTC",
+            "name": "Email sent to the Broker",
+            "code": "BLCES"
+        }
+    }
+}

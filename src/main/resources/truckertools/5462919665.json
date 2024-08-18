@@ -1,0 +1,56 @@
+{
+    "type": "StatusUpdate",
+    "headers": [
+        "Content-Length: 1034",
+        "Content-Type: application/json",
+        "Authorization: 9q/QQ2H297RwSulNldDr5A==",
+        "x-api-key: 9q/QQ2H297RwSulNldDr5A=="
+    ],
+    "body": {
+        "partnerId": 143,
+        "accountId": "9q/QQ2H297RwSulNldDr5A==",
+        "loadTrackId": 24566354,
+        "loadTrackExternalId": "38b49410-1496-4194-b6fc-f26fecc57ac6",
+        "ltExternalId": "38b49410-1496-4194-b6fc-f26fecc57ac6",
+        "carrierExternalId": null,
+        "driverPhone": "4013167762",
+        "loadNumber": "120000",
+        "eventType": "StatusUpdate",
+        "latestLocation": {
+            "lat": "41.8693618",
+            "lon": "-71.472618",
+            "accuracy": 4.7382,
+            "timestampSec": "08/13/2024 22:49:20 EDT",
+            "timestamp": "08/13/2024 22:49 EDT",
+            "timestampUTC": "08/14/2024 02:49:20 UTC",
+            "city": "N Providence",
+            "state": "RI",
+            "country": "USA"
+        },
+        "latestStatus": {
+            "id": 599332321,
+            "location": {
+                "lat": "41.8693618",
+                "lon": "-71.472618",
+                "accuracy": 4.7382
+            },
+            "timestamp": "08/13/2024 22:49 EDT",
+            "timestampSec": "08/13/2024 22:49:20 EDT",
+            "timestampUTC": "08/14/2024 02:49:20 UTC",
+            "name": "Tracking",
+            "code": "TLT"
+        },
+        "status": {
+            "location": {
+                "lat": "41.8693618",
+                "lon": "-71.472618",
+                "accuracy": 4.7382
+            },
+            "timestamp": "08/13/2024 22:49 EDT",
+            "timestampSec": "08/13/2024 22:49:20 EDT",
+            "timestampUTC": "08/14/2024 02:49:20 UTC",
+            "name": "Tracking",
+            "code": "TLT"
+        }
+    }
+}

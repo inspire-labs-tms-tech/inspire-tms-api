@@ -1,0 +1,46 @@
+{
+    "type": "StatusUpdate",
+    "headers": [
+        "Content-Length: 981",
+        "Content-Type: application/json",
+        "Authorization: 9q/QQ2H297RwSulNldDr5A==",
+        "x-api-key: 9q/QQ2H297RwSulNldDr5A=="
+    ],
+    "body": {
+        "partnerId": 143,
+        "accountId": "9q/QQ2H297RwSulNldDr5A==",
+        "loadTrackId": 24566354,
+        "loadTrackExternalId": "38b49410-1496-4194-b6fc-f26fecc57ac6",
+        "ltExternalId": "38b49410-1496-4194-b6fc-f26fecc57ac6",
+        "carrierExternalId": null,
+        "driverPhone": "4013167762",
+        "loadNumber": "120000",
+        "eventType": "StatusUpdate",
+        "latestLocation": {
+            "lat": "41.8693809",
+            "lon": "-71.472633",
+            "accuracy": 13.7936,
+            "timestampSec": "08/13/2024 23:15:24 EDT",
+            "timestamp": "08/13/2024 23:15 EDT",
+            "timestampUTC": "08/14/2024 03:15:24 UTC",
+            "city": "N Providence",
+            "state": "RI",
+            "country": "USA"
+        },
+        "latestStatus": {
+            "id": 599364105,
+            "timestamp": "08/14/2024 01:32 EDT",
+            "timestampSec": "08/14/2024 01:32:21 EDT",
+            "timestampUTC": "08/14/2024 05:32:21 UTC",
+            "name": "Tracking interrupted - Send another text message",
+            "code": "TILTA"
+        },
+        "status": {
+            "timestamp": "08/14/2024 01:32 EDT",
+            "timestampSec": "08/14/2024 01:32:21 EDT",
+            "timestampUTC": "08/14/2024 05:32:21 UTC",
+            "name": "Tracking interrupted - Send another text message",
+            "code": "TILTA"
+        }
+    }
+}

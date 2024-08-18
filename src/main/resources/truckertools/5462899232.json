@@ -1,0 +1,45 @@
+{
+    "type": "StatusUpdate",
+    "headers": [
+        "Content-Length: 906",
+        "Content-Type: application/json",
+        "Authorization: 9q/QQ2H297RwSulNldDr5A==",
+        "x-api-key: 9q/QQ2H297RwSulNldDr5A=="
+    ],
+    "body": {
+        "partnerId": 143,
+        "accountId": "9q/QQ2H297RwSulNldDr5A==",
+        "loadTrackId": 24566354,
+        "loadTrackExternalId": "38b49410-1496-4194-b6fc-f26fecc57ac6",
+        "ltExternalId": "38b49410-1496-4194-b6fc-f26fecc57ac6",
+        "carrierExternalId": null,
+        "driverPhone": "4013167762",
+        "loadNumber": "120000",
+        "eventType": "StatusUpdate",
+        "latestLocation": {
+            "lat": "41.8693960",
+            "lon": "-71.472661",
+            "accuracy": 4.7563,
+            "timestampSec": "08/13/2024 22:46:31 EDT",
+            "timestamp": "08/13/2024 22:46 EDT",
+            "timestampUTC": "08/14/2024 02:46:31 UTC",
+            "city": "N Providence",
+            "state": "RI",
+            "country": "USA"
+        },
+        "latestStatus": {
+            "name": "Tracking",
+            "code": "TLT",
+            "timestamp": "08/13/2024 22:46 EDT",
+            "timestampSec": "08/13/2024 22:46:31 EDT",
+            "timestampUTC": "08/14/2024 02:46:31 UTC"
+        },
+        "status": {
+            "timestamp": "08/13/2024 22:46 EDT",
+            "timestampSec": "08/13/2024 22:46:27 EDT",
+            "timestampUTC": "08/14/2024 02:46:27 UTC",
+            "name": "Driver has viewed the Load Track",
+            "code": "LVBD"
+        }
+    }
+}

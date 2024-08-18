@@ -1,0 +1,54 @@
+{
+    "type": "DocumentUpdate",
+    "headers": [
+        "Content-Length: 1205",
+        "Content-Type: application/json",
+        "Authorization: 9q/QQ2H297RwSulNldDr5A==",
+        "x-api-key: 9q/QQ2H297RwSulNldDr5A=="
+    ],
+    "body": {
+        "partnerId": 143,
+        "accountId": "9q/QQ2H297RwSulNldDr5A==",
+        "loadTrackId": 24566354,
+        "loadTrackExternalId": "38b49410-1496-4194-b6fc-f26fecc57ac6",
+        "ltExternalId": "38b49410-1496-4194-b6fc-f26fecc57ac6",
+        "carrierExternalId": null,
+        "driverPhone": "4013167762",
+        "loadNumber": "120000",
+        "eventType": "DocumentUpdate",
+        "latestLocation": {
+            "lat": "41.8693935",
+            "lon": "-71.472642",
+            "accuracy": 4.764,
+            "timestampSec": "08/13/2024 22:47:14 EDT",
+            "timestamp": "08/13/2024 22:47 EDT",
+            "timestampUTC": "08/14/2024 02:47:14 UTC",
+            "city": "N Providence",
+            "state": "RI",
+            "country": "USA"
+        },
+        "latestStatus": {
+            "name": "Entered pickup geofence",
+            "code": "PE",
+            "stopExternalId": "0c29e7b1-c92a-4262-ad6f-eb100aa3dba4",
+            "timestamp": "08/13/2024 22:46 EDT",
+            "timestampSec": "08/13/2024 22:46:31 EDT",
+            "timestampUTC": "08/14/2024 02:46:31 UTC"
+        },
+        "document": {
+            "type": "Proof of Delivery",
+            "location": {
+                "lat": "41.8693935",
+                "lon": "-71.472642",
+                "accuracy": "4.76401376",
+                "city": "N Providence",
+                "state": "RI",
+                "country": "USA"
+            },
+            "timestamp": "08/13/2024 22:47:14 EDT",
+            "url": "https://assets.truckertools.com/images/tt-scan-docs/scanImageuploads/pkyg-120000-07194AE0-6BB4-4D1C-80D3-50078C601BB1.jpg",
+            "stopExternalId": "a3f7a706-2a31-41a7-b1cc-96a4ae6013bd",
+            "stopOrderNumber": 2
+        }
+    }
+}
