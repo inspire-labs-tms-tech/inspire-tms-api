@@ -50,6 +50,8 @@ public class RequiresProcessor {
         switch (scope) {
             case FACILITIES -> this.test(scope, role.get().getScopeFacilities());
             case CARRIERS -> this.test(scope, role.get().getScopeCarriers());
+            case CUSTOMERS -> this.test(scope, role.get().getScopeCustomers());
+            case OPERATIONS -> this.test(scope, role.get().getScopeOperations());
             case NEVER -> this.test(scope, false); // NEVER is always false
             default ->
                     throw new ResponseException("Unhandled Scope", "The server is improperly configured to handle scope " + scope, "Contact Inspire TMS Support to resolve this issue");
