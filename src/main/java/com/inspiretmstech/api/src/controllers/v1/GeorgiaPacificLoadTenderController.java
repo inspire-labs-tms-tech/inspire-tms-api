@@ -66,7 +66,7 @@ public class GeorgiaPacificLoadTenderController {
                     Optional<LoadTendersRecord> tender = Optional.ofNullable(transaction.dsl()
                             .insertInto(Tables.LOAD_TENDERS)
                             .set(_tender)
-                            .onConflict(Tables.LOAD_TENDERS.ORIGINAL_CUSTOMER_REFERENCE_NUMBER)
+                            .onConflict(Tables.LOAD_TENDERS.UID)
                             .doUpdate()
                             .set(_tender)
                             .returning()
