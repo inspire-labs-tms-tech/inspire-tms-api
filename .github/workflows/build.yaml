@@ -148,10 +148,15 @@ jobs:
       - name: Publish to GitHub Packages
         working-directory: ./types/java
         run: |
+          # build
           bash ./build.sh
-          REPO="github::default::https://maven.pkg.github.com/inspire-labs-tms-tech/inspire-tms-api"
-          python patch-pom.xml.py
-          cd gen && mvn deploy -DaltReleaseDeploymentRepository="${REPO}" -DaltSnapshotDeploymentRepository="${REPO}"
+          
+          # download and patch using tool: https://gist.github.com/barrownicholas/4532cc8187ed47319c96ccf61e901f72
+          gh gist view --raw 4532cc8187ed47319c96ccf61e901f72 > patch.py
+          python patch.py --pom=./gen/pom.xml --repo=inspire-tms-api --org=inspire-labs-tms-tech
+          
+          # publish
+          cd gen && mvn deploy
         env:
           VERSION: ${{ needs.version.outputs.latest }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
