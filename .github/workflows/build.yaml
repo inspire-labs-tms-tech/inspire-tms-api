@@ -152,7 +152,7 @@ jobs:
           bash ./build.sh
           
           # download and patch using tool: https://gist.github.com/barrownicholas/4532cc8187ed47319c96ccf61e901f72
-          gh gist view --raw 4532cc8187ed47319c96ccf61e901f72 > patch.py
+          curl -O https://gist.githubusercontent.com/barrownicholas/4532cc8187ed47319c96ccf61e901f72/raw/patch.py
           python patch.py --pom=./gen/pom.xml --repo=inspire-tms-api --org=inspire-labs-tms-tech
           
           # publish
