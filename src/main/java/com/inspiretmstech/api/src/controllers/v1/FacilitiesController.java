@@ -1,8 +1,8 @@
 package com.inspiretmstech.api.src.controllers.v1;
 
-import com.inspiretmstech.api.src.auth.Authority;
-import com.inspiretmstech.api.src.auth.Requires;
-import com.inspiretmstech.api.src.auth.Scopes;
+import com.inspiretmstech.api.src.auth.methods.apikey.Authority;
+import com.inspiretmstech.api.src.auth.requires.Requires;
+import com.inspiretmstech.api.src.auth.requires.Scopes;
 import com.inspiretmstech.api.src.models.ResponseException;
 import com.inspiretmstech.api.src.models.address.AddressObjectModel;
 import com.inspiretmstech.api.src.models.controllers.Controller;

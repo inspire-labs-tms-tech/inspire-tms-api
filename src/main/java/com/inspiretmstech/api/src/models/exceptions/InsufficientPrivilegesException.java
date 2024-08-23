@@ -1,6 +1,6 @@
 package com.inspiretmstech.api.src.models.exceptions;
 
-import com.inspiretmstech.api.src.auth.Scopes;
+import com.inspiretmstech.api.src.auth.requires.Scopes;
 import com.inspiretmstech.api.src.models.ResponseException;
 
 public class InsufficientPrivilegesException extends ResponseException {

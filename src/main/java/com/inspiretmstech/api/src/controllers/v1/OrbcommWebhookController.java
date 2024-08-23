@@ -1,6 +1,6 @@
 package com.inspiretmstech.api.src.controllers.v1;
 
-import com.inspiretmstech.api.src.auth.Authority;
+import com.inspiretmstech.api.src.auth.methods.apikey.Authority;
 import com.inspiretmstech.api.src.models.ResponseException;
 import com.inspiretmstech.api.src.models.requests.orbcomm.Data;
 import com.inspiretmstech.api.src.models.requests.orbcomm.OrbcommDataPushRequest;

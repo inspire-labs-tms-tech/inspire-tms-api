@@ -1,9 +1,10 @@
 package com.inspiretmstech.api.src.controllers.v1;
 
-import com.inspiretmstech.api.src.auth.Authority;
-import com.inspiretmstech.api.src.auth.Requires;
-import com.inspiretmstech.api.src.auth.Scopes;
-import com.inspiretmstech.api.src.auth.bearer.APIKey;
+import com.inspiretmstech.api.src.auth.methods.apikey.Authority;
+import com.inspiretmstech.api.src.auth.requires.Requires;
+import com.inspiretmstech.api.src.auth.requires.Scopes;
+import com.inspiretmstech.api.src.auth.methods.SecurityHolder;
+import com.inspiretmstech.api.src.auth.methods.apikey.APIKeyAuthenticationHolder;
 import com.inspiretmstech.api.src.models.ResponseException;
 import com.inspiretmstech.api.src.models.controllers.Controller;
 import com.inspiretmstech.api.src.models.requests.tenders.LoadTenderActionRequest;
@@ -41,7 +42,6 @@ import org.jooq.DSLContext;
 import org.jooq.InsertResultStep;
 import org.jooq.exception.IntegrityConstraintViolationException;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -476,7 +476,7 @@ public class LoadTendersController extends Controller {
     @PutMapping
     public void updateLoadTender(@RequestBody LoadTenderRequest request) {
 
-        APIKey key = (APIKey) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        APIKeyAuthenticationHolder holder = SecurityHolder.getAuthenticationHolder(APIKeyAuthenticationHolder.class);
 
         try {
             PostgresConnection.getInstance().unsafely(supabase -> {
@@ -485,7 +485,7 @@ public class LoadTendersController extends Controller {
                     // locate the tender
                     LoadTendersRecord tender = transaction.dsl()
                             .selectFrom(Tables.LOAD_TENDERS)
-                            .where(Tables.LOAD_TENDERS.CUSTOMER_ID.eq(key.getSub()))
+                            .where(Tables.LOAD_TENDERS.CUSTOMER_ID.eq(holder.getSub()))
                             .and(Tables.LOAD_TENDERS.ORIGINAL_CUSTOMER_REFERENCE_NUMBER.eq(request.uniqueReferenceID()))
                             .fetchOne();
                     if (Objects.isNull(tender)) throw new RuntimeException("Unable to Locate Load Tender!");
@@ -506,7 +506,7 @@ public class LoadTendersController extends Controller {
     @PostMapping
     public IDResponse createLoadTender(@RequestBody LoadTenderRequest request) throws SQLException {
 
-        APIKey key = (APIKey) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        APIKeyAuthenticationHolder holder = SecurityHolder.getAuthenticationHolder(APIKeyAuthenticationHolder.class);
 
         AtomicReference<LoadTendersRecord> tender = new AtomicReference<>();
 
@@ -516,7 +516,7 @@ public class LoadTendersController extends Controller {
                     // create the load tender (upsertable)
 
                     LoadTendersRecord record = new LoadTendersRecord();
-                    record.setCustomerId(key.getSub());
+                    record.setCustomerId(holder.getSub());
                     record.setOriginalCustomerReferenceNumber(request.uniqueReferenceID());
 
                     tender.set(

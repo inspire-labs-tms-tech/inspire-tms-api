@@ -1,7 +1,7 @@
 package com.inspiretmstech.api.src.controllers.v1;
 
 import com.google.maps.model.LatLng;
-import com.inspiretmstech.api.src.auth.Authority;
+import com.inspiretmstech.api.src.auth.methods.apikey.Authority;
 import com.inspiretmstech.api.src.models.ResponseException;
 import com.inspiretmstech.api.src.models.requests.tenders.dsg.DicksSportingGoodsLoadTender;
 import com.inspiretmstech.api.src.models.responses.IDResponse;

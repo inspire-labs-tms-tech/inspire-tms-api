@@ -1,6 +1,6 @@
 package com.inspiretmstech.api.src.controllers.v1;
 
-import com.inspiretmstech.api.src.auth.Authority;
+import com.inspiretmstech.api.src.auth.methods.apikey.Authority;
 import com.inspiretmstech.api.src.constants.Config;
 import com.inspiretmstech.api.src.constants.EnvironmentVariables;
 import com.inspiretmstech.api.src.models.responses.VersionResponse;

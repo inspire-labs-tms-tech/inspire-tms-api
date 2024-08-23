@@ -1,6 +1,7 @@
-package com.inspiretmstech.api.src.auth;
+package com.inspiretmstech.api.src.auth.requires;
 
-import com.inspiretmstech.api.src.auth.bearer.APIKey;
+import com.inspiretmstech.api.src.auth.methods.SecurityHolder;
+import com.inspiretmstech.api.src.auth.methods.apikey.APIKeyAuthenticationHolder;
 import com.inspiretmstech.api.src.models.ResponseException;
 import com.inspiretmstech.api.src.models.exceptions.InsufficientPrivilegesException;
 import com.inspiretmstech.common.postgres.PostgresConnection;
@@ -10,7 +11,6 @@ import com.inspiretmstech.db.tables.records.UsersRecord;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import java.sql.SQLException;
@@ -31,18 +31,20 @@ public class RequiresProcessor {
 
     public void requires(Scopes scope) throws SQLException {
 
-        APIKey key = (APIKey) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        // only supports API
+        if (!SecurityHolder.isAuthenticationHolder(APIKeyAuthenticationHolder.class))
+            throw new ResponseException("Insufficient Credentials", "The credentials you provided were insufficient to access this resource", "API Key bearer-token is required");
+
+        APIKeyAuthenticationHolder credentials = SecurityHolder.getAuthenticationHolder(APIKeyAuthenticationHolder.class);
 
         // load the user
-        Optional<UsersRecord> user = PostgresConnection.getInstance().with(supabase ->
-                supabase.selectFrom(Tables.USERS).where(Tables.USERS.ID.eq(key.getSub())).fetchOne());
+        Optional<UsersRecord> user = PostgresConnection.getInstance().with(supabase -> supabase.selectFrom(Tables.USERS).where(Tables.USERS.ID.eq(credentials.getSub())).fetchOne());
         if (user.isEmpty())
             throw new ResponseException("Unable to Load User", "The server was unable to load a user object for the current user");
         if (Objects.isNull(user.get().getRoleId())) this.fail(scope);
 
         // load the role
-        Optional<RolesRecord> role = PostgresConnection.getInstance().with(supabase ->
-                supabase.selectFrom(Tables.ROLES).where(Tables.ROLES.ID.eq(user.get().getRoleId())).fetchOne());
+        Optional<RolesRecord> role = PostgresConnection.getInstance().with(supabase -> supabase.selectFrom(Tables.ROLES).where(Tables.ROLES.ID.eq(user.get().getRoleId())).fetchOne());
         if (role.isEmpty())
             throw new ResponseException("Unable to Load Role", "The server was unable to load a role for the current user");
 

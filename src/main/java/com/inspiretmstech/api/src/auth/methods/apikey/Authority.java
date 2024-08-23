@@ -1,4 +1,4 @@
-package com.inspiretmstech.api.src.auth;
+package com.inspiretmstech.api.src.auth.methods.apikey;
 
 import org.springframework.security.core.GrantedAuthority;
 

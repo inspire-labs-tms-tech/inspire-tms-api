@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.inspiretmstech.api.src.auth.Authority;
+import com.inspiretmstech.api.src.auth.methods.apikey.Authority;
 import com.inspiretmstech.api.src.constants.EnvironmentVariables;
 import com.inspiretmstech.api.src.models.responses.fmcsa.FMCSAResult;
 import com.inspiretmstech.common.utils.Environment;

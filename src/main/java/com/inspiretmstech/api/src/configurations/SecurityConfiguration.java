@@ -2,7 +2,6 @@ package com.inspiretmstech.api.src.configurations;
 
 import com.google.gson.Gson;
 import com.inspiretmstech.api.src.auth.AuthenticationFilter;
-import com.inspiretmstech.api.src.auth.bearer.APIKeyDetailsService;
 import com.inspiretmstech.api.src.constants.EnvironmentVariables;
 import com.inspiretmstech.api.src.models.responses.ErrorResponse;
 import com.inspiretmstech.common.utils.Environment;
@@ -14,8 +13,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
@@ -28,14 +27,10 @@ import java.net.URISyntaxException;
 
 @Configuration
 @EnableMethodSecurity(securedEnabled = true)
+@EnableWebSecurity
 public class SecurityConfiguration {
 
     private final Logger logger = LoggerFactory.getLogger(SecurityConfiguration.class);
-
-    @Bean
-    UserDetailsService userDetailsService() {
-        return new APIKeyDetailsService();
-    }
 
     @Bean
     public AuthenticationFailureHandler authenticationFailureHandler() {
