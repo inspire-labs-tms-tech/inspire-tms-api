@@ -180,7 +180,9 @@ public class LoadTendersController extends Controller {
             default -> throw new RuntimeException("VERSION '" + VERSION + "' is unhandled");
         };
 
-        switch (tender.get().getIntegrationType()) {
+        // use SMTP as a fall-through case, as this would never be used in this context
+        IntegrationTypes type = Optional.ofNullable(tender.get().getIntegrationType()).orElse(IntegrationTypes.CUSTOM_SMTP);
+        switch (type) {
             case GEORGIA_PACIFIC -> {
                 Optional<IntegrationsRecord> gp = PostgresConnection.getInstance().with(supabase ->
                         supabase.selectFrom(Tables.INTEGRATIONS)
@@ -354,7 +356,7 @@ public class LoadTendersController extends Controller {
                         _order.setCustomerReferenceNumber(Optional.ofNullable(tenderVersion.get().getCustomerReferenceNumber()).orElse(""));
                         _order.setIsRequiringBols(false); // handled automatically in postgres triggers
                         _order.setPcmilerRoutingType(null); // handled automatically in postgres triggers
-                        Optional<OrdersRecord> order = Optional.ofNullable(trx.dsl().insertInto(Tables.ORDERS).values(_order).returning().fetchOne());
+                        Optional<OrdersRecord> order = Optional.ofNullable(trx.dsl().insertInto(Tables.ORDERS).set(_order).returning().fetchOne());
                         if (order.isEmpty())
                             throw new ResponseException("Unable to Accept Tender", "an error occurred while creating the order");
 
@@ -366,7 +368,7 @@ public class LoadTendersController extends Controller {
                             _stop.setStopNumber((long) -1); // handled in postgres triggers
                             _stop.setLoadTenderStopId(stop.getId());
                             _stop.setNotesShared("Earliest Arrival: " + (Objects.nonNull(stop.getEarliestArrival()) ? stop.getEarliestArrival().format(humanReadable) : "") + "\nLatest Arrival: " + (Objects.nonNull(stop.getLatestArrival()) ? stop.getLatestArrival().format(humanReadable) : ""));
-                            Optional<StopsRecord> newStop = Optional.ofNullable(trx.dsl().insertInto(Tables.STOPS).values(_stop).returning().fetchOne());
+                            Optional<StopsRecord> newStop = Optional.ofNullable(trx.dsl().insertInto(Tables.STOPS).set(_stop).returning().fetchOne());
                             if (newStop.isEmpty())
                                 throw new ResponseException("Unable to Accept Tender", "Unable to Create Stop " + stop.getId());
                         }
@@ -381,7 +383,7 @@ public class LoadTendersController extends Controller {
                             _line.setDate(LocalDate.now()); // handled automatically in postgres trigger
                             _line.setInvoiceId(UUID.randomUUID()); // handled automatically in postgres trigger
 
-                            Optional<RevenueLinesRecord> newLine = Optional.ofNullable(trx.dsl().insertInto(Tables.REVENUE_LINES).values(_line).returning().fetchOne());
+                            Optional<RevenueLinesRecord> newLine = Optional.ofNullable(trx.dsl().insertInto(Tables.REVENUE_LINES).set(_line).returning().fetchOne());
                             if (newLine.isEmpty())
                                 throw new ResponseException("Unable to Create Revenue Line(s)", "An error occurred while creating revenue lines");
                         }
@@ -412,7 +414,7 @@ public class LoadTendersController extends Controller {
                             _stop.setStopNumber((long) -1); // handled in postgres triggers
                             _stop.setLoadTenderStopId(stop.getId());
                             _stop.setNotesShared("Earliest Arrival: " + (Objects.nonNull(stop.getEarliestArrival()) ? stop.getEarliestArrival().format(humanReadable) : "") + "\nLatest Arrival: " + (Objects.nonNull(stop.getLatestArrival()) ? stop.getLatestArrival().format(humanReadable) : ""));
-                            Optional<StopsRecord> newStop = Optional.ofNullable(trx.dsl().insertInto(Tables.STOPS).values(_stop).returning().fetchOne());
+                            Optional<StopsRecord> newStop = Optional.ofNullable(trx.dsl().insertInto(Tables.STOPS).set(_stop).returning().fetchOne());
                             if (newStop.isEmpty())
                                 throw new ResponseException("Unable to Accept Tender", "Unable to Create Stop " + stop.getId());
                         }
@@ -427,7 +429,7 @@ public class LoadTendersController extends Controller {
                             _line.setDate(LocalDate.now()); // handled automatically in postgres trigger
                             _line.setInvoiceId(UUID.randomUUID()); // handled automatically in postgres trigger
 
-                            Optional<RevenueLinesRecord> newLine = Optional.ofNullable(trx.dsl().insertInto(Tables.REVENUE_LINES).values(_line).returning().fetchOne());
+                            Optional<RevenueLinesRecord> newLine = Optional.ofNullable(trx.dsl().insertInto(Tables.REVENUE_LINES).set(_line).returning().fetchOne());
                             if (newLine.isEmpty())
                                 throw new ResponseException("Unable to Create Revenue Line(s)", "An error occurred while creating revenue lines");
                         }
@@ -452,6 +454,7 @@ public class LoadTendersController extends Controller {
                     @Nullable
                     LoadTenderVersionsRecord newTenderVersion = trx.dsl().update(Tables.LOAD_TENDER_VERSIONS)
                             .set(Tables.LOAD_TENDER_VERSIONS.STATUS, LoadTenderStatus.ACCEPTED)
+                            .set(Tables.LOAD_TENDER_VERSIONS.STATUS_CHANGED_AT, OffsetDateTime.now())
                             .where(Tables.LOAD_TENDER_VERSIONS.ID.eq(tenderVersion.get().getId()))
                             .returning()
                             .fetchOne();

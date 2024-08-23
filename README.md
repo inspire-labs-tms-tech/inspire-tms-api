@@ -17,3 +17,4 @@ The following variables must be defined in the runtime environment:
 | DB_NAME                  | The name of the database in Postgres to connect to                                |
 | SITE_URL                 | The HTTP(S) URL where Inspire TMS is publicly accessible                          |
 | GOOGLE_GEOCODING_API_KEY | An API Key for the Google Geocoding API                                           |
+| JWT_SECRET               | JWT signing key used to verify JWTs                                               |

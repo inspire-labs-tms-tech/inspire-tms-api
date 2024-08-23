@@ -1,9 +1,9 @@
 package com.inspiretmstech.api.src.auth.methods;
 
+import com.inspiretmstech.api.src.auth.AuthenticatedAuthenticationToken;
 import com.inspiretmstech.api.src.auth.methods.abc.AuthenticationHolder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
 
 public class SecurityHolder<T extends AuthenticationHolder> {
 
@@ -29,7 +29,7 @@ public class SecurityHolder<T extends AuthenticationHolder> {
     }
 
     public Authentication getAuthentication() {
-        Authentication token = new PreAuthenticatedAuthenticationToken(this.object, this.object.getEncryptedSecret(), this.object.getAuthorities());
+        Authentication token = new AuthenticatedAuthenticationToken(this.object, this.object.getEncryptedSecret(), this.object.getAuthorities());
         token.setAuthenticated(true);
         return token;
     }
