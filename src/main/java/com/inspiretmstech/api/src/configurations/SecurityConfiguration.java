@@ -42,26 +42,30 @@ public class SecurityConfiguration {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(@NotNull CorsRegistry registry) {
-                try {
-                    URI uri = new URI(Environment.get(EnvironmentVariables.SITE_URL));
-                    String scheme = uri.getScheme();
-                    String host = uri.getHost();
-                    int port = uri.getPort();
-
-                    String origin;
-                    if (port == -1) origin = scheme + "://" + host;
-                    else origin = scheme + "://" + host + ":" + port;
-
-                    registry
-                            .addMapping("/**")
-                            .allowedOrigins(origin)
-                            .allowedMethods("*");
-
-                    logger.info("CORS enabled for: {}", origin);
-
-                } catch (URISyntaxException e) {
-                    throw new RuntimeException(e);
-                }
+                registry
+                        .addMapping("/**")
+                        .allowedOrigins("*")
+                        .allowedMethods("*");
+//                try {
+//                    URI uri = new URI(Environment.get(EnvironmentVariables.SITE_URL));
+//                    String scheme = uri.getScheme();
+//                    String host = uri.getHost();
+//                    int port = uri.getPort();
+//
+//                    String origin;
+//                    if (port == -1) origin = scheme + "://" + host;
+//                    else origin = scheme + "://" + host + ":" + port;
+//
+//                    registry
+//                            .addMapping("/**")
+//                            .allowedOrigins(origin)
+//                            .allowedMethods("*");
+//
+//                    logger.info("CORS enabled for: {}", origin);
+//
+//                } catch (URISyntaxException e) {
+//                    throw new RuntimeException(e);
+//                }
             }
         };
     }

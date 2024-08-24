@@ -5,6 +5,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.inspiretmstech.api.src.auth.methods.apikey.Authority;
+import com.inspiretmstech.api.src.auth.requires.Requires;
+import com.inspiretmstech.api.src.auth.requires.Scopes;
 import com.inspiretmstech.api.src.constants.EnvironmentVariables;
 import com.inspiretmstech.api.src.models.responses.fmcsa.FMCSAResult;
 import com.inspiretmstech.common.utils.Environment;
@@ -34,14 +36,16 @@ public class FMCSAController {
 
     private final Logger logger = LoggerFactory.getLogger(FMCSAController.class);
 
-    @Secured(Authority.Authorities.ANON)
+    @Secured(Authority.Authorities.USER)
+    @Requires(Scopes.CARRIERS)
     @Operation(summary = "Query by DOT Number")
     @PostMapping("/dot-number")
     public List<FMCSAResult> fmcsaLookupDOTNumber(@RequestBody int dotNumber) {
         return this.queryFMCSA("/qc/services/carriers/" + dotNumber);
     }
 
-    @Secured(Authority.Authorities.ANON)
+    @Secured(Authority.Authorities.USER)
+    @Requires(Scopes.CARRIERS)
     @Operation(summary = "Query by Name")
     @PostMapping("/name")
     public List<FMCSAResult> fmcsaLookupName(@RequestBody String name) {
