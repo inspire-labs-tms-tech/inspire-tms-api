@@ -1,10 +1,10 @@
 package com.inspiretmstech.api.src.controllers.v1;
 
+import com.inspiretmstech.api.src.auth.methods.SecurityHolder;
+import com.inspiretmstech.api.src.auth.methods.apikey.APIKeyAuthenticationHolder;
 import com.inspiretmstech.api.src.auth.methods.apikey.Authority;
 import com.inspiretmstech.api.src.auth.requires.Requires;
 import com.inspiretmstech.api.src.auth.requires.Scopes;
-import com.inspiretmstech.api.src.auth.methods.SecurityHolder;
-import com.inspiretmstech.api.src.auth.methods.apikey.APIKeyAuthenticationHolder;
 import com.inspiretmstech.api.src.models.ResponseException;
 import com.inspiretmstech.api.src.models.controllers.Controller;
 import com.inspiretmstech.api.src.models.requests.tenders.LoadTenderActionRequest;
@@ -40,6 +40,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.jetbrains.annotations.NotNull;
 import org.jooq.DSLContext;
 import org.jooq.InsertResultStep;
+import org.jooq.UpdateSetMoreStep;
 import org.jooq.exception.IntegrityConstraintViolationException;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
@@ -342,10 +343,9 @@ public class LoadTendersController extends Controller {
 
 
             // if not silent, need to update the order
+            AtomicReference<UUID> orderID = new AtomicReference<>();
             if (!request.silent()) PostgresConnection.getInstance().unsafely(supabase -> {
                 supabase.transaction(trx -> {
-
-                    UUID orderID = null;
 
                     // no order exists
                     if (Objects.isNull(tender.get().getOrderId())) {
@@ -388,29 +388,29 @@ public class LoadTendersController extends Controller {
                                 throw new ResponseException("Unable to Create Revenue Line(s)", "An error occurred while creating revenue lines");
                         }
 
-                        orderID = order.get().getId();
+                        orderID.set(order.get().getId());
                     } else { // update the existing order
-                        orderID = tender.get().getOrderId();
+                        orderID.set(tender.get().getOrderId());
 
                         // update order
                         Optional<OrdersRecord> newOrder = Optional.ofNullable(trx.dsl()
                                 .update(Tables.ORDERS)
                                 .set(Tables.ORDERS.CUSTOMER_REFERENCE_NUMBER, Optional.ofNullable(tenderVersion.get().getCustomerReferenceNumber()).orElse(""))
-                                .where(Tables.ORDERS.ID.eq(orderID))
+                                .where(Tables.ORDERS.ID.eq(orderID.get()))
                                 .returning()
                                 .fetchOne());
                         if (newOrder.isEmpty())
                             throw new ResponseException("Unable to Update Existing Order", "An error occurred while updating the customer reference number", "Is the order locked?");
 
                         // delete existing records
-                        trx.dsl().deleteFrom(Tables.STOPS).where(Tables.STOPS.ORDER_ID.eq(orderID)).execute();
-                        trx.dsl().deleteFrom(Tables.REVENUE_LINES).where(Tables.REVENUE_LINES.ORDER_ID.eq(orderID)).execute();
+                        trx.dsl().deleteFrom(Tables.STOPS).where(Tables.STOPS.ORDER_ID.eq(orderID.get())).execute();
+                        trx.dsl().deleteFrom(Tables.REVENUE_LINES).where(Tables.REVENUE_LINES.ORDER_ID.eq(orderID.get())).execute();
 
                         // create the stops
                         for (LoadTenderStopRecord stop : tenderVersion.get().getStops()) {
                             StopsRecord _stop = new StopsRecord();
                             _stop.setAddress(stop.getAddress());
-                            _stop.setOrderId(orderID);
+                            _stop.setOrderId(orderID.get());
                             _stop.setStopNumber((long) -1); // handled in postgres triggers
                             _stop.setLoadTenderStopId(stop.getId());
                             _stop.setNotesShared("Earliest Arrival: " + (Objects.nonNull(stop.getEarliestArrival()) ? stop.getEarliestArrival().format(humanReadable) : "") + "\nLatest Arrival: " + (Objects.nonNull(stop.getLatestArrival()) ? stop.getLatestArrival().format(humanReadable) : ""));
@@ -422,7 +422,7 @@ public class LoadTendersController extends Controller {
                         // create the revenue
                         for (LoadTenderRevenueItemRecord line : tenderVersion.get().getRevenue()) {
                             RevenueLinesRecord _line = new RevenueLinesRecord();
-                            _line.setOrderId(orderID);
+                            _line.setOrderId(orderID.get());
                             _line.setQuantity(line.getQuantity().shortValue());
                             _line.setRate(line.getRate());
                             _line.setAccountingPeriodId(0L); // handled automatically in postgres trigger
@@ -442,12 +442,18 @@ public class LoadTendersController extends Controller {
             // update the version (regardless of whether silent)
             PostgresConnection.getInstance().unsafely(supabase -> {
                 supabase.transaction(trx -> {
+
+                    // build base query
+                    UpdateSetMoreStep<LoadTendersRecord> query = trx.dsl().update(Tables.LOAD_TENDERS)
+                            .set(Tables.LOAD_TENDERS.STATUS, LoadTenderStatus.ACCEPTED);
+                    // dynamically add order id
+                    if (Objects.nonNull(orderID.get())) query = query.set(Tables.LOAD_TENDERS.ORDER_ID, orderID.get());
                     @Nullable
-                    LoadTendersRecord newTender = trx.dsl().update(Tables.LOAD_TENDERS)
-                            .set(Tables.LOAD_TENDERS.STATUS, LoadTenderStatus.ACCEPTED)
+                    LoadTendersRecord newTender = query
                             .where(Tables.LOAD_TENDERS.ID.eq(tender.get().getId()))
                             .returning()
                             .fetchOne();
+
                     if (Objects.isNull(newTender))
                         throw new ResponseException("Unable to Update Tender", "An error occurred while accepting the load tender");
 
