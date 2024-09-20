@@ -26,8 +26,10 @@
   "homepage": "https://github.com/inspire-labs-tms-tech/inspire-tms-api#readme",
   "devDependencies": {
     "@hey-api/client-axios": "^0.2.4",
-    "@hey-api/openapi-ts": "^0.53.2",
     "tsup": "^8.1.0",
     "typescript": "^5.5.3"
+  },
+  "dependencies": {
+    "@hey-api/openapi-ts": "^0.53.2"
   }
 }
