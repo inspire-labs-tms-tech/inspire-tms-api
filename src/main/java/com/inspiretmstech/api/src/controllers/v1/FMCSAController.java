@@ -39,6 +39,14 @@ public class FMCSAController {
     @Secured(Authority.Authorities.USER)
     @Requires(Scopes.CARRIERS)
     @Operation(summary = "Query by DOT Number")
+    @PostMapping("/mc-number")
+    public List<FMCSAResult> fmcsaLookupMCNumber(@RequestBody int mcNumber) {
+        return this.queryFMCSA("/qc/services/carriers/docket-number/" + mcNumber);
+    }
+
+    @Secured(Authority.Authorities.USER)
+    @Requires(Scopes.CARRIERS)
+    @Operation(summary = "Query by DOT Number")
     @PostMapping("/dot-number")
     public List<FMCSAResult> fmcsaLookupDOTNumber(@RequestBody int dotNumber) {
         return this.queryFMCSA("/qc/services/carriers/" + dotNumber);
