@@ -11,7 +11,7 @@
     "dist"
   ],
   "scripts": {
-    "types": "openapi-ts",
+    "types": "orval",
     "build": "npm run types && tsup"
   },
   "repository": {
@@ -25,11 +25,11 @@
   },
   "homepage": "https://github.com/inspire-labs-tms-tech/inspire-tms-api#readme",
   "devDependencies": {
-    "@hey-api/client-axios": "^0.2.4",
+    "orval": "^7.1.1",
     "tsup": "^8.1.0",
     "typescript": "^5.5.3"
   },
   "dependencies": {
-    "@hey-api/openapi-ts": "^0.53.2"
+    "axios": "^1.7.7"
   }
 }
