@@ -5,9 +5,13 @@
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
-  "files": ["README.md", "index.ts", "dist"],
+  "files": [
+    "README.md",
+    "index.ts",
+    "dist"
+  ],
   "scripts": {
-    "types": "npx --yes @hey-api/openapi-ts@0.50.2 --input http://127.0.0.1:8080/api-docs --output ./gen",
+    "types": "openapi-ts",
     "build": "npm run types && tsup"
   },
   "repository": {
@@ -21,6 +25,8 @@
   },
   "homepage": "https://github.com/inspire-labs-tms-tech/inspire-tms-api#readme",
   "devDependencies": {
+    "@hey-api/client-axios": "^0.2.4",
+    "@hey-api/openapi-ts": "^0.53.2",
     "tsup": "^8.1.0",
     "typescript": "^5.5.3"
   }
