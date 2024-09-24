@@ -10,6 +10,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -20,6 +22,8 @@ import java.util.List;
 
 public class AuthenticationFilter extends OncePerRequestFilter {
 
+    private final Logger logger = LoggerFactory.getLogger(AuthenticationFilter.class);
+
     // order by precedent (lower index = earlier/higher precedent => first supported is used)
     private final List<AuthenticationProvider<?>> providers = Arrays.asList(
             new SessionAuthenticationProvider(),
@@ -29,6 +33,9 @@ public class AuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(@NotNull HttpServletRequest request, @NotNull HttpServletResponse response, @NotNull FilterChain filterChain) throws ServletException, IOException {
+
+        logger.trace("Handling Inbound Authentication Request: {}", request);
+
         try {
             for (AuthenticationProvider<?> provider : providers) {
                 if (provider.supports(request)) {
@@ -43,6 +50,7 @@ public class AuthenticationFilter extends OncePerRequestFilter {
 
             filterChain.doFilter(request, response);
         } catch (AccessDeniedException e) {
+            logger.trace("Authentication Failure Exception: {}", e.getMessage());
             (new ResponseException("Access Denied", "An access denied exception has occurred", e.getMessage())).respondWith(response);
         }
     }
