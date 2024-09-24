@@ -19,9 +19,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler({RuntimeException.class, SQLException.class, ResponseException.class})
     public ResponseEntity<ErrorResponse> handleRuntimeException(RuntimeException e) {
-        logger.trace(e.getMessage());
-        for (StackTraceElement stackTraceElement : e.getStackTrace())
-            logger.trace(stackTraceElement.toString());
+        logger.trace("A Global Exception Has Occurred: {}", e.getMessage());
 
         if (e.getClass() == InsufficientPrivilegesException.class)
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(((InsufficientPrivilegesException) e).getErrorResponse());

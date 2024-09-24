@@ -19,6 +19,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class AuthenticationFilter extends OncePerRequestFilter {
 
@@ -34,7 +35,9 @@ public class AuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(@NotNull HttpServletRequest request, @NotNull HttpServletResponse response, @NotNull FilterChain filterChain) throws ServletException, IOException {
 
-        logger.trace("Handling Inbound Authentication Request: {}", request);
+        logger.debug("Handling Inbound Authentication Request");
+        logger.trace("  Headers:");
+        request.getHeaderNames().asIterator().forEachRemaining(h -> logger.trace("    {}: {}", h, request.getHeader(h)));
 
         try {
             for (AuthenticationProvider<?> provider : providers) {
@@ -53,5 +56,8 @@ public class AuthenticationFilter extends OncePerRequestFilter {
             logger.trace("Authentication Failure Exception: {}", e.getMessage());
             (new ResponseException("Access Denied", "An access denied exception has occurred", e.getMessage())).respondWith(response);
         }
+
+        if(Objects.isNull(SecurityContextHolder.getContext())) logger.error("Security Context is Null!");
+        else logger.debug("Security Context: {}", SecurityContextHolder.getContext().getAuthentication().getPrincipal().getClass().getName());
     }
 }
