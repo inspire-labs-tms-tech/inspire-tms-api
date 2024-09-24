@@ -36,7 +36,7 @@ public class AuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(@NotNull HttpServletRequest request, @NotNull HttpServletResponse response, @NotNull FilterChain filterChain) throws ServletException, IOException {
 
-        logger.debug("Handling Inbound Authentication Request");
+        logger.debug("Handling Inbound Authentication Request ({})", request.getServletPath());
         logger.trace("  Headers:");
         request.getHeaderNames().asIterator().forEachRemaining(h -> logger.trace("    {}: {}", h, request.getHeader(h)));
 
