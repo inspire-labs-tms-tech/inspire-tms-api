@@ -42,8 +42,9 @@ public class AuthenticationFilter extends OncePerRequestFilter {
 
         try {
             for (AuthenticationProvider<?> provider : providers) {
+                logger.debug("{}: {}",provider.getClass().getSimpleName(), provider.supports(request));
                 if (provider.supports(request)) {
-                    logger.debug("Attempting {} Authentication",provider.getClass().getSimpleName());
+                    logger.trace("Attempting {} Authentication",provider.getClass().getSimpleName());
                     SecurityContextHolder
                             .getContext()
                             .setAuthentication(
