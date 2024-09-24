@@ -71,9 +71,11 @@ public class TruckerToolsController extends Controller {
                         supabase.update(Tables.STOPS)
                                 .set(Tables.STOPS.DRIVER_ARRIVED_AT, OffsetDateTime.now())
                                 .set(Tables.STOPS.DRIVER_DEPARTED_AT, OffsetDateTime.now())
-                                .where(Tables.STOPS.ORDER_ID.eq(load.get().getOrderId()).and(Tables.STOPS.STOP_NUMBER.eq((long) request.loadTrackId()))).returning().fetchOne()
+                                .where(Tables.STOPS.ORDER_ID.eq(load.get().getOrderId()).and(Tables.STOPS.STOP_NUMBER.eq((long) request.status().stopOrderNumber()))).returning().fetchOne()
                 );
-                if(stop.isEmpty() || Objects.isNull(stop.get().getDriverArrivedAt())) throw new NullPointerException("Unable to Update Arrival/Departure Times");
+                if (stop.isEmpty()) throw new NullPointerException("Unable to Locate Stop to Update");
+                else if (Objects.isNull(stop.get().getDriverArrivedAt()))
+                    throw new NullPointerException("Unable to Update Arrival/Departure Times");
             }
 
         } catch (Exception e) {
