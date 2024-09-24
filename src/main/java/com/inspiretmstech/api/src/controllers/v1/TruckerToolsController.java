@@ -67,12 +67,21 @@ public class TruckerToolsController extends Controller {
 
             // update arrived/departed times
             if (request.status().name().startsWith("Checked Completed")) {
+
+                // set the arrived time (MUST be done separately from departure time)
                 Optional<StopsRecord> stop = PostgresConnection.getInstance().with(supabase ->
                         supabase.update(Tables.STOPS)
                                 .set(Tables.STOPS.DRIVER_ARRIVED_AT, OffsetDateTime.now())
+                                .where(Tables.STOPS.ORDER_ID.eq(load.get().getOrderId()).and(Tables.STOPS.STOP_NUMBER.eq((long) request.status().stopOrderNumber()))).returning().fetchOne()
+                );
+
+                // det departure time (MUST be done after arrival time)
+                stop = PostgresConnection.getInstance().with(supabase ->
+                        supabase.update(Tables.STOPS)
                                 .set(Tables.STOPS.DRIVER_DEPARTED_AT, OffsetDateTime.now())
                                 .where(Tables.STOPS.ORDER_ID.eq(load.get().getOrderId()).and(Tables.STOPS.STOP_NUMBER.eq((long) request.status().stopOrderNumber()))).returning().fetchOne()
                 );
+
                 if (stop.isEmpty()) throw new NullPointerException("Unable to Locate Stop to Update");
                 else if (Objects.isNull(stop.get().getDriverArrivedAt()))
                     throw new NullPointerException("Unable to Update Arrival/Departure Times");
