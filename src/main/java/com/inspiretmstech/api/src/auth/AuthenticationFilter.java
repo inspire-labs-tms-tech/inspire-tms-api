@@ -43,6 +43,7 @@ public class AuthenticationFilter extends OncePerRequestFilter {
         try {
             for (AuthenticationProvider<?> provider : providers) {
                 if (provider.supports(request)) {
+                    logger.debug("Attempting {} Authentication",provider.getClass().getSimpleName());
                     SecurityContextHolder
                             .getContext()
                             .setAuthentication(
@@ -62,6 +63,6 @@ public class AuthenticationFilter extends OncePerRequestFilter {
         if(Objects.isNull(context)) logger.error("Security Context is Null!");
         else if(Objects.isNull(context.getAuthentication())) logger.error("Security Context Authentication is Null!");
         else if(Objects.isNull(context.getAuthentication().getPrincipal())) logger.error("Security Context Authentication Principal is Null!");
-        else logger.debug("Security Context: {}", context.getAuthentication().getPrincipal().getClass().getName());
+        else logger.debug("Security Context: {}", context.getAuthentication().getPrincipal().getClass().getSimpleName());
     }
 }
