@@ -9,9 +9,7 @@ import com.inspiretmstech.api.src.models.requests.truckertools.TruckerToolsStatu
 import com.inspiretmstech.api.src.models.responses.StatusResponse;
 import com.inspiretmstech.common.postgres.PostgresConnection;
 import com.inspiretmstech.db.Tables;
-import com.inspiretmstech.db.tables.records.TruckerToolsLoadCommentsRecord;
-import com.inspiretmstech.db.tables.records.TruckerToolsLoadDocumentsRecord;
-import com.inspiretmstech.db.tables.records.TruckerToolsLoadStatusesRecord;
+import com.inspiretmstech.db.tables.records.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.security.access.annotation.Secured;
@@ -22,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.time.OffsetDateTime;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -58,6 +57,29 @@ public class TruckerToolsController extends Controller {
                         .set(status)
                         .returning()
                         .fetchOne());
+
+        // process stop-level information
+        if (request.status().stopOrderNumber() > 0) try {
+
+            // get the load
+            Optional<TruckerToolsLoadsRecord> load = PostgresConnection.getInstance().with(supabase -> supabase.selectFrom(Tables.TRUCKER_TOOLS_LOADS).where(Tables.TRUCKER_TOOLS_LOADS.ID.eq((long) request.loadTrackId())).fetchOne());
+            if (load.isEmpty()) throw new NullPointerException("Unable to Load LoadTrack");
+
+            // update arrived/departed times
+            if (request.status().name().startsWith("Checked Completed")) {
+                Optional<StopsRecord> stop = PostgresConnection.getInstance().with(supabase ->
+                        supabase.update(Tables.STOPS)
+                                .set(Tables.STOPS.DRIVER_ARRIVED_AT, OffsetDateTime.now())
+                                .set(Tables.STOPS.DRIVER_DEPARTED_AT, OffsetDateTime.now())
+                                .where(Tables.STOPS.ORDER_ID.eq(load.get().getOrderId()).and(Tables.STOPS.STOP_NUMBER.eq((long) request.loadTrackId()))).returning().fetchOne()
+                );
+                if(stop.isEmpty() || Objects.isNull(stop.get().getDriverArrivedAt())) throw new NullPointerException("Unable to Update Arrival/Departure Times");
+            }
+
+        } catch (Exception e) {
+            this.logger.error("Unable to Update Stop {}: {}", request.status().stopOrderNumber(), e.getMessage());
+        }
+
 
         if (created.isEmpty()) throw new ResponseException("Unable to Create Load Track Status!");
         return StatusResponse.ACCEPTED();
