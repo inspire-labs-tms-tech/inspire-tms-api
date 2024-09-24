@@ -11,10 +11,7 @@ public class AnonymousAuthenticationProvider implements AuthenticationProvider<A
 
     @Override
     public boolean supports(@NotNull HttpServletRequest request) {
-        return Optional
-                .ofNullable(request.getHeader("Authorization"))
-                .map(String::isBlank)
-                .orElse(true);
+        return true;
     }
 
     @Override
