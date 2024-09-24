@@ -6,13 +6,7 @@
         </Console>
     </Appenders>
     <Loggers>
-        <Logger name="com.inspiretmstech.api.src.controllers.v1.TruckerToolsController" level="trace">
-            <AppenderRef ref="Console"/>
-        </Logger>
-        <Logger name="com.inspiretmstech.api.src" level="warn">
-            <AppenderRef ref="Console"/>
-        </Logger>
-        <Logger name="com.inspiretmstech.api.API" level="info">
+        <Logger name="com.inspiretmstech.api" level="${env:LOG_LEVEL:-INFO}">
             <AppenderRef ref="Console"/>
         </Logger>
         <Logger name="org.apache" level="warn">
