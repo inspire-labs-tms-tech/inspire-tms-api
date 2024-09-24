@@ -13,6 +13,7 @@ import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -57,7 +58,10 @@ public class AuthenticationFilter extends OncePerRequestFilter {
             (new ResponseException("Access Denied", "An access denied exception has occurred", e.getMessage())).respondWith(response);
         }
 
-        if(Objects.isNull(SecurityContextHolder.getContext())) logger.error("Security Context is Null!");
-        else logger.debug("Security Context: {}", SecurityContextHolder.getContext().getAuthentication().getPrincipal().getClass().getName());
+        SecurityContext context = SecurityContextHolder.getContext();
+        if(Objects.isNull(context)) logger.error("Security Context is Null!");
+        else if(Objects.isNull(context.getAuthentication())) logger.error("Security Context Authentication is Null!");
+        else if(Objects.isNull(context.getAuthentication().getPrincipal())) logger.error("Security Context Authentication Principal is Null!");
+        else logger.debug("Security Context: {}", context.getAuthentication().getPrincipal().getClass().getName());
     }
 }
