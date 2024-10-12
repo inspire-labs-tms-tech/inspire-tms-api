@@ -1,10 +1,8 @@
-package com.inspiretmstech.api.src.configurations;
+package com.inspiretmstech.api.src.auth;
 
 import com.google.gson.Gson;
-import com.inspiretmstech.api.src.auth.AuthenticationFilter;
-import com.inspiretmstech.api.src.constants.EnvironmentVariables;
+import com.inspiretmstech.api.src.configurations.GlobalAuthenticationFailureHandler;
 import com.inspiretmstech.api.src.models.responses.ErrorResponse;
-import com.inspiretmstech.common.utils.Environment;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,9 +19,6 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 import org.springframework.security.web.header.writers.StaticHeadersWriter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-import java.net.URI;
-import java.net.URISyntaxException;
 
 @Configuration
 @EnableMethodSecurity(securedEnabled = true)
