@@ -7,7 +7,6 @@ import com.inspiretmstech.db.tables.records.StopsRecord;
 import com.inspiretmstech.db.udt.records.AddressRecord;
 import org.apache.http.client.utils.URIBuilder;
 import org.jetbrains.annotations.NotNull;
-import org.joda.time.DateTime;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -121,7 +120,7 @@ public class AfterShipTrackingUtility {
         ) {}
 
         public record AfterShipTrackingUpdateDetails(
-                @NotNull DateTime at,
+                @NotNull String at, // ISO 8601
                 @NotNull AfterShipMessageType type,
                 @NotNull StopsRecord stop
         ) {}
