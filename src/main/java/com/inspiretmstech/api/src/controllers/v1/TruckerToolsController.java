@@ -73,8 +73,9 @@ public class TruckerToolsController extends Controller {
             // update arrived/departed times
             if (request.status().name().startsWith("Checked Completed")) {
                 DateTime now = DateTime.now();
-                InOutTimesProcessor.arrived(new InOutTimes(load.get().getOrderId(), (long) request.status().stopOrderNumber(), now));
-                InOutTimesProcessor.departed(new InOutTimes(load.get().getOrderId(), (long) request.status().stopOrderNumber(), now.plusSeconds(1)));
+                InOutTimesProcessor processor = new InOutTimesProcessor();
+                processor.arrived(new InOutTimes(load.get().getOrderId(), (long) request.status().stopOrderNumber(), now));
+                processor.departed(new InOutTimes(load.get().getOrderId(), (long) request.status().stopOrderNumber(), now.plusSeconds(1)));
             }
 
         } catch (Exception e) {

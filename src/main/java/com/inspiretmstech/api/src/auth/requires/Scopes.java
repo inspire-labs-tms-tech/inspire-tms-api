@@ -5,5 +5,6 @@ public enum Scopes {
     CARRIERS,
     CUSTOMERS,
     OPERATIONS,
+    ORDERS,
     NEVER
 }

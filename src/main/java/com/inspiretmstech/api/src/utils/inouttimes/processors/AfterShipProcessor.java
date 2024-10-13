@@ -12,6 +12,7 @@ import com.inspiretmstech.db.tables.records.IntegrationsRecord;
 import com.inspiretmstech.db.tables.records.OrdersRecord;
 import com.inspiretmstech.db.tables.records.StopsRecord;
 
+import java.net.http.HttpResponse;
 import java.util.Optional;
 
 public class AfterShipProcessor extends TimeProcessor {
@@ -99,7 +100,7 @@ public class AfterShipProcessor extends TimeProcessor {
             return;
         }
 
-        AfterShipTrackingUtility.sendAfterShipTrackingUpdate(new AfterShipTrackingUtility.AfterShipTrackingUpdate(
+        HttpResponse<?> resp = AfterShipTrackingUtility.sendAfterShipTrackingUpdate(new AfterShipTrackingUtility.AfterShipTrackingUpdate(
                 aftership.get().getAftershipSlug().trim(),
                 new AfterShipTrackingUtility.AfterShipTrackingUpdate.AfterShipTrackingUpdateBasic(
                         customer.get(),
@@ -113,6 +114,15 @@ public class AfterShipProcessor extends TimeProcessor {
                         stop.get()
                 )
         ));
+
+        if (resp.statusCode() != 200 && resp.statusCode() != 201) {
+            logger.debug(resp.body().toString());
+            logger.error("unable to send after ship tracking (status code {})", resp.statusCode());
+            return;
+        }
+
+        // TODO: need to create/save the request and response as a (supabase) log to db
+        logger.debug("successfully sent after ship tracking (status code {})", resp.statusCode());
     }
 
     protected Executor<InOutTimes> getArrivalProcessor() {
