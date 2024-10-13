@@ -7,11 +7,17 @@ import com.inspiretmstech.api.src.models.requests.truckertools.TruckerToolsComme
 import com.inspiretmstech.api.src.models.requests.truckertools.TruckerToolsDocumentsRequest;
 import com.inspiretmstech.api.src.models.requests.truckertools.TruckerToolsStatusRequest;
 import com.inspiretmstech.api.src.models.responses.StatusResponse;
+import com.inspiretmstech.api.src.utils.inouttimes.InOutTimes;
+import com.inspiretmstech.api.src.utils.inouttimes.InOutTimesProcessor;
 import com.inspiretmstech.common.postgres.PostgresConnection;
 import com.inspiretmstech.db.Tables;
-import com.inspiretmstech.db.tables.records.*;
+import com.inspiretmstech.db.tables.records.TruckerToolsLoadCommentsRecord;
+import com.inspiretmstech.db.tables.records.TruckerToolsLoadDocumentsRecord;
+import com.inspiretmstech.db.tables.records.TruckerToolsLoadStatusesRecord;
+import com.inspiretmstech.db.tables.records.TruckerToolsLoadsRecord;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.joda.time.DateTime;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,7 +26,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
-import java.time.OffsetDateTime;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -67,24 +72,9 @@ public class TruckerToolsController extends Controller {
 
             // update arrived/departed times
             if (request.status().name().startsWith("Checked Completed")) {
-
-                // set the arrived time (MUST be done separately from departure time)
-                Optional<StopsRecord> stop = PostgresConnection.getInstance().with(supabase ->
-                        supabase.update(Tables.STOPS)
-                                .set(Tables.STOPS.DRIVER_ARRIVED_AT, OffsetDateTime.now())
-                                .where(Tables.STOPS.ORDER_ID.eq(load.get().getOrderId()).and(Tables.STOPS.STOP_NUMBER.eq((long) request.status().stopOrderNumber()))).returning().fetchOne()
-                );
-
-                // det departure time (MUST be done after arrival time)
-                stop = PostgresConnection.getInstance().with(supabase ->
-                        supabase.update(Tables.STOPS)
-                                .set(Tables.STOPS.DRIVER_DEPARTED_AT, OffsetDateTime.now())
-                                .where(Tables.STOPS.ORDER_ID.eq(load.get().getOrderId()).and(Tables.STOPS.STOP_NUMBER.eq((long) request.status().stopOrderNumber()))).returning().fetchOne()
-                );
-
-                if (stop.isEmpty()) throw new NullPointerException("Unable to Locate Stop to Update");
-                else if (Objects.isNull(stop.get().getDriverArrivedAt()))
-                    throw new NullPointerException("Unable to Update Arrival/Departure Times");
+                DateTime now = DateTime.now();
+                InOutTimesProcessor.arrived(new InOutTimes(load.get().getOrderId(), (long) request.status().stopOrderNumber(), now));
+                InOutTimesProcessor.departed(new InOutTimes(load.get().getOrderId(), (long) request.status().stopOrderNumber(), now.plusSeconds(1)));
             }
 
         } catch (Exception e) {

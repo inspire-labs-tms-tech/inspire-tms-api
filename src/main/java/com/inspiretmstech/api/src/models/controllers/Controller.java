@@ -1,14 +1,11 @@
 package com.inspiretmstech.api.src.models.controllers;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.inspiretmstech.api.src.utils.WithLogger;
 
-public abstract class Controller {
-
-    protected final Logger logger;
+public abstract class Controller extends WithLogger {
 
     public Controller(Class<?> controllerClass) {
-        logger = LoggerFactory.getLogger(controllerClass);
+        super(controllerClass);
     }
 
 }
