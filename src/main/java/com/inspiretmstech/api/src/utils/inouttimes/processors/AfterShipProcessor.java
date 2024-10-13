@@ -60,6 +60,10 @@ public class AfterShipProcessor extends TimeProcessor {
             logger.error("unable to load customer");
             return;
         }
+        if(!customer.get().getIsAftershipCustomer()) {
+            logger.debug("aftership not enabled for customer");
+            return;
+        }
 
         // get the origin
         Optional<StopsRecord> origin = conn.unsafely(supabase ->
