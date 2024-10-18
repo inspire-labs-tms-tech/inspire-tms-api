@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -82,7 +83,7 @@ public class DicksSportingGoodsLoadTenderController {
 
                     // create the revenue
                     if (Objects.nonNull(tender.data().section3().totalWeightAndCharges()) && Objects.nonNull(tender.data().section3().totalWeightAndCharges().charge()))
-                        revenue.add(new LoadTenderRevenueItemRecord(1, BigDecimal.valueOf(tender.data().section3().totalWeightAndCharges().charge() / 100)));
+                        revenue.add(new LoadTenderRevenueItemRecord(1, BigDecimal.valueOf(tender.data().section3().totalWeightAndCharges().charge()).divide(BigDecimal.valueOf(100), 2, RoundingMode.HALF_UP)));
 
                     // create the stops
                     int stopNum = 0;
