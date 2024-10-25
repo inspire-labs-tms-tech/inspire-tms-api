@@ -61,6 +61,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public class LoadTendersController extends Controller {
 
     private final static DateTimeFormatter humanReadable = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm a ZZZZ");
+    private final static DateTimeFormatter apiFormat = DateTimeFormatter.ofPattern("yyyyMMdd");
 
     public LoadTendersController() {
         super(LoadTendersController.class);
@@ -219,7 +220,7 @@ public class LoadTendersController extends Controller {
                 section1.setReferenceIdentification(refID);
 
                 SegmentBeginningSegmentForBookingOrPickupOrDeliveryFd5c9c80f5468dd49a82921bf09de44761e645537968a5d096703bf6e4147b9d beginning = new SegmentBeginningSegmentForBookingOrPickupOrDeliveryFd5c9c80f5468dd49a82921bf09de44761e645537968a5d096703bf6e4147b9d();
-                beginning.setDate(LocalDate.now());
+                beginning.setDate(apiFormat.format(LocalDate.now()));
                 beginning.setShipmentIdentificationNumber(tender.get().getOriginalCustomerReferenceNumber());
                 beginning.setReservationActionCode(request.accept() ? SegmentBeginningSegmentForBookingOrPickupOrDeliveryFd5c9c80f5468dd49a82921bf09de44761e645537968a5d096703bf6e4147b9d.ReservationActionCodeEnum.A : SegmentBeginningSegmentForBookingOrPickupOrDeliveryFd5c9c80f5468dd49a82921bf09de44761e645537968a5d096703bf6e4147b9d.ReservationActionCodeEnum.D);
                 beginning.setStandardCarrierAlphaCode(gp.get().getGeorgiaPacificScac());
@@ -274,7 +275,7 @@ public class LoadTendersController extends Controller {
                 section1.setReferenceIdentification(ref);
 
                 SegmentBeginningSegmentForBookingOrPickupOrDelivery906c00531695b2ddfe89ee321e01671195cc392c9435cee04a4b5c96608e75fc beginning = new SegmentBeginningSegmentForBookingOrPickupOrDelivery906c00531695b2ddfe89ee321e01671195cc392c9435cee04a4b5c96608e75fc();
-                beginning.setDate(LocalDate.now());
+                beginning.setDate(apiFormat.format(LocalDate.now()));
                 beginning.setShipmentIdentificationNumber(tender.get().getOriginalCustomerReferenceNumber());
                 beginning.setReservationActionCode(request.accept() ? SegmentBeginningSegmentForBookingOrPickupOrDelivery906c00531695b2ddfe89ee321e01671195cc392c9435cee04a4b5c96608e75fc.ReservationActionCodeEnum.A : SegmentBeginningSegmentForBookingOrPickupOrDelivery906c00531695b2ddfe89ee321e01671195cc392c9435cee04a4b5c96608e75fc.ReservationActionCodeEnum.D);
                 beginning.setStandardCarrierAlphaCode(dsg.get().getDsgScac());
