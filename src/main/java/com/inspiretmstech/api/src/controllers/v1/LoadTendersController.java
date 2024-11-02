@@ -242,6 +242,7 @@ public class LoadTendersController extends Controller {
                     api.rtsEdiSendGeorgiaPacificResponseToALoadTenderPost(List.of(body), "GeorgiaPacific");
                 } catch (com.inspiretmstech.common.microservices.gp.ApiException e) {
                     this.logger.error(e.getMessage(), e.getResponseBody());
+
                     throw new ResponseException("Unable to POST Zenbridge Update", "An error occurred while sending the transaction for EDI processing", e.getMessage() + ": " + e.getResponseBody());
                 }
             }
@@ -292,7 +293,7 @@ public class LoadTendersController extends Controller {
                     api.rtsEdiSendDicksSportingGoodsResponseToLoadTenderPost(List.of(inner), dsg.get().getDsgScac().toUpperCase());
                 } catch (ApiException e) {
                     this.logger.error(e.getMessage(), e.getResponseBody());
-                    throw new ResponseException("Unable to POST Zenbridge Update", "An error occurred while sending the transaction for EDI processing", e.getMessage() + ": " + e.getResponseBody());
+                    if(!VERSION.equals("development")) throw new ResponseException("Unable to POST Zenbridge Update", "An error occurred while sending the transaction for EDI processing", e.getMessage() + ": " + e.getResponseBody());
                 }
             }
             default -> {
