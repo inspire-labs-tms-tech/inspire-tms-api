@@ -20,7 +20,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.inspiretmstech:db:1.2.0")
+    implementation("com.inspiretmstech:db:1.2.4")
     implementation("com.inspiretmstech:common:1.6.73")
     implementation("com.inspiretmstech.common.microservices:dsg:1.6.73")
     implementation("com.inspiretmstech.common.microservices:gp:1.6.73")

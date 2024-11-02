@@ -1,5 +1,8 @@
 package com.inspiretmstech.api.src.controllers.v1;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.inspiretmstech.api.src.auth.methods.SecurityHolder;
 import com.inspiretmstech.api.src.auth.methods.apikey.APIKeyAuthenticationHolder;
 import com.inspiretmstech.api.src.auth.methods.apikey.Authority;
@@ -40,6 +43,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.jetbrains.annotations.NotNull;
 import org.jooq.DSLContext;
 import org.jooq.InsertResultStep;
+import org.jooq.JSONB;
 import org.jooq.UpdateSetMoreStep;
 import org.jooq.exception.IntegrityConstraintViolationException;
 import org.springframework.security.access.annotation.Secured;
@@ -135,7 +139,7 @@ public class LoadTendersController extends Controller {
             if (Objects.isNull(stop.appointment().latest()))
                 throw new ResponseException("Invalid Appointment", "The latest appointment cannot be empty");
 
-            stops.add(new LoadTenderStopRecord(null, OffsetDateTime.parse(stop.appointment().earliest()), OffsetDateTime.parse(stop.appointment().latest()), stop.type(), stop.address().build()));
+            stops.add(new LoadTenderStopRecord(null, OffsetDateTime.parse(stop.appointment().earliest()), OffsetDateTime.parse(stop.appointment().latest()), stop.type(), stop.address().build(), JSONB.valueOf("{}")));
         }
 
         LoadTenderVersionsRecord newVersion = new LoadTenderVersionsRecord();
@@ -369,6 +373,22 @@ public class LoadTendersController extends Controller {
                             _stop.setStopNumber((long) -1); // handled in postgres triggers
                             _stop.setLoadTenderStopId(stop.getId());
                             _stop.setNotesShared("Earliest Arrival: " + (Objects.nonNull(stop.getEarliestArrival()) ? stop.getEarliestArrival().format(humanReadable) : "") + "\nLatest Arrival: " + (Objects.nonNull(stop.getLatestArrival()) ? stop.getLatestArrival().format(humanReadable) : ""));
+
+                            // dynamic meta handling
+                            if(Objects.nonNull(stop.getMeta()) && Objects.nonNull(stop.getMeta().data())) {
+                                JsonElement e = JsonParser.parseString(stop.getMeta().data());
+                                if(!e.isJsonNull() && e.isJsonObject()) {
+                                    JsonObject meta = e.getAsJsonObject();
+                                    if (meta.has("facility_id") && !meta.get("facility_id").isJsonNull()) {
+                                        Optional<FacilitiesRecord> facility = trx.dsl().selectFrom(Tables.FACILITIES)
+                                                .where(Tables.FACILITIES.ID.eq(UUID.fromString(meta.get("facility_id").getAsString())))
+                                                .fetchOptional();
+                                        if(facility.isPresent()) _stop.setFacilityId(facility.get().getId());
+                                        else logger.error("unable to fetch facility id: {}", meta.get("facility_id").getAsString());
+                                    }
+                                }
+                            }
+
                             Optional<StopsRecord> newStop = Optional.ofNullable(trx.dsl().insertInto(Tables.STOPS).set(_stop).returning().fetchOne());
                             if (newStop.isEmpty())
                                 throw new ResponseException("Unable to Accept Tender", "Unable to Create Stop " + stop.getId());

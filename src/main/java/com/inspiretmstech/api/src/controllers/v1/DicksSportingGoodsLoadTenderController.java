@@ -12,6 +12,7 @@ import com.inspiretmstech.db.Tables;
 import com.inspiretmstech.db.enums.IntegrationTypes;
 import com.inspiretmstech.db.enums.LoadTenderStatus;
 import com.inspiretmstech.db.enums.StopTypes;
+import com.inspiretmstech.db.tables.records.FacilitiesRecord;
 import com.inspiretmstech.db.tables.records.IntegrationsRecord;
 import com.inspiretmstech.db.tables.records.LoadTenderVersionsRecord;
 import com.inspiretmstech.db.tables.records.LoadTendersRecord;
@@ -20,6 +21,7 @@ import com.inspiretmstech.db.udt.records.LoadTenderRevenueItemRecord;
 import com.inspiretmstech.db.udt.records.LoadTenderStopRecord;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.jooq.JSONB;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -91,50 +93,77 @@ public class DicksSportingGoodsLoadTenderController {
                         stopNum++;
 
                         LoadTenderStopRecord stop = new LoadTenderStopRecord();
+                        AddressRecord a;
+                        ZoneId zone;
 
-                        Optional<String> address = Optional.empty();
-                        Optional<String> streetAddress1 = Optional.empty();
-                        Optional<String> streetAddress2 = Optional.empty();
-                        Optional<String> city = Optional.empty();
-                        Optional<String> state = Optional.empty();
-                        Optional<String> postalCode = Optional.empty();
+                        // search for existing facility
+                        FacilitiesRecord facility;
+                        String id = tenderStop.groupName_270().name().entityIdentifierCode() + "-" + tenderStop.groupName_270().name().identificationCode() + "-" + tenderStop.groupName_270().name().identificationCodeQualifier();
+                        Optional<FacilitiesRecord> existingFacility = Optional.ofNullable(transaction.dsl()
+                                .selectFrom(Tables.FACILITIES)
+                                .where(Tables.FACILITIES.EDI_FACILITY_ID.eq(id))
+                                .and(Tables.FACILITIES.EDI_INTEGRATION_TYPE.eq(IntegrationTypes.DSG))
+                                .fetchOne());
+                        if (existingFacility.isPresent()) {
+                            facility = existingFacility.get();
+                            a = facility.getAddress();
+                            zone = ZoneId.of(a.getIanaTimezoneId());
+                        } else {
+                            Optional<String> address = Optional.empty();
 
-                        if (Objects.nonNull(tenderStop.groupName_270()) && Objects.nonNull(tenderStop.groupName_270().addressInformation()) && Objects.nonNull(tenderStop.groupName_270().geographicLocation())) {
-                            city = Optional.ofNullable(tenderStop.groupName_270().geographicLocation().cityName());
-                            state = Optional.ofNullable(tenderStop.groupName_270().geographicLocation().stateOrProvinceCode());
-                            postalCode = Optional.ofNullable(tenderStop.groupName_270().geographicLocation().postalCode());
+                            Optional<String> streetAddress1 = Optional.empty();
+                            Optional<String> streetAddress2 = Optional.empty();
+                            Optional<String> city = Optional.empty();
+                            Optional<String> state = Optional.empty();
+                            Optional<String> postalCode = Optional.empty();
 
-                            for (DicksSportingGoodsLoadTender.AddressInformation addressInformation : tenderStop.groupName_270().addressInformation()) {
-                                if (Objects.nonNull(addressInformation.addressInformation()) && !addressInformation.addressInformation().isBlank())
-                                    streetAddress1 = Optional.of(addressInformation.addressInformation());
-                                if (Objects.nonNull(addressInformation.addressInformation_1()) && !addressInformation.addressInformation_1().isBlank())
-                                    streetAddress2 = Optional.of(addressInformation.addressInformation_1());
+                            if (Objects.nonNull(tenderStop.groupName_270()) && Objects.nonNull(tenderStop.groupName_270().addressInformation()) && Objects.nonNull(tenderStop.groupName_270().geographicLocation())) {
+                                city = Optional.ofNullable(tenderStop.groupName_270().geographicLocation().cityName());
+                                state = Optional.ofNullable(tenderStop.groupName_270().geographicLocation().stateOrProvinceCode());
+                                postalCode = Optional.ofNullable(tenderStop.groupName_270().geographicLocation().postalCode());
+
+                                for (DicksSportingGoodsLoadTender.AddressInformation addressInformation : tenderStop.groupName_270().addressInformation()) {
+                                    if (Objects.nonNull(addressInformation.addressInformation()) && !addressInformation.addressInformation().isBlank())
+                                        streetAddress1 = Optional.of(addressInformation.addressInformation());
+                                    if (Objects.nonNull(addressInformation.addressInformation_1()) && !addressInformation.addressInformation_1().isBlank())
+                                        streetAddress2 = Optional.of(addressInformation.addressInformation_1());
+                                }
+
+                                if (streetAddress1.isPresent() && city.isPresent() && state.isPresent() && postalCode.isPresent()) {
+                                    String _address = streetAddress1.get().trim() + ", ";
+                                    if (streetAddress2.isPresent()) _address += streetAddress2.get().trim() + ", ";
+                                    _address += city.get().trim() + ", " + state.get().trim() + " " + postalCode.get().trim();
+                                    address = Optional.of(_address);
+                                }
                             }
 
-                            if (streetAddress1.isPresent() && city.isPresent() && state.isPresent() && postalCode.isPresent()) {
-                                String _address = streetAddress1.get().trim() + ", ";
-                                if (streetAddress2.isPresent()) _address += streetAddress2.get().trim() + ", ";
-                                _address += city.get().trim() + ", " + state.get().trim() + " " + postalCode.get().trim();
-                                address = Optional.of(_address);
-                            }
+                            if (address.isEmpty())
+                                throw new ResponseException("Unable to Geocode Address", "Unable to geocode address: " + tenderStop.groupName_270());
+
+                            LatLng coords = Geocoder.geocode(address.get());
+                            zone = TimeZones.lookup(coords, address.get());
+                            String ianaTimezoneID = zone.getId();
+
+                            a = new AddressRecord();
+                            a.setStreetAddress_1(streetAddress1.get().trim());
+                            a.setStreetAddress_2(streetAddress2.map(String::trim).orElse(""));
+                            a.setCity(city.get());
+                            a.setState(state.get());
+                            a.setZip(postalCode.get());
+                            a.setLatitude(BigDecimal.valueOf(coords.lat));
+                            a.setLongitude(BigDecimal.valueOf(coords.lng));
+                            a.setIanaTimezoneId(ianaTimezoneID);
+
+                            facility = new FacilitiesRecord();
+                            facility.setAddress(a);
+                            facility.setEdiFacilityId(id);
+                            facility.setEdiIntegrationType(IntegrationTypes.DSG);
+                            facility.setDisplay("(DSG) " + tenderStop.groupName_270().name().name());
+                            facility = transaction.dsl().insertInto(Tables.FACILITIES)
+                                    .set(facility).returning().fetchAny();
+                            if (Objects.isNull(facility))
+                                throw new ResponseException("Stop " + stopNum + ": facility does not exist and could not be created");
                         }
-
-                        if (address.isEmpty())
-                            throw new ResponseException("Unable to Geocode Address", "Unable to geocode address: " + tenderStop.groupName_270());
-
-                        LatLng coords = Geocoder.geocode(address.get());
-                        ZoneId zone = TimeZones.lookup(coords, address.get());
-                        String ianaTimezoneID = zone.getId();
-
-                        AddressRecord a = new AddressRecord();
-                        a.setStreetAddress_1(streetAddress1.get().trim());
-                        a.setStreetAddress_2(streetAddress2.map(String::trim).orElse(""));
-                        a.setCity(city.get());
-                        a.setState(state.get());
-                        a.setZip(postalCode.get());
-                        a.setLatitude(BigDecimal.valueOf(coords.lat));
-                        a.setLongitude(BigDecimal.valueOf(coords.lng));
-                        a.setIanaTimezoneId(ianaTimezoneID);
 
                         // get the stop ID
                         Optional<DicksSportingGoodsLoadTender.BusinessInstructionsAndReferenceNumber> stopRef = tenderStop.businessInstructionsAndReferenceNumber().stream().filter(i -> i.referenceIdentificationQualifier().equalsIgnoreCase("QN")).findFirst();
@@ -198,6 +227,7 @@ public class DicksSportingGoodsLoadTenderController {
                         stop.setLatestArrival(latest);
                         stop.setType(type);
                         stop.setAddress(a);
+                        stop.setMeta(JSONB.valueOf("{\"facility_id\": \"" + facility.getId().toString() + "\"}"));
 
                         stops.add(stop);
                     }
