@@ -2,6 +2,7 @@ package com.inspiretmstech.api.src.controllers.v1;
 
 import com.google.maps.model.LatLng;
 import com.inspiretmstech.api.src.auth.methods.apikey.Authority;
+import com.inspiretmstech.api.src.constants.Constants;
 import com.inspiretmstech.api.src.models.ResponseException;
 import com.inspiretmstech.api.src.models.requests.tenders.gp.GeorgiaPacificLoadTender;
 import com.inspiretmstech.api.src.models.responses.IDResponse;
@@ -229,8 +230,8 @@ public class GeorgiaPacificLoadTenderController {
                     // Build the Version
                     LoadTenderVersionsRecord version = new LoadTenderVersionsRecord();
                     version.setCustomerReferenceNumber(shipment.data().section1().beginningSegmentForShipmentInformationTransaction().shipmentIdentificationNumber());
-                    version.setAcceptWebhook("#");
-                    version.setDeclineWebhook("#");
+                    version.setAcceptWebhook(Constants.Globals.LoadTenders.NO_WEBHOOK_CALLBACK);
+                    version.setDeclineWebhook(Constants.Globals.LoadTenders.NO_WEBHOOK_CALLBACK);
                     version.setLoadTenderId(tender.get().getId());
                     version.setRevenue(new LoadTenderRevenueItemRecord[0]); // GP does not send revenue in 204s
                     version.setStops(stops.toArray(new LoadTenderStopRecord[0]));

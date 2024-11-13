@@ -5,22 +5,74 @@ plugins {
     id "com.adarshr.test-logger" version "4.0.0"
 }
 
+def loadEnvFile() {
+    def envFile = file(".env")
+    def properties = new Properties()
+
+    if (envFile.exists()) {
+        envFile.withReader { reader ->
+            properties.load(reader)
+        }
+    }
+
+    return properties
+}
+
+def loadRemoteEnv() {
+    def properties = new Properties()
+    try {
+        def command = "inspire-tms vault -- printenv"
+        def process = command.execute()
+        process.waitFor()
+
+        if (process.exitValue() != 0) {
+            println "Failed to fetch environment variables. Error: ${process.err.text}"
+            return properties
+        }
+
+        // Populate the Properties object with key-value pairs from the output
+        process.text.eachLine { line ->
+            if (line.contains('=')) {
+                def (key, value) = line.split('=', 2)
+                properties.setProperty(key.trim(), value?.trim())
+            }
+        }
+    } catch (Exception e) {
+        println "Error while executing command: ${e.message}"
+    }
+
+    return properties
+}
+
 group = 'com.inspiretmstech.microservices'
 version = '00000000.000000'
+
+def env = loadEnvFile()
+def remoteEnv = loadRemoteEnv()
+
+def GH_USER = remoteEnv.getProperty("GH_USER")
+        ?: env.getProperty("GH_USER")
+        ?: project.findProperty("gpr.user")
+        ?: System.getenv("GH_USER")
+
+def GH_PASS = remoteEnv.getProperty("GH_TOKEN")
+        ?: env.getProperty("GH_TOKEN")
+        ?: project.findProperty("gpr.key")
+        ?: System.getenv("GH_TOKEN")
 
 repositories {
     mavenCentral()
     maven {
         url = uri("https://maven.pkg.github.com/inspire-labs-tms-tech/inspire-tms-db")
         credentials {
-            username = project.findProperty("gpr.user") ?: System.getenv("GH_USER")
-            password = project.findProperty("gpr.key") ?: System.getenv("GH_TOKEN")
+            username = GH_USER
+            password = GH_PASS
         }
     }
 }
 
 dependencies {
-    implementation("com.inspiretmstech:db:1.2.4")
+    implementation("com.inspiretmstech:db:1.2.12")
     implementation("com.inspiretmstech:common:1.6.73")
     implementation("com.inspiretmstech.common.microservices:dsg:1.6.73")
     implementation("com.inspiretmstech.common.microservices:gp:1.6.73")

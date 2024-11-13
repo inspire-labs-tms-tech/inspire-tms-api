@@ -35,6 +35,7 @@ public class APIKeyAuthenticationHolder extends AuthenticationHolder {
             case USER -> authorities.add(Authority.USER);
             case CUSTOMER -> authorities.add(Authority.CUSTOMER);
             case ORBCOMM -> authorities.add(Authority.ORBCOMM);
+            case PRINCETON_TMX -> authorities.add(Authority.PRINCETONTMX);
             default -> this.logger().warn("unhandled API key type: {}", this.key.getType());
         }
 

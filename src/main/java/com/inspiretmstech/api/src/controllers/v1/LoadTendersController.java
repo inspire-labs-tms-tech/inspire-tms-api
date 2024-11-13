@@ -8,6 +8,7 @@ import com.inspiretmstech.api.src.auth.methods.apikey.APIKeyAuthenticationHolder
 import com.inspiretmstech.api.src.auth.methods.apikey.Authority;
 import com.inspiretmstech.api.src.auth.requires.Requires;
 import com.inspiretmstech.api.src.auth.requires.Scopes;
+import com.inspiretmstech.api.src.constants.Constants;
 import com.inspiretmstech.api.src.models.ResponseException;
 import com.inspiretmstech.api.src.models.controllers.Controller;
 import com.inspiretmstech.api.src.models.requests.tenders.LoadTenderActionRequest;
@@ -297,9 +298,7 @@ public class LoadTendersController extends Controller {
                 }
             }
             default -> {
-                // send the response (using '#' as escape character)
-                String escapeChar = "#";
-                if (request.accept() ? !escapeChar.equals(tenderVersion.get().getAcceptWebhook()) : !escapeChar.equals(tenderVersion.get().getDeclineWebhook())) {
+                if (request.accept() ? !Constants.Globals.LoadTenders.NO_WEBHOOK_CALLBACK.equals(tenderVersion.get().getAcceptWebhook()) : !Constants.Globals.LoadTenders.NO_WEBHOOK_CALLBACK.equals(tenderVersion.get().getDeclineWebhook())) {
                     try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
                         HttpPost post = new HttpPost(request.accept() ? tenderVersion.get().getAcceptWebhook() : tenderVersion.get().getDeclineWebhook());
                         try (CloseableHttpResponse response = httpClient.execute(post)) {
