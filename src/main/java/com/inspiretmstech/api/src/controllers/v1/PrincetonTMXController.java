@@ -213,11 +213,10 @@ public class PrincetonTMXController extends Controller {
 
             this.logger.debug("{} <=> {}", s.stopType(), type);
             List<String> dateList = Stream.of(
-                            type == StopTypes.PICKUP ? s.pickupNetDateTime() : s.deliveryNetDateTime(),
-                            type == StopTypes.PICKUP ? s.pickupNltDateTime() : s.deliveryNltDateTime(),
-                            type == StopTypes.PICKUP ? s.pickupXatDateTime() : s.deliveryXatDateTime()
+                            type == StopTypes.PICKUP ? s.pickupNetDate() : s.deliveryNetDate(),
+                            type == StopTypes.PICKUP ? s.pickupNltDate() : s.deliveryNltDate(),
+                            type == StopTypes.PICKUP ? s.pickupXatDate() : s.deliveryXatDate()
                     )
-                    .peek(date -> this.logger.debug("Date value before filtering: {}", date)) // Debug: Print date values before filtering
                     .filter(Objects::nonNull) // Filter out null values
                     .sorted() // Sort lexicographically (ISO date strings can be compared directly)
                     .toList();
@@ -227,9 +226,6 @@ public class PrincetonTMXController extends Controller {
             String latestDate = dateList.isEmpty() ? null : dateList.get(dateList.size() - 1);
 
             this.logger.debug(s.toString());
-            this.logger.debug(dateList.toString());
-            this.logger.debug(earliestDate);
-            this.logger.debug(latestDate);
 
             // build stop
             stop.setId(Integer.toString(stopNumber));
