@@ -1,6 +1,5 @@
 package com.inspiretmstech.api.src.models.requests.princetontmx;
 
-import com.google.gson.annotations.SerializedName;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -8,7 +7,7 @@ import java.util.List;
 public record PrincetonTMXLoadTender(
         @Nullable String commodity,
         @Nullable List<Note> notes,
-        @Nullable @SerializedName("respondByDate") String respondByDateTime,
+        @Nullable String respondByDate,
         @Nullable String quantityUOM,
         @Nullable String controlCustomerNumber,
         @Nullable String equipmentType,
@@ -24,7 +23,7 @@ public record PrincetonTMXLoadTender(
         @Nullable List<Rate> rates,
         @Nullable String length,
         @Nullable Double weight,
-        @Nullable @SerializedName("totalDistance") Integer totalMiles,
+        @Nullable Integer totalDistance,
         @Nullable String driver,
         @Nullable List<Reference> refs,
         @Nullable String tenderStatus,
@@ -32,7 +31,7 @@ public record PrincetonTMXLoadTender(
         @Nullable List<SpecialInstruction> specialInstructions,
         @Nullable List<Order> orders,
         @Nullable List<Stop> stops,
-        @Nullable @SerializedName("loadReadyDate") String loadReadyDateTime,
+        @Nullable String loadReadyDate,
         @Nullable String weightUOM,
         @Nullable List<Contact> contacts
 ) {
@@ -65,14 +64,14 @@ public record PrincetonTMXLoadTender(
     ) {}
 
     public record Order(
-            @Nullable @SerializedName("pickupNetDate") String pickupNetDateTime,
+            @Nullable String pickupNetDate,
             @Nullable List<LineItem> lineItems,
-            @Nullable @SerializedName("deliveryNltDate") String deliveryNltDateTime,
+            @Nullable String deliveryNltDate,
             @Nullable String orderNumber,
             @Nullable List<Note> notes,
             @Nullable List<Reference> refs,
-            @Nullable @SerializedName("deliveryNetDate") String deliveryNetDateTime,
-            @Nullable @SerializedName("pickupNltDate") String pickupNltDateTime
+            @Nullable String deliveryNetDate,
+            @Nullable String pickupNltDate
     ) {}
 
     public record LineItem(
@@ -91,20 +90,20 @@ public record PrincetonTMXLoadTender(
 
     public record Stop(
             @Nullable List<Note> notes,
-            @Nullable @SerializedName("deliveryXatDate") String deliveryXatDateTime,
+            @Nullable String deliveryXatDate,
             @Nullable String quantityUOM,
-            @Nullable @SerializedName("deliveryNetDate") String deliveryNetDateTime,
+            @Nullable String deliveryNetDate,
             @Nullable String stopType,
             @Nullable Integer stopOrder,
-            @Nullable String deliveryApptDateTime,
-            @Nullable @SerializedName("pickupNetDate") String pickupNetDateTime,
+            @Nullable String deliveryApptDate,
+            @Nullable String pickupNetDate,
             @Nullable String actArrivalDateTime,
-            @Nullable @SerializedName("deliveryNltDate") String deliveryNltDateTime,
+            @Nullable String deliveryNltDate,
             @Nullable List<Reference> refs,
             @Nullable String actDepartDateTime,
-            @Nullable @SerializedName("pickupNltDate") String pickupNltDateTime,
+            @Nullable String pickupNltDate,
             @Nullable String weightUOM,
-            @Nullable @SerializedName("pickupXatDate") String pickupXatDateTime,
+            @Nullable String pickupXatDate,
             @Nullable List<LocInfo> locInfos
     ) {}
 
