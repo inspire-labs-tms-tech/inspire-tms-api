@@ -1,7 +1,7 @@
 package com.inspiretmstech.api.src.auth.methods.apikey;
 
-import com.inspiretmstech.api.src.auth.methods.abc.AuthenticationProvider;
 import com.inspiretmstech.api.src.auth.methods.SecurityHolder;
+import com.inspiretmstech.api.src.auth.methods.abc.AuthenticationProvider;
 import com.inspiretmstech.common.postgres.PostgresConnection;
 import com.inspiretmstech.db.Tables;
 import com.inspiretmstech.db.routines.ValidateApiKey;
@@ -11,6 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.security.access.AccessDeniedException;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.regex.Pattern;
@@ -18,7 +19,12 @@ import java.util.regex.Pattern;
 public class APIKeyAuthenticationProvider implements AuthenticationProvider<APIKeyAuthenticationHolder> {
 
     private String getAuth(@NotNull HttpServletRequest request) {
-        return Optional.ofNullable(request.getHeader("Authorization")).orElse("");
+
+        String Authorization = request.getHeader("Authorization");
+        String xApiKey = request.getHeader("x-api-key");
+        if (Objects.nonNull(Authorization)) return Authorization;
+        if (Objects.nonNull(xApiKey)) return xApiKey;
+        return "";
     }
 
     @Override
