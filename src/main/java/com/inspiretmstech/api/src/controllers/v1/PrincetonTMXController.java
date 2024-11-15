@@ -120,12 +120,11 @@ public class PrincetonTMXController extends Controller {
         version.setDeclineWebhook(Constants.Globals.LoadTenders.NO_WEBHOOK_CALLBACK);
         version.setRawRequest(JSONB.valueOf((new Gson()).toJson(tender)));
 
+
         ArrayList<LoadTenderStopRecord> stops = new ArrayList<>();
-
-        List<PrincetonTMXLoadTender.Stop> sortedStops = Objects.isNull(tender.stops()) ? Collections.emptyList() : tender.stops();
+        List<PrincetonTMXLoadTender.Stop> sortedStops = new ArrayList<>(Objects.isNull(tender.stops()) ? Collections.emptyList() : tender.stops());
         sortedStops.sort(Comparator.comparing(PrincetonTMXLoadTender.Stop::stopOrder, Comparator.nullsLast(Integer::compareTo)));
-
-        Integer stopNumber = 0;
+        int stopNumber = 0;
         for (PrincetonTMXLoadTender.Stop s : sortedStops) {
             stopNumber++;
             LoadTenderStopRecord stop = new LoadTenderStopRecord();
@@ -224,8 +223,12 @@ public class PrincetonTMXController extends Controller {
             String earliestDate = dateList.isEmpty() ? null : dateList.get(0);
             String latestDate = dateList.isEmpty() ? null : dateList.get(dateList.size() - 1);
 
+            this.logger.debug(dateList.toString());
+            this.logger.debug(earliestDate);
+            this.logger.debug(latestDate);
+
             // build stop
-            stop.setId(stopNumber.toString());
+            stop.setId(Integer.toString(stopNumber));
             stop.setEarliestArrival(Objects.isNull(earliestDate) ? null : OffsetDateTime.parse(earliestDate));
             stop.setLatestArrival(Objects.isNull(latestDate) ? null : OffsetDateTime.parse(latestDate));
             stop.setType(type);
