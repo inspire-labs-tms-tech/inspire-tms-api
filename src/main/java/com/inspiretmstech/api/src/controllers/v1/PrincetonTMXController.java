@@ -226,6 +226,7 @@ public class PrincetonTMXController extends Controller {
             String earliestDate = dateList.isEmpty() ? null : dateList.get(0);
             String latestDate = dateList.isEmpty() ? null : dateList.get(dateList.size() - 1);
 
+            this.logger.debug(s.toString());
             this.logger.debug(dateList.toString());
             this.logger.debug(earliestDate);
             this.logger.debug(latestDate);
