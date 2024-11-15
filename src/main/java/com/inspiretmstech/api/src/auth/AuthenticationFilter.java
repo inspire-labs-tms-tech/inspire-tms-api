@@ -36,13 +36,13 @@ public class AuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(@NotNull HttpServletRequest request, @NotNull HttpServletResponse response, @NotNull FilterChain filterChain) throws ServletException, IOException {
 
-        logger.debug("Handling Inbound Authentication Request ({})", request.getServletPath());
+        logger.trace("Handling Inbound Authentication Request ({})", request.getServletPath());
         logger.trace("  Headers:");
         request.getHeaderNames().asIterator().forEachRemaining(h -> logger.trace("    {}: {}", h, request.getHeader(h)));
 
         try {
             for (AuthenticationProvider<?> provider : providers) {
-                logger.debug("{}: {}",provider.getClass().getSimpleName(), provider.supports(request));
+                logger.trace("{}: {}",provider.getClass().getSimpleName(), provider.supports(request));
                 if (provider.supports(request)) {
                     logger.trace("Attempting {} Authentication",provider.getClass().getSimpleName());
                     SecurityContextHolder
@@ -64,6 +64,6 @@ public class AuthenticationFilter extends OncePerRequestFilter {
         if(Objects.isNull(context)) logger.error("Security Context is Null!");
         else if(Objects.isNull(context.getAuthentication())) logger.error("Security Context Authentication is Null!");
         else if(Objects.isNull(context.getAuthentication().getPrincipal())) logger.error("Security Context Authentication Principal is Null!");
-        else logger.debug("Security Context: {}", context.getAuthentication().getPrincipal().getClass().getSimpleName());
+        else logger.trace("Security Context: {}", context.getAuthentication().getPrincipal().getClass().getSimpleName());
     }
 }

@@ -210,13 +210,16 @@ public class PrincetonTMXController extends Controller {
                 default ->
                         throw new ResponseException("Stop " + s.stopOrder() + ": stop " + stopNumber + " does not have a valid type ('" + s.stopType() + "')");
             };
+
+            this.logger.debug("{} <=> {}", s.stopType(), type);
             List<String> dateList = Stream.of(
                             type == StopTypes.PICKUP ? s.pickupNetDateTime() : s.deliveryNetDateTime(),
                             type == StopTypes.PICKUP ? s.pickupNltDateTime() : s.deliveryNltDateTime(),
                             type == StopTypes.PICKUP ? s.pickupXatDateTime() : s.deliveryXatDateTime()
                     )
-                    .filter(Objects::nonNull) // Filter out nulls
-                    .sorted() // Sort the remaining dates (ISO strings can be sorted lexicographically)
+                    .peek(date -> this.logger.debug("Date value before filtering: {}", date)) // Debug: Print date values before filtering
+                    .filter(Objects::nonNull) // Filter out null values
+                    .sorted() // Sort lexicographically (ISO date strings can be compared directly)
                     .toList();
 
             // Get the earliest and latest dates
@@ -240,7 +243,7 @@ public class PrincetonTMXController extends Controller {
         version.setStops(stops.toArray(new LoadTenderStopRecord[0]));
 
         ArrayList<LoadTenderRevenueItemRecord> revenue = new ArrayList<>();
-        if(Objects.nonNull(tender.rates())) for (PrincetonTMXLoadTender.Rate rate : tender.rates()) {
+        if (Objects.nonNull(tender.rates())) for (PrincetonTMXLoadTender.Rate rate : tender.rates()) {
             LoadTenderRevenueItemRecord line = new LoadTenderRevenueItemRecord();
             line.setQuantity(1);
             line.setRate(Objects.nonNull(rate.totalCost()) ? BigDecimal.valueOf(rate.totalCost()) : BigDecimal.valueOf(0));
