@@ -2,6 +2,7 @@ package com.inspiretmstech.api.src.utils.inouttimes;
 
 import com.inspiretmstech.api.src.utils.WithLogger;
 import com.inspiretmstech.api.src.utils.inouttimes.processors.AfterShipProcessor;
+import com.inspiretmstech.api.src.utils.inouttimes.processors.PrincetonTMXProcessor;
 import com.inspiretmstech.api.src.utils.inouttimes.processors.Processes;
 import com.inspiretmstech.api.src.utils.inouttimes.processors.SaveToDatabaseProcessor;
 
@@ -20,7 +21,8 @@ public class InOutTimesProcessor extends WithLogger {
         super(InOutTimesProcessor.class);
         this.processors = List.of(
                 new SaveToDatabaseProcessor(),
-                new AfterShipProcessor()
+                new AfterShipProcessor(),
+                new PrincetonTMXProcessor()
         );
     }
 

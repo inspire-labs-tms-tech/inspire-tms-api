@@ -17,8 +17,9 @@ import com.inspiretmstech.api.src.models.requests.tenders.LoadTenderRequestReven
 import com.inspiretmstech.api.src.models.requests.tenders.LoadTenderRequestStop;
 import com.inspiretmstech.api.src.models.responses.IDResponse;
 import com.inspiretmstech.api.src.models.responses.StatusResponse;
+import com.inspiretmstech.api.src.utils.apis.DicksSportingGoodsAPI;
+import com.inspiretmstech.api.src.utils.apis.ZenbridgeAPI;
 import com.inspiretmstech.common.microservices.dsg.ApiException;
-import com.inspiretmstech.common.microservices.dsg.DicksSportingGoodsOutboundApi;
 import com.inspiretmstech.common.microservices.dsg.models.*;
 import com.inspiretmstech.common.microservices.gp.GeorgiaPacificOutboundApi;
 import com.inspiretmstech.common.microservices.gp.models.SegmentRemarks;
@@ -179,14 +180,6 @@ public class LoadTendersController extends Controller {
         if (tenderVersion.isEmpty())
             throw new ResponseException("Not Found", "Load Tender with id '" + id + "' could not be found");
 
-        // shared Zenbridge URLs
-        String VERSION = Environment.get("VERSION");
-        String baseURL = switch (VERSION) {
-            case "main" -> "https://api.zenbridge.io";
-            case "development" -> "https://api.sandbox.zenbridge.io";
-            default -> throw new RuntimeException("VERSION '" + VERSION + "' is unhandled");
-        };
-
         // use SMTP as a fall-through case, as this would never be used in this context
         IntegrationTypes type = Optional.ofNullable(tender.get().getIntegrationType()).orElse(IntegrationTypes.CUSTOM_SMTP);
         switch (type) {
@@ -211,7 +204,7 @@ public class LoadTendersController extends Controller {
                     throw new ResponseException("Unable to Load Georgia Pacific Integration", "Unable to Load Zenbridge API Key");
 
                 com.inspiretmstech.common.microservices.gp.ApiClient client = com.inspiretmstech.common.microservices.gp.Configuration.getDefaultApiClient();
-                client.setBasePath(baseURL);
+                client.setBasePath(ZenbridgeAPI.getBaseURL());
                 client.addDefaultHeader("Authorization", "Bearer " + zenbridgeAPIKey.get());
                 GeorgiaPacificOutboundApi api = new GeorgiaPacificOutboundApi(client);
 
@@ -248,28 +241,7 @@ public class LoadTendersController extends Controller {
                 }
             }
             case DSG -> {
-                Optional<IntegrationsRecord> dsg = PostgresConnection.getInstance().with(supabase ->
-                        supabase.selectFrom(Tables.INTEGRATIONS)
-                                .where(Tables.INTEGRATIONS.TYPE.eq(IntegrationTypes.DSG))
-                                .fetchOne()
-                );
-                if (dsg.isEmpty()) throw new ResponseException("Unable to Load Dicks Sporting Goods Integration");
-                if (Objects.isNull(dsg.get().getDsgScac()) || dsg.get().getDsgScac().isBlank())
-                    throw new ResponseException("Improper Dicks Sporting Goods Integration Configuration", "Invalid SCAC");
-                if (Objects.isNull(dsg.get().getDsgApiKeyId()))
-                    throw new ResponseException("Improper Dicks Sporting Goods Integration Configuration", "Zenbridge API Key is missing");
-
-                GetSecret secret = new GetSecret();
-                secret.setSecretId(dsg.get().getDsgApiKeyId());
-                PostgresConnection.getInstance().with(supabase -> secret.execute(supabase.configuration()));
-                Optional<String> zenbridgeAPIKey = Optional.ofNullable(secret.getReturnValue());
-                if (zenbridgeAPIKey.isEmpty() || zenbridgeAPIKey.get().isBlank())
-                    throw new ResponseException("Unable to Load Dicks Sporting Goods Integration", "Unable to Load Zenbridge API Key");
-
-                com.inspiretmstech.common.microservices.dsg.ApiClient client = com.inspiretmstech.common.microservices.dsg.Configuration.getDefaultApiClient();
-                client.setBasePath(baseURL);
-                client.addDefaultHeader("Authorization", "Bearer " + zenbridgeAPIKey.get());
-                DicksSportingGoodsOutboundApi api = new DicksSportingGoodsOutboundApi(client);
+                DicksSportingGoodsAPI api = new DicksSportingGoodsAPI();
 
                 RtsEdiSendDicksSportingGoodsResponseToLoadTenderPostRequestInner inner = new RtsEdiSendDicksSportingGoodsResponseToLoadTenderPostRequestInner();
                 RtsEdiSendDicksSportingGoodsResponseToLoadTenderPostRequestInnerData data = new RtsEdiSendDicksSportingGoodsResponseToLoadTenderPostRequestInnerData();
@@ -284,17 +256,18 @@ public class LoadTendersController extends Controller {
                 beginning.setDate(apiFormat.format(LocalDate.now()));
                 beginning.setShipmentIdentificationNumber(tender.get().getOriginalCustomerReferenceNumber());
                 beginning.setReservationActionCode(request.accept() ? SegmentBeginningSegmentForBookingOrPickupOrDelivery906c00531695b2ddfe89ee321e01671195cc392c9435cee04a4b5c96608e75fc.ReservationActionCodeEnum.A : SegmentBeginningSegmentForBookingOrPickupOrDelivery906c00531695b2ddfe89ee321e01671195cc392c9435cee04a4b5c96608e75fc.ReservationActionCodeEnum.D);
-                beginning.setStandardCarrierAlphaCode(dsg.get().getDsgScac());
+                beginning.setStandardCarrierAlphaCode(api.getIntegration().getDsgScac());
                 section1.setBeginningSegmentForBookingOrPickupOrDelivery(beginning);
 
                 data.setSection1(section1);
                 inner.setData(data);
 
                 try {
-                    api.rtsEdiSendDicksSportingGoodsResponseToLoadTenderPost(List.of(inner), dsg.get().getDsgScac().toUpperCase());
+                    api.outbound().rtsEdiSendDicksSportingGoodsResponseToLoadTenderPost(List.of(inner), api.getIntegration().getDsgScac().toUpperCase());
                 } catch (ApiException e) {
                     this.logger.error(e.getMessage(), e.getResponseBody());
-                    if(!VERSION.equals("development")) throw new ResponseException("Unable to POST Zenbridge Update", "An error occurred while sending the transaction for EDI processing", e.getMessage() + ": " + e.getResponseBody());
+                    if (!Environment.get("VERSION").equals("development"))
+                        throw new ResponseException("Unable to POST Zenbridge Update", "An error occurred while sending the transaction for EDI processing", e.getMessage() + ": " + e.getResponseBody());
                 }
             }
             default -> {
@@ -375,16 +348,17 @@ public class LoadTendersController extends Controller {
                             _stop.setNotesShared("Earliest Arrival: " + (Objects.nonNull(stop.getEarliestArrival()) ? stop.getEarliestArrival().format(humanReadable) : "") + "\nLatest Arrival: " + (Objects.nonNull(stop.getLatestArrival()) ? stop.getLatestArrival().format(humanReadable) : ""));
 
                             // dynamic meta handling
-                            if(Objects.nonNull(stop.getMeta()) && Objects.nonNull(stop.getMeta().data())) {
+                            if (Objects.nonNull(stop.getMeta()) && Objects.nonNull(stop.getMeta().data())) {
                                 JsonElement e = JsonParser.parseString(stop.getMeta().data());
-                                if(!e.isJsonNull() && e.isJsonObject()) {
+                                if (!e.isJsonNull() && e.isJsonObject()) {
                                     JsonObject meta = e.getAsJsonObject();
                                     if (meta.has("facility_id") && !meta.get("facility_id").isJsonNull()) {
                                         Optional<FacilitiesRecord> facility = trx.dsl().selectFrom(Tables.FACILITIES)
                                                 .where(Tables.FACILITIES.ID.eq(UUID.fromString(meta.get("facility_id").getAsString())))
                                                 .fetchOptional();
-                                        if(facility.isPresent()) _stop.setFacilityId(facility.get().getId());
-                                        else logger.error("unable to fetch facility id: {}", meta.get("facility_id").getAsString());
+                                        if (facility.isPresent()) _stop.setFacilityId(facility.get().getId());
+                                        else
+                                            logger.error("unable to fetch facility id: {}", meta.get("facility_id").getAsString());
                                     }
                                 }
                             }
