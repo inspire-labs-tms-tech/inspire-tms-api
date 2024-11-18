@@ -30,35 +30,34 @@ import java.util.stream.Stream;
 
 public class PrincetonTMXProcessor extends TimeProcessor {
 
-    private final PostgresConnection conn;
-    private final Optional<IntegrationsRecord> integration;
-
     public PrincetonTMXProcessor() {
         super(PrincetonTMXProcessor.class);
-        try {
-            this.conn = PostgresConnection.getInstance();
-        } catch (SQLException e) {
-            logger.error("Unable to connect to PostgreSQL: {}", e.getMessage());
-            throw new ResponseException("Unable to connect to PostgreSQL");
-        }
-        this.integration = this.conn.with(supabase -> supabase.selectFrom(Tables.INTEGRATIONS).where(Tables.INTEGRATIONS.TYPE.eq(IntegrationTypes.PRINCETON_TMX)).fetchOne());
     }
 
     private void send(InOutTimes processor, boolean isArrived) {
 
-        if (this.integration.isEmpty()) throw new ResponseException("Unable to load PrincetonTMX Integration");
+        PostgresConnection conn;
+        try {
+            conn = PostgresConnection.getInstance();
+        } catch (SQLException e) {
+            logger.error("Unable to connect to PostgreSQL: {}", e.getMessage());
+            throw new ResponseException("Unable to connect to PostgreSQL");
+        }
+        Optional<IntegrationsRecord> integration = conn.with(supabase -> supabase.selectFrom(Tables.INTEGRATIONS).where(Tables.INTEGRATIONS.TYPE.eq(IntegrationTypes.PRINCETON_TMX)).fetchOne());
 
-        if (Objects.isNull(this.integration.get().getPricetonTmxApiKey()))
+        if (integration.isEmpty()) throw new ResponseException("Unable to load PrincetonTMX Integration");
+
+        if (Objects.isNull(integration.get().getPricetonTmxApiKey()))
             throw new ResponseException("Improper Integration Configuration", "PRINCETON_TMX_apy_key is null");
 
         GetSecret secret = new GetSecret();
-        secret.setSecretId(this.integration.get().getDsgApiKeyId());
-        this.conn.with(supabase -> secret.execute(supabase.configuration()));
+        secret.setSecretId(integration.get().getDsgApiKeyId());
+        conn.with(supabase -> secret.execute(supabase.configuration()));
         Optional<String> apiKey = Optional.ofNullable(secret.getReturnValue());
         if (apiKey.isEmpty() || apiKey.get().isBlank())
             throw new ResponseException("Unable to Load Integration", "Unable to load API Key from Vault");
 
-        OrdersRecord order = this.conn.with(supabase -> supabase.selectFrom(Tables.ORDERS).where(Tables.ORDERS.ID.eq(processor.orderID())).fetchOne()).orElse(null);
+        OrdersRecord order = conn.with(supabase -> supabase.selectFrom(Tables.ORDERS).where(Tables.ORDERS.ID.eq(processor.orderID())).fetchOne()).orElse(null);
         if (Objects.isNull(order)) throw new ResponseException("Unable to load Order");
 
         // get the customer
@@ -76,14 +75,14 @@ public class PrincetonTMXProcessor extends TimeProcessor {
             return;
         }
 
-        LoadTendersRecord tender = this.conn.with(supabase -> supabase.selectFrom(Tables.LOAD_TENDERS).where(Tables.LOAD_TENDERS.ORDER_ID.eq(order.getId())).fetchOne()).orElse(null);
+        LoadTendersRecord tender = conn.with(supabase -> supabase.selectFrom(Tables.LOAD_TENDERS).where(Tables.LOAD_TENDERS.ORDER_ID.eq(order.getId())).fetchOne()).orElse(null);
         if (Objects.isNull(tender)) throw new ResponseException("Unable to load Tender");
 
-        StopsRecord stop = this.conn.with(supabase -> supabase.selectFrom(Tables.STOPS).where(Tables.STOPS.ORDER_ID.eq(order.getId())).and(Tables.STOPS.STOP_NUMBER.eq(processor.stopNumber())).fetchOne()).orElse(null);
+        StopsRecord stop = conn.with(supabase -> supabase.selectFrom(Tables.STOPS).where(Tables.STOPS.ORDER_ID.eq(order.getId())).and(Tables.STOPS.STOP_NUMBER.eq(processor.stopNumber())).fetchOne()).orElse(null);
         if (Objects.isNull(stop)) throw new ResponseException("Unable to load Stop");
 
-        Optional<EquipmentRecord> truck = Objects.isNull(stop.getTruckId()) ? Optional.empty() : this.conn.with(supabase -> supabase.selectFrom(Tables.EQUIPMENT).where(Tables.EQUIPMENT.ID.eq(stop.getTruckId())).fetchOne());
-        Optional<EquipmentRecord> trailer = Objects.isNull(stop.getTrailerId()) ? Optional.empty() : this.conn.with(supabase -> supabase.selectFrom(Tables.EQUIPMENT).where(Tables.EQUIPMENT.ID.eq(stop.getTrailerId())).fetchOne());
+        Optional<EquipmentRecord> truck = Objects.isNull(stop.getTruckId()) ? Optional.empty() : conn.with(supabase -> supabase.selectFrom(Tables.EQUIPMENT).where(Tables.EQUIPMENT.ID.eq(stop.getTruckId())).fetchOne());
+        Optional<EquipmentRecord> trailer = Objects.isNull(stop.getTrailerId()) ? Optional.empty() : conn.with(supabase -> supabase.selectFrom(Tables.EQUIPMENT).where(Tables.EQUIPMENT.ID.eq(stop.getTrailerId())).fetchOne());
 
         String url = "https://carrier.qa.ptmx.io/events/loads/" + tender.getOriginalCustomerReferenceNumber();
 
@@ -96,7 +95,7 @@ public class PrincetonTMXProcessor extends TimeProcessor {
                 .findFirst();
 
         Optional<EldAssetsRecord> snapshot = Optional.empty();
-        if (trackable.isPresent()) snapshot = this.conn.with(supabase -> supabase.selectFrom(Tables.ELD_ASSETS)
+        if (trackable.isPresent()) snapshot = conn.with(supabase -> supabase.selectFrom(Tables.ELD_ASSETS)
                 .where(Tables.ELD_ASSETS.TYPE.eq(trackable.get().getEldProvider()))
                 .and(Tables.ELD_ASSETS.ELD_PROVIDER_ID.eq(trackable.get().getEldConnection().getKey()))
                 .fetchOne()
