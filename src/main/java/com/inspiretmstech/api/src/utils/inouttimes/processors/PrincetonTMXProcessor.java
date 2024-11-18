@@ -62,6 +62,21 @@ public class PrincetonTMXProcessor extends TimeProcessor {
         OrdersRecord order = this.conn.with(supabase -> supabase.selectFrom(Tables.ORDERS).where(Tables.ORDERS.ID.eq(processor.orderID())).fetchOne()).orElse(null);
         if (Objects.isNull(order)) throw new ResponseException("Unable to load Order");
 
+        // get the customer
+        Optional<CustomersRecord> customer = conn.with(supabase -> supabase
+                .selectFrom(Tables.CUSTOMERS)
+                .where(Tables.CUSTOMERS.ID.eq(order.getCustomerId()))
+                .fetchOne()
+        );
+        if (customer.isEmpty()) {
+            logger.error("unable to load customer");
+            return;
+        }
+        if (!customer.get().getIsPrincetonTmxCustomer()) {
+            logger.debug("princeton tmx not enabled for customer");
+            return;
+        }
+
         LoadTendersRecord tender = this.conn.with(supabase -> supabase.selectFrom(Tables.LOAD_TENDERS).where(Tables.LOAD_TENDERS.ORDER_ID.eq(order.getId())).fetchOne()).orElse(null);
         if (Objects.isNull(tender)) throw new ResponseException("Unable to load Tender");
 

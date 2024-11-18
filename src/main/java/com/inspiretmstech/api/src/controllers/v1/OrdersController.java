@@ -4,9 +4,11 @@ import com.inspiretmstech.api.src.auth.methods.apikey.Authority;
 import com.inspiretmstech.api.src.auth.requires.Requires;
 import com.inspiretmstech.api.src.auth.requires.Scopes;
 import com.inspiretmstech.api.src.models.controllers.Controller;
+import com.inspiretmstech.api.src.models.requests.orders.SubmitOrderTimeRequest;
 import com.inspiretmstech.api.src.models.responses.StatusResponse;
 import com.inspiretmstech.api.src.utils.inouttimes.InOutTimes;
 import com.inspiretmstech.api.src.utils.inouttimes.InOutTimesProcessor;
+import com.inspiretmstech.api.src.utils.inouttimes.processors.SaveToDatabaseProcessor;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.security.access.annotation.Secured;
@@ -19,8 +21,11 @@ import java.util.UUID;
 @RequestMapping("/v1/orders")
 public class OrdersController extends Controller {
 
+    private final InOutTimesProcessor processor;
+
     public OrdersController() {
         super(OrdersController.class);
+        this.processor = new InOutTimesProcessor();
     }
 
     @Secured(Authority.Authorities.USER)
@@ -30,10 +35,10 @@ public class OrdersController extends Controller {
     public StatusResponse submitArrivalTime(
             @PathVariable("orderID") String order,
             @PathVariable("stopNumber") Long stop,
-            @RequestBody String timestamp
+            @RequestBody SubmitOrderTimeRequest request
     ) {
-        InOutTimesProcessor processor = new InOutTimesProcessor();
-        processor.arrived(new InOutTimes(UUID.fromString(order), stop, timestamp));
+        if(!request.saveToDatabase()) this.processor.remove(SaveToDatabaseProcessor.class);
+        this.processor.arrived(new InOutTimes(UUID.fromString(order), stop, request.timestamp()));
         return StatusResponse.ACCEPTED();
     }
 
@@ -44,10 +49,10 @@ public class OrdersController extends Controller {
     public StatusResponse submitDepartureTime(
             @PathVariable("orderID") String order,
             @PathVariable("stopNumber") Long stop,
-            @RequestBody String timestamp
+            @RequestBody SubmitOrderTimeRequest request
     ) {
-        InOutTimesProcessor processor = new InOutTimesProcessor();
-        processor.departed(new InOutTimes(UUID.fromString(order), stop, timestamp));
+        if(!request.saveToDatabase()) this.processor.remove(SaveToDatabaseProcessor.class);
+        this.processor.departed(new InOutTimes(UUID.fromString(order), stop, request.timestamp()));
         return StatusResponse.ACCEPTED();
     }
 }

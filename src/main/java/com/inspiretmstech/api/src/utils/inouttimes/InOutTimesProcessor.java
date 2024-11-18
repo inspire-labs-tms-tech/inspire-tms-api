@@ -10,7 +10,13 @@ import java.util.List;
 
 public class InOutTimesProcessor extends WithLogger {
 
-    private final List<TimeProcessor> processors;
+    private List<TimeProcessor> processors;
+
+    private final List<TimeProcessor> _processors = List.of(
+            new SaveToDatabaseProcessor(),
+            new AfterShipProcessor(),
+            new PrincetonTMXProcessor()
+    );
 
     public InOutTimesProcessor(List<TimeProcessor> processors) {
         super(InOutTimesProcessor.class);
@@ -24,6 +30,12 @@ public class InOutTimesProcessor extends WithLogger {
                 new AfterShipProcessor(),
                 new PrincetonTMXProcessor()
         );
+    }
+
+    public void remove(Class<? extends TimeProcessor> processorClass) {
+        this.processors = this.processors.stream()
+                .filter(p -> !processorClass.isInstance(p))
+                .toList();
     }
 
     public void arrived(InOutTimes request) {
