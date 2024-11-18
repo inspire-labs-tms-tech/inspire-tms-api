@@ -31,8 +31,7 @@ import java.util.stream.Stream;
 public class PrincetonTMXProcessor extends TimeProcessor {
 
     private final PostgresConnection conn;
-    private final IntegrationsRecord integration;
-    private final String apiKey;
+    private final Optional<IntegrationsRecord> integration;
 
     public PrincetonTMXProcessor() {
         super(PrincetonTMXProcessor.class);
@@ -42,23 +41,23 @@ public class PrincetonTMXProcessor extends TimeProcessor {
             logger.error("Unable to connect to PostgreSQL: {}", e.getMessage());
             throw new ResponseException("Unable to connect to PostgreSQL");
         }
-        Optional<IntegrationsRecord> record = this.conn.with(supabase -> supabase.selectFrom(Tables.INTEGRATIONS).where(Tables.INTEGRATIONS.TYPE.eq(IntegrationTypes.PRINCETON_TMX)).fetchOne());
-        if (record.isEmpty()) throw new ResponseException("Unable to load PrincetonTMX Integration");
-        this.integration = record.get();
+        this.integration = this.conn.with(supabase -> supabase.selectFrom(Tables.INTEGRATIONS).where(Tables.INTEGRATIONS.TYPE.eq(IntegrationTypes.PRINCETON_TMX)).fetchOne());
+    }
 
-        if (Objects.isNull(this.integration.getPricetonTmxApiKey()))
+    private void send(InOutTimes processor, boolean isArrived) {
+
+        if (this.integration.isEmpty()) throw new ResponseException("Unable to load PrincetonTMX Integration");
+
+        if (Objects.isNull(this.integration.get().getPricetonTmxApiKey()))
             throw new ResponseException("Improper Integration Configuration", "PRINCETON_TMX_apy_key is null");
 
         GetSecret secret = new GetSecret();
-        secret.setSecretId(this.integration.getDsgApiKeyId());
+        secret.setSecretId(this.integration.get().getDsgApiKeyId());
         this.conn.with(supabase -> secret.execute(supabase.configuration()));
         Optional<String> apiKey = Optional.ofNullable(secret.getReturnValue());
         if (apiKey.isEmpty() || apiKey.get().isBlank())
             throw new ResponseException("Unable to Load Integration", "Unable to load API Key from Vault");
-        this.apiKey = apiKey.get();
-    }
 
-    private void send(InOutTimes processor, boolean isArrived) {
         OrdersRecord order = this.conn.with(supabase -> supabase.selectFrom(Tables.ORDERS).where(Tables.ORDERS.ID.eq(processor.orderID())).fetchOne()).orElse(null);
         if (Objects.isNull(order)) throw new ResponseException("Unable to load Order");
 
@@ -126,7 +125,7 @@ public class PrincetonTMXProcessor extends TimeProcessor {
             // Set headers if needed
             httpPost.setHeader("Accept", "application/json");
             httpPost.setHeader("Content-Type", "application/json");
-            httpPost.setHeader("x-api-key", this.apiKey);
+            httpPost.setHeader("x-api-key", apiKey.get());
 
             // Execute the request and handle the response
             try (CloseableHttpResponse response = httpClient.execute(httpPost)) {
