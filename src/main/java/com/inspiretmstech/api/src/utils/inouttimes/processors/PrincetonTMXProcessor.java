@@ -51,7 +51,7 @@ public class PrincetonTMXProcessor extends TimeProcessor {
             throw new ResponseException("Improper Integration Configuration", "PRINCETON_TMX_apy_key is null");
 
         GetSecret secret = new GetSecret();
-        secret.setSecretId(integration.get().getDsgApiKeyId());
+        secret.setSecretId(integration.get().getPricetonTmxApiKey());
         conn.with(supabase -> secret.execute(supabase.configuration()));
         Optional<String> apiKey = Optional.ofNullable(secret.getReturnValue());
         if (apiKey.isEmpty() || apiKey.get().isBlank())

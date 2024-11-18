@@ -197,7 +197,7 @@ public class LoadTendersController extends Controller {
                     throw new ResponseException("Improper Integration Configuration", "PRINCETON_TMX_apy_key is null");
 
                 GetSecret secret = new GetSecret();
-                secret.setSecretId(princeton.get().getDsgApiKeyId());
+                secret.setSecretId(princeton.get().getPricetonTmxApiKey());
                 PostgresConnection.getInstance().with(supabase -> secret.execute(supabase.configuration()));
                 Optional<String> apiKey = Optional.ofNullable(secret.getReturnValue());
                 if (apiKey.isEmpty() || apiKey.get().isBlank())
