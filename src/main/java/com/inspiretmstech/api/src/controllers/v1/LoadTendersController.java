@@ -1,5 +1,6 @@
 package com.inspiretmstech.api.src.controllers.v1;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -37,6 +38,10 @@ import com.inspiretmstech.db.udt.records.LoadTenderStopRecord;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Nullable;
+import org.apache.hc.core5.http.ContentType;
+import org.apache.hc.core5.http.ParseException;
+import org.apache.hc.core5.http.io.entity.EntityUtils;
+import org.apache.hc.core5.http.io.entity.StringEntity;
 import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -183,6 +188,47 @@ public class LoadTendersController extends Controller {
         // use SMTP as a fall-through case, as this would never be used in this context
         IntegrationTypes type = Optional.ofNullable(tender.get().getIntegrationType()).orElse(IntegrationTypes.CUSTOM_SMTP);
         switch (type) {
+            case PRINCETON_TMX -> {
+
+                Optional<IntegrationsRecord> princeton = PostgresConnection.getInstance().with(supabase -> supabase.selectFrom(Tables.INTEGRATIONS).where(Tables.INTEGRATIONS.TYPE.eq(IntegrationTypes.PRINCETON_TMX)).fetchOne());
+                if (princeton.isEmpty()) throw new ResponseException("Unable to load PrincetonTMX Integration");
+
+                if (Objects.isNull(princeton.get().getPricetonTmxApiKey()))
+                    throw new ResponseException("Improper Integration Configuration", "PRINCETON_TMX_apy_key is null");
+
+                GetSecret secret = new GetSecret();
+                secret.setSecretId(princeton.get().getDsgApiKeyId());
+                PostgresConnection.getInstance().with(supabase -> secret.execute(supabase.configuration()));
+                Optional<String> apiKey = Optional.ofNullable(secret.getReturnValue());
+                if (apiKey.isEmpty() || apiKey.get().isBlank())
+                    throw new ResponseException("Unable to Load Integration", "Unable to load API Key from Vault");
+
+                String url = "https://carrier.qa.ptmx.io/tender/loads/" + tender.get().getOriginalCustomerReferenceNumber();
+                JsonObject jsonPayload = new JsonObject();
+                jsonPayload.addProperty("response", request.accept() ? "accept" : "reject");
+                try (org.apache.hc.client5.http.impl.classic.CloseableHttpClient httpClient = org.apache.hc.client5.http.impl.classic.HttpClients.createDefault()) {
+                    org.apache.hc.client5.http.classic.methods.HttpPost httpPost = new org.apache.hc.client5.http.classic.methods.HttpPost(url);
+                    httpPost.setEntity(new StringEntity((new Gson()).toJson(jsonPayload), ContentType.APPLICATION_JSON));
+
+                    httpPost.setHeader("Accept", "application/json");
+                    httpPost.setHeader("Content-Type", "application/json");
+                    httpPost.setHeader("x-api-key", apiKey.get());
+
+                    // Execute the request and handle the response
+                    try (org.apache.hc.client5.http.impl.classic.CloseableHttpResponse response = httpClient.execute(httpPost)) {
+                        if (response.getCode() != 200) {
+                            String responseBody = EntityUtils.toString(response.getEntity());
+                            logger.error(responseBody);
+                        } else logger.debug("response sent successfully");
+                    } catch (ParseException e) {
+                        logger.error("an error occurred sending response, but the body could not be parsed as a string");
+                    }
+                } catch (IOException e) {
+                    logger.error("An error occurred while processing request: {}", e.getMessage());
+                    for (StackTraceElement el : e.getStackTrace()) logger.debug(el.toString());
+                }
+
+            }
             case GEORGIA_PACIFIC -> {
                 Optional<IntegrationsRecord> gp = PostgresConnection.getInstance().with(supabase ->
                         supabase.selectFrom(Tables.INTEGRATIONS)
