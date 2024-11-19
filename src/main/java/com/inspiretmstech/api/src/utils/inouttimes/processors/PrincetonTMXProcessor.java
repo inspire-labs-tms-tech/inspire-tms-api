@@ -126,6 +126,8 @@ public class PrincetonTMXProcessor extends TimeProcessor {
             httpPost.setHeader("Content-Type", "application/json");
             httpPost.setHeader("x-api-key", apiKey.get());
 
+            logger.debug("Authenticating With: '{}'", apiKey.get());
+
             // Execute the request and handle the response
             try (CloseableHttpResponse response = httpClient.execute(httpPost)) {
                 if (response.getCode() != 200) {
