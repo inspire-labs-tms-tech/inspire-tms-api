@@ -15,16 +15,11 @@ import java.util.Optional;
 public class DicksSportingGoodsAPI {
 
     private final IntegrationsRecord integration;
-    private final PostgresConnection conn;
 
-    public DicksSportingGoodsAPI() {
-        try {
-            this.conn = PostgresConnection.getInstance();
-        } catch (SQLException e) {
-            throw new ResponseException("Unable to connect to database", "A database connection error occurred");
-        }
+    public DicksSportingGoodsAPI() throws SQLException {
 
-        Optional<IntegrationsRecord> dsg = conn.with(supabase ->
+
+        Optional<IntegrationsRecord> dsg = PostgresConnection.getInstance().with(supabase ->
                 supabase.selectFrom(Tables.INTEGRATIONS)
                         .where(Tables.INTEGRATIONS.TYPE.eq(IntegrationTypes.DSG))
                         .fetchOne()
@@ -37,7 +32,7 @@ public class DicksSportingGoodsAPI {
         return this.integration;
     }
 
-    public DicksSportingGoodsOutboundApi outbound() {
+    public DicksSportingGoodsOutboundApi outbound() throws SQLException {
         if (Objects.isNull(this.integration.getDsgScac()) || this.integration.getDsgScac().isBlank())
             throw new ResponseException("Improper Dicks Sporting Goods Integration Configuration", "Invalid SCAC");
         if (Objects.isNull(this.integration.getDsgApiKeyId()))
@@ -45,7 +40,7 @@ public class DicksSportingGoodsAPI {
 
         GetSecret secret = new GetSecret();
         secret.setSecretId(this.integration.getDsgApiKeyId());
-        this.conn.with(supabase -> secret.execute(supabase.configuration()));
+        PostgresConnection.getInstance().with(supabase -> secret.execute(supabase.configuration()));
         Optional<String> zenbridgeAPIKey = Optional.ofNullable(secret.getReturnValue());
         if (zenbridgeAPIKey.isEmpty() || zenbridgeAPIKey.get().isBlank())
             throw new ResponseException("Unable to Load Dicks Sporting Goods Integration", "Unable to Load Zenbridge API Key");

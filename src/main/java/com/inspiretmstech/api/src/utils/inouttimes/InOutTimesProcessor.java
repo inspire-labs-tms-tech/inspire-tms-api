@@ -1,21 +1,20 @@
 package com.inspiretmstech.api.src.utils.inouttimes;
 
 import com.inspiretmstech.api.src.utils.WithLogger;
-import com.inspiretmstech.api.src.utils.inouttimes.processors.AfterShipProcessor;
-import com.inspiretmstech.api.src.utils.inouttimes.processors.PrincetonTMXProcessor;
-import com.inspiretmstech.api.src.utils.inouttimes.processors.Processes;
-import com.inspiretmstech.api.src.utils.inouttimes.processors.SaveToDatabaseProcessor;
+import com.inspiretmstech.api.src.utils.inouttimes.processors.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class InOutTimesProcessor extends WithLogger {
 
     private List<TimeProcessor> processors;
 
-    private final List<TimeProcessor> _processors = List.of(
+    private static final List<TimeProcessor> DEFAULT_PROCESSORS = Arrays.asList(
             new SaveToDatabaseProcessor(),
             new AfterShipProcessor(),
-            new PrincetonTMXProcessor()
+            new PrincetonTMXProcessor(),
+            new DSGProcessor()
     );
 
     public InOutTimesProcessor(List<TimeProcessor> processors) {
@@ -25,11 +24,7 @@ public class InOutTimesProcessor extends WithLogger {
 
     public InOutTimesProcessor() {
         super(InOutTimesProcessor.class);
-        this.processors = List.of(
-                new SaveToDatabaseProcessor(),
-                new AfterShipProcessor(),
-                new PrincetonTMXProcessor()
-        );
+        this.processors = DEFAULT_PROCESSORS;
     }
 
     public void remove(Class<? extends TimeProcessor> processorClass) {
