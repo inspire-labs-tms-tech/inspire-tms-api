@@ -5,10 +5,12 @@ import com.inspiretmstech.api.src.utils.Executor;
 import com.inspiretmstech.api.src.utils.apis.DicksSportingGoodsAPI;
 import com.inspiretmstech.api.src.utils.inouttimes.InOutTimes;
 import com.inspiretmstech.api.src.utils.inouttimes.TimeProcessor;
+import com.inspiretmstech.common.microservices.dsg.ApiException;
 import com.inspiretmstech.common.microservices.dsg.models.*;
 import com.inspiretmstech.common.postgres.PostgresConnection;
 import com.inspiretmstech.common.utils.StateConverter;
 import com.inspiretmstech.db.Tables;
+import com.inspiretmstech.db.enums.IntegrationTypes;
 import com.inspiretmstech.db.tables.records.EquipmentRecord;
 import com.inspiretmstech.db.tables.records.LoadTendersRecord;
 import com.inspiretmstech.db.tables.records.OrdersRecord;
@@ -29,27 +31,17 @@ public class DSGProcessor extends TimeProcessor {
 
     @Override
     protected Executor<InOutTimes> getArrivalProcessor() {
-        return (processor) -> {
-            DicksSportingGoodsAPI dsg = new DicksSportingGoodsAPI();
-            dsg.outbound().rtsEdiSendDicksSportingGoodsTransportationCarrierShipmentMessagePost(
-                    List.of(this.buildUpdate(dsg, processor, true)),
-                    dsg.getIntegration().getDsgScac().toUpperCase()
-            );
-        };
+        return (processor) -> this.send(processor, true);
     }
 
     @Override
     protected Executor<InOutTimes> getDepartureProcessor() {
-        return (processor) -> {
-            DicksSportingGoodsAPI dsg = new DicksSportingGoodsAPI();
-            dsg.outbound().rtsEdiSendDicksSportingGoodsTransportationCarrierShipmentMessagePost(
-                    List.of(this.buildUpdate(dsg, processor, false)),
-                    dsg.getIntegration().getDsgScac().toUpperCase()
-            );
-        };
+        return (processor) -> this.send(processor, false);
     }
 
-    private RtsEdiSendDicksSportingGoodsTransportationCarrierShipmentMessagePostRequestInner buildUpdate(DicksSportingGoodsAPI dsg, InOutTimes processor, boolean isArrival) throws SQLException {
+    private void send(InOutTimes processor, boolean isArrival) throws SQLException {
+
+        DicksSportingGoodsAPI dsg = new DicksSportingGoodsAPI();
 
         OrdersRecord order = PostgresConnection.getInstance().with(supabase -> supabase.selectFrom(Tables.ORDERS).where(Tables.ORDERS.ID.eq(processor.orderID())).fetchOne()).orElse(null);
         if(Objects.isNull(order)) throw new ResponseException("Unable to load Order");
@@ -59,6 +51,11 @@ public class DSGProcessor extends TimeProcessor {
 
         LoadTendersRecord tender = PostgresConnection.getInstance().with(supabase -> supabase.selectFrom(Tables.LOAD_TENDERS).where(Tables.LOAD_TENDERS.ORDER_ID.eq(order.getId())).fetchOne()).orElse(null);
         if(Objects.isNull(tender)) throw new ResponseException("Unable to load Tender");
+
+        if(Objects.isNull(tender.getIntegrationType()) || (tender.getIntegrationType() != IntegrationTypes.DSG)) {
+            logger.debug("dicks sporting goods not enabled for this order");
+            return;
+        }
 
         Optional<EquipmentRecord> trailer = Objects.isNull(stop.getTrailerId()) ? Optional.empty() : PostgresConnection.getInstance().with(supabase -> supabase.selectFrom(Tables.EQUIPMENT).where(Tables.EQUIPMENT.ID.eq(stop.getTrailerId())).fetchOne());
 
@@ -94,7 +91,8 @@ public class DSGProcessor extends TimeProcessor {
 
         SegmentEquipmentOrContainerOwnerAndType94aa1adbd6bbecd23749372c0642c25fb06a56c6b306b2015f3756e5211ed95e equipment = new SegmentEquipmentOrContainerOwnerAndType94aa1adbd6bbecd23749372c0642c25fb06a56c6b306b2015f3756e5211ed95e();
         details.setEquipmentOrContainerOwnerAndType(equipment);
-        equipment.setEquipmentNumber(trailer.isPresent() ? trailer.get().getUnitNumber() : order.getCarrierEdiTrailerNumberOrId());
+        String equipmentNumber = trailer.isPresent() ? trailer.get().getUnitNumber() : order.getCarrierEdiTrailerNumberOrId();
+        equipment.setEquipmentNumber(equipmentNumber.isBlank() ? "UNKNOWN" : equipmentNumber.trim());
         equipment.setStandardCarrierAlphaCode(dsg.getIntegration().getDsgScac().toUpperCase());
 
         OffsetDateTime dt = isArrival ? stop.getDriverArrivedAt() : stop.getDriverDepartedAt();
@@ -105,6 +103,15 @@ public class DSGProcessor extends TimeProcessor {
         details.getShipmentStatusDetails().setShipmentStatusOrAppointmentReasonCode(SegmentShipmentStatusDetails9e93a24c60d21fb3059d71dfd13f9724ed0bcee894354fd851588f1c503c4747.ShipmentStatusOrAppointmentReasonCodeEnum.NS);
         details.getShipmentStatusDetails().setShipmentStatusCode(isArrival ? SegmentShipmentStatusDetails9e93a24c60d21fb3059d71dfd13f9724ed0bcee894354fd851588f1c503c4747.ShipmentStatusCodeEnum.X3 : SegmentShipmentStatusDetails9e93a24c60d21fb3059d71dfd13f9724ed0bcee894354fd851588f1c503c4747.ShipmentStatusCodeEnum.X1);
 
-        return update;
+        try {
+            dsg.outbound().rtsEdiSendDicksSportingGoodsTransportationCarrierShipmentMessagePost(
+                    List.of(update),
+                    dsg.getIntegration().getDsgScac().toUpperCase()
+            );
+        } catch(ApiException e) {
+            logger.error("ApiException: {}", e.getMessage());
+            for (StackTraceElement el : e.getStackTrace()) logger.trace(el.toString());
+            throw new ResponseException("Unable to Send EDI!", "An error occurred while sending EDI to Dicks Sporting Goods");
+        }
     }
 }
