@@ -11,16 +11,18 @@ import com.inspiretmstech.db.Tables;
 import com.inspiretmstech.db.enums.IntegrationTypes;
 import com.inspiretmstech.db.routines.GetSecret;
 import com.inspiretmstech.db.tables.records.*;
-import org.apache.hc.client5.http.classic.methods.HttpPost;
+import org.apache.hc.client5.http.classic.methods.HttpPut;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
 import org.apache.hc.client5.http.impl.classic.HttpClients;
 import org.apache.hc.core5.http.ContentType;
+import org.apache.hc.core5.http.Header;
 import org.apache.hc.core5.http.ParseException;
 import org.apache.hc.core5.http.io.entity.EntityUtils;
 import org.apache.hc.core5.http.io.entity.StringEntity;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.sql.SQLException;
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
@@ -118,18 +120,17 @@ public class PrincetonTMXProcessor extends TimeProcessor {
         // Create an HTTP client
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
             // Create an HTTP POST request
-            HttpPost httpPost = new HttpPost(url);
-            httpPost.setEntity(new StringEntity((new Gson()).toJson(jsonPayload), ContentType.APPLICATION_JSON));
+            HttpPut request = new HttpPut(url);
+            request.setEntity(new StringEntity((new Gson()).toJson(jsonPayload), ContentType.APPLICATION_JSON));
 
             // Set headers if needed
-            httpPost.setHeader("Accept", "application/json");
-            httpPost.setHeader("Content-Type", "application/json");
-            httpPost.setHeader("x-api-key", apiKey.get());
-
-            logger.debug("Authenticating With: '{}'", apiKey.get());
+            request.setHeader("Accept", "application/json");
+            request.setHeader("Content-Type", "application/json");
+            request.setHeader("x-api-key", apiKey.get());
 
             // Execute the request and handle the response
-            try (CloseableHttpResponse response = httpClient.execute(httpPost)) {
+            try (CloseableHttpResponse response = httpClient.execute(request)) {
+                logger.debug("Executing: {}", this.httpPutToCurl(request));
                 if (response.getCode() != 200) {
                     String responseBody = EntityUtils.toString(response.getEntity());
                     logger.error(responseBody);
@@ -137,10 +138,36 @@ public class PrincetonTMXProcessor extends TimeProcessor {
             } catch (ParseException e) {
                 logger.error("an error occurred sending update, but the response body could not be parsed as a string");
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             logger.error("An error occurred while processing request: {}", e.getMessage());
             for (StackTraceElement el : e.getStackTrace()) logger.debug(el.toString());
         }
+    }
+
+    private String httpPutToCurl(HttpPut httpPost) throws URISyntaxException {
+        StringBuilder curlCommand = new StringBuilder("curl -X POST");
+
+        // Add URL
+        curlCommand.append(" '").append(httpPost.getUri()).append("'");
+
+        // Add headers
+        for (Header header : httpPost.getHeaders()) {
+            curlCommand.append(" -H '").append(header.getName()).append(": ").append(header.getValue()).append("'");
+        }
+
+        // Add body if present
+        if (httpPost.getEntity() != null) {
+            try {
+                String body = EntityUtils.toString(httpPost.getEntity());
+                curlCommand.append(" --data '").append(body.replace("'", "\\'")).append("'");
+            } catch (IOException e) {
+                logger.error("Failed to convert HttpPost entity to string: {}", e.getMessage());
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        return curlCommand.toString();
     }
 
     @Override
