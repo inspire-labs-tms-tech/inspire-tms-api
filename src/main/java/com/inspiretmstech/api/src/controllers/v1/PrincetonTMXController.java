@@ -54,12 +54,7 @@ public class PrincetonTMXController extends Controller {
     @PostMapping
     public StatusResponse princetonTMXLoadTenderWebhook(@RequestBody PrincetonTMXLoadTender tender) throws Exception {
 
-        this.logger.debug("princeton tmx load tender received: {}", tender.loadID());
         this.logger.trace("{}", tender);
-
-        if (Objects.isNull(tender.loadID()) || tender.loadID().isBlank())
-            throw new ResponseException("Missing Load ID", "The loadID field cannot be empty", Objects.isNull(tender.loadID()) ? "The loadID was null" : "The loadID was empty");
-
         APIKeyAuthenticationHolder holder = SecurityHolder.getAuthenticationHolder(APIKeyAuthenticationHolder.class);
 
         PostgresConnection.getInstance().unsafely(supabase -> {
@@ -76,7 +71,10 @@ public class PrincetonTMXController extends Controller {
                 // upsert the load tender record
                 LoadTendersRecord record = new LoadTendersRecord();
                 record.setCustomerId(holder.getSub());
-                record.setOriginalCustomerReferenceNumber(tender.loadID().trim());
+
+                if(Objects.isNull(tender.contract())) throw new ResponseException("Contact is Null!", "Contract value is required!");
+
+                record.setOriginalCustomerReferenceNumber(tender.contract().trim());
                 record.setIntegrationType(IntegrationTypes.PRINCETON_TMX);
                 record.setStatus(LoadTenderStatus.NEW);
 
