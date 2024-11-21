@@ -207,15 +207,15 @@ public class LoadTendersController extends Controller {
                 JsonObject jsonPayload = new JsonObject();
                 jsonPayload.addProperty("response", request.accept() ? "accept" : "reject");
                 try (org.apache.hc.client5.http.impl.classic.CloseableHttpClient httpClient = org.apache.hc.client5.http.impl.classic.HttpClients.createDefault()) {
-                    org.apache.hc.client5.http.classic.methods.HttpPost httpPost = new org.apache.hc.client5.http.classic.methods.HttpPost(url);
-                    httpPost.setEntity(new StringEntity((new Gson()).toJson(jsonPayload), ContentType.APPLICATION_JSON));
+                    org.apache.hc.client5.http.classic.methods.HttpPut post = new org.apache.hc.client5.http.classic.methods.HttpPut(url);
+                    post.setEntity(new StringEntity((new Gson()).toJson(jsonPayload), ContentType.APPLICATION_JSON));
 
-                    httpPost.setHeader("Accept", "application/json");
-                    httpPost.setHeader("Content-Type", "application/json");
-                    httpPost.setHeader("x-api-key", apiKey.get());
+                    post.setHeader("Accept", "application/json");
+                    post.setHeader("Content-Type", "application/json");
+                    post.setHeader("x-api-key", apiKey.get());
 
                     // Execute the request and handle the response
-                    try (org.apache.hc.client5.http.impl.classic.CloseableHttpResponse response = httpClient.execute(httpPost)) {
+                    try (org.apache.hc.client5.http.impl.classic.CloseableHttpResponse response = httpClient.execute(post)) {
                         if (response.getCode() != 200) {
                             String responseBody = EntityUtils.toString(response.getEntity());
                             logger.error(responseBody);
