@@ -110,7 +110,7 @@ public class PrincetonTMXProcessor extends TimeProcessor {
         jsonPayload.addProperty("lastLocationLongitude", (snapshot.isEmpty() || Objects.isNull(snapshot.get().getLastAddress())) ? null : snapshot.get().getLastAddress().getLongitude());
         jsonPayload.addProperty("lastLocationCity", (snapshot.isEmpty() || Objects.isNull(snapshot.get().getLastAddress())) ? null : snapshot.get().getLastAddress().getCity());
         jsonPayload.addProperty("lastLocationState", (snapshot.isEmpty() || Objects.isNull(snapshot.get().getLastAddress())) ? null : snapshot.get().getLastAddress().getState());
-        jsonPayload.addProperty("truckID", truck.map(EquipmentRecord::getUnitNumber).orElse(null));
+        jsonPayload.addProperty("truckID", truck.map(EquipmentRecord::getUnitNumber).orElse("UNKNOWN"));
         jsonPayload.addProperty("trailerNumber", trailer.map(EquipmentRecord::getUnitNumber).orElse(null));
         jsonPayload.addProperty("earlyLateApptReason", (String) null);
         jsonPayload.addProperty("arrival", isArrived ? processor.at() : (Objects.isNull(stop.getDriverArrivedAt()) ? null : stop.getDriverArrivedAt().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)));
