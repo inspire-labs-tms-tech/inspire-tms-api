@@ -113,8 +113,7 @@ public class PrincetonTMXProcessor extends TimeProcessor {
         jsonPayload.addProperty("truckID", truck.map(EquipmentRecord::getUnitNumber).orElse("UNKNOWN"));
         jsonPayload.addProperty("trailerNumber", trailer.map(EquipmentRecord::getUnitNumber).orElse(null));
         jsonPayload.addProperty("earlyLateApptReason", (String) null);
-        jsonPayload.addProperty("arrival", isArrived ? processor.at() : (Objects.isNull(stop.getDriverArrivedAt()) ? null : stop.getDriverArrivedAt().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)));
-        jsonPayload.addProperty("departure", isArrived ? Objects.isNull(stop.getDriverDepartedAt()) ? null : stop.getDriverDepartedAt().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME) : processor.at());
+        jsonPayload.addProperty(isArrived ? "arrival" : "departure", processor.at());
         jsonPayload.addProperty("xat", OffsetDateTime.now().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME));
 
         // Create an HTTP client
