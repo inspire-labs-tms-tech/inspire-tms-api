@@ -31,11 +31,13 @@ public class DSGProcessor extends TimeProcessor {
 
     @Override
     protected Executor<InOutTimes> getArrivalProcessor() {
+        logger.debug("processing arrival time");
         return (processor) -> this.send(processor, true);
     }
 
     @Override
     protected Executor<InOutTimes> getDepartureProcessor() {
+        logger.debug("processing departure time");
         return (processor) -> this.send(processor, false);
     }
 
@@ -44,13 +46,22 @@ public class DSGProcessor extends TimeProcessor {
         DicksSportingGoodsAPI dsg = new DicksSportingGoodsAPI();
 
         OrdersRecord order = PostgresConnection.getInstance().with(supabase -> supabase.selectFrom(Tables.ORDERS).where(Tables.ORDERS.ID.eq(processor.orderID())).fetchOne()).orElse(null);
-        if(Objects.isNull(order)) throw new ResponseException("Unable to load Order");
+        if(Objects.isNull(order)) {
+            logger.error("unable to load order");
+            throw new ResponseException("Unable to load Order");
+        }
 
         StopsRecord stop = PostgresConnection.getInstance().with(supabase -> supabase.selectFrom(Tables.STOPS).where(Tables.STOPS.ORDER_ID.eq(order.getId())).and(Tables.STOPS.STOP_NUMBER.eq(processor.stopNumber())).fetchOne()).orElse(null);
-        if(Objects.isNull(stop)) throw new ResponseException("Unable to load Stop");
+        if(Objects.isNull(stop)) {
+            logger.error("unable to load stop");
+            throw new ResponseException("Unable to load Stop");
+        }
 
         LoadTendersRecord tender = PostgresConnection.getInstance().with(supabase -> supabase.selectFrom(Tables.LOAD_TENDERS).where(Tables.LOAD_TENDERS.ORDER_ID.eq(order.getId())).fetchOne()).orElse(null);
-        if(Objects.isNull(tender)) throw new ResponseException("Unable to load Tender");
+        if(Objects.isNull(tender)) {
+            logger.error("unable to load tender");
+            throw new ResponseException("Unable to load Tender");
+        }
 
         if(Objects.isNull(tender.getIntegrationType()) || (tender.getIntegrationType() != IntegrationTypes.DSG)) {
             logger.debug("dicks sporting goods not enabled for this order");
