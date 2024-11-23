@@ -1,6 +1,7 @@
 package com.inspiretmstech.api.src.utils.inouttimes;
 
 import com.inspiretmstech.api.src.models.ResponseException;
+import com.inspiretmstech.api.src.models.requests.InOutTimesRequest;
 import com.inspiretmstech.api.src.utils.WithLogger;
 import com.inspiretmstech.api.src.utils.inouttimes.processors.*;
 import com.inspiretmstech.common.postgres.PostgresConnection;

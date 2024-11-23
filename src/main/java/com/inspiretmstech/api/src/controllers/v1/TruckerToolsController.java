@@ -7,9 +7,8 @@ import com.inspiretmstech.api.src.models.requests.truckertools.TruckerToolsComme
 import com.inspiretmstech.api.src.models.requests.truckertools.TruckerToolsDocumentsRequest;
 import com.inspiretmstech.api.src.models.requests.truckertools.TruckerToolsStatusRequest;
 import com.inspiretmstech.api.src.models.responses.StatusResponse;
-import com.inspiretmstech.api.src.utils.inouttimes.InOutTimes;
 import com.inspiretmstech.api.src.utils.inouttimes.InOutTimesProcessor;
-import com.inspiretmstech.api.src.utils.inouttimes.InOutTimesRequest;
+import com.inspiretmstech.api.src.models.requests.InOutTimesRequest;
 import com.inspiretmstech.common.postgres.PostgresConnection;
 import com.inspiretmstech.db.Tables;
 import com.inspiretmstech.db.tables.records.TruckerToolsLoadCommentsRecord;

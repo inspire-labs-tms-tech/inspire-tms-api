@@ -1,4 +1,4 @@
-package com.inspiretmstech.api.src.utils.inouttimes;
+package com.inspiretmstech.api.src.models.requests;
 
 import org.jetbrains.annotations.NotNull;
 
