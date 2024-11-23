@@ -18,6 +18,8 @@ import com.inspiretmstech.db.tables.records.StopsRecord;
 
 import java.sql.SQLException;
 import java.time.OffsetDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
@@ -106,7 +108,7 @@ public class DSGProcessor extends TimeProcessor {
         equipment.setEquipmentNumber(equipmentNumber.isBlank() ? "UNKNOWN" : equipmentNumber.trim());
         equipment.setStandardCarrierAlphaCode(dsg.getIntegration().getDsgScac().toUpperCase());
 
-        OffsetDateTime dt = isArrival ? stop.getDriverArrivedAt() : stop.getDriverDepartedAt();
+        ZonedDateTime dt = (isArrival ? stop.getDriverArrivedAt() : stop.getDriverDepartedAt()).atZoneSameInstant(ZoneId.of(stop.getAddress().getIanaTimezoneId()));
 
         details.setShipmentStatusDetails(new SegmentShipmentStatusDetails9e93a24c60d21fb3059d71dfd13f9724ed0bcee894354fd851588f1c503c4747());
         details.getShipmentStatusDetails().setDate(dt.format(DateTimeFormatter.ofPattern("yyyyMMdd")));
