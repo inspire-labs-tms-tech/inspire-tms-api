@@ -15,6 +15,7 @@ import com.inspiretmstech.db.tables.records.EquipmentRecord;
 import com.inspiretmstech.db.tables.records.LoadTendersRecord;
 import com.inspiretmstech.db.tables.records.OrdersRecord;
 import com.inspiretmstech.db.tables.records.StopsRecord;
+import org.jetbrains.annotations.Nullable;
 
 import java.sql.SQLException;
 import java.time.OffsetDateTime;
@@ -29,6 +30,11 @@ public class DSGProcessor extends TimeProcessor {
 
     public DSGProcessor() {
         super(DSGProcessor.class);
+    }
+
+    @Override
+    protected boolean supports(@Nullable IntegrationTypes type) {
+        return Objects.nonNull(type) && type == IntegrationTypes.DSG;
     }
 
     @Override
@@ -47,19 +53,13 @@ public class DSGProcessor extends TimeProcessor {
 
         DicksSportingGoodsAPI dsg = new DicksSportingGoodsAPI();
 
-        OrdersRecord order = PostgresConnection.getInstance().with(supabase -> supabase.selectFrom(Tables.ORDERS).where(Tables.ORDERS.ID.eq(processor.orderID())).fetchOne()).orElse(null);
-        if(Objects.isNull(order)) {
-            logger.error("unable to load order");
-            throw new ResponseException("Unable to load Order");
-        }
-
-        StopsRecord stop = PostgresConnection.getInstance().with(supabase -> supabase.selectFrom(Tables.STOPS).where(Tables.STOPS.ORDER_ID.eq(order.getId())).and(Tables.STOPS.STOP_NUMBER.eq(processor.stopNumber())).fetchOne()).orElse(null);
+        StopsRecord stop = PostgresConnection.getInstance().with(supabase -> supabase.selectFrom(Tables.STOPS).where(Tables.STOPS.ORDER_ID.eq(processor.order().getId())).and(Tables.STOPS.STOP_NUMBER.eq(processor.stopNumber())).fetchOne()).orElse(null);
         if(Objects.isNull(stop)) {
             logger.error("unable to load stop");
             throw new ResponseException("Unable to load Stop");
         }
 
-        LoadTendersRecord tender = PostgresConnection.getInstance().with(supabase -> supabase.selectFrom(Tables.LOAD_TENDERS).where(Tables.LOAD_TENDERS.ORDER_ID.eq(order.getId())).fetchOne()).orElse(null);
+        LoadTendersRecord tender = PostgresConnection.getInstance().with(supabase -> supabase.selectFrom(Tables.LOAD_TENDERS).where(Tables.LOAD_TENDERS.ORDER_ID.eq(processor.order().getId())).fetchOne()).orElse(null);
         if(Objects.isNull(tender)) {
             logger.error("unable to load tender");
             throw new ResponseException("Unable to load Tender");
@@ -86,7 +86,7 @@ public class DSGProcessor extends TimeProcessor {
                 new SegmentBusinessInstructionsAndReferenceNumberEcd348263a08ab479c637b88c6e6dce4b4a750bbdfe084123937c8a2b4d2b952(),
                 new SegmentBusinessInstructionsAndReferenceNumberEcd348263a08ab479c637b88c6e6dce4b4a750bbdfe084123937c8a2b4d2b952()
         ));
-        update.getData().getSection1().getBusinessInstructionsAndReferenceNumber().get(0).setReferenceIdentification("" + order.getOrderNumber());
+        update.getData().getSection1().getBusinessInstructionsAndReferenceNumber().get(0).setReferenceIdentification("" + processor.order().getOrderNumber());
         update.getData().getSection1().getBusinessInstructionsAndReferenceNumber().get(0).setReferenceIdentificationQualifier(SegmentBusinessInstructionsAndReferenceNumberEcd348263a08ab479c637b88c6e6dce4b4a750bbdfe084123937c8a2b4d2b952.ReferenceIdentificationQualifierEnum.BM);
         update.getData().getSection1().getBusinessInstructionsAndReferenceNumber().get(1).setReferenceIdentification(Objects.nonNull(stop.getLoadTenderStopId()) && !stop.getLoadTenderStopId().isBlank() ? stop.getLoadTenderStopId() : stop.getCustomerOrderNumber());
         update.getData().getSection1().getBusinessInstructionsAndReferenceNumber().get(1).setReferenceIdentificationQualifier(SegmentBusinessInstructionsAndReferenceNumberEcd348263a08ab479c637b88c6e6dce4b4a750bbdfe084123937c8a2b4d2b952.ReferenceIdentificationQualifierEnum.QN);
@@ -104,7 +104,7 @@ public class DSGProcessor extends TimeProcessor {
 
         SegmentEquipmentOrContainerOwnerAndType94aa1adbd6bbecd23749372c0642c25fb06a56c6b306b2015f3756e5211ed95e equipment = new SegmentEquipmentOrContainerOwnerAndType94aa1adbd6bbecd23749372c0642c25fb06a56c6b306b2015f3756e5211ed95e();
         details.setEquipmentOrContainerOwnerAndType(equipment);
-        String equipmentNumber = trailer.isPresent() ? trailer.get().getUnitNumber() : order.getCarrierEdiTrailerNumberOrId();
+        String equipmentNumber = trailer.isPresent() ? trailer.get().getUnitNumber() : processor.order().getCarrierEdiTrailerNumberOrId();
         equipment.setEquipmentNumber(equipmentNumber.isBlank() ? "UNKNOWN" : equipmentNumber.trim());
         equipment.setStandardCarrierAlphaCode(dsg.getIntegration().getDsgScac().toUpperCase());
 

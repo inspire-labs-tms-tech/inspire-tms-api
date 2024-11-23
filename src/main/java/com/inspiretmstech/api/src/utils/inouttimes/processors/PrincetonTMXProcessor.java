@@ -20,6 +20,7 @@ import org.apache.hc.core5.http.Header;
 import org.apache.hc.core5.http.ParseException;
 import org.apache.hc.core5.http.io.entity.EntityUtils;
 import org.apache.hc.core5.http.io.entity.StringEntity;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -34,6 +35,11 @@ public class PrincetonTMXProcessor extends TimeProcessor {
 
     public PrincetonTMXProcessor() {
         super(PrincetonTMXProcessor.class);
+    }
+
+    @Override
+    protected boolean supports(@Nullable IntegrationTypes type) {
+        return Objects.nonNull(type) && type == IntegrationTypes.PRINCETON_TMX;
     }
 
     private void send(InOutTimes processor, boolean isArrived) {
@@ -59,13 +65,10 @@ public class PrincetonTMXProcessor extends TimeProcessor {
         if (apiKey.isEmpty() || apiKey.get().isBlank())
             throw new ResponseException("Unable to Load Integration", "Unable to load API Key from Vault");
 
-        OrdersRecord order = conn.with(supabase -> supabase.selectFrom(Tables.ORDERS).where(Tables.ORDERS.ID.eq(processor.orderID())).fetchOne()).orElse(null);
-        if (Objects.isNull(order)) throw new ResponseException("Unable to load Order");
-
         // get the customer
         Optional<CustomersRecord> customer = conn.with(supabase -> supabase
                 .selectFrom(Tables.CUSTOMERS)
-                .where(Tables.CUSTOMERS.ID.eq(order.getCustomerId()))
+                .where(Tables.CUSTOMERS.ID.eq(processor.order().getCustomerId()))
                 .fetchOne()
         );
         if (customer.isEmpty()) {
@@ -77,10 +80,10 @@ public class PrincetonTMXProcessor extends TimeProcessor {
             return;
         }
 
-        LoadTendersRecord tender = conn.with(supabase -> supabase.selectFrom(Tables.LOAD_TENDERS).where(Tables.LOAD_TENDERS.ORDER_ID.eq(order.getId())).fetchOne()).orElse(null);
+        LoadTendersRecord tender = conn.with(supabase -> supabase.selectFrom(Tables.LOAD_TENDERS).where(Tables.LOAD_TENDERS.ORDER_ID.eq(processor.order().getId())).fetchOne()).orElse(null);
         if (Objects.isNull(tender)) throw new ResponseException("Unable to load Tender");
 
-        StopsRecord stop = conn.with(supabase -> supabase.selectFrom(Tables.STOPS).where(Tables.STOPS.ORDER_ID.eq(order.getId())).and(Tables.STOPS.STOP_NUMBER.eq(processor.stopNumber())).fetchOne()).orElse(null);
+        StopsRecord stop = conn.with(supabase -> supabase.selectFrom(Tables.STOPS).where(Tables.STOPS.ORDER_ID.eq(processor.order().getId())).and(Tables.STOPS.STOP_NUMBER.eq(processor.stopNumber())).fetchOne()).orElse(null);
         if (Objects.isNull(stop)) throw new ResponseException("Unable to load Stop");
 
         Optional<EquipmentRecord> truck = Objects.isNull(stop.getTruckId()) ? Optional.empty() : conn.with(supabase -> supabase.selectFrom(Tables.EQUIPMENT).where(Tables.EQUIPMENT.ID.eq(stop.getTruckId())).fetchOne());

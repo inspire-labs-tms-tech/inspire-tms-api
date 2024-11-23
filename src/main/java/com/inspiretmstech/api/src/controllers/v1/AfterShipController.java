@@ -8,6 +8,7 @@ import com.inspiretmstech.api.src.models.controllers.Controller;
 import com.inspiretmstech.api.src.models.responses.StatusResponse;
 import com.inspiretmstech.api.src.utils.inouttimes.InOutTimes;
 import com.inspiretmstech.api.src.utils.inouttimes.InOutTimesProcessor;
+import com.inspiretmstech.api.src.utils.inouttimes.InOutTimesRequest;
 import com.inspiretmstech.api.src.utils.inouttimes.processors.AfterShipProcessor;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -32,7 +33,7 @@ public class AfterShipController extends Controller {
     @Requires(Scopes.ORDERS)
     @Operation(summary = "Send Arrived Tracking Update")
     @PostMapping("/tracking/arrived")
-    public StatusResponse sendAfterShipArrivedTrackingUpdate(@RequestBody InOutTimes update) {
+    public StatusResponse sendAfterShipArrivedTrackingUpdate(@RequestBody InOutTimesRequest update) {
         InOutTimesProcessor processor = new InOutTimesProcessor(List.of(new AfterShipProcessor()));
         try {
             processor.arrived(update);
@@ -47,7 +48,7 @@ public class AfterShipController extends Controller {
     @Requires(Scopes.ORDERS)
     @Operation(summary = "Send Departed Tracking Update")
     @PostMapping("/tracking/departed")
-    public StatusResponse sendAfterShipDepartedTrackingUpdate(@RequestBody InOutTimes update) {
+    public StatusResponse sendAfterShipDepartedTrackingUpdate(@RequestBody InOutTimesRequest update) {
         InOutTimesProcessor processor = new InOutTimesProcessor(List.of(new AfterShipProcessor()));
         try {
             processor.departed(update);

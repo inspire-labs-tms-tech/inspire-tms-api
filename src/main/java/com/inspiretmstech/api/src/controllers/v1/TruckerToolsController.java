@@ -9,6 +9,7 @@ import com.inspiretmstech.api.src.models.requests.truckertools.TruckerToolsStatu
 import com.inspiretmstech.api.src.models.responses.StatusResponse;
 import com.inspiretmstech.api.src.utils.inouttimes.InOutTimes;
 import com.inspiretmstech.api.src.utils.inouttimes.InOutTimesProcessor;
+import com.inspiretmstech.api.src.utils.inouttimes.InOutTimesRequest;
 import com.inspiretmstech.common.postgres.PostgresConnection;
 import com.inspiretmstech.db.Tables;
 import com.inspiretmstech.db.tables.records.TruckerToolsLoadCommentsRecord;
@@ -74,8 +75,8 @@ public class TruckerToolsController extends Controller {
             if (request.status().name().startsWith("Checked Completed")) {
                 DateTime now = DateTime.now();
                 InOutTimesProcessor processor = new InOutTimesProcessor();
-                processor.arrived(new InOutTimes(load.get().getOrderId(), (long) request.status().stopOrderNumber(), now.toString()));
-                processor.departed(new InOutTimes(load.get().getOrderId(), (long) request.status().stopOrderNumber(), now.plusSeconds(1).toString()));
+                processor.arrived(new InOutTimesRequest(load.get().getOrderId(), (long) request.status().stopOrderNumber(), now.toString()));
+                processor.departed(new InOutTimesRequest(load.get().getOrderId(), (long) request.status().stopOrderNumber(), now.plusSeconds(1).toString()));
             }
 
         } catch (Exception e) {

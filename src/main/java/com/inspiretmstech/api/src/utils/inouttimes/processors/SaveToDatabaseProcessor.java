@@ -5,7 +5,9 @@ import com.inspiretmstech.api.src.utils.inouttimes.InOutTimes;
 import com.inspiretmstech.api.src.utils.inouttimes.TimeProcessor;
 import com.inspiretmstech.common.postgres.PostgresConnection;
 import com.inspiretmstech.db.Tables;
+import com.inspiretmstech.db.enums.IntegrationTypes;
 import com.inspiretmstech.db.tables.records.StopsRecord;
+import org.jetbrains.annotations.Nullable;
 
 import java.time.OffsetDateTime;
 import java.util.Objects;
@@ -15,6 +17,11 @@ public class SaveToDatabaseProcessor extends TimeProcessor {
 
     public SaveToDatabaseProcessor() {
         super(SaveToDatabaseProcessor.class);
+    }
+
+    @Override
+    protected boolean supports(@Nullable IntegrationTypes type) {
+        return true;
     }
 
     /**
@@ -27,7 +34,7 @@ public class SaveToDatabaseProcessor extends TimeProcessor {
             Optional<StopsRecord> stop = PostgresConnection.getInstance().with(supabase ->
                     supabase.update(Tables.STOPS)
                             .set(Tables.STOPS.DRIVER_ARRIVED_AT, OffsetDateTime.now())
-                            .where(Tables.STOPS.ORDER_ID.eq(request.orderID())
+                            .where(Tables.STOPS.ORDER_ID.eq(request.order().getId())
                                     .and(Tables.STOPS.STOP_NUMBER.eq(request.stopNumber())))
                             .returning()
                             .fetchOne()
@@ -51,7 +58,7 @@ public class SaveToDatabaseProcessor extends TimeProcessor {
             Optional<StopsRecord> stop = PostgresConnection.getInstance().with(supabase ->
                     supabase.update(Tables.STOPS)
                             .set(Tables.STOPS.DRIVER_DEPARTED_AT, OffsetDateTime.now())
-                            .where(Tables.STOPS.ORDER_ID.eq(request.orderID())
+                            .where(Tables.STOPS.ORDER_ID.eq(request.order().getId())
                                     .and(Tables.STOPS.STOP_NUMBER.eq(request.stopNumber())))
                             .returning()
                             .fetchOne()

@@ -11,14 +11,21 @@ import com.inspiretmstech.db.tables.records.CustomersRecord;
 import com.inspiretmstech.db.tables.records.IntegrationsRecord;
 import com.inspiretmstech.db.tables.records.OrdersRecord;
 import com.inspiretmstech.db.tables.records.StopsRecord;
+import org.jetbrains.annotations.Nullable;
 
 import java.net.http.HttpResponse;
+import java.util.Objects;
 import java.util.Optional;
 
 public class AfterShipProcessor extends TimeProcessor {
 
     public AfterShipProcessor() {
         super(AfterShipProcessor.class);
+    }
+
+    @Override
+    protected boolean supports(@Nullable IntegrationTypes type) {
+        return Objects.nonNull(type) && type == IntegrationTypes.AFTERSHIP;
     }
 
     private void handle(AfterShipTrackingUtility.AfterShipMessageType type, InOutTimes request) throws Exception {
@@ -39,21 +46,10 @@ public class AfterShipProcessor extends TimeProcessor {
             return;
         }
 
-        // get the order
-        Optional<OrdersRecord> order = conn.unsafely(supabase ->
-                supabase.selectFrom(Tables.ORDERS)
-                        .where(Tables.ORDERS.ID.eq(request.orderID()))
-                        .fetchOne()
-        );
-        if (order.isEmpty()) {
-            logger.error("unable to load order");
-            return;
-        }
-
         // get the customer
         Optional<CustomersRecord> customer = conn.unsafely(supabase ->
                 supabase.selectFrom(Tables.CUSTOMERS)
-                        .where(Tables.CUSTOMERS.ID.eq(order.get().getCustomerId()))
+                        .where(Tables.CUSTOMERS.ID.eq(request.order().getCustomerId()))
                         .fetchOne()
         );
         if (customer.isEmpty()) {
@@ -68,7 +64,7 @@ public class AfterShipProcessor extends TimeProcessor {
         // get the origin
         Optional<StopsRecord> origin = conn.unsafely(supabase ->
                 supabase.selectFrom(Tables.STOPS)
-                        .where(Tables.STOPS.ORDER_ID.eq(order.get().getId()))
+                        .where(Tables.STOPS.ORDER_ID.eq(request.order().getId()))
                         .and(Tables.STOPS.STOP_NUMBER.eq((long) 1))
                         .fetchOne()
         );
@@ -80,7 +76,7 @@ public class AfterShipProcessor extends TimeProcessor {
         // get the destination
         Optional<StopsRecord> destination = conn.unsafely(supabase ->
                 supabase.selectFrom(Tables.STOPS)
-                        .where(Tables.STOPS.ORDER_ID.eq(order.get().getId()))
+                        .where(Tables.STOPS.ORDER_ID.eq(request.order().getId()))
                         .orderBy(Tables.STOPS.STOP_NUMBER.desc())
                         .limit(1)
                         .fetchOne()
@@ -95,7 +91,7 @@ public class AfterShipProcessor extends TimeProcessor {
                 request.stopNumber().equals(destination.get().getStopNumber()) ? destination :
                         conn.unsafely(supabase ->
                                 supabase.selectFrom(Tables.STOPS)
-                                        .where(Tables.STOPS.ORDER_ID.eq(order.get().getId()))
+                                        .where(Tables.STOPS.ORDER_ID.eq(request.order().getId()))
                                         .and(Tables.STOPS.STOP_NUMBER.eq(request.stopNumber()))
                                         .fetchOne()
                         );
@@ -108,7 +104,7 @@ public class AfterShipProcessor extends TimeProcessor {
                 aftership.get().getAftershipSlug().trim(),
                 new AfterShipTrackingUtility.AfterShipTrackingUpdate.AfterShipTrackingUpdateBasic(
                         customer.get(),
-                        order.get(),
+                        request.order(),
                         origin.get(),
                         destination.get()
                 ),

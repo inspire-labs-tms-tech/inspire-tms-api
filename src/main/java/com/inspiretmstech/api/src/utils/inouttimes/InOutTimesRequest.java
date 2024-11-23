@@ -1,10 +1,11 @@
 package com.inspiretmstech.api.src.utils.inouttimes;
 
-import com.inspiretmstech.db.tables.records.OrdersRecord;
 import org.jetbrains.annotations.NotNull;
 
-public record InOutTimes(
-        @NotNull OrdersRecord order,
+import java.util.UUID;
+
+public record InOutTimesRequest(
+        @NotNull UUID orderID,
         @NotNull Long stopNumber,
         @NotNull String at // ISO 8601
 ) {

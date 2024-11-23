@@ -8,6 +8,7 @@ import com.inspiretmstech.api.src.models.requests.orders.SubmitOrderTimeRequest;
 import com.inspiretmstech.api.src.models.responses.StatusResponse;
 import com.inspiretmstech.api.src.utils.inouttimes.InOutTimes;
 import com.inspiretmstech.api.src.utils.inouttimes.InOutTimesProcessor;
+import com.inspiretmstech.api.src.utils.inouttimes.InOutTimesRequest;
 import com.inspiretmstech.api.src.utils.inouttimes.processors.SaveToDatabaseProcessor;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -38,7 +39,7 @@ public class OrdersController extends Controller {
             @RequestBody SubmitOrderTimeRequest request
     ) {
         if(!request.saveToDatabase()) this.processor.remove(SaveToDatabaseProcessor.class);
-        this.processor.arrived(new InOutTimes(UUID.fromString(order), stop, request.timestamp()));
+        this.processor.arrived(new InOutTimesRequest(UUID.fromString(order), stop, request.timestamp()));
         return StatusResponse.ACCEPTED();
     }
 
@@ -52,7 +53,7 @@ public class OrdersController extends Controller {
             @RequestBody SubmitOrderTimeRequest request
     ) {
         if(!request.saveToDatabase()) this.processor.remove(SaveToDatabaseProcessor.class);
-        this.processor.departed(new InOutTimes(UUID.fromString(order), stop, request.timestamp()));
+        this.processor.departed(new InOutTimesRequest(UUID.fromString(order), stop, request.timestamp()));
         return StatusResponse.ACCEPTED();
     }
 }
