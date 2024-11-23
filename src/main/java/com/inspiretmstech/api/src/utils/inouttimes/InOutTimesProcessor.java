@@ -48,7 +48,6 @@ public class InOutTimesProcessor extends WithLogger {
 
     private void process(Processes type, InOutTimesRequest request) {
         this.logger.info("processing {} time ({} active processors)", type, this.processors.size());
-
         try {
             OrdersRecord order = PostgresConnection.getInstance().with(supabase -> supabase.selectFrom(Tables.ORDERS).where(Tables.ORDERS.ID.eq(request.orderID())).fetchOne()).orElse(null);
             if(Objects.isNull(order)) {
@@ -60,6 +59,7 @@ public class InOutTimesProcessor extends WithLogger {
             if(Objects.isNull(tender)) logger.debug("no load tender for order {}", order.getId());
 
             List<TimeProcessor> processors = this.processors.stream().filter(p -> p.supports(Objects.isNull(tender) ? null : tender.getIntegrationType())).toList();
+            this.logger.debug("{} supported processors", processors.size());
             for (TimeProcessor processor : processors) {
                 try {
                     this.logger.trace("processing {}", processor.getClass().getSimpleName());
