@@ -13,12 +13,10 @@ import com.inspiretmstech.db.Tables;
 import com.inspiretmstech.db.enums.IntegrationTypes;
 import com.inspiretmstech.db.tables.records.EquipmentRecord;
 import com.inspiretmstech.db.tables.records.LoadTendersRecord;
-import com.inspiretmstech.db.tables.records.OrdersRecord;
 import com.inspiretmstech.db.tables.records.StopsRecord;
 import org.jetbrains.annotations.Nullable;
 
 import java.sql.SQLException;
-import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -54,18 +52,18 @@ public class DSGProcessor extends TimeProcessor {
         DicksSportingGoodsAPI dsg = new DicksSportingGoodsAPI();
 
         StopsRecord stop = PostgresConnection.getInstance().with(supabase -> supabase.selectFrom(Tables.STOPS).where(Tables.STOPS.ORDER_ID.eq(processor.order().getId())).and(Tables.STOPS.STOP_NUMBER.eq(processor.stopNumber())).fetchOne()).orElse(null);
-        if(Objects.isNull(stop)) {
+        if (Objects.isNull(stop)) {
             logger.error("unable to load stop");
             throw new ResponseException("Unable to load Stop");
         }
 
         LoadTendersRecord tender = PostgresConnection.getInstance().with(supabase -> supabase.selectFrom(Tables.LOAD_TENDERS).where(Tables.LOAD_TENDERS.ORDER_ID.eq(processor.order().getId())).fetchOne()).orElse(null);
-        if(Objects.isNull(tender)) {
+        if (Objects.isNull(tender)) {
             logger.error("unable to load tender");
             throw new ResponseException("Unable to load Tender");
         }
 
-        if(Objects.isNull(tender.getIntegrationType()) || (tender.getIntegrationType() != IntegrationTypes.DSG)) {
+        if (Objects.isNull(tender.getIntegrationType()) || (tender.getIntegrationType() != IntegrationTypes.DSG)) {
             logger.debug("dicks sporting goods not enabled for this order");
             return;
         }
@@ -114,14 +112,28 @@ public class DSGProcessor extends TimeProcessor {
         details.getShipmentStatusDetails().setDate(dt.format(DateTimeFormatter.ofPattern("yyyyMMdd")));
         details.getShipmentStatusDetails().setTime(dt.format(DateTimeFormatter.ofPattern("HHmm")));
         details.getShipmentStatusDetails().setShipmentStatusOrAppointmentReasonCode(SegmentShipmentStatusDetails9e93a24c60d21fb3059d71dfd13f9724ed0bcee894354fd851588f1c503c4747.ShipmentStatusOrAppointmentReasonCodeEnum.NS);
-        details.getShipmentStatusDetails().setShipmentStatusCode(isArrival ? SegmentShipmentStatusDetails9e93a24c60d21fb3059d71dfd13f9724ed0bcee894354fd851588f1c503c4747.ShipmentStatusCodeEnum.X3 : SegmentShipmentStatusDetails9e93a24c60d21fb3059d71dfd13f9724ed0bcee894354fd851588f1c503c4747.ShipmentStatusCodeEnum.X1);
+        details.getShipmentStatusDetails().setShipmentStatusCode(
+                isArrival ?
+                        switch (stop.getType()) {
+                            case PICKUP ->
+                                    SegmentShipmentStatusDetails9e93a24c60d21fb3059d71dfd13f9724ed0bcee894354fd851588f1c503c4747.ShipmentStatusCodeEnum.X3;
+                            case DROPOFF ->
+                                    SegmentShipmentStatusDetails9e93a24c60d21fb3059d71dfd13f9724ed0bcee894354fd851588f1c503c4747.ShipmentStatusCodeEnum.X1;
+                        } :
+                        switch (stop.getType()) {
+                            case PICKUP ->
+                                    SegmentShipmentStatusDetails9e93a24c60d21fb3059d71dfd13f9724ed0bcee894354fd851588f1c503c4747.ShipmentStatusCodeEnum.AF;
+                            case DROPOFF ->
+                                    SegmentShipmentStatusDetails9e93a24c60d21fb3059d71dfd13f9724ed0bcee894354fd851588f1c503c4747.ShipmentStatusCodeEnum.D1;
+                        }
+        );
 
         try {
             dsg.outbound().rtsEdiSendDicksSportingGoodsTransportationCarrierShipmentMessagePost(
                     List.of(update),
                     dsg.getIntegration().getDsgScac().toUpperCase()
             );
-        } catch(ApiException e) {
+        } catch (ApiException e) {
             logger.error("ApiException: {}", e.getMessage());
             for (StackTraceElement el : e.getStackTrace()) logger.trace(el.toString());
             throw new ResponseException("Unable to Send EDI!", "An error occurred while sending EDI to Dicks Sporting Goods");
