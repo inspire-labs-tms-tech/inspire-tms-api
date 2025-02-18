@@ -42,6 +42,10 @@ public class OrbcommAssetLocationService {
             return;
         }
 
+        // avoids race conditions
+        Map<String, Data> assetCache = new ConcurrentHashMap<>(this.assetCache);
+        this.assetCache.clear();
+
         for (Data data : assetCache.values())
             try {
                 // build the new snapshot
@@ -64,9 +68,6 @@ public class OrbcommAssetLocationService {
             } catch (Exception e) {
                 this.logger.error("{}: {}", data.assetStatus().deviceSN(), e.getMessage());
             }
-
-        // reset cache
-        assetCache.clear();
     }
 
     private Optional<EldAssetsRecord> safely(Executor executor) {
